@@ -14,6 +14,7 @@ import com.robertx22.mine_and_slash.uncommon.utilityclasses.AllyOrEnemy;
 public class SpellConfiguration {
 
     public boolean swing_arm = true;
+    public boolean slows_when_casting = true;
     public CastingWeapon castingWeapon = CastingWeapon.ANY_WEAPON;
     public LeveledValue mana_cost = new LeveledValue(0, 0);
     public LeveledValue ene_cost = new LeveledValue(0, 0);

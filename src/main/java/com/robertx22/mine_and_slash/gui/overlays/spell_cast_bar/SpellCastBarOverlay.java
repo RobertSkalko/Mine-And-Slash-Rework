@@ -1,5 +1,7 @@
 package com.robertx22.mine_and_slash.gui.overlays.spell_cast_bar;
 
+import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
+import com.robertx22.mine_and_slash.config.forge.overlay.OverlayType;
 import com.robertx22.mine_and_slash.database.data.spells.components.Spell;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
@@ -31,7 +33,7 @@ public class SpellCastBarOverlay {
             float current = data.spellCastingData.castTickLeft;
 
             float percent = (total - current + partialtick) / total;
-    
+
             renderCastBar(gui, data.spellCastingData.getSpellBeingCast(), percent);
 
         }
@@ -43,10 +45,13 @@ public class SpellCastBarOverlay {
 
         int spellSize = 14;
 
-
         int x = mc.getWindow().getGuiScaledWidth() / 2 - WIDTH / 2;
         int y = (int) (mc.getWindow().getGuiScaledHeight() / 1.25F - HEIGHT / 2);
 
+        var config = ClientConfigs.getConfig().getOverlayConfig(OverlayType.SPELL_CAST_BAR);
+
+        x = config.getPos().x;
+        y = config.getPos().y;
 
         gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 

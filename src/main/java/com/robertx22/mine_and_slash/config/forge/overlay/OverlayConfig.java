@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.config.forge.overlay;
 
+import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
 import com.robertx22.mine_and_slash.saveclasses.PointData;
 import net.minecraftforge.common.ForgeConfigSpec;
 
@@ -33,10 +34,16 @@ public class OverlayConfig {
     public PointData getPos() {
         var target = ANCHOR_TARGET.get();
 
+        int x = ANCHOR_X.get().getAnchorPos(target).x;
+        int y = ANCHOR_Y.get().getAnchorPos(target).y;
 
-        int x = ANCHOR_X.get().getPosOffset(target).x;
-        int y = ANCHOR_Y.get().getPosOffset(target).y;
 
+        if (target != OverlayType.SCREEN) {
+            var anchorTargetPos = ClientConfigs.getConfig().getOverlayConfig(target).getPos();
+
+            x += anchorTargetPos.x;
+            y += anchorTargetPos.y;
+        }
         x += X_OFFSET.get();
         y += Y_OFFSET.get();
 

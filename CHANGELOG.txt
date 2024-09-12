@@ -9,3 +9,6 @@ The actual animations file is in the assets\mmorpg\player_animation folder
 - cast bar gui redesigned
 - player is now slowed when casting (like when using an item, unsure if feels the same though)
 - hotbar swapping overlay reworked to show all spells but also show which hotbar is the currently used
+- overlays can now be disabled
+- overlays can now be configured. You can specify positions, disable them, or anchor them to other overlays
+- effect overlay can now be horizontal and vertical and attached to other overlays like the spell hotbar 

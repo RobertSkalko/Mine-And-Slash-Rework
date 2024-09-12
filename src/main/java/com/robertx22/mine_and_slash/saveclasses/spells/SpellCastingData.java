@@ -277,6 +277,11 @@ public class SpellCastingData {
                         }
                     }
 
+                    if (ctx.caster instanceof ServerPlayer p) {
+                        Load.Unit(ctx.caster).sync.setDirty();
+                        Packets.sendToClient(p, new TellClientEntityCastingSpell(PlayerAnimations.CastEnum.CAST_FINISH, p, ctx.spell));
+                    }
+
                     this.calcSpell = null;
                 }
             } else {
@@ -449,10 +454,13 @@ public class SpellCastingData {
 
         this.casting = false;
 
+        /*
         if (ctx.caster instanceof ServerPlayer p) {
             Load.Unit(ctx.caster).sync.setDirty();
             Packets.sendToClient(p, new TellClientEntityCastingSpell(PlayerAnimations.CastEnum.CAST_FINISH, p, ctx.spell));
         }
+
+         */
     }
 
 }

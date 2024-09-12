@@ -1,9 +1,13 @@
 package com.robertx22.mine_and_slash.gui.overlays;
 
 import com.robertx22.library_of_exile.utils.GuiUtils;
+import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
+import com.robertx22.mine_and_slash.config.forge.overlay.OverlayType;
 import com.robertx22.mine_and_slash.database.data.exile_effects.ExileEffectInstanceData;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.saveclasses.PointData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -14,8 +18,14 @@ import java.util.Map;
 
 public class EffectsOverlay {
 
-    public static void render(int x, int y, Player p, GuiGraphics gui, boolean horizontal) {
+    public static void render(GuiGraphics gui, boolean horizontal) {
+        Player p = ClientOnly.getPlayer();
 
+        var config = ClientConfigs.getConfig().getOverlayConfig(OverlayType.EFFECTS_VERTICAL);
+
+
+        int x = config.getPos().x;
+        int y = config.getPos().y;
 
         int size = 16;
         int spacing = 18;
@@ -49,13 +59,14 @@ public class EffectsOverlay {
 
                 }
 
-                int yoff = 21;
-                if (!horizontal) {
-                    yoff = 14;
-                }
 
-                GuiUtils.renderScaledText(gui, (int) x + 9, (int) y - 5, 0.8F, text, ChatFormatting.YELLOW);
-                // gui.drawString(mc.font, text, (int) x, (int) y + 18, ChatFormatting.YELLOW.getColor(), true);
+                PointData textOff = new PointData(9, -5);
+                if (!horizontal) {
+                    textOff = new PointData(11, -12);
+                }
+                // todo check
+
+                GuiUtils.renderScaledText(gui, (int) x + textOff.x, (int) y - textOff.y, 0.8F, text, ChatFormatting.YELLOW);
 
                 if (horizontal) {
                     x += spacing;

@@ -1,5 +1,8 @@
 package com.robertx22.mine_and_slash.aoe_data.database.spells.schools;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
+import com.robertx22.mine_and_slash.a_libraries.player_animations.AnimationHolder;
+import com.robertx22.mine_and_slash.a_libraries.player_animations.SpellAnimations;
 import com.robertx22.mine_and_slash.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.PartBuilder;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.SpellBuilder;
@@ -21,7 +24,6 @@ import com.robertx22.mine_and_slash.uncommon.enumclasses.PlayStyle;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.DashUtils;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.EntityFinder;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.sounds.SoundEvents;
@@ -92,8 +94,8 @@ public class RangerSpells implements ExileRegistryInit {
                                 .applyCastSpeedToCooldown(), "Boomerang",
                         Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.chaining, SpellTags.PHYSICAL))
                 .manualDesc("Strike enemies with a projectile that deals " + SpellCalcs.BOOMERANG.getLocDmgTooltip(Elements.Physical))
-
-                .onCast(PartBuilder.playSound(SoundEvents.ALLAY_THROW, 1D, 1D))
+                .animations(SpellAnimations.THROW, AnimationHolder.none())
+                .onCast(PartBuilder.playSound(SoundEvents.SNOWBALL_THROW, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(SlashItems.BOOMERANG.get(), 1D, 1D, SlashEntities.SIMPLE_PROJECTILE.get(), 50D, false)
                         .put(MapField.CHAIN_COUNT, 5D)
                 ))
@@ -226,6 +228,7 @@ public class RangerSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.PHYSICAL))
 
                 .weaponReq(CastingWeapon.RANGED)
+                .animations(SpellAnimations.SHOOT_ARROW_FAST, SpellAnimations.CAST_FINISH)
                 .manualDesc("Shoot out arrows in rapid succession, dealing " + SpellCalcs.ARROW_STORM.getLocDmgTooltip(Elements.Physical))
                 .onCast(PartBuilder.playSound(SoundEvents.ARROW_SHOOT, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.createArrow(1D)))

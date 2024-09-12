@@ -1,6 +1,7 @@
 package com.robertx22.mine_and_slash.aoe_data.database.spells.schools;
 
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
+import com.robertx22.mine_and_slash.a_libraries.player_animations.AnimationHolder;
 import com.robertx22.mine_and_slash.a_libraries.player_animations.SpellAnimations;
 import com.robertx22.mine_and_slash.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.PartBuilder;
@@ -119,7 +120,7 @@ public class FireSpells implements ExileRegistryInit {
                 .manualDesc(
                         "Engulf the area in flames, dealing " + SpellCalcs.FIRE_NOVA.getLocDmgTooltip()
                                 + " " + Elements.Fire.getIconNameDmg() + " to nearby enemies.")
-
+                .animations(SpellAnimations.TOUCH_GROUND, AnimationHolder.none())
                 .onCast(PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
 
                 .onCast(PartBuilder.nova(ParticleTypes.FLAME, 200D, 5D, 0.05D))

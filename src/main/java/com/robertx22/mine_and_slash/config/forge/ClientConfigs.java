@@ -60,6 +60,9 @@ public class ClientConfigs {
 
         b.comment("Overlays").push("overlays");
 
+        STATUS_EFFECTS_OVERLAY_TYPE = b.defineEnum("STATUS_EFFECTS_OVERLAY_TYPE", HorizontalOrVertical.HORIZONTAL);
+        SPELL_HOTBAR_OVERLAY_TYPE = b.defineEnum("SPELL_HOTBAR_OVERLAY_TYPE", HorizontalOrVertical.VERTICAL);
+
         for (OverlayConfigBuilder preset : OverlayPresets.ALL_PRESETS) {
             OVERLAY_PRESETS.put(preset.preset, new OverlayConfig(b, preset));
         }
@@ -69,6 +72,7 @@ public class ClientConfigs {
                 OVERLAY_CONFIGS.put(type, b.defineEnum(type.name() + "_" + "CONFIG", type.getDefaultConfig()));
             }
         }
+
 
         b.pop();
 
@@ -86,6 +90,9 @@ public class ClientConfigs {
     public ForgeConfigSpec.BooleanValue MODIFY_TOOLTIP_LENGTH;
     public ForgeConfigSpec.BooleanValue IN_DEPTH_TOOLTIPS_BY_DEFAULT;
     public ForgeConfigSpec.BooleanValue HOTBAR_SWAPPING;
+
+    public ForgeConfigSpec.EnumValue<HorizontalOrVertical> STATUS_EFFECTS_OVERLAY_TYPE;
+    public ForgeConfigSpec.EnumValue<HorizontalOrVertical> SPELL_HOTBAR_OVERLAY_TYPE;
 
     public ForgeConfigSpec.EnumValue<GlintType> ITEM_RARITY_BACKGROUND_TYPE;
     public ForgeConfigSpec.EnumValue<GuiPosition> GUI_POSITION;
@@ -106,11 +113,15 @@ public class ClientConfigs {
 
     public boolean shouldRenderOverlay(OverlayType type) {
         var preset = OVERLAY_CONFIGS.get(type).get();
-        return preset != OverlayPresets.PresetEnum.NONE;
+        return preset != OverlayPresets.PresetEnum.DISABLE_OVERLAY;
     }
 
     public enum GlintType {
         BORDER, FULL;
+    }
+
+    public enum HorizontalOrVertical {
+        HORIZONTAL, VERTICAL;
     }
 
     public static ClientConfigs getConfig() {

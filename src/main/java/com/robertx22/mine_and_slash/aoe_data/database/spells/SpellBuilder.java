@@ -84,7 +84,7 @@ public class SpellBuilder {
     }
 
     public SpellBuilder summons(EntityType type, int duration, int amount, SummonType st) {
-        
+
         return summons(type, duration, amount, st, true);
     }
 
@@ -208,6 +208,11 @@ public class SpellBuilder {
         this.spell.cast_finish_animation = new SpellAnimationData(castFinish);
 
 
+        return this;
+    }
+
+    public SpellBuilder disableCastingSlow() {
+        this.spell.config.slows_when_casting = false;
         return this;
     }
 

@@ -141,7 +141,9 @@ public class OnServerTick {
             if (atri != null) {
                 if (playerData.spellCastingData.isCasting() && playerData.spellCastingData.castTickLeft > 0) {
                     if (!atri.hasModifier(CASTING_SPEED_SLOW)) {
-                        atri.addTransientModifier(CASTING_SPEED_SLOW);
+                        if (playerData.spellCastingData.getSpellBeingCast() != null && playerData.spellCastingData.getSpellBeingCast().config.slows_when_casting) {
+                            atri.addTransientModifier(CASTING_SPEED_SLOW);
+                        }
                     }
                 } else {
                     if (atri.hasModifier(CASTING_SPEED_SLOW)) {

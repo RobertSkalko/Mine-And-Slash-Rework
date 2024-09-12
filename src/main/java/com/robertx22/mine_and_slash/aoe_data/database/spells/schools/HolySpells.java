@@ -1,6 +1,7 @@
 package com.robertx22.mine_and_slash.aoe_data.database.spells.schools;
 
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
+import com.robertx22.mine_and_slash.a_libraries.player_animations.AnimationHolder;
 import com.robertx22.mine_and_slash.a_libraries.player_animations.SpellAnimations;
 import com.robertx22.mine_and_slash.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.PartBuilder;
@@ -107,7 +108,8 @@ public class HolySpells implements ExileRegistryInit {
                         "Charge in a direction, stopping upon first enemy hit to deal "
                                 + SpellCalcs.CHARGE.getLocDmgTooltip() + " " + Elements.Physical.getIconNameDmg() + " in an area."
 
-                )
+                ).disableCastingSlow()
+                .animations(SpellAnimations.CHARGE, SpellAnimations.TAUNT)
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.ANCIENT_DEBRIS_STEP, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.SET_ADD_MOTION.create(SetAdd.ADD, 0.4D, ParticleMotion.CasterLook)
@@ -131,6 +133,7 @@ public class HolySpells implements ExileRegistryInit {
                         "Shout, making nearby enemies want to attack you. " +
                                 "Generates " + SpellCalcs.TAUNT.getLocDmgTooltip() + " threat."
                 )
+                .animations(AnimationHolder.none(), SpellAnimations.TAUNT)
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.SHIELD_BLOCK, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.AGGRO.create(SpellCalcs.TAUNT, AggroAction.Type.AGGRO))
@@ -147,6 +150,7 @@ public class HolySpells implements ExileRegistryInit {
                                 SpellCalcs.PULL.getLocDmgTooltip() + " " +
                                 Elements.Physical.getIconNameDmg() + " and slowing them."
                 )
+                .animations(AnimationHolder.none(), SpellAnimations.PULL)
                 .onCast(PartBuilder.playSound(SoundEvents.ANVIL_HIT, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.TP_TARGET_TO_SELF.create())
                         .addActions(SpellAction.POTION.createGive(MobEffects.MOVEMENT_SLOWDOWN, 20D * 5))

@@ -29,7 +29,13 @@ public enum OverlayType {
             return OverlayPresets.PresetEnum.HOTBAR_VERTICAL;
         }
     },
-    EFFECTS {
+    EFFECTS_VERTICAL {
+        @Override
+        public OverlayPresets.PresetEnum getDefaultConfig() {
+            return OverlayPresets.PresetEnum.EFFECTS_UNDER_VERTICAL_HOTBAR;
+        }
+    },
+    EFFECTS_HORIZONATL {
         @Override
         public OverlayPresets.PresetEnum getDefaultConfig() {
             return OverlayPresets.PresetEnum.EFFECTS_BOTTOM_RIGHT;

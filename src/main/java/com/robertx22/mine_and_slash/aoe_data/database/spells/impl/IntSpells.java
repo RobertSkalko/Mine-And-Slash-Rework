@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.aoe_data.database.spells.impl;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.PartBuilder;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.SpellCalcs;
@@ -15,7 +16,6 @@ import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.PlayStyle;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.EntityFinder;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 
@@ -29,7 +29,7 @@ public class IntSpells implements ExileRegistryInit {
     public void registerAll() {
 
         SpellBuilder.of(BLACK_HOLE, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 60)
-                                .setSwingArm(), "   Black Hole",
+                                .setSwingArm(), "Black Hole",
                         Arrays.asList(SpellTags.damage, SpellTags.area, SpellTags.CHAOS))
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
 

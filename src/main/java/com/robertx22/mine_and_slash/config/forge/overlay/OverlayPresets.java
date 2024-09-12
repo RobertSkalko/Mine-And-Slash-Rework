@@ -11,7 +11,7 @@ public class OverlayPresets {
     public static HashMap<OverlayType, PointData> SIZES = new HashMap<>();
 
     public enum PresetEnum {
-        NONE() {
+        DISABLE_OVERLAY() {
             @Override
             public OverlayType getType() {
                 return null;
@@ -35,10 +35,18 @@ public class OverlayPresets {
                 return OverlayType.SPELL_HOTBAR_VERTICAL;
             }
         },
+
+        EFFECTS_UNDER_VERTICAL_HOTBAR {
+            @Override
+            public OverlayType getType() {
+                return OverlayType.EFFECTS_VERTICAL;
+            }
+        },
+
         EFFECTS_BOTTOM_RIGHT {
             @Override
             public OverlayType getType() {
-                return OverlayType.EFFECTS;
+                return OverlayType.EFFECTS_VERTICAL;
             }
         };
 
@@ -49,7 +57,7 @@ public class OverlayPresets {
 
     public static OverlayConfigBuilder SPELL_CAST_BAR = OverlayConfigBuilder.of(PresetEnum.SPELL_CAST_BAR, "Spell Cast Bar", OverlayType.SCREEN, 172, 20)
             .anchor(OverlayAnchor.AttachmentPosition.MIDDLE, OverlayAnchor.AttachmentPosition.END)
-            .offset(0, -200);
+            .offset(-172 / 2, -125);
 
     public static OverlayConfigBuilder HOTBAR_HORIZONTAL = OverlayConfigBuilder.of(PresetEnum.HOTBAR_HORIZONTAL, "Horizontal Spell Hotbar", OverlayType.SCREEN, 162, 22)
             .anchor(OverlayAnchor.AttachmentPosition.MIDDLE, OverlayAnchor.AttachmentPosition.END)
@@ -62,6 +70,12 @@ public class OverlayPresets {
     public static OverlayConfigBuilder EFFECTS_BOTTOM_RIGHT = OverlayConfigBuilder.of(PresetEnum.EFFECTS_BOTTOM_RIGHT, "Status Effects Bottom Right", OverlayType.SCREEN, 20, 100)
             .anchor(OverlayAnchor.AttachmentPosition.MIDDLE, OverlayAnchor.AttachmentPosition.END)
             .offset(90, -30);
+
+
+    public static OverlayConfigBuilder EFFECTS_UNDER_VERTICAL_HOTBAR = OverlayConfigBuilder.of(PresetEnum.EFFECTS_UNDER_VERTICAL_HOTBAR, "Status Effects Under Vertical Hotbar", OverlayType.SPELL_HOTBAR_VERTICAL, 20, 80)
+            .anchor(OverlayAnchor.AttachmentPosition.START, OverlayAnchor.AttachmentPosition.END)
+            .offset(2, 2);
+
 
     public static void init() {
 

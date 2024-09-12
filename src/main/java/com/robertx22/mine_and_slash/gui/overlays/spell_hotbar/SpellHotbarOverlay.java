@@ -4,8 +4,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
 import com.robertx22.mine_and_slash.config.forge.overlay.OverlayConfig;
 import com.robertx22.mine_and_slash.config.forge.overlay.OverlayType;
-import com.robertx22.mine_and_slash.gui.overlays.EffectsOverlay;
-import com.robertx22.mine_and_slash.gui.overlays.GuiPosition;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.mmorpg.registers.client.SpellKeybind;
 import com.robertx22.mine_and_slash.saveclasses.PointData;
@@ -70,11 +68,6 @@ public class SpellHotbarOverlay {
             }
 
             RenderSystem.disableBlend(); // enables transparency
-
-            /// todo
-            if (true || ClientConfigs.getConfig().GUI_POSITION.get() != GuiPosition.TOP_LEFT) {
-                EffectsOverlay.render(mc.getWindow().getGuiScaledWidth() / 2 + 95, mc.getWindow().getGuiScaledHeight() - 20, mc.player, gui, true);
-            }
 
         } catch (Exception e) {
             e.printStackTrace();

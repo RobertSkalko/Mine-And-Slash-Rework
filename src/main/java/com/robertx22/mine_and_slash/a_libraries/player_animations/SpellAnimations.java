@@ -16,4 +16,13 @@ public class SpellAnimations {
     public static final AnimationHolder STAFF_CAST_FINISH = new AnimationHolder("staff_cast_shoot");
     public static final AnimationHolder MELEE_SLASH = new AnimationHolder("sword_slash_double");
 
+
+    public static final AnimationHolder SHOOT_ARROW_FAST = new AnimationHolder("spell_arrow");
+    public static final AnimationHolder TAUNT = new AnimationHolder("spell_taunt");
+    public static final AnimationHolder PULL = new AnimationHolder("spell_pull");
+    public static final AnimationHolder TOUCH_GROUND = new AnimationHolder("staff_ground");
+    public static final AnimationHolder CHARGE = new AnimationHolder("spell_charge");
+    public static final AnimationHolder THROW = new AnimationHolder("cast_throwable");
+
+
 }
