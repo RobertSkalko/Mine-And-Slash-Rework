@@ -3,7 +3,6 @@ package com.robertx22.mine_and_slash.gui.overlays.bar_overlays.types;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
 import com.robertx22.mine_and_slash.gui.overlays.BarGuiType;
-import com.robertx22.mine_and_slash.gui.overlays.EffectsOverlay;
 import com.robertx22.mine_and_slash.gui.overlays.GuiPosition;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.mmorpg.SyncedToClientValues;
@@ -97,7 +96,7 @@ public class RPGGuiOverlay {
             }
 
             if (ClientConfigs.getConfig().GUI_POSITION.get() == GuiPosition.TOP_LEFT) {
-                EffectsOverlay.render(18, 63 + off, mc.player, gui, true);
+                //  EffectsOverlay.render(18, 63 + off, mc.player, gui, true);
             } else {
 //                EffectsOverlay.render(5, 63, mc.player, gui, true);
 

@@ -93,6 +93,7 @@ public class HolySpells implements ExileRegistryInit {
                 .onCast(PartBuilder.giveSelfEffect(SlashPotions.KNOCKBACK_RESISTANCE.get(), 100D))
                 .onCast(PartBuilder.playSound(SoundEvents.PLAYER_ATTACK_SWEEP, 1D, 1D))
                 .onCast(PartBuilder.groundEdgeParticles(ParticleTypes.EFFECT, 100D, 2D, 0.5D))
+                .onCast(PartBuilder.groundEdgeParticles(ParticleTypes.SWEEP_ATTACK, 25D, 2D, 1D))
                 .onCast(PartBuilder.damageInAoe(SpellCalcs.WHIRLWIND, Elements.Physical, 1.5D)
                         .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.EFFECT, 50D, 0.5D, 0.1D))
                 )

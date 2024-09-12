@@ -1,5 +1,7 @@
 package com.robertx22.mine_and_slash.mmorpg.event_registers;
 
+import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
+import com.robertx22.mine_and_slash.config.forge.overlay.OverlayType;
 import com.robertx22.mine_and_slash.gui.overlays.bar_overlays.types.RPGGuiOverlay;
 import com.robertx22.mine_and_slash.gui.overlays.spell_cast_bar.SpellCastBarOverlay;
 import com.robertx22.mine_and_slash.gui.overlays.spell_hotbar.SpellHotbarOverlay;
@@ -23,9 +25,15 @@ public class GuiOverlays {
         event.registerAbove(VanillaGuiOverlay.CHAT_PANEL.id(), SlashRef.MODID + ".spell_hotbar", new IGuiOverlay() {
             @Override
             public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
-                new SpellHotbarOverlay().onHudRender(guiGraphics);
+                if (ClientConfigs.getConfig().shouldRenderOverlay(OverlayType.SPELL_HOTBAR_VERTICAL)) {
+                    new SpellHotbarOverlay().onHudRender(guiGraphics, ClientConfigs.getConfig().getOverlayConfig(OverlayType.SPELL_HOTBAR_VERTICAL), OverlayType.SPELL_HOTBAR_VERTICAL);
+                }
+                if (ClientConfigs.getConfig().shouldRenderOverlay(OverlayType.SPELL_HOTBAR_HORIZONTAL)) {
+                    new SpellHotbarOverlay().onHudRender(guiGraphics, ClientConfigs.getConfig().getOverlayConfig(OverlayType.SPELL_HOTBAR_HORIZONTAL), OverlayType.SPELL_HOTBAR_HORIZONTAL);
+                }
             }
         });
+        
         event.registerAbove(VanillaGuiOverlay.CHAT_PANEL.id(), SlashRef.MODID + ".cast_bar", new IGuiOverlay() {
             @Override
             public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {

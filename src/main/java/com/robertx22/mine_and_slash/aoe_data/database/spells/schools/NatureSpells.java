@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.aoe_data.database.spells.schools;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import com.robertx22.mine_and_slash.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.PartBuilder;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.SpellBuilder;
@@ -15,7 +16,6 @@ import com.robertx22.mine_and_slash.mmorpg.registers.common.SlashSounds;
 import com.robertx22.mine_and_slash.tags.all.SpellTags;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.PlayStyle;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Items;
@@ -174,7 +174,7 @@ public class NatureSpells implements ExileRegistryInit {
                 .build();
 
 
-        SpellBuilder.of(GARDEN_OF_THORNS, PlayStyle.INT, SpellConfiguration.Builder.multiCast(15, 20, 20, 5)
+        SpellBuilder.of(GARDEN_OF_THORNS, PlayStyle.INT, SpellConfiguration.Builder.multiCast(15, 20, 30, 5)
                                 .setChargesAndRegen(GARDEN_OF_THORNS, 3, 20 * 30), "Garden of Thorns",
                         Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.thorns, SpellTags.PHYSICAL)
                 )
@@ -185,11 +185,11 @@ public class NatureSpells implements ExileRegistryInit {
 
                 .onCast(PartBuilder.giveSelfExileEffect(ModEffects.INNER_CALM, 20 * 5D))
 
-                .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 7D)))
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 5D)))
                 .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(Blocks.CACTUS, 200D)
                         .put(MapField.ENTITY_NAME, "block")
                         .put(MapField.FIND_NEAREST_SURFACE, false)
-                        .put(MapField.BLOCK_FALL_SPEED, -0.02D)
+                        .put(MapField.BLOCK_FALL_SPEED, -0.05D)
                         .put(MapField.IS_BLOCK_FALLING, true)))
                 .onExpire("block", PartBuilder.damageInAoe(SpellCalcs.THORN_CONSUME, Elements.Physical, 3D).noKnock())
                 .onExpire("block", PartBuilder.addExileEffectToEnemiesInAoe(ModEffects.THORN.resourcePath, 3D, 20 * 10D))

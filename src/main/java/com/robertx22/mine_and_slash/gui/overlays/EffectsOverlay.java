@@ -1,9 +1,9 @@
 package com.robertx22.mine_and_slash.gui.overlays;
 
+import com.robertx22.library_of_exile.utils.GuiUtils;
 import com.robertx22.mine_and_slash.database.data.exile_effects.ExileEffectInstanceData;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
-import com.robertx22.library_of_exile.utils.GuiUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -54,7 +54,7 @@ public class EffectsOverlay {
                     yoff = 14;
                 }
 
-                GuiUtils.renderScaledText(gui, (int) x + 9, (int) y + yoff, 0.8F, text, ChatFormatting.YELLOW);
+                GuiUtils.renderScaledText(gui, (int) x + 9, (int) y - 5, 0.8F, text, ChatFormatting.YELLOW);
                 // gui.drawString(mc.font, text, (int) x, (int) y + 18, ChatFormatting.YELLOW.getColor(), true);
 
                 if (horizontal) {

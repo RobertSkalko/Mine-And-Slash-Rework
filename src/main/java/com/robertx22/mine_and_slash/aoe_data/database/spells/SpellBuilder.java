@@ -84,6 +84,7 @@ public class SpellBuilder {
     }
 
     public SpellBuilder summons(EntityType type, int duration, int amount, SummonType st) {
+        
         return summons(type, duration, amount, st, true);
     }
 

@@ -43,9 +43,12 @@ public class SpellOnHotbarRender {
 
     Minecraft mc = Minecraft.getInstance();
 
-    public SpellOnHotbarRender(int place, GuiGraphics gui, int x, int y) {
+    boolean horizontal;
+
+    public SpellOnHotbarRender(boolean horizontal, int place, GuiGraphics gui, int x, int y) {
         this.place = place;
         this.gui = gui;
+        this.horizontal = horizontal;
         this.x = x;
         this.y = y;
 
@@ -80,7 +83,7 @@ public class SpellOnHotbarRender {
 
         gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 
-        if (ClientConfigs.getConfig().HORIZONTAL_HOTBAR.get()) {
+        if (horizontal) {
             x += place * 20;
         } else {
             y += place * 20;

@@ -1,9 +1,15 @@
 package com.robertx22.mine_and_slash.config.forge;
 
+import com.robertx22.mine_and_slash.config.forge.overlay.OverlayConfig;
+import com.robertx22.mine_and_slash.config.forge.overlay.OverlayConfigBuilder;
+import com.robertx22.mine_and_slash.config.forge.overlay.OverlayPresets;
+import com.robertx22.mine_and_slash.config.forge.overlay.OverlayType;
 import com.robertx22.mine_and_slash.gui.overlays.GuiPosition;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.PlayerGUIs;
 import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.HashMap;
 
 public class ClientConfigs {
 
@@ -16,10 +22,13 @@ public class ClientConfigs {
         CLIENT = specPair.getLeft();
     }
 
+    public HashMap<OverlayPresets.PresetEnum, OverlayConfig> OVERLAY_PRESETS = new HashMap<>();
+    public HashMap<OverlayType, ForgeConfigSpec.EnumValue<OverlayPresets.PresetEnum>> OVERLAY_CONFIGS = new HashMap<>();
+
+
     ClientConfigs(ForgeConfigSpec.Builder b) {
 
-        b.comment("Client Configs")
-                .push("general");
+        b.comment("Client Configs").push("general");
 
 
         SHOW_LOW_ENERGY_MANA_WARNING = b.define("show_low_mana_warning", true);
@@ -40,7 +49,6 @@ public class ClientConfigs {
         DONT_CULL_PARTICLES_UNDER = b.defineInRange("DONT_CULL_PARTICLES_UNDER", 50D, 0D, 5000D);
 
         HOTBAR_SWAPPING = b.comment("When OFF: 8 bars, 8 keybinds. When ON: 4 bars, 5 keybinds(4 for each bar, 1 for hotbar swap button)").define("HOTBAR_SWAPPING", false);
-        HORIZONTAL_HOTBAR = b.comment("Instead of hotbar being on the side of the screen, it would be placed above the vanilla game's hotbar").define("HORIZONTAL_HOTBAR", false);
 
         GUI_POSITION = b.defineEnum("GUI_POSITION", GuiPosition.TOP_LEFT);
         ITEM_RARITY_BACKGROUND_TYPE = b.defineEnum("ITEM_RARITY_BACKGROUND_TYPE", GlintType.FULL);
@@ -50,8 +58,22 @@ public class ClientConfigs {
         REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES = b.defineInRange("REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES", 35, 0, 1000);
 
 
+        b.comment("Overlays").push("overlays");
+
+        for (OverlayConfigBuilder preset : OverlayPresets.ALL_PRESETS) {
+            OVERLAY_PRESETS.put(preset.preset, new OverlayConfig(b, preset));
+        }
+
+        for (OverlayType type : OverlayType.values()) {
+            if (type.getDefaultConfig() != null) {
+                OVERLAY_CONFIGS.put(type, b.defineEnum(type.name() + "_" + "CONFIG", type.getDefaultConfig()));
+            }
+        }
+
         b.pop();
+
     }
+
 
     public ForgeConfigSpec.BooleanValue SHOW_LOW_ENERGY_MANA_WARNING;
     public ForgeConfigSpec.BooleanValue ENABLE_FLOATING_DMG;
@@ -64,7 +86,6 @@ public class ClientConfigs {
     public ForgeConfigSpec.BooleanValue MODIFY_TOOLTIP_LENGTH;
     public ForgeConfigSpec.BooleanValue IN_DEPTH_TOOLTIPS_BY_DEFAULT;
     public ForgeConfigSpec.BooleanValue HOTBAR_SWAPPING;
-    public ForgeConfigSpec.BooleanValue HORIZONTAL_HOTBAR;
 
     public ForgeConfigSpec.EnumValue<GlintType> ITEM_RARITY_BACKGROUND_TYPE;
     public ForgeConfigSpec.EnumValue<GuiPosition> GUI_POSITION;
@@ -77,6 +98,16 @@ public class ClientConfigs {
 
     public ForgeConfigSpec.IntValue REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES;
 
+
+    public OverlayConfig getOverlayConfig(OverlayType type) {
+        var preset = OVERLAY_CONFIGS.get(type).get();
+        return OVERLAY_PRESETS.get(preset);
+    }
+
+    public boolean shouldRenderOverlay(OverlayType type) {
+        var preset = OVERLAY_CONFIGS.get(type).get();
+        return preset != OverlayPresets.PresetEnum.NONE;
+    }
 
     public enum GlintType {
         BORDER, FULL;
