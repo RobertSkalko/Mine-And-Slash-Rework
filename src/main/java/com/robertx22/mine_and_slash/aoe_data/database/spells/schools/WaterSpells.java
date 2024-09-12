@@ -86,7 +86,7 @@ public class WaterSpells implements ExileRegistryInit {
                         "Blizzard",
                         Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.COLD, SpellTags.PHYSICAL, SpellTags.SHATTER)
                 )
-                .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.STAFF_CAST_FINISH)
+                .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.CAST_FINISH)
                 .manualDesc("Create a Cloud that sends cold waves, damaging enemies for " + SpellCalcs.BLIZZARD.getLocDmgTooltip(Elements.Cold)
                 )
                 .weaponReq(CastingWeapon.MAGE_WEAPON)

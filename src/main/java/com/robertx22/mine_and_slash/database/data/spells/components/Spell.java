@@ -460,7 +460,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     public AnimationHolder getAnimation(PlayerAnimations.CastEnum e) {
         if (e == PlayerAnimations.CastEnum.CAST_START) {
             if (false) {
-                return SpellAnimations.CAST_FINISH;
+                return SpellAnimations.SPIN;
             }
             return this.cast_animation.getAnim();
         }

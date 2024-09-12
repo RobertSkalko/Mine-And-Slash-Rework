@@ -1,5 +1,7 @@
 package com.robertx22.mine_and_slash.aoe_data.database.spells.schools;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
+import com.robertx22.mine_and_slash.a_libraries.player_animations.SpellAnimations;
 import com.robertx22.mine_and_slash.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.PartBuilder;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.SpellBuilder;
@@ -22,7 +24,6 @@ import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.PlayStyle;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.EntityFinder;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffects;
@@ -87,7 +88,7 @@ public class HolySpells implements ExileRegistryInit {
                                 .setSwingArm(), "Whirlwind",
                         Arrays.asList(SpellTags.weapon_skill, SpellTags.area, SpellTags.damage, SpellTags.PHYSICAL))
                 .manualDesc("Spin and continuously strike enemies around you for " + SpellCalcs.WHIRLWIND.getLocDmgTooltip(Elements.Physical))
-
+                .animations(SpellAnimations.SPIN, SpellAnimations.CAST_FINISH)
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
                 .onCast(PartBuilder.giveSelfEffect(SlashPotions.KNOCKBACK_RESISTANCE.get(), 100D))
                 .onCast(PartBuilder.playSound(SoundEvents.PLAYER_ATTACK_SWEEP, 1D, 1D))

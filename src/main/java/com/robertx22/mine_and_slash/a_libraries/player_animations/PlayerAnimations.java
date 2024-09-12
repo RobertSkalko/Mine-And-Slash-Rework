@@ -37,14 +37,18 @@ public class PlayerAnimations {
     public static void initClient() {
         PlayerAnimationFactory.ANIMATION_DATA_FACTORY.registerFactory(
                 SpellAnimations.ANIMATION_RESOURCE,
-                42,
+                40,
                 (player) -> {
                     var animation = new ModifierLayer<>();
 
                     animation.addModifierLast(new AdjustmentModifier((partName) -> {
                         switch (partName) {
                             case "rightArm", "leftArm" -> {
-                                return Optional.of(new AdjustmentModifier.PartModifier(new Vec3f(player.getXRot() * Mth.DEG_TO_RAD, Mth.DEG_TO_RAD * (player.yHeadRot - player.yBodyRot), 0), Vec3f.ZERO));
+
+                                return Optional.of(new AdjustmentModifier.PartModifier(new Vec3f(
+                                        player.getXRot() * Mth.DEG_TO_RAD,
+                                        Mth.DEG_TO_RAD * (player.yHeadRot - player.yBodyRot),
+                                        0), Vec3f.ZERO));
 
                             }
                             default -> {
@@ -92,12 +96,16 @@ public class PlayerAnimations {
 
     private static void animatePlayerStart(Player player, ResourceLocation resourceLocation) {
 
+
         var keyframeAnimation = PlayerAnimationRegistry.getAnimation(resourceLocation);
         if (keyframeAnimation != null) {
             //noinspection unchecked
             var animation = (ModifierLayer<IAnimation>) PlayerAnimationAccess.getPlayerAssociatedData((AbstractClientPlayer) player).get(SpellAnimations.ANIMATION_RESOURCE);
             if (animation != null) {
+
+
                 var castingAnimationPlayer = new KeyframeAnimationPlayer(keyframeAnimation);
+
                 castingAnimationPlayerLookup.put(player.getUUID(), castingAnimationPlayer);
                 var armsFlag = true; //SHOW_FIRST_PERSON_ARMS.get();
                 var itemsFlag = true;//SHOW_FIRST_PERSON_ITEMS.get();
