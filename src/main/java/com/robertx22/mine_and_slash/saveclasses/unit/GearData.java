@@ -3,12 +3,18 @@ package com.robertx22.mine_and_slash.saveclasses.unit;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.database.data.gear_types.bases.BaseGearType;
+import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
+import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.GearStatCtx;
+import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.mine_and_slash.tags.all.SlotTags;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.RepairUtils;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GearData {
 
@@ -17,15 +23,34 @@ public class GearData {
     public EquipmentSlot slot;
     public int percentStatUtilization = 100; // todo if stats change stat utilization, they need special handling..
 
+    public List<StatContext> cachedStats = new ArrayList<>();
+
+
     public GearData(ItemStack stack, EquipmentSlot slot, EntityData data) {
         this.stack = stack;
         if (stack != null) {
             this.gear = StackSaving.GEARS.loadFrom(stack);
         }
+
         this.slot = slot;
 
+        if (gear != null) {
+            calcStatUtilization(data);
 
-        calcStatUtilization(data);
+            List<ExactStatData> stats = gear.GetAllStats();
+            if (percentStatUtilization != 100) {
+                // multi stats like for offfhand weapons
+                float multi = percentStatUtilization / 100F;
+                stats.forEach(s -> s.multiplyBy(multi));
+            }
+            cachedStats.add(GearStatCtx.of(gear, stats));
+            var ench = gear.getEnchantCompatStats(stack);
+            if (ench != null) {
+                cachedStats.add(ench);
+            }
+        } else {
+            percentStatUtilization = 0;
+        }
     }
 
     @Override

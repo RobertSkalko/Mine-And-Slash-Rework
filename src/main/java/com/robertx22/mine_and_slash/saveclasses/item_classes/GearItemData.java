@@ -1,5 +1,7 @@
 package com.robertx22.mine_and_slash.saveclasses.item_classes;
 
+import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
+import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.database.data.affixes.Affix;
 import com.robertx22.mine_and_slash.database.data.gear_types.bases.BaseGearType;
@@ -27,8 +29,6 @@ import com.robertx22.mine_and_slash.uncommon.localization.Formatter;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.TooltipUtils;
-import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -365,13 +365,10 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
         List<ExactStatData> list = new ArrayList<>();
         for (IStatsContainer x : GetAllStatContainers()) {
-
             List<ExactStatData> stats = x.GetAllStats(this);
-
             stats.forEach(s -> {
                 list.add(s);
             });
-
         }
         return list;
     }

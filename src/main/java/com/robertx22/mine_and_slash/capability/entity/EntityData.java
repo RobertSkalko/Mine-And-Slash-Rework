@@ -22,6 +22,7 @@ import com.robertx22.mine_and_slash.database.data.stats.types.resources.energy.E
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.health.Health;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.event_hooks.damage_hooks.util.AttackInformation;
+import com.robertx22.mine_and_slash.event_hooks.my_events.CachedEntityStats;
 import com.robertx22.mine_and_slash.event_hooks.ontick.UnequipGear;
 import com.robertx22.mine_and_slash.event_hooks.player.OnLogin;
 import com.robertx22.mine_and_slash.loot.LootModifiersList;
@@ -108,10 +109,12 @@ public class EntityData implements ICap, INeededForClient {
 
     }
 
-
     public EntityData(LivingEntity entity) {
         this.entity = entity;
+        this.equipmentCache = new CachedEntityStats(entity);
     }
+
+    public CachedEntityStats equipmentCache;
 
 
     private static final String RARITY = "rarity";
@@ -138,7 +141,8 @@ public class EntityData implements ICap, INeededForClient {
 
 
     public DirtySync sync = new DirtySync("endata sync", x -> syncData());
-    public DirtySync gear = new DirtySync("gear_recalc", x -> recalcStats());
+    // public DirtySync gear = new DirtySync("gear_recalc", x -> recalcStats());
+
 
     public UnsavedMaxEffectStacksData maxCharges = new UnsavedMaxEffectStacksData();
 
@@ -344,7 +348,7 @@ public class EntityData implements ICap, INeededForClient {
     }
 
     public void setEquipsChanged() {
-        this.gear.setDirty();
+        this.equipmentCache.setAllDirty();
     }
 
     public CooldownsData getCooldowns() {
@@ -428,8 +432,7 @@ public class EntityData implements ICap, INeededForClient {
         if (data.getAttackerEntity() instanceof Player p && PlayerUTIL.isFake(p)) {
             // this is a bit jank but it solves 2 things: fake players not having energy to attack, and fake players not having stats because they dont tick
             // and stats are calc on tick..
-            Load.Unit(p).gear.setDirty();
-            Load.Unit(p).recalcStats();
+            Load.Unit(p).equipmentCache.setAllDirty();
         } else {
             if (event.data.getNumber() > resources.getEnergy()) {
                 data.setCanceled(true);
@@ -467,7 +470,7 @@ public class EntityData implements ICap, INeededForClient {
     public void setRarity(String rarity) {
         this.rarity = rarity;
         this.sync.setDirty();
-        this.gear.setDirty();
+        this.equipmentCache.setAllDirty();
     }
 
     @Override
@@ -549,7 +552,7 @@ public class EntityData implements ICap, INeededForClient {
         }
     }
 
-    private void recalcStats() {
+    public void recalcStats_DONT_CALL() {
 
         if (this.entity.level().isClientSide()) {
             return;
@@ -570,9 +573,9 @@ public class EntityData implements ICap, INeededForClient {
         //Watch watch = new Watch();
         this.unit = new Unit();
 
-        var stats = StatCalculation.getStatsWithoutSuppGems(entity, this, null);
+        var stats = StatCalculation.getStatsWithoutSuppGems(entity, this);
 
-        StatCalculation.calc(unit, stats, entity, -1, null);
+        StatCalculation.calc(unit, stats, entity, -1);
 
         if (entity instanceof Player p) {
             this.didStatCalcThisTickForPlayer = true;
@@ -672,8 +675,8 @@ public class EntityData implements ICap, INeededForClient {
             if (data.getAttackerEntity() instanceof Player p && PlayerUTIL.isFake(p)) {
                 // this is a bit jank but it solves 2 things: fake players not having energy to attack, and fake players not having stats because they dont tick
                 // and stats are calc on tick..
-                Load.Unit(p).gear.setDirty();
-                Load.Unit(p).recalcStats();
+                Load.Unit(p).equipmentCache.setAllDirty();
+                Load.Unit(p).recalcStats_DONT_CALL();
             } else {
                 if (event.data.getNumber() > resources.getEnergy()) {
                     data.setCanceled(true);
@@ -892,7 +895,7 @@ public class EntityData implements ICap, INeededForClient {
             p.awardStat(Stats.CUSTOM.get(PlayerStats.LEVELS_GAINED), lvl);
         }
 
-        this.gear.setDirty();
+        this.equipmentCache.setAllDirty();
         this.sync.setDirty();
     }
 

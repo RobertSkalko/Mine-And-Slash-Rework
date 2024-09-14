@@ -128,8 +128,11 @@ public class OnServerTick {
                 event.Activate();
             }
 
-            if (age % (20 * 3) == 0) {
+            if (age % (20 * 10) == 0) {
                 unitdata.setEquipsChanged();
+            }
+            
+            if (age % (20 * 3) == 0) {
                 playerData.playerDataSync.setDirty();
             }
 

@@ -1,5 +1,7 @@
 package com.robertx22.mine_and_slash.mmorpg.event_registers;
 
+import com.robertx22.library_of_exile.events.base.EventConsumer;
+import com.robertx22.library_of_exile.events.base.ExileEvents;
 import com.robertx22.mine_and_slash.capability.player.PlayerData;
 import com.robertx22.mine_and_slash.database.data.stats.datapacks.stats.AttributeStat;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
@@ -27,8 +29,6 @@ import com.robertx22.mine_and_slash.uncommon.effectdatas.OnMobKilledByDamageEven
 import com.robertx22.mine_and_slash.uncommon.error_checks.base.ErrorChecks;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.Cached;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
-import com.robertx22.library_of_exile.events.base.EventConsumer;
-import com.robertx22.library_of_exile.events.base.ExileEvents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResultHolder;
@@ -127,7 +127,7 @@ public class CommonEvents {
         ForgeEvents.registerForgeEvent(EntityJoinLevelEvent.class, event -> {
 
             if (event.getEntity() instanceof LivingEntity en) {
-                Load.Unit(en).gear.setDirty(); // todo this is a new performance test
+                Load.Unit(en).equipmentCache.setAllDirty(); // todo this is a new performance test
                 // does NOT saving stats to nbt, but calculating every time entity joins world make servers better or worse off?
             }
             OnMobSpawn.onLoad(event.getEntity());

@@ -11,6 +11,7 @@ import com.robertx22.mine_and_slash.capability.player.helper.JewelInvHelper;
 import com.robertx22.mine_and_slash.capability.player.helper.MyInventory;
 import com.robertx22.mine_and_slash.characters.CharStorageData;
 import com.robertx22.mine_and_slash.database.data.spells.components.Spell;
+import com.robertx22.mine_and_slash.event_hooks.my_events.CachedPlayerStats;
 import com.robertx22.mine_and_slash.gui.screens.stat_gui.StatCalcInfoData;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.prophecy.PlayerProphecies;
@@ -133,8 +134,11 @@ public class PlayerData implements ICap {
 
     public PlayerData(Player player) {
         this.player = player;
+        this.cachedStats = new CachedPlayerStats(player);
     }
 
+
+    public CachedPlayerStats cachedStats;
 
     public JewelInvHelper getJewels() {
         return new JewelInvHelper(jewelsInv);
@@ -232,7 +236,7 @@ public class PlayerData implements ICap {
     private Unit getSpellStats(Spell spell, List<StatContext> stats) {
         int key = this.spellCastingData.keyOfSpell(spell.GUID());
         var unit = new Unit();
-        StatCalculation.calc(unit, StatCalculation.getStatsWithoutSuppGems(this.player, Load.Unit(player), null), player, key, null);
+        StatCalculation.calc(unit, StatCalculation.getStatsWithoutSuppGems(this.player, Load.Unit(player)), player, key);
         return unit;
     }
 

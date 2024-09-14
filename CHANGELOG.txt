@@ -12,3 +12,4 @@ The actual animations file is in the assets\mmorpg\player_animation folder
 - overlays can now be disabled
 - overlays can now be configured. You can specify positions, disable them, or anchor them to other overlays
 - effect overlay can now be horizontal and vertical and attached to other overlays like the spell hotbar 
+- attempt to cache some stat calculation for less lag on servers, may be bugs
