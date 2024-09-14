@@ -203,13 +203,13 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
         ctx.castedThisTick = true;
 
-        // todo
+     /*
         if (MMORPG.RUN_DEV_TOOLS_REMOVE_WHEN_DONE && this.config.swing_arm) {
             //    caster.swingTime = -1; // this makes sure hand swings
             //   caster.swing(InteractionHand.MAIN_HAND);
         }
 
-
+      */
         attached.onCast(SpellCtx.onCast(caster, ctx.calcData));
 
 

@@ -4,8 +4,8 @@ import com.robertx22.mine_and_slash.capability.DirtySync;
 import com.robertx22.mine_and_slash.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
-import com.robertx22.mine_and_slash.uncommon.stat_calculation.CommonStatUtils;
 import com.robertx22.mine_and_slash.uncommon.stat_calculation.PlayerStatUtils;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
@@ -20,7 +20,13 @@ public class CachedPlayerStats {
     // I guess these could be all stats that don't change often, fine to set these to recalc everything
     public DirtySync ALLOCATED = new DirtySync("misc_player", x -> {
         recalcAllocated();
-    });
+    }) {
+        @Override
+        public void setDirty() {
+            super.setDirty();
+        }
+
+    };
 
     public void tick() {
 
@@ -32,6 +38,11 @@ public class CachedPlayerStats {
     }
 
     private void recalcAllocated() {
+
+        if (false) {
+            p.sendSystemMessage(Component.literal("Re calcing player stuff"));
+        }
+
         statContexts = new ArrayList<>();
 
         var playerData = Load.player(p);
@@ -41,7 +52,7 @@ public class CachedPlayerStats {
             playerData.aurasOn.add(aura.id);
         }
 
-        statContexts.add(CommonStatUtils.addStatCompat(p));
+
         statContexts.addAll(PlayerStatUtils.addToolStats(p));
 
         statContexts.add(PlayerStatUtils.addBonusExpPerCharacters(p));

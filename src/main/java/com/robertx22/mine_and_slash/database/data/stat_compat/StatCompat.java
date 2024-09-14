@@ -111,8 +111,7 @@ public class StatCompat implements JsonExileRegistry<StatCompat>, IAutoGson<Stat
 
         if (check.isAttribDirty()) {
             check.setAttribDirty(false);
-            // todo i need to check this
-            Load.Unit(en).setEquipsChanged();
+            Load.Unit(en).equipmentCache.STAT_COMPAT.setDirty();
         }
     }
 

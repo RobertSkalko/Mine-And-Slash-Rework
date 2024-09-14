@@ -8,6 +8,7 @@ import com.robertx22.mine_and_slash.saveclasses.unit.GearData;
 import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
+import com.robertx22.mine_and_slash.uncommon.stat_calculation.CommonStatUtils;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -36,6 +37,7 @@ public class CachedEntityStats {
     public AttackInformation attackInfo; // this was used to retrieve thrown weapons like tridents
 
     private StatContext statusEffects;
+    private StatContext statCompat;
 
     LazyClass<EntityData> unitdata = new LazyClass<>(() -> Load.Unit(entity));
 
@@ -59,6 +61,10 @@ public class CachedEntityStats {
         recalcStatusEffects();
         STAT_CALC.setDirty();
     });
+    public DirtySync STAT_COMPAT = new DirtySync("stat_compat", x -> {
+        recalcStatCompat();
+        STAT_CALC.setDirty();
+    });
 
     private void recalcPlayerStuff() {
         if (entity instanceof Player p) {
@@ -76,11 +82,15 @@ public class CachedEntityStats {
         GEAR.onTickTrySync(entity);
         WEAPON.onTickTrySync(entity);
         STATUS.onTickTrySync(entity);
+        STAT_COMPAT.onTickTrySync(entity);
 
         STAT_CALC.onTickTrySync(entity);
 
     }
 
+    private void recalcStatCompat() {
+        this.statCompat = CommonStatUtils.addStatCompat(entity);
+    }
 
     public List<GearData> getGear() {
         List<GearData> all = new ArrayList<>(gear);
@@ -90,6 +100,12 @@ public class CachedEntityStats {
         return all;
     }
 
+    public StatContext getStatCompatStats() {
+        if (statusEffects == null) {
+            recalcStatCompat();
+        }
+        return statusEffects;
+    }
 
     public StatContext getStatusEffectStats() {
         if (statusEffects == null) {

@@ -23,7 +23,6 @@ public class CommonStatUtils {
 
     // no idea about perf impact lets keep this player only for now
     public static StatContext addStatCompat(LivingEntity en) {
-
         List<ExactStatData> list = new ArrayList<>();
 
         for (StatCompat c : ExileDB.StatCompat().getList()) {
