@@ -103,7 +103,6 @@ public class SpellOnHotbarRender {
 
                     CooldownsData cds = Load.Unit(mc.player).getCooldowns();
                     float percent = (float) cds.getCooldownTicks(spell.GUID()) / (float) cds.getNeededTicks(spell.GUID());
-
                     drawCooldown(gui, percent, xs, ys);
 
                 }

@@ -279,7 +279,7 @@ public class SpellCastingData {
 
                     if (ctx.caster instanceof ServerPlayer p) {
                         Load.Unit(ctx.caster).sync.setDirty();
-                        Packets.sendToClient(p, new TellClientEntityCastingSpell(PlayerAnimations.CastEnum.CAST_FINISH, p, ctx.spell));
+                        TellClientEntityCastingSpell.sendUpdates(PlayerAnimations.CastEnum.CAST_FINISH, p, ctx.spell);
                     }
 
                     this.calcSpell = null;
@@ -311,7 +311,7 @@ public class SpellCastingData {
         this.casting = true;
 
         if (ctx.caster instanceof ServerPlayer p) {
-            Packets.sendToClient(p, new TellClientEntityCastingSpell(PlayerAnimations.CastEnum.CAST_START, p, ctx.spell));
+            TellClientEntityCastingSpell.sendUpdates(PlayerAnimations.CastEnum.CAST_START, p, ctx.spell);
         }
     }
 

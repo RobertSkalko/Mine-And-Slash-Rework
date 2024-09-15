@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+// todo wrap these configs into a class and separate them into categories: loot configs, lvl penalty configs, map configs etc
 public class ServerContainer {
 
     public static final ForgeConfigSpec spec;
@@ -57,7 +58,7 @@ public class ServerContainer {
         MAX_EXP_DEBT_MULTI = b.defineInRange("max_death_exp_debt_multi", 1F, 0, 100);
         EXP_GAIN_MULTI = b.defineInRange("exp_gain_multi", 1D, 0, 1000);
         PARTY_RADIUS = b.defineInRange("party_radius", 200D, 0, 1000);
-        LEVEL_DISTANCE_PENALTY_PER_LVL = b.defineInRange("lvl_distance_penalty_per_level", 0.1D, 0, 1D);
+        LEVEL_DISTANCE_PENALTY_PER_LVL = b.comment("When you are higher or lower level than mobs by X levels, decreases the loot and exp droprate.").defineInRange("lvl_distance_loot_penalty_per_level", 0.1D, 0, 1D);
         LEVEL_DISTANCE_PENALTY_MIN_MULTI = b.defineInRange("min_loot_chance", 0.2D, 0, 1);
         EXTRA_MOB_STATS_PER_LEVEL = b.defineInRange("extra_mob_stats_per_lvl", 0.02D, 0, 1000);
         VANILLA_MOB_DMG_AS_EXILE_DMG = b.defineInRange("vanilla_mob_dmg_as_exile_dmg", 1D, 0, 1000);

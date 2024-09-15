@@ -77,10 +77,8 @@ public class PlayerAnimations {
     }
 
     // todo need to cleanup this lol
-    public static void onSpellCast(Spell spell, CastEnum c) {
+    public static void onSpellCast(Player player, Spell spell, CastEnum c) {
 
-
-        var player = Minecraft.getInstance().player;
 
         var x = spell.getAnimation(c);
 
