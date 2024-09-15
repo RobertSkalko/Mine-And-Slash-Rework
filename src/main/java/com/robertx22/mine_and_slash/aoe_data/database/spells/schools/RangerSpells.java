@@ -196,6 +196,9 @@ public class RangerSpells implements ExileRegistryInit {
         SpellBuilder.of(ARROW_STORM, PlayStyle.DEX, SpellConfiguration.Builder.arrowSpell(20, 20 * 25), "Arrow Storm",
                         Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.PHYSICAL))
                 .weaponReq(CastingWeapon.RANGED)
+
+                .singleAnimation(SpellAnimations.SINGLE_ARROW_SHOT)
+
                 .manualDesc("Shoot out arrows in an arc, dealing " + SpellCalcs.ARROW_STORM.getLocDmgTooltip(Elements.Physical))
                 .onCast(PartBuilder.playSound(SoundEvents.ARROW_SHOOT, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.createArrow(5D)))

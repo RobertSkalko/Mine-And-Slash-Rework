@@ -131,8 +131,10 @@ public class SummonSpells implements ExileRegistryInit {
 
         SpellBuilder.of(RETURN_SUMMONS, PlayStyle.STR, SpellConfiguration.Builder.instant(15, 20 * 30), "Return Summons",
                         Arrays.asList(SpellTags.area, SpellTags.heal, SpellTags.summon))
+                .singleAnimation(SpellAnimations.PULL)
+
                 .manualDesc("Regroup your summons and heal them for " + SpellCalcs.HEALING_AURA.getLocDmgTooltip() + " health.")
-                .onCast(PartBuilder.playSound(SoundEvents.ANVIL_HIT, 1D, 1D))
+                .onCast(PartBuilder.playSound(SoundEvents.STONE_BREAK, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.TP_TARGET_TO_SELF.create())
                         .addActions(SpellAction.POTION.createGive(MobEffects.MOVEMENT_SLOWDOWN, 20D * 5))
                         .addActions(SpellAction.DEAL_DAMAGE.create(SpellCalcs.PULL, Elements.Physical))

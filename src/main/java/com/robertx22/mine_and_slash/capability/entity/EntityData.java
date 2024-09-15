@@ -557,6 +557,7 @@ public class EntityData implements ICap, INeededForClient {
         if (this.entity.level().isClientSide()) {
             return;
         }
+        
 
         if (unit == null) {
             unit = new Unit();

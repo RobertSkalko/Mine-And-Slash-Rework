@@ -18,6 +18,7 @@ public class SpellAnimations {
 
 
     public static final AnimationHolder SHOOT_ARROW_FAST = new AnimationHolder("spell_arrow");
+    public static final AnimationHolder SINGLE_ARROW_SHOT = new AnimationHolder("single_arrow_shot"); // needs reworking
     public static final AnimationHolder TAUNT = new AnimationHolder("spell_taunt");
     public static final AnimationHolder PULL = new AnimationHolder("spell_pull");
     public static final AnimationHolder TOUCH_GROUND = new AnimationHolder("staff_ground");

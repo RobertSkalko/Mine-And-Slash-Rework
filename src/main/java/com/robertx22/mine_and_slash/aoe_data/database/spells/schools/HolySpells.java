@@ -167,6 +167,8 @@ public class HolySpells implements ExileRegistryInit {
                 .manualDesc("Bash enemies around you for " +
                         SpellCalcs.GONG_STRIKE.getLocDmgTooltip(Elements.Physical))
 
+                .animations(SpellAnimations.TAUNT, SpellAnimations.TAUNT)
+
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
 
                 .onCast(PartBuilder.playSound(SoundEvents.ANVIL_PLACE, 1D, 1D))
@@ -186,6 +188,7 @@ public class HolySpells implements ExileRegistryInit {
                         Arrays.asList(SpellTags.BUFF))
                 .manualDesc("Gives buff to self.")
                 .weaponReq(CastingWeapon.ANY_WEAPON)
+
                 .onCast(PartBuilder.playSound(SoundEvents.RAVAGER_ROAR, 1D, 1D))
                 .onCast(PartBuilder.giveSelfExileEffect(ModEffects.UNDYING_WILL, 20D * 10))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.ENCHANTED_HIT, 50D, 1D))
@@ -237,12 +240,11 @@ public class HolySpells implements ExileRegistryInit {
                 .levelReq(1)
                 .build();
 
-        SpellBuilder.of(WISH, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 10)
+        SpellBuilder.of(WISH, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(20, 0, 30)
                                 .setChargesAndRegen(WISH, 3, 20 * 30), "Wish",
                         Arrays.asList(SpellTags.heal))
                 .manualDesc(
-                        "Heal allies around you for " + SpellCalcs.WISH.getLocDmgTooltip() +
-                                " health")
+                        "Heal allies around you for " + SpellCalcs.WISH.getLocDmgTooltip() + " health")
                 .weaponReq(CastingWeapon.ANY_WEAPON)
                 .onCast(PartBuilder.playSound(SlashSounds.BUFF.get(), 1D, 1D))
                 .onCast(PartBuilder.groundParticles(ParticleTypes.COMPOSTER, 50D, 5D, 0.2D))

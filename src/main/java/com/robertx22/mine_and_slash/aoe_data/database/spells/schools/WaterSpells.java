@@ -130,13 +130,13 @@ public class WaterSpells implements ExileRegistryInit {
                 .levelReq(20)
                 .build();
 
-        SpellBuilder.of(FROST_FLOWER, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 20 * 60)
+        SpellBuilder.of(FROST_FLOWER, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(20, 20 * 60, 30)
                                 .setSwingArm(), "Frost Totem",
                         Arrays.asList(SpellTags.damage, SpellTags.area, SpellTags.totem, SpellTags.COLD))
                 .manualDesc("Summon a frost totem that deals "
                         + SpellCalcs.FROST_FLOWER.getLocDmgTooltip(Elements.Cold) + " in an area every second.")
 
-
+            
                 .onCast(PartBuilder.playSound(SoundEvents.GRASS_PLACE, 1D, 1D))
 
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 0D)))

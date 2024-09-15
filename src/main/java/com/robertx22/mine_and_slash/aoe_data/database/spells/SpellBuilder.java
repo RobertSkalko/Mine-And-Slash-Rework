@@ -203,11 +203,14 @@ public class SpellBuilder {
     }
 
     public SpellBuilder animations(AnimationHolder castStart, AnimationHolder castFinish) {
-
         this.spell.cast_animation = new SpellAnimationData(castStart);
         this.spell.cast_finish_animation = new SpellAnimationData(castFinish);
+        return this;
+    }
 
-
+    public SpellBuilder singleAnimation(AnimationHolder castStart) {
+        this.spell.cast_animation = new SpellAnimationData(castStart);
+        this.spell.cast_finish_animation = new SpellAnimationData(AnimationHolder.none());
         return this;
     }
 

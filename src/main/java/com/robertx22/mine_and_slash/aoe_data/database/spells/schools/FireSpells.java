@@ -1,7 +1,6 @@
 package com.robertx22.mine_and_slash.aoe_data.database.spells.schools;
 
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
-import com.robertx22.mine_and_slash.a_libraries.player_animations.AnimationHolder;
 import com.robertx22.mine_and_slash.a_libraries.player_animations.SpellAnimations;
 import com.robertx22.mine_and_slash.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.PartBuilder;
@@ -35,7 +34,7 @@ public class FireSpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        SpellBuilder.of(MAGMA_FLOWER, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 20 * 30)
+        SpellBuilder.of(MAGMA_FLOWER, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(15, 20 * 30, 20)
                                 .setSwingArm(), "Magma Totem",
                         Arrays.asList(SpellTags.damage, SpellTags.area, SpellTags.totem, SpellTags.FIRE))
                 .manualDesc("Summon a flaming totem that deals "
@@ -62,6 +61,7 @@ public class FireSpells implements ExileRegistryInit {
         SpellBuilder.of(FLAME_STRIKE_ID, PlayStyle.STR, SpellConfiguration.Builder.instant(8, 15)
                                 .setSwingArm(), "Flame Strike",
                         Arrays.asList(SpellTags.weapon_skill, SpellTags.area, SpellTags.damage, SpellTags.FIRE))
+                .singleAnimation(SpellAnimations.MELEE_SLASH)
                 .manualDesc("Strike enemies in front for " +
                         SpellCalcs.FLAME_STRIKE.getLocDmgTooltip(Elements.Fire))
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
@@ -120,7 +120,7 @@ public class FireSpells implements ExileRegistryInit {
                 .manualDesc(
                         "Engulf the area in flames, dealing " + SpellCalcs.FIRE_NOVA.getLocDmgTooltip()
                                 + " " + Elements.Fire.getIconNameDmg() + " to nearby enemies.")
-                .animations(SpellAnimations.TOUCH_GROUND, AnimationHolder.none())
+                .singleAnimation(SpellAnimations.TOUCH_GROUND)
                 .onCast(PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
 
                 .onCast(PartBuilder.nova(ParticleTypes.FLAME, 200D, 5D, 0.05D))
