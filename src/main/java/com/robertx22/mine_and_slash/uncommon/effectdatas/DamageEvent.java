@@ -2,6 +2,8 @@ package com.robertx22.mine_and_slash.uncommon.effectdatas;
 
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.SoundUtils;
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.DamageNullifiedParticle;
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.ElementDamageParticle;
 import com.robertx22.mine_and_slash.aoe_data.database.ailments.Ailment;
 import com.robertx22.mine_and_slash.capability.entity.CooldownsData;
 import com.robertx22.mine_and_slash.capability.player.data.PlayerConfigData;
@@ -16,6 +18,8 @@ import com.robertx22.mine_and_slash.database.data.stats.types.offense.FullSwingD
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.DamageAbsorbedByMana;
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.magic_shield.MagicShield;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.event.MASEvent;
+import com.robertx22.mine_and_slash.event.server.NotifyClientToSpawnParticleEvent;
 import com.robertx22.mine_and_slash.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.mine_and_slash.loot.LootUtils;
 import com.robertx22.mine_and_slash.mixin_ducks.DamageSourceDuck;
@@ -483,7 +487,8 @@ public class DamageEvent extends EffectEvent {
                 attackInfo.setCanceled(true);
             }
             cancelDamage();
-            sendDamageParticle(info);
+            MASEvent.INSTANCE.post(new NotifyClientToSpawnParticleEvent(getAttackType().isAttack() ? DamageNullifiedParticle.Type.DODGE : DamageNullifiedParticle.Type.RESIST, (ServerPlayer)source, target));
+            //sendDamageParticle(info);
             SoundUtils.playSound(target, SoundEvents.SHIELD_BLOCK, 1, 1.5F);
             return;
         }
@@ -630,8 +635,8 @@ public class DamageEvent extends EffectEvent {
                     threatEvent.Activate();
                 }
             }
-
-            sendDamageParticle(info);
+            MASEvent.INSTANCE.post(new NotifyClientToSpawnParticleEvent(ElementDamageParticle.DamageInformation.fromDmgByElement(info, data.isCrit()), (ServerPlayer)source, target));
+            //sendDamageParticle(info);
 
             // target.invulnerableTime = 20;
 
@@ -685,6 +690,10 @@ public class DamageEvent extends EffectEvent {
         public boolean isMixedDamage() {
             int bonusdmg = (int) dmgmap.entrySet().stream().filter(x -> true).count();
             return bonusdmg > 1;
+        }
+
+        public HashMap<Elements, Float> getDmgmap() {
+            return dmgmap;
         }
 
         public void addDmg(DamageEvent event, float dmg, Elements element) {

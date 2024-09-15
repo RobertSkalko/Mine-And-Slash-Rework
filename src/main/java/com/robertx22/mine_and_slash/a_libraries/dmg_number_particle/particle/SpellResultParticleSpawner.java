@@ -15,12 +15,14 @@ import java.util.function.Consumer;
 public class SpellResultParticleSpawner {
 
     public enum SpawnType {
-        DAMAGE(ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().damageStrategy),
-        NULLIFIED_DAMAGE(ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().nullifiedDamageStrategy);
+        DAMAGE(ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().damageStrategy, new ElementDamageParticle.DamageInformation(null, null, false)),
+        NULLIFIED_DAMAGE(ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().nullifiedDamageStrategy, DamageNullifiedParticle.Type.DODGE);
         public final BiConsumer<IParticleSpawnNotifier, Entity> strategy;
+        public final IParticleSpawnNotifier target;
 
-        SpawnType(BiConsumer<IParticleSpawnNotifier, Entity> Strategy) {
-            this.strategy = Strategy;
+        SpawnType(BiConsumer<IParticleSpawnNotifier, Entity> strategy, IParticleSpawnNotifier target) {
+            this.strategy = strategy;
+            this.target = target;
         }
     }
 
@@ -28,14 +30,16 @@ public class SpellResultParticleSpawner {
         ORIGINAL((info, entity) -> {
             var mat = (ElementDamageParticle.DamageInformation) info;
             ImmutableMap<Elements, Float> dmgMap = mat.getDmgMap();
+            System.out.println("the map I got is " + dmgMap);
             double x = entity.getRandomX(1.0D);
             double y = entity.getEyeY();
             double z = entity.getRandomZ(1.0D);
 
-            boolean crit = ((ElementDamageParticle.DamageInformation) info).isCrit();
+            boolean crit = mat.isCrit();
             for (Map.Entry<Elements, Float> entry : dmgMap.entrySet()) {
                 if (entry.getValue()
                         .intValue() > 0) {
+                    System.out.println("add to particleEngine");
                     Minecraft.getInstance().particleEngine.add(new ElementDamageParticle(Minecraft.getInstance().level, x, y, z, new Original(), entry.getKey().format.getColor(), crit ? entry.getValue() + "!" : entry.getValue() + ""));
                 }
             }
@@ -45,6 +49,7 @@ public class SpellResultParticleSpawner {
                     double x = entity.getRandomX(1.0D);
                     double y = entity.getEyeY();
                     double z = entity.getRandomZ(1.0D);
+                    System.out.println("add to particleEngine");
                     Minecraft.getInstance().particleEngine.add(new DamageNullifiedParticle(Minecraft.getInstance().level, x, y, z, new Original(), mat));
                 });
 

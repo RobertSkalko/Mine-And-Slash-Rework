@@ -7,19 +7,15 @@ import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.Exi
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.function.Supplier;
-
 public class Original implements IParticleRenderStrategy{
 
-    ExileSpellResultParticle particle;
 
     @Override
-    public void setupStyle(VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack) {
+    public void setupStyle(ExileSpellResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack) {
         Vec3 cameraPos = camera.getPosition();
         Vec3 pos = particle.getPos();
         Vec3 original = particle.getOriginalPosition();
@@ -35,24 +31,20 @@ public class Original implements IParticleRenderStrategy{
     }
 
     @Override
-    public void renderDamage(VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack, Supplier<?> extraInfo) {
-        TextAndColor textAndColor = (TextAndColor)extraInfo.get();
+    public void renderDamage(ExileSpellResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack, String text, int color) {
         MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-        float f = (float) (-Minecraft.getInstance().font.width(textAndColor.text) / 2);
-        Minecraft.getInstance().font.drawInBatch(textAndColor.text, f, 0.0F, textAndColor.color, false, posestack.last().pose(), multibuffersource$buffersource, Font.DisplayMode.NORMAL, 0, 15728880);
+        float f = (float) (-Minecraft.getInstance().font.width(text) / 2);
+        Minecraft.getInstance().font.drawInBatch(text, f, 0.0F, color, false, posestack.last().pose(), multibuffersource$buffersource, Font.DisplayMode.NORMAL, 0, 15728880);
         multibuffersource$buffersource.endBatch();
     }
 
 
     @Override
-    public void renderNullifiedDamage(VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack, Supplier<?> extraInfo) {
-        TextAndColor textAndColor = (TextAndColor)extraInfo.get();
+    public void renderNullifiedDamage(ExileSpellResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack, String text, int color) {
         MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-        float f = (float) (-Minecraft.getInstance().font.width(textAndColor.text) / 2);
-        Minecraft.getInstance().font.drawInBatch(textAndColor.text, f, 0.0F, textAndColor.color, false, posestack.last().pose(), multibuffersource$buffersource, Font.DisplayMode.NORMAL, 0, 15728880);
+        float f = (float) (-Minecraft.getInstance().font.width(text) / 2);
+        Minecraft.getInstance().font.drawInBatch(text, f, 0.0F, color, false, posestack.last().pose(), multibuffersource$buffersource, Font.DisplayMode.NORMAL, 0, 15728880);
         multibuffersource$buffersource.endBatch();
     }
-
-    public record TextAndColor(String text, int color){}
 
 }

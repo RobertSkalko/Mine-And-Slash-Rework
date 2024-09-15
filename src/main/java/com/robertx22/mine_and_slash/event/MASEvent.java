@@ -2,11 +2,11 @@ package com.robertx22.mine_and_slash.event;
 
 import com.google.common.eventbus.EventBus;
 
-public class ExileEvent extends EventBus {
+public class MASEvent extends EventBus {
 
-    public static final ExileEvent INSTANCE = new ExileEvent();
+    public static final MASEvent INSTANCE = new MASEvent();
 
-    public ExileEvent() {
+    public MASEvent() {
         super("mine_and_slash");
     }
 }

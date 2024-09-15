@@ -31,13 +31,13 @@ public class DamageNullifiedParticle extends ExileSpellResultParticle {
         PoseStack posestack = new PoseStack();
         posestack.pushPose();
 
-        super.getStrategy().setupStyle(vertexConsumer, camera, partialTick, posestack);
-        super.getStrategy().renderDamage(vertexConsumer, camera, partialTick, posestack, () -> new Original.TextAndColor(type.text, getColor()));
+        super.getStrategy().setupStyle(this, vertexConsumer, camera, partialTick, posestack);
+        super.getStrategy().renderNullifiedDamage(this, vertexConsumer, camera, partialTick, posestack, type.text, getColor());
 
         posestack.popPose();
     }
 
-    public enum Type implements IParticleSpawnNotifier<DamageNullifiedParticle> {
+    public enum Type implements IParticleSpawnNotifier {
         DODGE("dodge"),
         RESIST("resist");
 

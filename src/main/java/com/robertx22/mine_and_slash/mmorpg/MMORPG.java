@@ -5,6 +5,7 @@ import com.robertx22.library_of_exile.events.base.ExileEvents;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.utils.Watch;
 import com.robertx22.mine_and_slash.a_libraries.curios.CurioEvents;
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.listeners.NotifyClientListener;
 import com.robertx22.mine_and_slash.a_libraries.neat.NeatForgeConfig;
 import com.robertx22.mine_and_slash.aoe_data.GeneratedData;
 import com.robertx22.mine_and_slash.aoe_data.database.boss_spell.BossSpells;
@@ -26,6 +27,8 @@ import com.robertx22.mine_and_slash.database.data.stats.priority.StatPriority;
 import com.robertx22.mine_and_slash.database.data.stats.types.special.SpecialStats;
 import com.robertx22.mine_and_slash.database.registrators.Currencies;
 import com.robertx22.mine_and_slash.database.registry.ExileDBInit;
+import com.robertx22.mine_and_slash.event.MASEvent;
+import com.robertx22.mine_and_slash.event.server.NotifyClientToSpawnParticleEvent;
 import com.robertx22.mine_and_slash.gui.SocketTooltip;
 import com.robertx22.mine_and_slash.maps.MapEvents;
 import com.robertx22.mine_and_slash.mmorpg.event_registers.CommonEvents;
@@ -195,6 +198,7 @@ public class MMORPG {
         MapEvents.init();
         ProfessionEvents.init();
         DerivedRegistries.init();
+        MASEvent.INSTANCE.register(new NotifyClientListener());
 
         watch.print("Mine and slash mod initialization ");
 
