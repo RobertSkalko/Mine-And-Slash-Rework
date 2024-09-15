@@ -557,7 +557,7 @@ public class EntityData implements ICap, INeededForClient {
         if (this.entity.level().isClientSide()) {
             return;
         }
-        
+
 
         if (unit == null) {
             unit = new Unit();
@@ -584,7 +584,7 @@ public class EntityData implements ICap, INeededForClient {
 
             var data = Load.player(p);
             var spells = data.spellCastingData.getAllHotbarSpells().stream().map(x -> x.getSpell()).collect(Collectors.toList());
-            data.calcSpellUnits(spells, stats);
+            data.setSpellUnitsDirty(spells);
 
             Load.player(p).spellCastingData.calcSpellLevels(unit);
             Load.player(p).getSkillGemInventory().removeAurasIfCantWear(p);

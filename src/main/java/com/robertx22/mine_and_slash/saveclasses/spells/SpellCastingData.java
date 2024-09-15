@@ -231,6 +231,10 @@ public class SpellCastingData {
                 spellTotalCastTicks = 0;
                 castTicksDone = 0;
                 this.casting = false;
+
+                if (entity instanceof ServerPlayer p) {
+                    TellClientEntityCastingSpell.sendUpdates(PlayerAnimations.CastEnum.CAST_FINISH, p, spell);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

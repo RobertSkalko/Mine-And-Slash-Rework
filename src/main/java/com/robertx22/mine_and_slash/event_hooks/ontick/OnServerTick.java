@@ -52,7 +52,7 @@ public class OnServerTick {
             EntityData unitdata = Load.Unit(player);
             PlayerData playerData = Load.player(player);
 
-
+          
             if (player.level() instanceof ServerLevel sw) {
                 if (WorldUtils.isMapWorldClass(sw)) {
 
@@ -131,7 +131,7 @@ public class OnServerTick {
             if (age % (20 * 10) == 0) {
                 unitdata.setEquipsChanged();
             }
-            
+
             if (age % (20 * 3) == 0) {
                 playerData.playerDataSync.setDirty();
             }
@@ -154,15 +154,16 @@ public class OnServerTick {
                     }
                 }
             }
+            if (player.isBlocking()) {
+                if (playerData.spellCastingData.isCasting()) {
+                    playerData.spellCastingData.cancelCast(player);
+                }
+            }
 
             if (age % 5 == 0) {
                 var tickrate = 5;
 
-                if (player.isBlocking()) {
-                    if (playerData.spellCastingData.isCasting()) {
-                        playerData.spellCastingData.cancelCast(player);
-                    }
-                }
+
                 playerData.buff.onTick(player, tickrate);
                 unitdata.getResources().onTickBlock(player, tickrate);
 

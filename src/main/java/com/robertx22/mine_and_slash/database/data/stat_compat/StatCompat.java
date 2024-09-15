@@ -15,6 +15,7 @@ import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -105,13 +106,13 @@ public class StatCompat implements JsonExileRegistry<StatCompat>, IAutoGson<Stat
         return null;
     }
 
-    public static void onTick(LivingEntity en) {
+    public static void onTick(Player en) {
 
         IDirty check = (IDirty) en.getAttributes();
 
         if (check.isAttribDirty()) {
             check.setAttribDirty(false);
-            Load.Unit(en).equipmentCache.STAT_COMPAT.setDirty();
+            Load.player(en).cachedStats.STAT_COMPAT.setDirty();
         }
     }
 

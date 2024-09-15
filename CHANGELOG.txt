@@ -12,4 +12,5 @@ The actual animations file is in the assets\mmorpg\player_animation folder
 - overlays can now be disabled
 - overlays can now be configured. You can specify positions, disable them, or anchor them to other overlays
 - effect overlay can now be horizontal and vertical and attached to other overlays like the spell hotbar 
-- attempt to cache some stat calculation for less lag on servers, may be bugs
+- attempt to cache some stat calculation for less lag on servers, may be bugs but should be significant perf improvement if it works. At the very least halved the tick lag of players/entities caused by mns stat calc
+- map rarity orbs are now craftable

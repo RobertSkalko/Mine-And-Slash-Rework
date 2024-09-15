@@ -155,6 +155,7 @@ public class RangerSpells implements ExileRegistryInit {
 
                 .build();
 
+        // todo this one needs a big hold and release anim
         SpellBuilder.of(CHARGED_BOLT, PlayStyle.DEX, SpellConfiguration.Builder.arrowSpell(8, 20 * 15), "Charged Bolt",
                         Arrays.asList(SpellTags.projectile, SpellTags.area, SpellTags.damage, SpellTags.LIGHTNING))
 

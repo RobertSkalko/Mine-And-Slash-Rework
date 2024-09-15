@@ -44,7 +44,6 @@ public class PlayerAnimations {
                     animation.addModifierLast(new AdjustmentModifier((partName) -> {
                         switch (partName) {
                             case "rightArm", "leftArm" -> {
-
                                 return Optional.of(new AdjustmentModifier.PartModifier(new Vec3f(
                                         player.getXRot() * Mth.DEG_TO_RAD,
                                         Mth.DEG_TO_RAD * (player.yHeadRot - player.yBodyRot),
@@ -56,7 +55,6 @@ public class PlayerAnimations {
                             }
                         }
                     }));
-
                     // this makes the casting hand be the one with the weapon
                     animation.addModifierLast(new MirrorModifier() {
                         @Override
@@ -69,8 +67,6 @@ public class PlayerAnimations {
                             return true;
                         }
                     });
-
-
                     return animation;
                 });
 
@@ -79,17 +75,15 @@ public class PlayerAnimations {
     // todo need to cleanup this lol
     public static void onSpellCast(Player player, Spell spell, CastEnum c) {
 
-
         var x = spell.getAnimation(c);
 
-        x.getForPlayer().ifPresent((resourceLocation -> {
+        if (x != null) {
             if (c == CastEnum.CAST_START) {
-                animatePlayerStart(player, resourceLocation);
+                animatePlayerStart(player, x.getLocation());
             } else {
-                handleClientBoundOnCastFinished(spell, false);
+                handleClientBoundOnCastFinished(x.getLocation(), spell, false);
             }
-        }));
-
+        }
     }
 
     private static void animatePlayerStart(Player player, ResourceLocation resourceLocation) {
@@ -97,10 +91,12 @@ public class PlayerAnimations {
 
         var keyframeAnimation = PlayerAnimationRegistry.getAnimation(resourceLocation);
         if (keyframeAnimation != null) {
+
+            AnimationHolder config = SpellAnimations.MAP.getOrDefault(resourceLocation.getPath(), AnimationHolder.none());
+
             //noinspection unchecked
             var animation = (ModifierLayer<IAnimation>) PlayerAnimationAccess.getPlayerAssociatedData((AbstractClientPlayer) player).get(SpellAnimations.ANIMATION_RESOURCE);
             if (animation != null) {
-
 
                 var castingAnimationPlayer = new KeyframeAnimationPlayer(keyframeAnimation);
 
@@ -109,28 +105,29 @@ public class PlayerAnimations {
                 var itemsFlag = true;//SHOW_FIRST_PERSON_ITEMS.get();
 
                 if (armsFlag || itemsFlag) {
-                    castingAnimationPlayer.setFirstPersonMode(/*resourceLocation.getPath().equals("charge_arrow") ? FirstPersonMode.VANILLA : */FirstPersonMode.THIRD_PERSON_MODEL);
-                    castingAnimationPlayer.setFirstPersonConfiguration(new FirstPersonConfiguration(armsFlag, armsFlag, itemsFlag, itemsFlag));
+                    castingAnimationPlayer.setFirstPersonMode(FirstPersonMode.THIRD_PERSON_MODEL);
+                    castingAnimationPlayer.setFirstPersonConfiguration(new FirstPersonConfiguration(armsFlag, armsFlag, true, !config.hideOffhand));
                 } else {
-                    castingAnimationPlayer.setFirstPersonMode(FirstPersonMode.DISABLED);
+                    //castingAnimationPlayer.setFirstPersonMode(FirstPersonMode.DISABLED);
                 }
                 animation.replaceAnimationWithFade(AbstractFadeModifier.standardFadeIn(2, Ease.INOUTSINE), castingAnimationPlayer, true);
             }
         }
     }
 
-    public static void handleClientBoundOnCastFinished(Spell spell, boolean cancelled) {
+    public static void handleClientBoundOnCastFinished(ResourceLocation finishAnimation, Spell spell, boolean cancelled) {
         var player = Minecraft.getInstance().player;
 
-        var finishAnimation = spell.getAnimation(CastEnum.CAST_FINISH);
-
-        if (finishAnimation.getForPlayer().isPresent() && !cancelled) {
-            animatePlayerStart(player, finishAnimation.getForPlayer().get());
-        } else if (finishAnimation != AnimationHolder.pass() || cancelled) {
+        if (finishAnimation != null && !cancelled) {
+            animatePlayerStart(player, finishAnimation);
+        }
+        /*else if (finishAnimation != AnimationHolder.pass() || cancelled) {
             var animationPlayer = castingAnimationPlayerLookup.getOrDefault(player.getUUID(), null);
             if (animationPlayer != null) {
                 animationPlayer.stop();
             }
         }
+
+         */
     }
 }

@@ -21,7 +21,6 @@ import com.robertx22.mine_and_slash.saveclasses.spells.SpellCastingData;
 import com.robertx22.mine_and_slash.saveclasses.spells.SpellSchoolsData;
 import com.robertx22.mine_and_slash.saveclasses.unit.Unit;
 import com.robertx22.mine_and_slash.saveclasses.unit.stat_calc.StatCalculation;
-import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -216,6 +215,8 @@ public class PlayerData implements ICap {
     }
 
     transient HashMap<String, Unit> spellUnits = new HashMap<>();
+    transient HashMap<String, Boolean> dirtyUnits = new HashMap<>();
+
 
     public Unit getSpellUnitStats(Player p, Spell spell) {
         if (!spellUnits.containsKey(spell.GUID())) {
@@ -223,17 +224,23 @@ public class PlayerData implements ICap {
             // todo will this break anything
             //   spellUnits.put(spell.GUID(), getSpellStats(spell));
         }
+
+        if (dirtyUnits.getOrDefault(spell.GUID(), false)) {
+            spellUnits.put(spell.GUID(), calcSpellUnit(spell));
+            dirtyUnits.put(spell.GUID(), false);
+
+        }
+
         return spellUnits.get(spell.GUID());
     }
 
-    public void calcSpellUnits(List<Spell> spells, List<StatContext> stats) {
+    public void setSpellUnitsDirty(List<Spell> spells) {
         for (Spell spell : spells) {
-            spellUnits.put(spell.GUID(), getSpellStats(spell, stats));
+            dirtyUnits.put(spell.GUID(), true);
         }
     }
 
-
-    private Unit getSpellStats(Spell spell, List<StatContext> stats) {
+    private Unit calcSpellUnit(Spell spell) {
         int key = this.spellCastingData.keyOfSpell(spell.GUID());
         var unit = new Unit();
         StatCalculation.calc(unit, StatCalculation.getStatsWithoutSuppGems(this.player, Load.Unit(player)), player, key);

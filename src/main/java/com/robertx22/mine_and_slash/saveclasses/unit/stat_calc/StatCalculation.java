@@ -32,8 +32,7 @@ public class StatCalculation {
     public static List<StatContext> getStatsWithoutSuppGems(LivingEntity entity, EntityData data) {
         List<StatContext> statContexts = new ArrayList<>();
 
-        List<GearData> gears = new ArrayList<>();
-
+   
         statContexts = collectStatsWithCtx(entity, data, data.equipmentCache.getGear());
 
         statContexts.removeIf(x -> x.stats.isEmpty());
@@ -166,6 +165,7 @@ public class StatCalculation {
 
         if (entity instanceof Player p) {
             statContexts.addAll(Load.player(p).cachedStats.statContexts);
+            statContexts.add(Load.player(p).cachedStats.getStatCompatStats());
         } else {
             statContexts.addAll(MobStatUtils.getMobBaseStats(data, entity));
 

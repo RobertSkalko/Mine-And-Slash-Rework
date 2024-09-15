@@ -21,7 +21,6 @@ public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
     public void accept(ExileEvents.OnEntityTick onEntityTick) {
         LivingEntity entity = onEntityTick.entity;
 
-
         try {
 
             if (entity.level().isClientSide) {
@@ -67,8 +66,8 @@ public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
                 }
             }
 
-
             data.equipmentCache.onTick();
+
             if (entity instanceof Player p) {
                 Load.player(p).cachedStats.tick();
             }

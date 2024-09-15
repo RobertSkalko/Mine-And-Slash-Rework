@@ -1,11 +1,31 @@
 package com.robertx22.mine_and_slash.mixins;
 
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import org.spongepowered.asm.mixin.Mixin;
 
 // todo why is this one done??
-@Mixin(Player.class)
+@Mixin(ItemInHandLayer.class)
 public class PlayerAnimMixin {
+
+    /*
+    @Inject(method = "renderArmWithItem", cancellable = true, at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/ItemInHandRenderer;renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemDisplayContext;ZLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"))
+    private void changeItemLocation(LivingEntity livingEntity, ItemStack itemStack, ItemDisplayContext itemDisplayContext, HumanoidArm arm, PoseStack matrices, MultiBufferSource multiBufferSource, int i, CallbackInfo ci) {
+        if (livingEntity instanceof IAnimatedPlayer player) {
+
+            // todo
+            var animation = (ModifierLayer<IAnimation>) PlayerAnimationAccess.getPlayerAssociatedData((AbstractClientPlayer) player).get(SpellAnimations.ANIMATION_RESOURCE);
+            if (animation != null) {
+                matrices.popPose();
+                ci.cancel();
+            }
+
+
+        }
+    }
+
+     */
+
     /*
     //Unique params might be renamed
     @Unique

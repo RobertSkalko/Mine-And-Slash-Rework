@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.database.data.currency.map;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.database.data.currency.base.Currency;
+import com.robertx22.mine_and_slash.database.data.currency.base.IShapedRecipe;
 import com.robertx22.mine_and_slash.database.data.currency.loc_reqs.BaseLocRequirement;
 import com.robertx22.mine_and_slash.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.mine_and_slash.database.data.profession.ExplainedResult;
@@ -14,13 +15,27 @@ import com.robertx22.mine_and_slash.maps.MapItemData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class MapRarityIncrease extends Currency {
+public class MapRarityIncrease extends Currency implements IShapedRecipe {
+
+    @Override
+    public ShapedRecipeBuilder getRecipe() {
+        return shaped(this.getCurrencyItem(), 3)
+                .define('X', Items.DIAMOND)
+                .define('Y', Items.REDSTONE)
+                .pattern("YYY")
+                .pattern("YXY")
+                .pattern("YYY")
+                .unlockedBy("player_level", trigger());
+    }
+
     @Override
     public WorksOnBlock.ItemType usedOn() {
         return WorksOnBlock.ItemType.MAP;
