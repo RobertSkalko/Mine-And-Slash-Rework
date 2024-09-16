@@ -124,7 +124,7 @@ public class NatureSpells implements ExileRegistryInit {
 
                 .manualDesc(
                         "Refreshes all your cooldowns by 1 minute.")
-                
+
                 .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.STAFF_CAST_FINISH)
 
                 .weaponReq(CastingWeapon.ANY_WEAPON)
@@ -178,10 +178,13 @@ public class NatureSpells implements ExileRegistryInit {
                 .build();
 
 
-        SpellBuilder.of(GARDEN_OF_THORNS, PlayStyle.INT, SpellConfiguration.Builder.multiCast(15, 20, 30, 5)
+        SpellBuilder.of(GARDEN_OF_THORNS, PlayStyle.INT, SpellConfiguration.Builder.multiCast(15, 20, 20, 5)
                                 .setChargesAndRegen(GARDEN_OF_THORNS, 3, 20 * 30), "Garden of Thorns",
                         Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.thorns, SpellTags.PHYSICAL)
                 )
+
+                .animations(SpellAnimations.SHOOT_ARROW_FAST, SpellAnimations.CAST_FINISH)
+
                 .manualDesc("Deals " + SpellCalcs.THORN_CONSUME.getLocDmgTooltip(Elements.Physical) +
                         " in the area and applies Thorns. Gives you Inner Calm which restores " + SpellCalcs.INNER_CALM.getLocDmgTooltip() + " Mana/s.")
 
@@ -189,7 +192,7 @@ public class NatureSpells implements ExileRegistryInit {
 
                 .onCast(PartBuilder.giveSelfExileEffect(ModEffects.INNER_CALM, 20 * 5D))
 
-                .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 5D)))
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 4D)))
                 .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(Blocks.CACTUS, 200D)
                         .put(MapField.ENTITY_NAME, "block")
                         .put(MapField.FIND_NEAREST_SURFACE, false)

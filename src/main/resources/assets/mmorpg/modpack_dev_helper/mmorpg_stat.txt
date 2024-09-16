@@ -288,10 +288,6 @@ health_regen
 health_regen_per_10_intelligence
 health_regen_per_1_magic_shield_regen
 hit_damage
-holy_cast_time
-holy_cdr
-holy_spell_dmg
-holy_spell_dmg_taken
 hp_resto_to_blood
 husbandry_core_drop_bonus
 husbandry_double_drop
@@ -564,7 +560,6 @@ plus_lvl_fire_spells
 plus_lvl_golem_spells
 plus_lvl_has_pet_ability_spells
 plus_lvl_heal_spells
-plus_lvl_holy_spells
 plus_lvl_lightning_spells
 plus_lvl_magic_spells
 plus_lvl_melee_spells

@@ -1,10 +1,11 @@
-Changelog of recent updates: https://github.com/RobertSkalko/Mine-And-Slash-Rework/blob/1.20-Forge/changelogs/v.5.6.txt
+Changelog of recent updates: https://github.com/RobertSkalko/Mine-And-Slash-Rework/blob/1.20-Forge/changelogs/v.5.7.txt
 
-v.5.6.6
+v.5.7.0
 - Spell casting now has custom animations! This requires a new dependency mod: player animator
 Spell animations are dictated through each spell's datapack json so you can change them, add new ones etc.
 The actual animations file is in the assets\mmorpg\player_animation folder
 - Some useless/confusing items are now hidden from JEI, still available in creative tabs
+- a lot of spells now have cast time again. But i think it will feel good now with better animations instead of just "wave hand"
 - charge gui redesigned
 - cast bar gui redesigned
 - player is now slowed when casting (like when using an item, unsure if feels the same though)
@@ -14,3 +15,8 @@ The actual animations file is in the assets\mmorpg\player_animation folder
 - effect overlay can now be horizontal and vertical and attached to other overlays like the spell hotbar 
 - attempt to cache some stat calculation for less lag on servers, may be bugs but should be significant perf improvement if it works. At the very least halved the tick lag of players/entities caused by mns stat calc
 - map rarity orbs are now craftable
+- new entity targetting predicate: allies_not_self
+- shooting star now tracks to nearest non self ally and was slightly buffed
+
+PLEASE report any weird animations for spells, or bugs related to them! 
+Same with gui overlays and stat calculation.

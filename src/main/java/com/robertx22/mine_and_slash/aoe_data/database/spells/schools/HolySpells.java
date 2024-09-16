@@ -48,7 +48,7 @@ public class HolySpells implements ExileRegistryInit {
     public static String SHOUT_WARN = "shout_warn";
     public static String PULL = "pull";
 
-    //public static String HOLY_MISSILES = "holy_missiles";
+    public static String HOLY_MISSILES = "holy_missiles";
 
     public static String HYMN_OF_VALOR = "song_of_valor";
     public static String HYMN_OF_PERSERVANCE = "song_of_perseverance";
@@ -57,29 +57,31 @@ public class HolySpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        /*
-        SpellBuilder.of(HOLY_MISSILES, PlayStyle.INT, SpellConfiguration.Builder.multiCast(30, 10, 30, 5)
-                                .setSwingArm().setTrackingRadius(2), "Holy Missiles",
-                        Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.HOLY, SpellTags.MISSILE))
+/*
+        SpellBuilder.of(HOLY_MISSILES, PlayStyle.INT, SpellConfiguration.Builder.multiCast(30, 10, 25, 8)
+                                .setChargesAndRegen(HOLY_MISSILES, 3, 20 * 10)
+                                .setSwingArm().setTrackingRadius(4), "Holy Missiles",
+                        Arrays.asList(SpellTags.damage, SpellTags.LIGHTNING, SpellTags.MISSILE))
+                .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.STAFF_CAST_FINISH)
                 .manualDesc(
-                        "Fire off Missiles that slowly move towards enemies and deal " + SpellCalcs.ICEBALL.getLocDmgTooltip()
-                                + " " + Elements.Cold.getIconNameDmg() + ".")
+                        "Fire off Missiles that slowly move towards enemies and deal " + SpellCalcs.HOLY_MISSILES.getLocDmgTooltip()
+                                + " " + Elements.Nature.getIconNameDmg() + ".")
 
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.WITCH_THROW, 1D, 2D))
-                .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.AIR, 1D, 0.3D, SlashEntities.SIMPLE_PROJECTILE.get(), 20 * 10D, false)
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.AIR, 1D, 0.3D, SlashEntities.SIMPLE_PROJECTILE.get(), 20 * 8D, false)
                         .put(MapField.TRACKS_ENEMIES, true)
                         .put(MapField.EXPIRE_ON_ENTITY_HIT, true)
                 ))
                 .onTick(ParticleBuilder.of(ParticleTypes.END_ROD, 0.03F).amount(3).build())
                 .onTick(ParticleBuilder.of(ParticleTypes.ENCHANT, 0.03F).amount(3).build())
 
-                .onHit(DamageBuilder.target(Elements.Holy, SpellCalcs.HOLY_MISSILES).build())
+                .onHit(DamageBuilder.target(Elements.Nature, SpellCalcs.HOLY_MISSILES).build())
 
                 .build();
 
+ */
 
-         */
 
         song(HYMN_OF_VALOR, "Hymn of Valor", ModEffects.VALOR);
         song(HYMN_OF_PERSERVANCE, "Hymn of Perseverance", ModEffects.PERSEVERANCE);
@@ -167,7 +169,7 @@ public class HolySpells implements ExileRegistryInit {
                 .manualDesc("Bash enemies around you for " +
                         SpellCalcs.GONG_STRIKE.getLocDmgTooltip(Elements.Physical))
 
-                .animations(SpellAnimations.TAUNT, SpellAnimations.TAUNT)
+                .singleAnimation(SpellAnimations.TAUNT)
 
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
 
@@ -209,7 +211,7 @@ public class HolySpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(SHOOTING_STAR, PlayStyle.INT, SpellConfiguration.Builder.instant(10, 20)
-                                .setSwingArm()
+                                .setSwingArm().setTracksNonSelfAllies().setTrackingRadius(5)
                                 .applyCastSpeedToCooldown(), "Shooting Star",
                         Arrays.asList(SpellTags.projectile, SpellTags.heal))
                 .manualDesc("Shoots a star that heals allies for " + SpellCalcs.SHOOTING_STAR.getLocDmgTooltip() + " health on hit.")
@@ -217,7 +219,10 @@ public class HolySpells implements ExileRegistryInit {
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.BEACON_ACTIVATE, 1D, 1.7D))
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.NETHER_STAR, 1D, 1D, SlashEntities.SIMPLE_PROJECTILE.get(), 20D, false)
-                        .put(MapField.HITS_ALLIES, true)))
+                                .put(MapField.HITS_ALLIES, true)
+                                .put(MapField.TRACKS_ENEMIES, true)
+                        )
+                )
                 .onTick(PartBuilder.aoeParticles(ParticleTypes.CRIT, 3D, 0.5D).tick(1D))
                 .onTick(PartBuilder.aoeParticles(ParticleTypes.SOUL_FIRE_FLAME, 5D, 0.5D).tick(1D))
                 .onTick(PartBuilder.aoeParticles(ParticleTypes.ENCHANT, 1D, 0.7D).tick(1D))
@@ -232,6 +237,8 @@ public class HolySpells implements ExileRegistryInit {
                         "Heal allies around you for " + SpellCalcs.HEALING_AURA.getLocDmgTooltip() +
                                 " health")
 
+                .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.STAFF_CAST_FINISH)
+
                 .weaponReq(CastingWeapon.ANY_WEAPON)
                 .onCast(PartBuilder.playSound(SlashSounds.BUFF.get(), 1D, 1D))
                 .onCast(PartBuilder.groundParticles(ParticleTypes.COMPOSTER, 50D, 2D, 0.2D))
@@ -243,6 +250,9 @@ public class HolySpells implements ExileRegistryInit {
         SpellBuilder.of(WISH, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(20, 0, 30)
                                 .setChargesAndRegen(WISH, 3, 20 * 30), "Wish",
                         Arrays.asList(SpellTags.heal))
+
+                .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.STAFF_CAST_FINISH)
+
                 .manualDesc(
                         "Heal allies around you for " + SpellCalcs.WISH.getLocDmgTooltip() + " health")
                 .weaponReq(CastingWeapon.ANY_WEAPON)

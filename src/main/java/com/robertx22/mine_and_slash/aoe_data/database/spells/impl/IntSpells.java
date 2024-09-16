@@ -1,6 +1,7 @@
 package com.robertx22.mine_and_slash.aoe_data.database.spells.impl;
 
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
+import com.robertx22.mine_and_slash.a_libraries.player_animations.SpellAnimations;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.PartBuilder;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.SpellCalcs;
@@ -28,9 +29,12 @@ public class IntSpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        SpellBuilder.of(BLACK_HOLE, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 60)
+        SpellBuilder.of(BLACK_HOLE, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(30, 20 * 60, 40)
                                 .setSwingArm(), "Black Hole",
                         Arrays.asList(SpellTags.damage, SpellTags.area, SpellTags.CHAOS))
+
+                .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.STAFF_CAST_FINISH)
+                
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
 
                 .manualDesc("Summon a dark sphere that attracts nearby enemies to it, dealing "

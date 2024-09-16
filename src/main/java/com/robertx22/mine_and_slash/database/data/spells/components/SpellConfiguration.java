@@ -34,6 +34,11 @@ public class SpellConfiguration {
     public AllyOrEnemy tracks = AllyOrEnemy.enemies;
 
 
+    public SpellConfiguration setTracksNonSelfAllies() {
+        this.tracks = AllyOrEnemy.allies_not_self;
+        return this;
+    }
+
     public int getCastTimeTicks() {
         return cast_time_ticks;
     }

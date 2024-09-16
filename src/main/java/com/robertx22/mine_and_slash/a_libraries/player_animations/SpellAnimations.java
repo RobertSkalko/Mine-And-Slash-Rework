@@ -20,6 +20,7 @@ public class SpellAnimations {
     public static final AnimationHolder STAFF_CAST_WAVE_LOOP = of("staff_cast_loop");
     public static final AnimationHolder STAFF_CAST_FINISH = of("staff_cast_shoot");
     public static final AnimationHolder MELEE_SLASH = of("sword_slash_double");
+    public static final AnimationHolder SINGLE_MELEE_SLASH = of("sword_slash_single");
 
     public static final AnimationHolder SHOOT_ARROW_FAST = of("spell_arrow").hidesOffhand();
     public static final AnimationHolder SINGLE_ARROW_SHOT = of("single_arrow_shot").hidesOffhand(); // needs reworking

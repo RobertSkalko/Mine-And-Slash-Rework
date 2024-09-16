@@ -136,7 +136,7 @@ public class WaterSpells implements ExileRegistryInit {
                 .manualDesc("Summon a frost totem that deals "
                         + SpellCalcs.FROST_FLOWER.getLocDmgTooltip(Elements.Cold) + " in an area every second.")
 
-            
+
                 .onCast(PartBuilder.playSound(SoundEvents.GRASS_PLACE, 1D, 1D))
 
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 0D)))
@@ -160,7 +160,8 @@ public class WaterSpells implements ExileRegistryInit {
                 .build();
 
 
-        SpellBuilder.of(ICE_COMET, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(18, 0, 20).setChargesAndRegen(ICE_COMET, 3, 20 * 20),
+        SpellBuilder.of(ICE_COMET, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(18, 0, 20)
+                                .setChargesAndRegen(ICE_COMET, 3, 20 * 20),
                         "Ice Comet",
                         Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.COLD)
                 )
@@ -256,7 +257,7 @@ public class WaterSpells implements ExileRegistryInit {
 
                 .onExpire("block", PartBuilder.justAction(SpellAction.TP_TARGET_TO_SELF.create())
                         .addTarget(TargetSelector.CASTER.create()))
-                .onExpire(PartBuilder.playSound(SoundEvents.CHORUS_FRUIT_TELEPORT, 1D, 1D))
+                .onExpire("block", PartBuilder.playSound(SoundEvents.ENDERMAN_TELEPORT, 1D, 1D))
 
                 .onTick("block", PartBuilder.giveSelfExileEffect(ModEffects.MAGE_CIRCLE, 20D)
                         .addCondition(EffectCondition.IS_ENTITY_IN_RADIUS.alliesInRadius(2D)))

@@ -41,6 +41,7 @@ public class FireSpells implements ExileRegistryInit {
                         + SpellCalcs.MAGMA_FLOWER.getLocDmgTooltip() + " "
                         + Elements.Fire.getIconNameDmg() + " in an area every second.")
 
+                .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.STAFF_CAST_FINISH)
                 .onCast(PartBuilder.playSound(SoundEvents.GRASS_PLACE, 1D, 1D))
 
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 0D)))
@@ -90,7 +91,8 @@ public class FireSpells implements ExileRegistryInit {
                 .build();
 
 
-        SpellBuilder.of(METEOR, PlayStyle.INT, SpellConfiguration.Builder.instant(18, 20).setChargesAndRegen(METEOR, 3, 20 * 20), "Meteor",
+        SpellBuilder.of(METEOR, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(18, 0, 20)
+                                .setChargesAndRegen(METEOR, 3, 20 * 20), "Meteor",
                         Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.FIRE)
                 )
                 .animations(SpellAnimations.HAND_UP_CAST, SpellAnimations.CAST_FINISH)
