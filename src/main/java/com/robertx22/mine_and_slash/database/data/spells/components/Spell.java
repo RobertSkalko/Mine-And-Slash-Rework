@@ -24,7 +24,6 @@ import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.StatRangeInfo;
-import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.saveclasses.skill_gem.ISkillGem;
 import com.robertx22.mine_and_slash.saveclasses.spells.SpellCastingData;
 import com.robertx22.mine_and_slash.saveclasses.unit.ResourceType;
@@ -32,7 +31,6 @@ import com.robertx22.mine_and_slash.tags.all.SpellTags;
 import com.robertx22.mine_and_slash.tags.imp.SpellTag;
 import com.robertx22.mine_and_slash.uncommon.MathHelper;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
-import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.SpendResourceEvent;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.rework.EventData;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.PlayStyle;
@@ -52,7 +50,6 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.apache.commons.lang3.StringUtils;
 
@@ -156,10 +153,9 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     public WeaponTypes getWeapon(LivingEntity en) {
         try {
             if (getStyle() != PlayStyle.INT) {
-                ItemStack stack = en.getMainHandItem();
-                GearItemData gear = StackSaving.GEARS.loadFrom(stack);
-                if (gear != null) {
-                    return gear.GetBaseGearType().weaponType();
+                var wep = Load.Unit(en).equipmentCache.getWeapon();
+                if (wep != null && wep.gear != null) {
+                    return wep.gear.GetBaseGearType().weaponType();
                 }
             }
         } catch (Exception e) {

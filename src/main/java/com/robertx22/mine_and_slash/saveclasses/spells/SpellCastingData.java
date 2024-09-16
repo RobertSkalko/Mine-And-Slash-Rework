@@ -20,7 +20,6 @@ import com.robertx22.mine_and_slash.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.mine_and_slash.saveclasses.unit.Unit;
 import com.robertx22.mine_and_slash.uncommon.MathHelper;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
-import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.SpendResourceEvent;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.NoManaPacket;
@@ -403,7 +402,8 @@ public class SpellCastingData {
 
             if (data.getResources().hasEnough(mana) && data.getResources().hasEnough(energy)) {
 
-                GearItemData wep = StackSaving.GEARS.loadFrom(ctx.caster.getMainHandItem());
+                var opt = Load.Unit(player).equipmentCache.getWeaponOpt();
+                GearItemData wep = opt.map(x -> x.gear).orElse(null);
 
                 if (wep == null) {
                     return ExplainedResult.failure(Chats.NOT_MNS_WEAPON.locName());

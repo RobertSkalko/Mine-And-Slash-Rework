@@ -16,6 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CachedEntityStats {
@@ -40,6 +41,14 @@ public class CachedEntityStats {
 
     LazyClass<EntityData> unitdata = new LazyClass<>(() -> Load.Unit(entity));
 
+
+    public GearData getWeapon() {
+        return weapon;
+    }
+
+    public Optional<GearData> getWeaponOpt() {
+        return weapon != null ? Optional.of(weapon) : Optional.empty();
+    }
 
     public DirtySync STAT_CALC = new DirtySync("stat_calc", x -> {
         unitdata.get().recalcStats_DONT_CALL();
@@ -135,7 +144,7 @@ public class CachedEntityStats {
     }
 
     private void recalcGears() {
-       
+
         List<GearData> list = new ArrayList<>();
 
         List<EquipmentSlot> ARMORS = Arrays.asList(EquipmentSlot.CHEST, EquipmentSlot.FEET, EquipmentSlot.LEGS, EquipmentSlot.HEAD, EquipmentSlot.OFFHAND);

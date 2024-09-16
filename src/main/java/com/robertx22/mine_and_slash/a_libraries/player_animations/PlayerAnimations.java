@@ -59,7 +59,6 @@ public class PlayerAnimations {
                     animation.addModifierLast(new MirrorModifier() {
                         @Override
                         public boolean isEnabled() {
-
                             var gear = StackSaving.GEARS.loadFrom(player.getMainHandItem());
                             if (gear != null && gear.isWeapon()) {
                                 return false;

@@ -5,10 +5,8 @@ import com.robertx22.mine_and_slash.database.data.spells.components.actions.Posi
 import com.robertx22.mine_and_slash.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
-import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -30,7 +28,7 @@ public class SpellCtx {
 
     public CalculatedSpellData calculatedSpellData;
 
-   
+
     public SpellCtx setSourceEntity(Entity en) {
         this.sourceEntity = en;
         return this;
@@ -56,12 +54,9 @@ public class SpellCtx {
     }
 
     public GearItemData getWeapon() {
-        var stack = Load.Unit(caster).getCurrentGears().get(EquipmentSlot.MAINHAND);
-        if (stack != null) {
-            GearItemData gear = StackSaving.GEARS.loadFrom(stack);
-            if (gear != null) {
-                return gear;
-            }
+        var stack = Load.Unit(caster).equipmentCache.getWeapon();
+        if (stack != null && stack.gear != null) {
+            return stack.gear;
         }
         return null;
     }

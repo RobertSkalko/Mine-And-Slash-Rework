@@ -56,13 +56,11 @@ public class UnequipGear {
 
     public static void check(Player player) {
 
-
         for (EquipmentSlot slot : SLOTS) {
 
             ItemStack stack = player.getItemBySlot(slot);
 
             GearItemData gear = StackSaving.GEARS.loadFrom(stack);
-
 
             if (gear != null) {
                 if (!gear.canPlayerWear(Load.Unit(player))) {

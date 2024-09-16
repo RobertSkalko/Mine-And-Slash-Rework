@@ -26,7 +26,6 @@ import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.uncommon.MathHelper;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
-import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.rework.EventData;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.AttackType;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
@@ -228,19 +227,22 @@ public class DamageEvent extends EffectEvent {
             if (this.source instanceof Player) {
 
 
-                GearItemData gear = StackSaving.GEARS.loadFrom(source.getMainHandItem());
+                var wep = this.sourceData.equipmentCache.getWeapon();
+                if (wep != null) {
+                    GearItemData gear = wep.gear;
 
-                if (gear != null) {
-                    float atkpersec = 1;
+                    if (gear != null) {
+                        float atkpersec = 1;
 
-                    float secWaited = (float) (source.tickCount - source.getLastHurtMobTimestamp()) / 20F;
+                        float secWaited = (float) (source.tickCount - source.getLastHurtMobTimestamp()) / 20F;
 
-                    float secNeededToWaitForFull = 1F / atkpersec;
+                        float secNeededToWaitForFull = 1F / atkpersec;
 
-                    cool = secWaited / secNeededToWaitForFull;
+                        cool = secWaited / secNeededToWaitForFull;
 
-                    cool = Mth.clamp(cool, 0F, 1F);
+                        cool = Mth.clamp(cool, 0F, 1F);
 
+                    }
                 }
             }
         }
