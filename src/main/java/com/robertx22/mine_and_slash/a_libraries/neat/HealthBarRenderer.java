@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.a_libraries.neat;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -35,6 +36,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.scores.Team;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.joml.Quaternionf;
+import org.lwjgl.opengl.GL11;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
@@ -221,6 +223,7 @@ public class HealthBarRenderer {
             return;
         }
 
+
         // Constants
         final int light = 0xF000F0;
         final float globalScale = 0.0267F;
@@ -371,6 +374,7 @@ public class HealthBarRenderer {
         }
 
         poseStack.popPose();
+
     }
 
     private static void renderIcon(Level level, ItemStack icon, PoseStack poseStack,

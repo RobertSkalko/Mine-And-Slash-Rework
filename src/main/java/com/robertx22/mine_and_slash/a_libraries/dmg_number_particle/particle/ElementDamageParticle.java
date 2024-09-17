@@ -43,7 +43,7 @@ public class ElementDamageParticle extends ExileSpellResultParticle {
     public void render(VertexConsumer vertexConsumer, Camera camera, float partialTick) {
         PoseStack posestack = new PoseStack();
         posestack.pushPose();
-        System.out.println("rendering damage particle!");
+        //System.out.println("rendering damage particle!");
         super.getStrategy().setupStyle(this, vertexConsumer, camera, partialTick, posestack);
         super.getStrategy().renderDamage(this, vertexConsumer, camera, partialTick, posestack, damageString, getColor());
 

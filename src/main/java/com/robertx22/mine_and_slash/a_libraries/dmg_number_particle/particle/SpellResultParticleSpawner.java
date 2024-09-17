@@ -31,15 +31,16 @@ public class SpellResultParticleSpawner {
         ORIGINAL((info, entity) -> {
             var mat = (ElementDamageParticle.DamageInformation) info;
             ImmutableMap<Elements, Float> dmgMap = mat.getDmgMap();
-            double x = entity.getRandomX(1.0D);
-            double y = entity.getEyeY();
-            double z = entity.getRandomZ(1.0D);
 
             boolean crit = mat.isCrit();
             for (Map.Entry<Elements, Float> entry : dmgMap.entrySet()) {
                 Float damage = entry.getValue();
                 if (damage
                         .intValue() > 0) {
+
+                    double x = entity.getRandomX(0.5D);
+                    double y = entity.getEyeY();
+                    double z = entity.getRandomZ(0.5D);
                     String damageString = NumberUtils.format(damage);
                     Minecraft.getInstance().particleEngine.add(new ElementDamageParticle(Minecraft.getInstance().level, x, y, z, new Original(), entry.getKey().format.getColor(), crit ? damageString + "!" : damageString));
                 }
@@ -47,9 +48,9 @@ public class SpellResultParticleSpawner {
         },
                 (type, entity) -> {
                     var mat = (DamageNullifiedParticle.Type) type;
-                    double x = entity.getRandomX(1.0D);
+                    double x = entity.getRandomX(0.5D);
                     double y = entity.getEyeY();
-                    double z = entity.getRandomZ(1.0D);
+                    double z = entity.getRandomZ(0.5D);
                     Minecraft.getInstance().particleEngine.add(new DamageNullifiedParticle(Minecraft.getInstance().level, x, y, z, new Original(), mat));
                 });
 
