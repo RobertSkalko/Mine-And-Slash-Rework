@@ -47,4 +47,9 @@ public class Original implements IParticleRenderStrategy{
         multibuffersource$buffersource.endBatch();
     }
 
+    @Override
+    public float scaleChange(ExileSpellResultParticle particle, float partialTick) {
+        return 0;
+    }
+
 }

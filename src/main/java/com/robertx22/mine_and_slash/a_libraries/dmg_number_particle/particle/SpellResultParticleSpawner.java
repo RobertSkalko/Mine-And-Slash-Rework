@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.style.Original;
 import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.NumberUtils;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.interaction.IParticleSpawnNotifier;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.Entity;
@@ -30,17 +31,17 @@ public class SpellResultParticleSpawner {
         ORIGINAL((info, entity) -> {
             var mat = (ElementDamageParticle.DamageInformation) info;
             ImmutableMap<Elements, Float> dmgMap = mat.getDmgMap();
-            System.out.println("the map I got is " + dmgMap);
             double x = entity.getRandomX(1.0D);
             double y = entity.getEyeY();
             double z = entity.getRandomZ(1.0D);
 
             boolean crit = mat.isCrit();
             for (Map.Entry<Elements, Float> entry : dmgMap.entrySet()) {
-                if (entry.getValue()
+                Float damage = entry.getValue();
+                if (damage
                         .intValue() > 0) {
-                    System.out.println("add to particleEngine");
-                    Minecraft.getInstance().particleEngine.add(new ElementDamageParticle(Minecraft.getInstance().level, x, y, z, new Original(), entry.getKey().format.getColor(), crit ? entry.getValue() + "!" : entry.getValue() + ""));
+                    String damageString = NumberUtils.format(damage);
+                    Minecraft.getInstance().particleEngine.add(new ElementDamageParticle(Minecraft.getInstance().level, x, y, z, new Original(), entry.getKey().format.getColor(), crit ? damageString + "!" : damageString));
                 }
             }
         },
@@ -49,7 +50,6 @@ public class SpellResultParticleSpawner {
                     double x = entity.getRandomX(1.0D);
                     double y = entity.getEyeY();
                     double z = entity.getRandomZ(1.0D);
-                    System.out.println("add to particleEngine");
                     Minecraft.getInstance().particleEngine.add(new DamageNullifiedParticle(Minecraft.getInstance().level, x, y, z, new Original(), mat));
                 });
 

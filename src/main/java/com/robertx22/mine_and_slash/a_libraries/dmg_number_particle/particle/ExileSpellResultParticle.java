@@ -24,7 +24,7 @@ public abstract class ExileSpellResultParticle extends Particle{
         this.lifetime = 15 + clientLevel.random.nextInt(5);
         this.scale = 1.0F;
         this.yd = 0.2F + Math.random() * 0.2F;
-        this.gravity = 1.3F;
+        this.gravity = 0.8F;
         this.strategy = strategy;
     }
 
@@ -33,7 +33,7 @@ public abstract class ExileSpellResultParticle extends Particle{
         super.tick();
         float ageScaled = age / (float) lifetime;
         this.prevScale = scale;
-        this.scale = 1.0F - ageScaled;
+        this.scale = Math.max(0.3f, 1.0F - ageScaled);
     }
 
     public IParticleRenderStrategy getStrategy() {
