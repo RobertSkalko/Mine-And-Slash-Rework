@@ -113,8 +113,7 @@ public class OnLogin {
             Load.player(player).playerDataSync.setDirty();
 
 
-        } catch (
-                Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

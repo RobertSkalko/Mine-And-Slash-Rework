@@ -45,6 +45,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.*;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -192,8 +193,11 @@ public class CommonEvents {
             }
         });
 
+        ForgeEvents.registerForgeEvent(LivingEvent.LivingTickEvent.class, event -> {
+            OnEntityTick.onTick(event.getEntity());
+        });
+
         ExileEvents.ON_CHEST_LOOTED.register(new OnLootChestEvent());
-        ExileEvents.LIVING_ENTITY_TICK.register(new OnEntityTick());
         ExileEvents.MOB_DEATH.register(new OnMobDeathDrops());
 
         NewDamageMain.init();

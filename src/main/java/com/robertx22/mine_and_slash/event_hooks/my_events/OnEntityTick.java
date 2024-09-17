@@ -1,7 +1,5 @@
 package com.robertx22.mine_and_slash.event_hooks.my_events;
 
-import com.robertx22.library_of_exile.events.base.EventConsumer;
-import com.robertx22.library_of_exile.events.base.ExileEvents;
 import com.robertx22.mine_and_slash.capability.bases.EntityGears;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.characters.PlayerStats;
@@ -15,11 +13,10 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.Map;
 
-public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
+public class OnEntityTick {
 
-    @Override
-    public void accept(ExileEvents.OnEntityTick onEntityTick) {
-        LivingEntity entity = onEntityTick.entity;
+    
+    public static void onTick(LivingEntity entity) {
 
         try {
 

@@ -34,7 +34,7 @@ public class IntSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTags.damage, SpellTags.area, SpellTags.CHAOS))
 
                 .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.STAFF_CAST_FINISH)
-                
+
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
 
                 .manualDesc("Summon a dark sphere that attracts nearby enemies to it, dealing "
@@ -44,7 +44,7 @@ public class IntSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.playSound(SoundEvents.END_PORTAL_SPAWN, 1D, 1D))
 
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 0D)))
-                .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(SlashBlocks.BLACK_HOLE.get(), 20D * 5)
+                .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(SlashBlocks.BLACK_HOLE.get(), 20D * 3)
                         .put(MapField.ENTITY_NAME, "block")
                         .put(MapField.BLOCK_FALL_SPEED, 0D)
                         .put(MapField.FIND_NEAREST_SURFACE, true)

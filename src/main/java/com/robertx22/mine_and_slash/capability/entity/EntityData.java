@@ -211,48 +211,56 @@ public class EntityData implements ICap, INeededForClient {
     @Override
     public void addClientNBT(CompoundTag nbt) {
 
-        nbt.putInt(LEVEL, level);
-        nbt.putString(RARITY, rarity);
-        nbt.putInt(HP, (int) getUnit().getCalculatedStat(Health.getInstance()).getValue());
-        nbt.putString(ENTITY_TYPE, this.type.toString());
+        try {
+            nbt.putInt(LEVEL, level);
+            nbt.putString(RARITY, rarity);
+            nbt.putInt(HP, (int) getUnit().getCalculatedStat(Health.getInstance()).getValue());
+            nbt.putString(ENTITY_TYPE, this.type.toString());
 
-        if (affixes != null) {
-            LoadSave.Save(affixes, nbt, AFFIXES);
-        }
-        LoadSave.Save(statusEffects, nbt, STATUSES);
+            if (affixes != null) {
+                LoadSave.Save(affixes, nbt, AFFIXES);
+            }
+            LoadSave.Save(statusEffects, nbt, STATUSES);
 
-        if (unit != null) {
-            UnitNbt.Save(nbt, unit);
+            if (unit != null) {
+                UnitNbt.Save(nbt, unit);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     @Override
     public void loadFromClientNBT(CompoundTag nbt) {
 
-        this.rarity = nbt.getString(RARITY);
-        this.level = nbt.getInt(LEVEL);
-        if (level < 1) {
-            level = 1;
-        }
-        this.maxHealth = nbt.getInt(HP);
-
         try {
-            String typestring = nbt.getString(ENTITY_TYPE);
-            this.type = EntityTypeUtils.EntityClassification.valueOf(typestring);
+            this.rarity = nbt.getString(RARITY);
+            this.level = nbt.getInt(LEVEL);
+            if (level < 1) {
+                level = 1;
+            }
+            this.maxHealth = nbt.getInt(HP);
+
+            try {
+                String typestring = nbt.getString(ENTITY_TYPE);
+                this.type = EntityTypeUtils.EntityClassification.valueOf(typestring);
+            } catch (Exception e) {
+                this.type = EntityTypeUtils.EntityClassification.OTHER;
+            }
+
+            this.affixes = LoadSave.Load(MobData.class, new MobData(), nbt, AFFIXES);
+            if (affixes == null) {
+                affixes = new MobData();
+            }
+
+            this.statusEffects = loadOrBlank(EntityStatusEffectsData.class, new EntityStatusEffectsData(), nbt, STATUSES, new EntityStatusEffectsData());
+
+            this.unit = UnitNbt.Load(nbt);
+            if (this.unit == null) {
+                this.unit = new Unit();
+            }
         } catch (Exception e) {
-            this.type = EntityTypeUtils.EntityClassification.OTHER;
-        }
-
-        this.affixes = LoadSave.Load(MobData.class, new MobData(), nbt, AFFIXES);
-        if (affixes == null) {
-            affixes = new MobData();
-        }
-
-        this.statusEffects = loadOrBlank(EntityStatusEffectsData.class, new EntityStatusEffectsData(), nbt, STATUSES, new EntityStatusEffectsData());
-
-        this.unit = UnitNbt.Load(nbt);
-        if (this.unit == null) {
-            this.unit = new Unit();
+            e.printStackTrace();
         }
     }
 
@@ -262,35 +270,39 @@ public class EntityData implements ICap, INeededForClient {
 
         addClientNBT(nbt);
 
-        nbt.putInt(EXP, exp);
-        nbt.putInt(EXP_DEBT, expDebt);
-        nbt.putString(UUID, uuid);
-        nbt.putString(MAP_ID, this.mapUUID);
-        nbt.putBoolean(SET_MOB_STATS, setMobStats);
-        nbt.putBoolean(NEWBIE_STATUS, this.isNewbie);
-        nbt.putBoolean(MAP_MOB, this.isCorrectlySpawnedMapMob);
+        try {
+            nbt.putInt(EXP, exp);
+            nbt.putInt(EXP_DEBT, expDebt);
+            nbt.putString(UUID, uuid);
+            nbt.putString(MAP_ID, this.mapUUID);
+            nbt.putBoolean(SET_MOB_STATS, setMobStats);
+            nbt.putBoolean(NEWBIE_STATUS, this.isNewbie);
+            nbt.putBoolean(MAP_MOB, this.isCorrectlySpawnedMapMob);
 
-        LoadSave.Save(cooldowns, nbt, COOLDOWNS);
-        LoadSave.Save(ailments, nbt, AILMENTS);
-        LoadSave.Save(summonedPetData, nbt, PET);
-        LoadSave.Save(leech, nbt, LEECH);
-        LoadSave.Save(customExactStats, nbt, CUSTOM_STATS);
+            LoadSave.Save(cooldowns, nbt, COOLDOWNS);
+            LoadSave.Save(ailments, nbt, AILMENTS);
+            LoadSave.Save(summonedPetData, nbt, PET);
+            LoadSave.Save(leech, nbt, LEECH);
+            LoadSave.Save(customExactStats, nbt, CUSTOM_STATS);
 
 
-        if (customExactStats != null) {
-            CustomExactStats.Save(nbt, customExactStats);
-        }
+            if (customExactStats != null) {
+                CustomExactStats.Save(nbt, customExactStats);
+            }
 
-        if (resources != null) {
-            LoadSave.Save(resources, nbt, RESOURCES_LOC);
-        }
+            if (resources != null) {
+                LoadSave.Save(resources, nbt, RESOURCES_LOC);
+            }
 
-        if (threat != null) {
-            LoadSave.Save(threat, nbt, THREAT);
-        }
+            if (threat != null) {
+                LoadSave.Save(threat, nbt, THREAT);
+            }
 
-        if (boss != null) {
-            LoadSave.Save(boss, nbt, BOSS);
+            if (boss != null) {
+                LoadSave.Save(boss, nbt, BOSS);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
 
@@ -315,18 +327,22 @@ public class EntityData implements ICap, INeededForClient {
     @Override
     public void deserializeNBT(CompoundTag nbt) {
 
-        loadFromClientNBT(nbt);
+        try {
+            loadFromClientNBT(nbt);
 
-        this.exp = nbt.getInt(EXP);
-        this.expDebt = nbt.getInt(EXP_DEBT);
-        this.uuid = nbt.getString(UUID);
-        this.mapUUID = nbt.getString(MAP_ID);
-        this.setMobStats = nbt.getBoolean(SET_MOB_STATS);
+            this.exp = nbt.getInt(EXP);
+            this.expDebt = nbt.getInt(EXP_DEBT);
+            this.uuid = nbt.getString(UUID);
+            this.mapUUID = nbt.getString(MAP_ID);
+            this.setMobStats = nbt.getBoolean(SET_MOB_STATS);
 
-        if (nbt.contains(NEWBIE_STATUS)) {
-            this.isNewbie = nbt.getBoolean(NEWBIE_STATUS);
+            if (nbt.contains(NEWBIE_STATUS)) {
+                this.isNewbie = nbt.getBoolean(NEWBIE_STATUS);
+            }
+            this.isCorrectlySpawnedMapMob = nbt.getBoolean(MAP_MOB);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        this.isCorrectlySpawnedMapMob = nbt.getBoolean(MAP_MOB);
 
         try {
             this.summonedPetData = loadOrBlank(SummonedPetData.class, new SummonedPetData(), nbt, PET, new SummonedPetData());
@@ -484,7 +500,6 @@ public class EntityData implements ICap, INeededForClient {
             return;
         }
         if (entity instanceof Player p) {
-
             Packets.sendToClient(p, new EntityUnitPacket(p));
         } else {
             if (!Unit.shouldSendUpdatePackets(entity)) {

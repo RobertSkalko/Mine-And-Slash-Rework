@@ -52,7 +52,7 @@ public class OnServerTick {
             EntityData unitdata = Load.Unit(player);
             PlayerData playerData = Load.player(player);
 
-          
+
             if (player.level() instanceof ServerLevel sw) {
                 if (WorldUtils.isMapWorldClass(sw)) {
 
@@ -234,19 +234,22 @@ public class OnServerTick {
                         RestoreResourceEvent hpevent = EventBuilder.ofRestore(player, player, ResourceType.health, RestoreType.regen, 0)
                                 .build();
                         hpevent.Activate();
-
                     }
                 }
 
 
             }
 
-            playerData.playerDataSync.onTickTrySync(player);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        try {
+            Load.player(player).playerDataSync.onTickTrySync(player);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
