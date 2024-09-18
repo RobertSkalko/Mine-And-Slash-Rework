@@ -219,18 +219,13 @@ public class PlayerData implements ICap {
 
 
     public Unit getSpellUnitStats(Player p, Spell spell) {
-        if (!spellUnits.containsKey(spell.GUID())) {
-            return Load.Unit(p).getUnit();
-            // todo will this break anything
-            //   spellUnits.put(spell.GUID(), getSpellStats(spell));
-        }
-
         if (dirtyUnits.getOrDefault(spell.GUID(), false)) {
             spellUnits.put(spell.GUID(), calcSpellUnit(spell));
             dirtyUnits.put(spell.GUID(), false);
-
         }
-
+        if (!spellUnits.containsKey(spell.GUID())) {
+            return Load.Unit(p).getUnit();
+        }
         return spellUnits.get(spell.GUID());
     }
 

@@ -23,9 +23,7 @@ public class CachedEntityStats {
 
     public CachedEntityStats(LivingEntity entity) {
         this.entity = entity;
-
     }
-
 
     private List<GearData> gear = new ArrayList<>();
 
@@ -115,6 +113,8 @@ public class CachedEntityStats {
     }
 
     private void recalcWeapon() {
+        weapon = null;
+
         Boolean hasWeapon = false;
 
         var slot = EquipmentSlot.MAINHAND;

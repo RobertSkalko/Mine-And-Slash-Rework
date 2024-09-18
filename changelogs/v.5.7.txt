@@ -20,3 +20,6 @@ The actual animations file is in the assets\mmorpg\player_animation folder
 
 PLEASE report any weird animations for spells, or bugs related to them! 
 Same with gui overlays and stat calculation.
+
+v.5.7.1
+- fix anims in multiplayer
