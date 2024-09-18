@@ -3,17 +3,13 @@ package com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.style.IParticleRenderStrategy;
-import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.style.Original;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.interaction.IParticleSpawnNotifier;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Camera;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.network.FriendlyByteBuf;
 
-public class DamageNullifiedParticle extends ExileSpellResultParticle {
+public class DamageNullifiedParticle extends ExileInteractionResultParticle {
     private final Type type;
 
     public DamageNullifiedParticle(ClientLevel clientLevel, double x, double y, double z, IParticleRenderStrategy strategy, Type type) {
@@ -33,6 +29,7 @@ public class DamageNullifiedParticle extends ExileSpellResultParticle {
 
         super.getStrategy().setupStyle(this, vertexConsumer, camera, partialTick, posestack);
         super.getStrategy().renderNullifiedDamage(this, vertexConsumer, camera, partialTick, posestack, type.text, getColor());
+        super.getStrategy().changeScale(this, getAge(), getLiftTime(), partialTick);
 
         posestack.popPose();
     }

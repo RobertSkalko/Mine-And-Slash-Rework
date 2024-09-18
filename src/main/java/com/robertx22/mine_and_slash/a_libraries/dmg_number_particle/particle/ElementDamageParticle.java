@@ -3,28 +3,21 @@ package com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.robertx22.library_of_exile.packets.ExilePacketContext;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.style.IParticleRenderStrategy;
-import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.style.Original;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.DamageEvent;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.interaction.IParticleSpawnNotifier;
 import it.unimi.dsi.fastutil.floats.FloatArrayList;
 import it.unimi.dsi.fastutil.floats.FloatList;
 import net.minecraft.client.Camera;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.entity.Entity;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.BiConsumer;
 
-public class ElementDamageParticle extends ExileSpellResultParticle {
+public class ElementDamageParticle extends ExileInteractionResultParticle {
     private final int color;
     private final String damageString;
 
@@ -46,6 +39,7 @@ public class ElementDamageParticle extends ExileSpellResultParticle {
         //System.out.println("rendering damage particle!");
         super.getStrategy().setupStyle(this, vertexConsumer, camera, partialTick, posestack);
         super.getStrategy().renderDamage(this, vertexConsumer, camera, partialTick, posestack, damageString, getColor());
+        super.getStrategy().changeScale(this, getAge(), getLiftTime(), partialTick);
 
         posestack.popPose();
     }

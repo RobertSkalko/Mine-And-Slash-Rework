@@ -16,6 +16,6 @@ public interface IParticleRenderStrategy {
 
     void renderNullifiedDamage(ExileSpellResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack, String text, int color);
 
-    float scaleChange(ExileSpellResultParticle particle, float partialTick);
+    float changeScale(ExileInteractionResultParticle particle, int age, int lifeTime, float partialTick);
 
 }

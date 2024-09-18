@@ -54,6 +54,11 @@ public class Original implements IParticleRenderStrategy{
     @Override
     public float scaleChange(ExileSpellResultParticle particle, float partialTick) {
         return 0;
+    public float changeScale(ExileInteractionResultParticle particle, int age, int lifeTime, float partialTick) {
+        float ageScaled = age / (float) lifeTime;
+        float prevScale = scale;
+        this.scale = Math.max(0.7f, 1.0F - ageScaled);
+        return prevScale + (scale - prevScale) * partialTick;
     }
 
 }
