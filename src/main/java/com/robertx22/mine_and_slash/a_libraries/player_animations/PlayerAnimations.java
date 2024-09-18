@@ -15,7 +15,6 @@ import dev.kosmx.playerAnim.core.util.Vec3f;
 import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationAccess;
 import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationFactory;
 import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationRegistry;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -80,7 +79,7 @@ public class PlayerAnimations {
             if (c == CastEnum.CAST_START) {
                 animatePlayerStart(player, x.getLocation());
             } else {
-                handleClientBoundOnCastFinished(x.getLocation(), spell, false);
+                handleClientBoundOnCastFinished(player, x.getLocation(), spell, false);
             }
         }
     }
@@ -114,9 +113,7 @@ public class PlayerAnimations {
         }
     }
 
-    public static void handleClientBoundOnCastFinished(ResourceLocation finishAnimation, Spell spell, boolean cancelled) {
-        var player = Minecraft.getInstance().player;
-
+    public static void handleClientBoundOnCastFinished(Player player, ResourceLocation finishAnimation, Spell spell, boolean cancelled) {
         if (finishAnimation != null && !cancelled) {
             animatePlayerStart(player, finishAnimation);
         }

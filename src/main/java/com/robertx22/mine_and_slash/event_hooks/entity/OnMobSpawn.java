@@ -22,17 +22,6 @@ public class OnMobSpawn {
 
     public static void onLoad(Entity entity) {
 
-/*
-        if (true || MMORPG.RUN_DEV_TOOLS_REMOVE_WHEN_DONE) {
-            if (entity instanceof Mob en) {
-                var s = new ItemStack(Items.CHAINMAIL_CHESTPLATE);
-                s.enchant(Enchantments.PROJECTILE_PROTECTION, 1);
-                s.enchant(Enchantments.ALL_DAMAGE_PROTECTION, 1);
-                en.equipItemIfPossible(s);
-            }
-        }
-
- */
         if (!(entity instanceof LivingEntity)) {
             return;
         }

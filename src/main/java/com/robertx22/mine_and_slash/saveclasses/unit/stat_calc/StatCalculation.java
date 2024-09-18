@@ -32,7 +32,7 @@ public class StatCalculation {
     public static List<StatContext> getStatsWithoutSuppGems(LivingEntity entity, EntityData data) {
         List<StatContext> statContexts = new ArrayList<>();
 
-   
+
         statContexts = collectStatsWithCtx(entity, data, data.equipmentCache.getGear());
 
         statContexts.removeIf(x -> x.stats.isEmpty());
@@ -80,12 +80,6 @@ public class StatCalculation {
         sc.applyCtxModifierStats();
         sc.applyToInCalc(statCalc);
 
-
-        if (entity instanceof Player p) {
-
-
-            //        Load.player(p).ctxStats = new SavedStatCtxList(sc);
-        }
 
         InCalc incalc = new InCalc(unit);
         incalc.addVanillaHpToStats(entity, statCalc);
