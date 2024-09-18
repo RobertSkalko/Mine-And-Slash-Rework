@@ -17,7 +17,8 @@ public class SpellResultParticleSpawner {
 
     public enum SpawnType {
         DAMAGE(ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().damageStrategy, new ElementDamageParticle.DamageInformation(null, null, false)),
-        NULLIFIED_DAMAGE(ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().nullifiedDamageStrategy, DamageNullifiedParticle.Type.DODGE);
+        NULLIFIED_DAMAGE(ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().nullifiedDamageStrategy, DamageNullifiedParticle.Type.DODGE),
+        HEAL(ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().healStrategy, new HealParticle.HealNumber(0.0f));
         public final BiConsumer<IParticleSpawnNotifier, Entity> strategy;
         public final IParticleSpawnNotifier target;
 
@@ -52,14 +53,23 @@ public class SpellResultParticleSpawner {
                     double y = entity.getEyeY();
                     double z = entity.getRandomZ(0.5D);
                     Minecraft.getInstance().particleEngine.add(new DamageNullifiedParticle(Minecraft.getInstance().level, x, y, z, new Original(), mat));
+                },
+                (type, entity) -> {
+                    var mat = (HealParticle.HealNumber) type;
+                    double x = entity.getRandomX(0.5D);
+                    double y = entity.getEyeY();
+                    double z = entity.getRandomZ(0.5D);
+                    Minecraft.getInstance().particleEngine.add(new HealParticle(Minecraft.getInstance().level, x, y, z, new Original(), mat.number()));
                 });
 
         public final BiConsumer<IParticleSpawnNotifier, Entity> damageStrategy;
         public final BiConsumer<IParticleSpawnNotifier, Entity> nullifiedDamageStrategy;
+        public final BiConsumer<IParticleSpawnNotifier, Entity> healStrategy;
 
-        ClientParticleSpawnStrategy(BiConsumer<IParticleSpawnNotifier, Entity> damageStrategy, BiConsumer<IParticleSpawnNotifier, Entity> nullifiedDamageStrategy) {
+        ClientParticleSpawnStrategy(BiConsumer<IParticleSpawnNotifier, Entity> damageStrategy, BiConsumer<IParticleSpawnNotifier, Entity> nullifiedDamageStrategy, BiConsumer<IParticleSpawnNotifier, Entity> healStrategy) {
             this.damageStrategy = damageStrategy;
             this.nullifiedDamageStrategy = nullifiedDamageStrategy;
+            this.healStrategy = healStrategy;
         }
     }
 
