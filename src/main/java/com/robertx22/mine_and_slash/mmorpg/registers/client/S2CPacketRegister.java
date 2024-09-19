@@ -7,7 +7,7 @@ import com.robertx22.mine_and_slash.gui.screens.stat_gui.SendStatCalcInfoToClien
 import com.robertx22.mine_and_slash.gui.screens.stat_gui.StatCalcInfoData;
 import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.*;
-import com.robertx22.mine_and_slash.vanilla_mc.packets.interaction.ExileInteractionResultParticlePacket;
+import com.robertx22.mine_and_slash.vanilla_mc.packets.interaction.ExileInteractionResultPacket;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.spells.TellClientEntityIsCastingSpellPacket;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.spells.TellClientToCastSpellPacket;
 import com.robertx22.library_of_exile.main.Packets;
@@ -29,7 +29,7 @@ public class S2CPacketRegister {
         Packets.registerServerToClient(MMORPG.NETWORK, new ParticlesPacket(new ParticlesPacket.Data()), i++);
         Packets.registerServerToClient(MMORPG.NETWORK, new StationPacket(new StationSyncData()), i++);
         Packets.registerServerToClient(MMORPG.NETWORK, new SendStatCalcInfoToClientPacket(new StatCalcInfoData()), i++);
-        Packets.registerServerToClient(MMORPG.NETWORK, new ExileInteractionResultParticlePacket(), i++);
+        Packets.registerServerToClient(MMORPG.NETWORK, new ExileInteractionResultPacket(), i++);
 
 
     }

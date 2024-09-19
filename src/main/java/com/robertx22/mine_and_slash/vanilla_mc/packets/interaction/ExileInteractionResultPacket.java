@@ -8,7 +8,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 
-public class ExileInteractionResultParticlePacket extends MyPacket<ExileInteractionResultParticlePacket> {
+public class ExileInteractionResultPacket extends MyPacket<ExileInteractionResultPacket> {
 
 
     public int id;
@@ -16,13 +16,13 @@ public class ExileInteractionResultParticlePacket extends MyPacket<ExileInteract
     private IParticleSpawnNotifier notifier;
 
 
-    public ExileInteractionResultParticlePacket(int id, IParticleSpawnNotifier notifier) {
+    public ExileInteractionResultPacket(int id, IParticleSpawnNotifier notifier) {
         this.id = id;
         this.notifier = notifier;
         this.type = notifier.getSpawnType();
     }
 
-    public ExileInteractionResultParticlePacket() {
+    public ExileInteractionResultPacket() {
     }
 
     @Override
@@ -52,8 +52,8 @@ public class ExileInteractionResultParticlePacket extends MyPacket<ExileInteract
     }
 
     @Override
-    public MyPacket<ExileInteractionResultParticlePacket> newInstance() {
-        return new ExileInteractionResultParticlePacket();
+    public MyPacket<ExileInteractionResultPacket> newInstance() {
+        return new ExileInteractionResultPacket();
     }
 
 }
