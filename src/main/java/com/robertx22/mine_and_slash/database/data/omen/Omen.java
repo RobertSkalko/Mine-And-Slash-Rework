@@ -6,11 +6,13 @@ import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.mine_and_slash.database.data.StatMod;
 import com.robertx22.mine_and_slash.database.data.affixes.Affix;
 import com.robertx22.mine_and_slash.database.data.gear_slots.GearSlot;
+import com.robertx22.mine_and_slash.database.data.rarities.GearRarityType;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class Omen implements JsonExileRegistry<Omen>, IAutoGson<Omen> {
@@ -45,6 +47,13 @@ public class Omen implements JsonExileRegistry<Omen>, IAutoGson<Omen> {
     public GearSlot getRandomSlotReq() {
         // exclude weapons from omens req at least, they're a lot of times swapped
         return ExileDB.GearSlots().getFilterWrapped(x -> !x.fam.isWeapon()).random();
+    }
+
+    public GearRarityType getRandomSlotReqRarity(OmenData data) {
+        return Arrays.stream(GearRarityType.values())
+                .max(Comparator.comparingInt(x -> (int) data.slot_req.stream()
+                        .filter(s -> s.rtype == x).count()))
+                .orElse(GearRarityType.NORMAL);
     }
 
     @Override

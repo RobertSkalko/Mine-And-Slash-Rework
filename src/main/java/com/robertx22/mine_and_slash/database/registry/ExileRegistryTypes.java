@@ -49,6 +49,13 @@ import net.minecraft.ChatFormatting;
 
 public class ExileRegistryTypes {
 
+    /*
+    public static ExileDBWrap TEST = ExileDBWrap.ofDatapack("test", 0, null, SyncTime.ON_LOGIN)
+            .container("def")
+            .registerClass(() -> new Runewords().registerAll());
+
+     */
+
     public static ExileRegistryType GEAR_RARITY = ExileRegistryType.register(SlashRef.MODID, "gear_rarity", 0, GearRarity.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType WEAPON_TYPE = ExileRegistryType.register(SlashRef.MODID, "weapon_type", 0, WeaponTypes.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType STAT_LAYER = ExileRegistryType.register(SlashRef.MODID, "stat_layer", 0, StatLayer.SERIALIZER, SyncTime.ON_LOGIN);

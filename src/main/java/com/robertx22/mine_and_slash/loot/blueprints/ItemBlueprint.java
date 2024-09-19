@@ -13,7 +13,7 @@ public abstract class ItemBlueprint {
 
     public LootInfo info = null;
 
- 
+
     public ItemBlueprint(LootInfo info) {
         this.info = info;
         this.level.number = info.level;
@@ -33,7 +33,7 @@ public abstract class ItemBlueprint {
 
     public LevelPart level = new LevelPart(this);
 
-    abstract ItemStack generate();
+    protected abstract ItemStack generate();
 
 
     final public ItemStack createStack() {

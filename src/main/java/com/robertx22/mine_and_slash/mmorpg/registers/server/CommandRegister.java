@@ -1,6 +1,7 @@
 package com.robertx22.mine_and_slash.mmorpg.registers.server;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.robertx22.mine_and_slash.database.data.omen.OmenBlueprint;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
 import com.robertx22.mine_and_slash.loot.blueprints.GearBlueprint;
 import com.robertx22.mine_and_slash.loot.blueprints.JewelBlueprint;
@@ -52,6 +53,7 @@ public class CommandRegister {
 
         new GenericGive("gear", ExileRegistryTypes.GEAR_TYPE, x -> new GearBlueprint(x)).register(dispatcher);
         new GenericGive("loot_chest", ExileRegistryTypes.LOOT_CHEST, x -> new LootChestBlueprint(x)).register(dispatcher);
+        new GenericGive("omen", ExileRegistryTypes.OMEN, x -> new OmenBlueprint(x)).register(dispatcher);
 
 
         new AutoSalvageGenericConfigure(ExileRegistryTypes.GEAR_SLOT).register(dispatcher);

@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.loot.blueprints.bases;
 
+import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.database.data.stats.types.loot.TreasureQuality;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
@@ -10,7 +11,6 @@ import com.robertx22.mine_and_slash.loot.blueprints.MapBlueprint;
 import com.robertx22.mine_and_slash.loot.blueprints.SkillGemBlueprint;
 import com.robertx22.mine_and_slash.uncommon.MathHelper;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +23,14 @@ public class GearRarityPart extends BlueprintPart<GearRarity, ItemBlueprint> {
     public float chanceForHigherRarity = 0;
 
     public boolean canRollUnique = false;
+    public boolean canRollRuned = false;
 
 
     public GearRarityPart(ItemBlueprint blueprint) {
         super(blueprint);
         if (blueprint instanceof GearBlueprint) {
             canRollUnique = true;
+            canRollRuned = true;
         }
     }
 
@@ -66,6 +68,9 @@ public class GearRarityPart extends BlueprintPart<GearRarity, ItemBlueprint> {
 
         if (!canRollUnique) {
             filt = filt.of(x -> !x.is_unique_item);
+        }
+        if (!canRollRuned) {
+            filt = filt.of(x -> !x.guid.equals(IRarity.RUNEWORD_ID));
         }
 
         // prevent high rarity gear from dropping in low rarity maps

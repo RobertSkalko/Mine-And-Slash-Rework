@@ -10,12 +10,13 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Consumer;
 
+// todo, not sure
 public class ExileDBWrap {
-
     public static Set<ExileDBWrap> ALL = new HashSet<>();
 
     public ExileRegistryType type;
 
+    // todo maybe i should require iinit class that has both init and register methods?
     public Runnable callRegister;
 
     public ExileRegistryContainer container;
@@ -23,15 +24,23 @@ public class ExileDBWrap {
     public static ExileDBWrap ofDatapack(String id, int order, ISerializable ser, SyncTime sync) {
         var o = new ExileDBWrap();
         o.type = ExileRegistryType.register(SlashRef.MODID, id, order, ser, sync);
-        o.container = new ExileRegistryContainer(o.type, "");
         return o;
     }
 
-    public static ExileDBWrap container(String def {
+    public static ExileDBWrap ofCode(String id, int order) {
         var o = new ExileDBWrap();
-        o.type = ExileRegistryType.register(SlashRef.MODID, id, order, ser, sync);
-        o.container = new ExileRegistryContainer(o.type, "");
+        o.type = ExileRegistryType.register(SlashRef.MODID, id, order, null, SyncTime.NEVER);
         return o;
+    }
+
+    public ExileDBWrap container(String def) {
+        container = new ExileRegistryContainer(type, def);
+        return this;
+    }
+
+    public ExileDBWrap registerClass(Runnable r) {
+        callRegister = r;
+        return this;
     }
 
     public ExileDBWrap edit(Consumer<ExileDBWrap> c) {
