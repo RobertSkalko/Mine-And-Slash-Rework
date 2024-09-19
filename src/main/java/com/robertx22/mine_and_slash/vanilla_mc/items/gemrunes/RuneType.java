@@ -104,40 +104,42 @@ public enum RuneType {
             .addJewerly(OffenseStats.SUMMON_DAMAGE.get().mod(4, 12))
             .addWeapon(OffenseStats.SUMMON_DAMAGE.get().mod(5, 15))
     ),
-    OWD(0, "owd", "Owd", 0, 0.0f, () -> StatPerType.of()
-            .addArmor(OffenseStats.ACCURACY.get().mod(3, 15).percent())
-            .addJewerly(OffenseStats.ACCURACY.get().mod(3, 15).percent())
-            .addWeapon(OffenseStats.ACCURACY.get().mod(5, 25).percent())
+
+    //RARER RUNES
+    OWD(300, "owd", "Owd", 0, 0.0f, () -> StatPerType.of()
+            .addArmor(OffenseStats.ACCURACY.get().mod(5, 15).percent())
+            .addJewerly(OffenseStats.ACCURACY.get().mod(5, 15).percent())
+            .addWeapon(OffenseStats.ACCURACY.get().mod(5, 15))
     ),
-    NET(0, "net", "Net", 1, 0.15f, () -> StatPerType.of()
-            .addArmor(new ElementalResist(Elements.Fire).mod(5, 25))
-            .addJewerly(new ElementalResist(Elements.Fire).mod(5, 25))
+    NET(300, "net", "Net", 1, 0.15f, () -> StatPerType.of()
+            .addArmor(new ElementalResist(Elements.Fire).mod(3, 10))
+            .addJewerly(new ElementalResist(Elements.Fire).mod(3, 10))
             .addWeapon(OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Fire).mod(1, 10))
     ),
-    UND(0, "und", "Und", 2, 0.3f, () -> StatPerType.of()
-            .addArmor(new ElementalResist(Elements.Cold).mod(5, 25))
-            .addJewerly(new ElementalResist(Elements.Cold).mod(5, 25))
+    UND(300, "und", "Und", 2, 0.3f, () -> StatPerType.of()
+            .addArmor(new ElementalResist(Elements.Cold).mod(3, 10))
+            .addJewerly(new ElementalResist(Elements.Cold).mod(3, 10))
             .addWeapon(OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Cold).mod(1, 10))
     ),
-    BRI(0, "bri", "Bri", 3, 0.4f, () -> StatPerType.of()
-            .addArmor(new ElementalResist(Elements.Nature).mod(5, 25))
-            .addJewerly(new ElementalResist(Elements.Nature).mod(5, 25))
+    BRI(300, "bri", "Bri", 3, 0.4f, () -> StatPerType.of()
+            .addArmor(new ElementalResist(Elements.Nature).mod(3, 10))
+            .addJewerly(new ElementalResist(Elements.Nature).mod(3, 10))
             .addWeapon(OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Nature).mod(1, 10))
     ),
-    DAW(0, "daw", "Daw", 3, 0.4f, () -> StatPerType.of()
-            .addArmor(new ElementalResist(Elements.Shadow).mod(3, 15))
-            .addJewerly(new ElementalResist(Elements.Shadow).mod(3, 15))
+    DAW(300, "daw", "Daw", 3, 0.4f, () -> StatPerType.of()
+            .addArmor(new ElementalResist(Elements.Shadow).mod(3, 10))
+            .addJewerly(new ElementalResist(Elements.Shadow).mod(3, 10))
             .addWeapon(OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Fire).mod(1, 10))
     ),
-    END(0, "end", "End", 4, 0.55f, () -> StatPerType.of()
-            .addArmor(new ElementalResist(Elements.Physical).mod(5, 25))
-            .addJewerly(new ElementalResist(Elements.Physical).mod(5, 25))
+    END(300, "end", "End", 4, 0.55f, () -> StatPerType.of()
+            .addArmor(new ElementalResist(Elements.Physical).mod(3, 10))
+            .addJewerly(new ElementalResist(Elements.Physical).mod(3, 10))
             .addWeapon(OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Physical).mod(1, 10))
     ),
-    SID(0, "sid", "Sid", 4, 0.65f, () -> StatPerType.of()
-            .addArmor(TreasureQuantity.getInstance().mod(1, 8))
-            .addJewerly(TreasureQuantity.getInstance().mod(1, 8))
-            .addWeapon(TreasureQuantity.getInstance().mod(1, 8))
+    SID(300, "sid", "Sid", 4, 0.65f, () -> StatPerType.of()
+            .addArmor(TreasureQuantity.getInstance().mod(1, 4))
+            .addJewerly(TreasureQuantity.getInstance().mod(1, 4))
+            .addWeapon(TreasureQuantity.getInstance().mod(1, 4))
     );
 
     public String id;

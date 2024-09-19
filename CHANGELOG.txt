@@ -1,5 +1,6 @@
 Changelog of recent updates: https://github.com/RobertSkalko/Mine-And-Slash-Rework/blob/1.20-Forge/changelogs/v.5.7.txt
 
-v.5.7.2
-- fix weapon cache
-- fix supp gems not working
+v.5.7.3
+- new runewords
+- new runes
+- gear rarity has a type field now

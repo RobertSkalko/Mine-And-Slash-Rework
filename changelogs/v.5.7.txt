@@ -23,3 +23,7 @@ Same with gui overlays and stat calculation.
 
 v.5.7.1
 - fix anims in multiplayer
+
+v.5.7.2
+- fix weapon cache
+- fix supp gems not working

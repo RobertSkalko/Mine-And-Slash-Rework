@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.aoe_data.database.gear_rarities;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import com.robertx22.mine_and_slash.database.data.MinMax;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
+import com.robertx22.mine_and_slash.database.data.rarities.GearRarityType;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 
 // check if loot drops in maps
@@ -171,7 +172,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
         GearRarity unique = new GearRarity().edit(x -> {
             x.map_resist_req = 50;
-
+            x.type = GearRarityType.UNIQUE;
             x.sockets = new MinMax(1, 3);
             x.stat_percents = new MinMax(50, 100);
             x.pot = new GearRarity.Potential(50);
@@ -190,7 +191,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         // todo need to make separate maprarity etc or else this will roll somehow
         GearRarity runeword = new GearRarity().edit(x -> {
             x.map_resist_req = 50;
-
+            x.type = GearRarityType.RUNED;
             x.min_lvl = 15;
             x.sockets = new MinMax(2, 6);
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;

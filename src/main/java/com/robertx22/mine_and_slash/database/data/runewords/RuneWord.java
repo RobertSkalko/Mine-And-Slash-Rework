@@ -67,11 +67,15 @@ public class RuneWord implements IAutoGson<RuneWord>, JsonExileRegistry<RuneWord
 
         var list = gear.sockets.getSocketed().stream().map(x -> x.g).collect(Collectors.toList());
 
-        String reqString = join(runes.listIterator(), "");
+        String reqString = getRunesString();
         String testString = join(list.listIterator(), "");
 
         return testString.contains(reqString);
 
+    }
+
+    public String getRunesString() {
+        return join(runes.listIterator(), "");
     }
 
 

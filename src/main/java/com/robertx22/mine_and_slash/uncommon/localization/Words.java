@@ -226,8 +226,10 @@ public enum Words implements IAutoLocName {
     AllowedOn("Allowed On: "),
 
     Unique_Gear("Unique Gear"),
+    Runed_gear("Runed Rarity"),
 
     Normal_Gear("Normal Gear"),
+    NORMAL_RARITY("Normal Rarity"),
 
     Requirements("Requirements: "),
     AreaContains("Area Contains an Uber Boss Portal"),

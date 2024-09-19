@@ -2,7 +2,6 @@ package com.robertx22.mine_and_slash.mmorpg;
 
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.mmorpg.registers.server.CommandRegister;
-import com.robertx22.mine_and_slash.uncommon.testing.TestManager;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.LevelUtils;
 import net.minecraft.world.level.GameRules;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -42,10 +41,7 @@ public class LifeCycleEvents {
                     .getRule(GameRules.RULE_NATURAL_REGENERATION)
                     .set(false, event.getServer());
 
-            if (MMORPG.RUN_DEV_TOOLS) { // CHANGE ON PUBLIC BUILDS TO FALSE
-                TestManager.RunAllTests(event.getServer().overworld());
-            }
-
+         
             ExileDB.checkAllDatabasesHaveDefaultEmpty();
 
         });

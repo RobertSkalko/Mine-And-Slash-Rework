@@ -8,6 +8,7 @@ import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
+import com.robertx22.mine_and_slash.uncommon.testing.TestManager;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
@@ -112,6 +113,9 @@ public class OnLogin {
             data.didStatCalcThisTickForPlayer = true; // temp fix, somehow the stat calc is being called before everything is set to dirty even on login?
             Load.player(player).playerDataSync.setDirty();
 
+            if (MMORPG.RUN_DEV_TOOLS) {
+                TestManager.RunAllTests(player);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

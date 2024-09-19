@@ -2,16 +2,18 @@ package com.robertx22.mine_and_slash.uncommon.testing.tests;
 
 import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.mine_and_slash.uncommon.testing.CommandTest;
+import com.robertx22.mine_and_slash.uncommon.testing.TestResult;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.LevelUtils;
 import net.minecraft.server.level.ServerPlayer;
 
 public class PlayerLevelTest extends CommandTest {
 
     @Override
-    public void run(ServerPlayer player) {
+    public TestResult runINTERNAL(ServerPlayer player) {
 
         testLevelCurve();
 
+        return TestResult.SUCCESS;
     }
 
     public static void testLevelCurve() {
@@ -25,6 +27,11 @@ public class PlayerLevelTest extends CommandTest {
             System.out.print("\nKills needed for level: " + i + " is " + killsneeded);
             System.out.print("\n");
         }
+    }
+
+    @Override
+    public boolean shouldRunEveryLogin() {
+        return false;
     }
 
     @Override

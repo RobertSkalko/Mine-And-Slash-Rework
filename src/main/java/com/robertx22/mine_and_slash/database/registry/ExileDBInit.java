@@ -55,8 +55,8 @@ public class ExileDBInit {
 
         // todo make sure all have valid empties!!!
 
-        Database.addRegistry(new RarityRegistryContainer<>(ExileRegistryTypes.GEAR_RARITY, IRarity.COMMON_ID).setIsDatapack());
-        Database.addRegistry(new RarityRegistryContainer<>(ExileRegistryTypes.WEAPON_TYPE, WeaponTypes.sword.GUID()).setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.GEAR_RARITY, IRarity.COMMON_ID).setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.WEAPON_TYPE, WeaponTypes.sword.GUID()).setIsDatapack());
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.GEAR_SLOT, GearSlots.SWORD).setIsDatapack());
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.GEAR_TYPE, BaseGearTypes.SWORD.GUID()).setIsDatapack());
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.RUNEWORDS, Runewords.EMPTY).setIsDatapack());
@@ -103,6 +103,7 @@ public class ExileDBInit {
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.STAT_LAYER, ""));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.UBER_BOSS, ""));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.SPAWNED_MOBS, UNKNOWN_ID));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.OMEN, ""));
 
     }
 }

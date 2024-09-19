@@ -1,11 +1,13 @@
 package com.robertx22.mine_and_slash.aoe_data.database.runewords;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import com.robertx22.mine_and_slash.aoe_data.database.ailments.Ailments;
 import com.robertx22.mine_and_slash.aoe_data.database.gear_slots.GearSlots;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.OffenseStats;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.ResourceStats;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.SpellChangeStats;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.base.ResourceAndAttack;
+import com.robertx22.mine_and_slash.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.mine_and_slash.database.data.aura.AuraGems;
 import com.robertx22.mine_and_slash.database.data.stats.types.MaxAllSpellLevels;
 import com.robertx22.mine_and_slash.database.data.stats.types.MaxSpellLevel;
@@ -23,7 +25,6 @@ import com.robertx22.mine_and_slash.tags.all.SpellTags;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.AttackType;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.vanilla_mc.items.gemrunes.RuneType;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
 import java.util.Arrays;
 
@@ -105,6 +106,26 @@ public class Runewords implements ExileRegistryInit {
                 Arrays.asList(RuneType.NOS, RuneType.MOS, RuneType.ITA, RuneType.CEN),
                 GearSlots.CHEST);
 
+
+        RunewordBuilder.of("nature_wrath", "Nature's Wrath",
+                Arrays.asList(
+                        new MaxSpellLevel(SpellTags.LIGHTNING).mod(1, 2),
+                        new MaxSpellLevel(SpellTags.COLD).mod(1, 2),
+                        new ElementalResist(Elements.Fire).mod(-25, -10),
+                        Mana.getInstance().mod(10, 25).percent()
+                ),
+                Arrays.asList(RuneType.BRI, RuneType.MOS, RuneType.UND, RuneType.ITA),
+                GearSlots.NECKLACE);
+
+        RunewordBuilder.of("choosen_of_azuna", "Choosen of Azuna",
+                Arrays.asList(
+                        DatapackStats.INT.mod(3, 5),
+                        DatapackStats.STR.mod(3, 5),
+                        DatapackStats.DEX.mod(3, 5),
+                        OffenseStats.TOTAL_DAMAGE.get().mod(5, 20)
+                ),
+                Arrays.asList(RuneType.YUN, RuneType.VEN, RuneType.NOS),
+                GearSlots.RING);
 
         RunewordBuilder.of("the_novice", "The Novice",
                 Arrays.asList(

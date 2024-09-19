@@ -35,6 +35,7 @@ import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanc
 import com.robertx22.mine_and_slash.database.data.game_balance_config.PlayerPointsConfig;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.PlayerPointsType;
 import com.robertx22.mine_and_slash.database.data.map_affix.MapAffixes;
+import com.robertx22.mine_and_slash.database.data.omen.Omens;
 import com.robertx22.mine_and_slash.database.data.profession.all.ProfessionRecipes;
 import com.robertx22.mine_and_slash.database.data.profession.all.Professions;
 import com.robertx22.mine_and_slash.database.data.profession.buffs.StatBuffs;
@@ -120,5 +121,6 @@ public class GeneratedData {
         c.player_points.put(PlayerPointsType.STATS, new PlayerPointsConfig(PlayerPointsType.STATS, 0, 2, 50, 300));
         c.addToSerializables();
 
+        Omens.init();
     }
 }

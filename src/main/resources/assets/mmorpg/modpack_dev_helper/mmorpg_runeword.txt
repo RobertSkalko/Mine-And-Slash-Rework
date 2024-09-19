@@ -2,8 +2,10 @@ These are all default registry entries of this type.
 This registry is modify-able through datapacks.
 abyssal_depths
 bramble
+choosen_of_azuna
 cure
 empty
 flickering_flame
+nature_wrath
 plague
 the_novice

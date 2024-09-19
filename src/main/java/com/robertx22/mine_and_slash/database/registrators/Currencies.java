@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.database.registrators;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import com.robertx22.mine_and_slash.database.data.currency.base.Currency;
 import com.robertx22.mine_and_slash.database.data.currency.gear.*;
 import com.robertx22.mine_and_slash.database.data.currency.jewel.JewelCorruptCurrency;
@@ -9,7 +10,6 @@ import com.robertx22.mine_and_slash.mechanics.harvest.currency.EntangledAffixUpg
 import com.robertx22.mine_and_slash.mechanics.harvest.currency.EntangledPotentialUpgrade;
 import com.robertx22.mine_and_slash.mechanics.harvest.currency.EntangledQuality;
 import com.robertx22.mine_and_slash.mechanics.harvest.currency.EntangledUniqueReroll;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import com.robertx22.temp.SkillItemTier;
 
 import java.util.ArrayList;
@@ -24,7 +24,6 @@ public class Currencies implements ExileRegistryInit {
     static {
 
         ALL.add(new MapRarityIncrease());
-
 
         ALL.add(new OrbAffixUpgrade());
         ALL.add(new OrbSocketAdder());
@@ -44,7 +43,6 @@ public class Currencies implements ExileRegistryInit {
             ALL.add(new SharpeningStone(tier));
             ALL.add(new ProfDropTierPickerCurrency(tier));
         }
-
 
     }
 

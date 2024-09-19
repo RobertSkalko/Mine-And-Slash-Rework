@@ -25,6 +25,7 @@ import com.robertx22.mine_and_slash.database.data.league.LeagueMechanic;
 import com.robertx22.mine_and_slash.database.data.loot_chest.base.LootChest;
 import com.robertx22.mine_and_slash.database.data.map_affix.MapAffix;
 import com.robertx22.mine_and_slash.database.data.mob_affixes.MobAffix;
+import com.robertx22.mine_and_slash.database.data.omen.Omen;
 import com.robertx22.mine_and_slash.database.data.perks.Perk;
 import com.robertx22.mine_and_slash.database.data.profession.Profession;
 import com.robertx22.mine_and_slash.database.data.profession.ProfessionRecipe;
@@ -161,8 +162,8 @@ public class ExileDB {
         return Database.getRegistry(ExileRegistryTypes.AFFIX);
     }
 
-    public static RarityRegistryContainer<GearRarity> GearRarities() {
-        return (RarityRegistryContainer<GearRarity>) Database.getRegistry(ExileRegistryTypes.GEAR_RARITY);
+    public static ExileRegistryContainer<GearRarity> GearRarities() {
+        return (ExileRegistryContainer<GearRarity>) Database.getRegistry(ExileRegistryTypes.GEAR_RARITY);
     }
 
     public static ExileRegistryContainer<MobRarity> MobRarities() {
@@ -204,6 +205,10 @@ public class ExileDB {
 
     public static ExileRegistryContainer<SpawnedMobList> MapMobs() {
         return Database.getRegistry(ExileRegistryTypes.SPAWNED_MOBS);
+    }
+
+    public static ExileRegistryContainer<Omen> Omens() {
+        return Database.getRegistry(ExileRegistryTypes.OMEN);
     }
 
 

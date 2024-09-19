@@ -42,7 +42,7 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     }
 
     public int affix_rarity_weight = 1000;
-
+    public GearRarityType type = GearRarityType.NORMAL;
 
     public LootableGearTier lootable_gear_tier = LootableGearTier.LOW;
     public int item_model_data_num = -1;
