@@ -19,7 +19,7 @@ import com.robertx22.mine_and_slash.database.data.stats.types.resources.DamageAb
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.magic_shield.MagicShield;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.event.MASEvent;
-import com.robertx22.mine_and_slash.event.server.NotifyClientToSpawnParticleEvent;
+import com.robertx22.mine_and_slash.event.server.TriggerInteractionResultEvent;
 import com.robertx22.mine_and_slash.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.mine_and_slash.loot.LootUtils;
 import com.robertx22.mine_and_slash.mixin_ducks.DamageSourceDuck;
@@ -487,9 +487,11 @@ public class DamageEvent extends EffectEvent {
                 attackInfo.setCanceled(true);
             }
             cancelDamage();
-            MASEvent.INSTANCE.post(new NotifyClientToSpawnParticleEvent(getAttackType().isAttack() ? DamageNullifiedParticle.Type.DODGE : DamageNullifiedParticle.Type.RESIST, (ServerPlayer)source, target));
+            MASEvent.INSTANCE.post(new TriggerInteractionResultEvent(getAttackType().isAttack() ? DamageNullifiedParticle.Type.DODGE : DamageNullifiedParticle.Type.RESIST, (ServerPlayer)source, target));
             //sendDamageParticle(info);
-            SoundUtils.playSound(target, SoundEvents.SHIELD_BLOCK, 1, 1.5F);
+
+            //move this sound to InteractionResultHandler.
+            //SoundUtils.playSound(target, SoundEvents.SHIELD_BLOCK, 1, 1.5F);
             return;
         }
 
@@ -635,7 +637,7 @@ public class DamageEvent extends EffectEvent {
                     threatEvent.Activate();
                 }
             }
-            MASEvent.INSTANCE.post(new NotifyClientToSpawnParticleEvent(ElementDamageParticle.DamageInformation.fromDmgByElement(info, data.isCrit()), (ServerPlayer)source, target));
+            MASEvent.INSTANCE.post(new TriggerInteractionResultEvent(ElementDamageParticle.DamageInformation.fromDmgByElement(info, data.isCrit()), (ServerPlayer)source, target));
             //sendDamageParticle(info);
 
             // target.invulnerableTime = 20;

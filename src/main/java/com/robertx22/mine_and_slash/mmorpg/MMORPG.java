@@ -28,7 +28,6 @@ import com.robertx22.mine_and_slash.database.data.stats.types.special.SpecialSta
 import com.robertx22.mine_and_slash.database.registrators.Currencies;
 import com.robertx22.mine_and_slash.database.registry.ExileDBInit;
 import com.robertx22.mine_and_slash.event.MASEvent;
-import com.robertx22.mine_and_slash.event.server.NotifyClientToSpawnParticleEvent;
 import com.robertx22.mine_and_slash.gui.SocketTooltip;
 import com.robertx22.mine_and_slash.maps.MapEvents;
 import com.robertx22.mine_and_slash.mmorpg.event_registers.CommonEvents;

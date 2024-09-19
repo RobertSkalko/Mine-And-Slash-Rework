@@ -8,6 +8,8 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 
 public class DamageNullifiedParticle extends ExileInteractionResultParticle {
     private final Type type;
@@ -35,13 +37,15 @@ public class DamageNullifiedParticle extends ExileInteractionResultParticle {
     }
 
     public enum Type implements IParticleSpawnNotifier {
-        DODGE("dodge"),
-        RESIST("resist");
+        DODGE("dodge", SoundEvents.SHIELD_BLOCK),
+        RESIST("resist", SoundEvents.SHIELD_BLOCK);
 
         public final String text;
+        public final SoundEvent sound;
 
-        Type(String text) {
+        Type(String text, SoundEvent sound) {
             this.text = text;
+            this.sound = sound;
         }
 
         @Override
@@ -55,8 +59,8 @@ public class DamageNullifiedParticle extends ExileInteractionResultParticle {
         }
 
         @Override
-        public SpellResultParticleSpawner.SpawnType getSpawnType() {
-            return SpellResultParticleSpawner.SpawnType.NULLIFIED_DAMAGE;
+        public InteractionResultHandler.ParticleSpawnType getSpawnType() {
+            return InteractionResultHandler.ParticleSpawnType.NULLIFIED_DAMAGE;
         }
     }
 }

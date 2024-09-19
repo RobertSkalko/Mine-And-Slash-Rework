@@ -1,6 +1,6 @@
 package com.robertx22.mine_and_slash.vanilla_mc.packets.interaction;
 
-import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.SpellResultParticleSpawner;
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.InteractionResultHandler;
 import net.minecraft.network.FriendlyByteBuf;
 
 public interface IParticleSpawnNotifier {
@@ -9,6 +9,6 @@ public interface IParticleSpawnNotifier {
 
     IParticleSpawnNotifier loadFromData(FriendlyByteBuf friendlyByteBuf);
 
-    SpellResultParticleSpawner.SpawnType getSpawnType();
+    InteractionResultHandler.ParticleSpawnType getSpawnType();
 
 }

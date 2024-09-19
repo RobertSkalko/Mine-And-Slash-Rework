@@ -4,13 +4,13 @@ import com.robertx22.mine_and_slash.vanilla_mc.packets.interaction.IParticleSpaw
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 
-public class NotifyClientToSpawnParticleEvent {
+public class TriggerInteractionResultEvent {
 
     public final IParticleSpawnNotifier notifier;
     public final ServerPlayer source;
     public final LivingEntity target;
 
-    public NotifyClientToSpawnParticleEvent(IParticleSpawnNotifier notifier, ServerPlayer source, LivingEntity target) {
+    public TriggerInteractionResultEvent(IParticleSpawnNotifier notifier, ServerPlayer source, LivingEntity target) {
         this.notifier = notifier;
         this.source = source;
         this.target = target;

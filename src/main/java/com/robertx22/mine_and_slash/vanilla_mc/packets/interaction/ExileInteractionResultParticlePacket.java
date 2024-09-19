@@ -2,7 +2,7 @@ package com.robertx22.mine_and_slash.vanilla_mc.packets.interaction;
 
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;
-import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.SpellResultParticleSpawner;
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.InteractionResultHandler;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -12,7 +12,7 @@ public class ExileInteractionResultParticlePacket extends MyPacket<ExileInteract
 
 
     public int id;
-    private SpellResultParticleSpawner.SpawnType type;
+    private InteractionResultHandler.ParticleSpawnType type;
     private IParticleSpawnNotifier notifier;
 
 
@@ -33,7 +33,7 @@ public class ExileInteractionResultParticlePacket extends MyPacket<ExileInteract
     @Override
     public void loadFromData(FriendlyByteBuf friendlyByteBuf) {
         this.id = friendlyByteBuf.readInt();
-        this.type = friendlyByteBuf.readEnum(SpellResultParticleSpawner.SpawnType.class);
+        this.type = friendlyByteBuf.readEnum(InteractionResultHandler.ParticleSpawnType.class);
         this.notifier = this.type.target.loadFromData(friendlyByteBuf);
     }
 

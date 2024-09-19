@@ -1,6 +1,6 @@
 package com.robertx22.mine_and_slash.config.forge;
 
-import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.SpellResultParticleSpawner;
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.InteractionResultHandler;
 import com.robertx22.mine_and_slash.gui.overlays.GuiPosition;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.PlayerGUIs;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -45,7 +45,7 @@ public class ClientConfigs {
         GUI_POSITION = b.defineEnum("GUI_POSITION", GuiPosition.TOP_LEFT);
         ITEM_RARITY_BACKGROUND_TYPE = b.defineEnum("ITEM_RARITY_BACKGROUND_TYPE", GlintType.FULL);
         PLAYER_GUI_TYPE = b.defineEnum("PLAYER_GUI_TYPE", PlayerGUIs.RPG);
-        DAMAGE_PARTICLE_STYLE = b.defineEnum("DAMAGE_PARTICLE_STYLE", SpellResultParticleSpawner.ClientParticleSpawnStrategy.ORIGINAL);
+        DAMAGE_PARTICLE_STYLE = b.defineEnum("DAMAGE_PARTICLE_STYLE", InteractionResultHandler.ClientReactionStrategy.ORIGINAL);
         SKILL_TREE_ZOOM_SPEED = b.defineInRange("SKILL_TREE_ZOOM_SPEED", 0.15D, 0.000001D, 1D);
 
         REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES = b.defineInRange("REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES", 35, 0, 1000);
@@ -69,7 +69,7 @@ public class ClientConfigs {
     public ForgeConfigSpec.EnumValue<GlintType> ITEM_RARITY_BACKGROUND_TYPE;
     public ForgeConfigSpec.EnumValue<GuiPosition> GUI_POSITION;
     public ForgeConfigSpec.EnumValue<PlayerGUIs> PLAYER_GUI_TYPE;
-    public ForgeConfigSpec.EnumValue<SpellResultParticleSpawner.ClientParticleSpawnStrategy> DAMAGE_PARTICLE_STYLE;
+    public ForgeConfigSpec.EnumValue<InteractionResultHandler.ClientReactionStrategy> DAMAGE_PARTICLE_STYLE;
     public ForgeConfigSpec.DoubleValue ITEM_RARITY_OPACITY;
     public ForgeConfigSpec.DoubleValue HEALTH_BAR_GUI_SCALE;
     public ForgeConfigSpec.DoubleValue SKILL_TREE_ZOOM_SPEED;

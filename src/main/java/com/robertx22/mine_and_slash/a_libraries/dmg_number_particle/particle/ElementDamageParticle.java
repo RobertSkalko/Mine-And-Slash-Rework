@@ -92,8 +92,8 @@ public class ElementDamageParticle extends ExileInteractionResultParticle {
         }
 
         @Override
-        public SpellResultParticleSpawner.SpawnType getSpawnType() {
-            return SpellResultParticleSpawner.SpawnType.DAMAGE;
+        public InteractionResultHandler.ParticleSpawnType getSpawnType() {
+            return InteractionResultHandler.ParticleSpawnType.DAMAGE;
         }
 
 

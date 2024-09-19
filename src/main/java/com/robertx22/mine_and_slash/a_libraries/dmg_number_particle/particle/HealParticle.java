@@ -46,7 +46,7 @@ public class HealParticle extends ExileInteractionResultParticle {
         }
 
         @Override
-        public SpellResultParticleSpawner.SpawnType getSpawnType() {
+        public InteractionResultHandler.ParticleSpawnType getSpawnType() {
             return null;
         }
     }
