@@ -23,13 +23,16 @@ public class OnPlayerDeath extends EventConsumer<ExileEvents.OnPlayerDeath> {
             var cd = Load.Unit(player).getCooldowns();
 
             if (!cd.isOnCooldown("death_event")) {
+
+                Load.Unit(player).setAllDirtyOnLoginEtc();
+
                 cd.setOnCooldown("death_event", 100);
 
                 Load.Unit(player).setEquipsChanged();
 
                 PlayerData data = Load.player(player);
 
-              
+
                 if (Load.Unit(player).getLevel() > ServerContainer.get().DEATH_PENALTY_START_LEVEL.get()) {
                     Load.Unit(player).onDeathDoPenalty();
                     data.rested_xp.onDeath();

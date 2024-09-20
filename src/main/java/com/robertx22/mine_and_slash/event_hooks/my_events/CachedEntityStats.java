@@ -88,8 +88,11 @@ public class CachedEntityStats {
         WEAPON.onTickTrySync(entity);
         STATUS.onTickTrySync(entity);
 
+        if (entity instanceof Player p) {
+            Load.player(p).cachedStats.tick();
+        }
+        
         STAT_CALC.onTickTrySync(entity);
-
     }
 
     public List<GearData> getGear() {

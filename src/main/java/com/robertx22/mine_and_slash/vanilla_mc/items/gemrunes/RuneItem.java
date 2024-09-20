@@ -38,6 +38,7 @@ import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.mine_and_slash.vanilla_mc.LuckyRandom;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.proxies.OpenGuiWrapper;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -284,17 +285,20 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
                     return statsTooltip();
                 }
             });
-            t.accept(new UsageBlock(splitLongText(Itemtips.RUNE_ITEM_USAGE.locName().withStyle(ChatFormatting.BLUE))));
+
             t.accept(WorksOnBlock.usableOn(WorksOnBlock.ItemType.GEAR));
             t.accept(new OperationTipBlock().setAlt().setShift());
             Rune rune = this.getRune();
 
-            if (rune.Weight() > 0) {
-                var lvl = Load.Unit(ClientOnly.getPlayer()).getLevel();
-                t.accept(new DropLevelBlock(rune.getReqLevelToDrop(), GameBalanceConfig.get().MAX_LEVEL));
-                t.accept(new DropChanceBlock(RunePart.droppableAtLevel(lvl).getDropChance(rune)));
-            } else {
-                t.accept(new AdditionalBlock(Itemtips.NOT_A_RANDOM_MNS_DROP_CHECK_MODPACK.locName().withStyle(ChatFormatting.BLUE)));
+            if (Screen.hasShiftDown()) {
+                t.accept(new UsageBlock(splitLongText(Itemtips.RUNE_ITEM_USAGE.locName().withStyle(ChatFormatting.BLUE))));
+                if (rune.Weight() > 0) {
+                    var lvl = Load.Unit(ClientOnly.getPlayer()).getLevel();
+                    t.accept(new DropLevelBlock(rune.getReqLevelToDrop(), GameBalanceConfig.get().MAX_LEVEL));
+                    t.accept(new DropChanceBlock(RunePart.droppableAtLevel(lvl).getDropChance(rune)));
+                } else {
+                    t.accept(new AdditionalBlock(Itemtips.NOT_A_RANDOM_MNS_DROP_CHECK_MODPACK.locName().withStyle(ChatFormatting.BLUE)));
+                }
             }
 
             tooltip.addAll(t.release());

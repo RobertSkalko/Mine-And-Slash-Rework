@@ -108,10 +108,7 @@ public class OnLogin {
 
             }
 
-            data.setEquipsChanged();
-            data.sync.setDirty();
-            data.didStatCalcThisTickForPlayer = true; // temp fix, somehow the stat calc is being called before everything is set to dirty even on login?
-            Load.player(player).playerDataSync.setDirty();
+            data.setAllDirtyOnLoginEtc();
 
             if (MMORPG.RUN_DEV_TOOLS) {
                 TestManager.RunAllTests(player);

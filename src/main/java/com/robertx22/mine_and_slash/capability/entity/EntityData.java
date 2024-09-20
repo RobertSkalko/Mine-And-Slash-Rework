@@ -363,6 +363,18 @@ public class EntityData implements ICap, INeededForClient {
 
     }
 
+    public void setAllDirtyOnLoginEtc() {
+        setEquipsChanged();
+        sync.setDirty();
+        didStatCalcThisTickForPlayer = true; // temp fix, somehow the stat calc is being called before everything is set to dirty even on login?
+        if (entity instanceof Player p) {
+            Load.player(p).cachedStats.setAllDirty();
+            Load.player(p).playerDataSync.setDirty();
+        }
+
+        //this.recalcStats_DONT_CALL();
+    }
+
     public void setEquipsChanged() {
         this.equipmentCache.setAllDirty();
     }

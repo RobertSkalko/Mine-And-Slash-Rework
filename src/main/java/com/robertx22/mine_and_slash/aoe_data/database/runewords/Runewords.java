@@ -124,7 +124,7 @@ public class Runewords implements ExileRegistryInit {
                         DatapackStats.DEX.mod(3, 5),
                         OffenseStats.TOTAL_DAMAGE.get().mod(5, 20)
                 ),
-                Arrays.asList(RuneType.YUN, RuneType.VEN, RuneType.NOS),
+                Arrays.asList(RuneType.MOS, RuneType.NOS, RuneType.ITA),
                 GearSlots.RING);
 
         RunewordBuilder.of("the_novice", "The Novice",

@@ -4,3 +4,4 @@ v.5.7.3
 - new runewords
 - new runes
 - gear rarity has a type field now
+- fixed supp gems dropping on death

@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.loot.blueprints;
 
+import com.robertx22.library_of_exile.registry.ExileRegistry;
 import com.robertx22.mine_and_slash.database.data.aura.AuraGem;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.database.data.spells.components.Spell;
@@ -9,7 +10,6 @@ import com.robertx22.mine_and_slash.loot.LootInfo;
 import com.robertx22.mine_and_slash.loot.blueprints.bases.RegistryPart;
 import com.robertx22.mine_and_slash.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
-import com.robertx22.library_of_exile.registry.ExileRegistry;
 import net.minecraft.world.item.ItemStack;
 
 public class SkillGemBlueprint extends RarityItemBlueprint implements ITypeBlueprint {
@@ -44,7 +44,7 @@ public class SkillGemBlueprint extends RarityItemBlueprint implements ITypeBluep
     }
 
     @Override
-    ItemStack generate() {
+    protected ItemStack generate() {
         var data = createData();
 
         ItemStack stack = data.getItem().getDefaultInstance();

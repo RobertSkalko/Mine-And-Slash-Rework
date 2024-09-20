@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class OnEntityTick {
 
-    
+
     public static void onTick(LivingEntity entity) {
 
         try {
@@ -64,10 +64,7 @@ public class OnEntityTick {
             }
 
             data.equipmentCache.onTick();
-
-            if (entity instanceof Player p) {
-                Load.player(p).cachedStats.tick();
-            }
+            
             data.sync.onTickTrySync(entity);
 
         } catch (Exception e) {

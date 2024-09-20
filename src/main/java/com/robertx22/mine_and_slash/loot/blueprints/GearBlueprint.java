@@ -33,7 +33,7 @@ public class GearBlueprint extends RarityItemBlueprint implements ITypeBlueprint
     }
 
     @Override
-    ItemStack generate() {
+    protected ItemStack generate() {
 
         this.item = this.gearItemSlot.get().getRandomItem(rarity.get());
 

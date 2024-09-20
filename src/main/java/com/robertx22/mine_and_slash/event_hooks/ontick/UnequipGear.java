@@ -29,8 +29,7 @@ public class UnequipGear {
 
         player.setItemSlot(slot, ItemStack.EMPTY); // todo is this good?
 
-        if (player.getItemBySlot(slot)
-                .isEmpty()) {
+        if (player.getItemBySlot(slot).isEmpty()) {
             if (slot == EquipmentSlot.MAINHAND) {
                 var en = player.spawnAtLocation(stack, 1F);
                 en.setPickUpDelay(40);

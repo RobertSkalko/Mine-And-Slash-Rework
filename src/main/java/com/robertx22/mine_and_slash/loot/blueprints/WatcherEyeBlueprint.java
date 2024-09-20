@@ -13,9 +13,9 @@ public class WatcherEyeBlueprint extends ItemBlueprint {
     public UberBossTier tier = UberBossTier.getTierFromMap(info.level);
 
     @Override
-    ItemStack generate() {
+    protected ItemStack generate() {
         JewelBlueprint b = new JewelBlueprint(info);
-    
+
         b.isEye = true;
         b.auraAffixes = tier.watcherEyeAffixes;
         b.level.set(info.level);
