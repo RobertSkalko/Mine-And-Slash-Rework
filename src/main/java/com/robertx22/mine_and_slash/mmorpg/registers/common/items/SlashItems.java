@@ -110,7 +110,7 @@ public class SlashItems {
     public static RegObj<Item> INVISIBLE_ICON = Def.item(() -> new Item(new Item.Properties()), "invisible_item");
     public static RegObj<Item> TEST_GEN = Def.item(() -> new Item(new Item.Properties()), "test_gen");
     public static RegObj<Item> MASTER_BAG = Def.item(() -> new BackpackItem(), "master_bag");
-    public static RegObj<Item> OMEN = Def.item(() -> new OmenItem(), "omen");
+    public static RegObj<Item> OMEN = Def.item(() -> new OmenItem(VanillaMaterial.DIAMOND), "omen");
     public static RegObj<LootCrateItem> LOOT_CRATE = Def.item(() -> new LootCrateItem(), "loot_crate/default");
 
     public static RegObj<ProjectileItem> FIREBALL = Def.item(() -> new ProjectileItem("fireball"), "projectile/" + "fireball");

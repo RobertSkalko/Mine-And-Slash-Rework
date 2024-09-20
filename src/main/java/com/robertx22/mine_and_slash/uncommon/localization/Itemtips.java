@@ -58,6 +58,7 @@ public enum Itemtips implements IAutoLocName {
 
     CHEST_CONTAINS("Contains: %1$s"),
     NEED_KEY("Needs %1$s "),
+    OMEN_SET_PIECES("%1$s Piece:"),
     EMPTY_SOCKET("[Socket]"),
 
     AURA_RESERVATION("Aura Reservation: "),

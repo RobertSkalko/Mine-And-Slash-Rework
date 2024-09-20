@@ -9,13 +9,15 @@ import com.robertx22.mine_and_slash.database.data.gear_slots.GearSlot;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarityType;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
+import com.robertx22.mine_and_slash.mmorpg.SlashRef;
+import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-public class Omen implements JsonExileRegistry<Omen>, IAutoGson<Omen> {
+public class Omen implements JsonExileRegistry<Omen>, IAutoGson<Omen>, IAutoLocName {
 
     public static Omen SERIALIZER = new Omen("ser", "ser", 0, Arrays.asList());
 
@@ -29,7 +31,7 @@ public class Omen implements JsonExileRegistry<Omen>, IAutoGson<Omen> {
 
     public List<StatMod> mods = new ArrayList<>();
 
-    public List<Affix.Type> affix_types = new ArrayList<>(Arrays.asList(Affix.Type.prefix, Affix.Type.suffix));
+    public List<Affix.Type> affix_types = new ArrayList<>(Arrays.asList(Affix.Type.chaos_stat, Affix.Type.jewel_corruption));
 
     public Omen(String id, String locname, float lvl_req, List<StatMod> mods) {
         this.id = id;
@@ -51,7 +53,7 @@ public class Omen implements JsonExileRegistry<Omen>, IAutoGson<Omen> {
 
     public GearRarityType getRandomSlotReqRarity(OmenData data) {
         return Arrays.stream(GearRarityType.values())
-                .max(Comparator.comparingInt(x -> (int) data.slot_req.stream()
+                .max(Comparator.comparingInt(x -> -(int) data.slot_req.stream()
                         .filter(s -> s.rtype == x).count()))
                 .orElse(GearRarityType.NORMAL);
     }
@@ -74,5 +76,20 @@ public class Omen implements JsonExileRegistry<Omen>, IAutoGson<Omen> {
     @Override
     public int Weight() {
         return weight;
+    }
+
+    @Override
+    public AutoLocGroup locNameGroup() {
+        return AutoLocGroup.Omens;
+    }
+
+    @Override
+    public String locNameLangFileGUID() {
+        return SlashRef.MODID + ".omen." + GUID();
+    }
+
+    @Override
+    public String locNameForLangFile() {
+        return locname;
     }
 }

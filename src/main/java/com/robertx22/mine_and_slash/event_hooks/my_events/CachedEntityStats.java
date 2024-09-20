@@ -3,8 +3,10 @@ package com.robertx22.mine_and_slash.event_hooks.my_events;
 import com.robertx22.mine_and_slash.a_libraries.curios.MyCurioUtils;
 import com.robertx22.mine_and_slash.capability.DirtySync;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
+import com.robertx22.mine_and_slash.database.data.omen.OmenSet;
 import com.robertx22.mine_and_slash.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.mine_and_slash.saveclasses.unit.GearData;
+import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.MiscStatCtx;
 import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
@@ -54,8 +56,20 @@ public class CachedEntityStats {
 
     public DirtySync GEAR = new DirtySync("gear", x -> {
         recalcGears();
+
+        if (x instanceof Player p) {
+            Load.player(p).cachedStats.omenStats = null;
+            Load.player(p).recalcOmensFilled();
+            var omen = Load.player(p).getOmen();
+            if (omen != null) {
+                Load.player(p).cachedStats.omenStats = new MiscStatCtx(new OmenSet(omen).getStats(p));
+            }
+        }
+
         recalcPlayerStuff();
+
         STAT_CALC.setDirty();
+
     });
 
     public DirtySync WEAPON = new DirtySync("weapon", x -> {
@@ -91,7 +105,7 @@ public class CachedEntityStats {
         if (entity instanceof Player p) {
             Load.player(p).cachedStats.tick();
         }
-        
+
         STAT_CALC.onTickTrySync(entity);
     }
 

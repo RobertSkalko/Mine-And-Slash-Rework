@@ -615,13 +615,14 @@ public class EntityData implements ICap, INeededForClient {
 
             Load.player(p).spellCastingData.calcSpellLevels(unit);
             Load.player(p).getSkillGemInventory().removeAurasIfCantWear(p);
-
+          
             UnequipGear.check(p);
 
             data.getSkillGemInventory().removeSupportGemsIfTooMany(p);
             data.getJewels().checkRemoveJewels(p);
 
             this.maxCharges.calc(this.unit.getStats());
+
         }
 
 

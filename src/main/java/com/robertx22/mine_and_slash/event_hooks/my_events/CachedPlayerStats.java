@@ -24,6 +24,7 @@ public class CachedPlayerStats {
         recalcStatCompat();
         Load.Unit(p).equipmentCache.STAT_CALC.setDirty();
     });
+    public StatContext omenStats;
 
     public StatContext getStatCompatStats() {
         if (statCompat == null) {
@@ -70,7 +71,7 @@ public class CachedPlayerStats {
             p.sendSystemMessage(Component.literal("Re calcing player stuff"));
         }
 
-       
+
         statContexts = new ArrayList<>();
 
         var playerData = Load.player(p);

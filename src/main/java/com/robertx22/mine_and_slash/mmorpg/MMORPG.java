@@ -5,6 +5,7 @@ import com.robertx22.library_of_exile.events.base.ExileEvents;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.utils.Watch;
 import com.robertx22.mine_and_slash.a_libraries.curios.CurioEvents;
+import com.robertx22.mine_and_slash.a_libraries.curios.RefCurio;
 import com.robertx22.mine_and_slash.a_libraries.neat.NeatForgeConfig;
 import com.robertx22.mine_and_slash.aoe_data.GeneratedData;
 import com.robertx22.mine_and_slash.aoe_data.database.boss_spell.BossSpells;
@@ -70,7 +71,7 @@ import java.util.function.Consumer;
 public class MMORPG {
 
     // DISABLE WHEN PUBLIC BUILD
-    public static boolean RUN_DEV_TOOLS = false;
+    public static boolean RUN_DEV_TOOLS = true;
 
     public static String formatNumber(float num) {
         if (num < 10) {
@@ -205,11 +206,10 @@ public class MMORPG {
 
     public void interMod(InterModEnqueueEvent event) {
 
+        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder(RefCurio.RING).size(2).build());
+        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder(RefCurio.NECKLACE).size(1).build());
+        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder(RefCurio.OMEN).size(1).build());
 
-        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("ring").size(2)
-                .build());
-        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("necklace").size(1)
-                .build());
     }
 
     public void commonSetupEvent(FMLCommonSetupEvent event) {

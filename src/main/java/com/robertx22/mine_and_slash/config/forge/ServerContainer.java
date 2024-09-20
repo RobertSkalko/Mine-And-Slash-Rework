@@ -87,6 +87,7 @@ public class ServerContainer {
         PROPHECY_COIN_DROPRATE = b.defineInRange("PROPHECY_COIN_DROPRATE", 1D, 0, 1000);
         JEWEL_DROPRATE = b.defineInRange("jewel_drop_rate", 0.25D, 0, 1000);
         LOOT_CHEST_DROPRATE = b.defineInRange("loot_chest_drop_rate", 0.1D, 0, 1000);
+        OMEN_DROPRATE = b.defineInRange("OMEN_DROPRATE", 0.1D, 0, 1000);
 
         MOB_FLAT_DAMAGE_BONUS = b.defineInRange("MOB_FLAT_DAMAGE_BONUS", 6D, 0, 1000);
 
@@ -242,6 +243,7 @@ public class ServerContainer {
     public ForgeConfigSpec.DoubleValue JEWEL_DROPRATE;
     public ForgeConfigSpec.DoubleValue WATCHER_EYE_DROPRATE;
     public ForgeConfigSpec.DoubleValue PROPHECY_COIN_DROPRATE;
+    public ForgeConfigSpec.DoubleValue OMEN_DROPRATE;
 
     public ForgeConfigSpec.DoubleValue MOB_FLAT_DAMAGE_BONUS;
 

@@ -31,6 +31,7 @@ public interface IBaseAutoLoc extends IGUID {
         Formatter,
         Rarities,
         Affixes,
+        Omens,
 
         Rune_Words,
         Item_Sets,

@@ -173,7 +173,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         GearRarity unique = new GearRarity().edit(x -> {
             x.map_resist_req = 50;
             x.type = GearRarityType.UNIQUE;
-            x.sockets = new MinMax(1, 3);
+            x.sockets = new MinMax(1, 2);
             x.stat_percents = new MinMax(50, 100);
             x.pot = new GearRarity.Potential(50);
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;

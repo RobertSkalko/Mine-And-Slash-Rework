@@ -27,3 +27,9 @@ v.5.7.1
 v.5.7.2
 - fix weapon cache
 - fix supp gems not working
+
+v.5.7.3
+- new runewords
+- new runes
+- gear rarity has a type field now
+- fixed supp gems dropping on death

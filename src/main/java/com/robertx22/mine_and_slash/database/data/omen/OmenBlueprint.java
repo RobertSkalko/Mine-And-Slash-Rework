@@ -8,6 +8,7 @@ import com.robertx22.mine_and_slash.loot.LootInfo;
 import com.robertx22.mine_and_slash.loot.blueprints.RarityItemBlueprint;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.AffixData;
+import com.robertx22.mine_and_slash.tags.all.SlotTags;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import net.minecraft.world.item.ItemStack;
 
@@ -31,6 +32,10 @@ public class OmenBlueprint extends RarityItemBlueprint {
 
         var omen = ExileDB.Omens().getFilterWrapped(x -> this.info.level >= GameBalanceConfig.get().MAX_LEVEL * x.lvl_req).random();
 
+        data.id = omen.GUID();
+
+        data.rar = rar.GUID();
+
         int slots = diff.specificSlots.random();
 
         int affixes = diff.affixes.random();
@@ -49,7 +54,7 @@ public class OmenBlueprint extends RarityItemBlueprint {
         }
 
         for (int i = 0; i < affixes; i++) {
-            var affix = ExileDB.Affixes().getFilterWrapped(x -> omen.affix_types.contains(x.type)).random();
+            var affix = ExileDB.Affixes().getFilterWrapped(x -> omen.affix_types.contains(x.type)).of(x -> !x.requirements.tag_requirements.stream().allMatch(t -> t.included.contains(SlotTags.weapon_family.GUID()))).random();
             var adata = new AffixData(affix.type);
             adata.id = affix.GUID();
             adata.rar = rar.GUID();

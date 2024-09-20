@@ -1,7 +1,18 @@
 Changelog of recent updates: https://github.com/RobertSkalko/Mine-And-Slash-Rework/blob/1.20-Forge/changelogs/v.5.7.txt
 
-v.5.7.3
-- new runewords
-- new runes
-- gear rarity has a type field now
-- fixed supp gems dropping on death
+v.5.7.4
+
+New Item type and featurE: Omens!
+
+Omens are a 4th curio slot item after necklace and rings but they work differently than normal gear items.
+Think of them as set item bonuses. Each omen has a random amount of requirements to unlock the 2,3,4,5 etc piece stat bonuses.
+The easiest omens only require you to wear x amount of say unique or runed gear. The harder ones might also require specific gear slots to be equipped with specific rarities of gears.
+The harder the omen is to assemble, the bigger the stat bonuses!
+
+The goal of omens is to reward players for equipping different types of gear, instead of punishing them with equip count restrictions.
+A lot of players asked for set effects so I wanted to make something that doesn't hurt build diversity but actually helps it.
+They don't make or break builds, but are nice thing to hunt for when you're minmaxing for the endgame, and there's easier omens too for the early game.
+
+All the omen requirements are random too.
+
+- slightly nerfed the top corruption outcomes (now gives 1 stat and 1 socket slot, instead of 2 stats)
