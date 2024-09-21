@@ -37,6 +37,7 @@ public class StatCalculation {
 
         statContexts.removeIf(x -> x.stats.isEmpty());
 
+        // oh this is for allowing player to see stat calc info on client
         if (entity instanceof Player p) {
             var pd = Load.player(p);
             pd.ctxs = new StatCalcInfoData();
@@ -74,10 +75,10 @@ public class StatCalculation {
 
         allstats.addAll(gemstats);
         allstats.addAll(statsWithoutSuppGems);
+        allstats.add(CtxStats.addStatCtxModifierStats(allstats));
 
         var sc = new CtxStats(allstats);
 
-        sc.applyCtxModifierStats();
         sc.applyToInCalc(statCalc);
 
 
