@@ -54,7 +54,6 @@ spell_damage_no_crit
 summon_damage
 summon_duration
 summon_health
-test_gem_datapack
 threat
 totem_damage
 totem_dmg_cdr

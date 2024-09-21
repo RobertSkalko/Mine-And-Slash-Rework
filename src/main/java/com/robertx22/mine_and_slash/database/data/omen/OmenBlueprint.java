@@ -5,6 +5,7 @@ import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanc
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarityType;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.loot.LootInfo;
+import com.robertx22.mine_and_slash.loot.blueprints.ITypeBlueprint;
 import com.robertx22.mine_and_slash.loot.blueprints.RarityItemBlueprint;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.AffixData;
@@ -15,12 +16,14 @@ import net.minecraft.world.item.ItemStack;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class OmenBlueprint extends RarityItemBlueprint {
+public class OmenBlueprint extends RarityItemBlueprint implements ITypeBlueprint {
 
     public OmenBlueprint(LootInfo info) {
         super(info);
     }
 
+
+    public OmenPart omen = new OmenPart(this);
 
     @Override
     protected ItemStack generate() {
@@ -30,7 +33,9 @@ public class OmenBlueprint extends RarityItemBlueprint {
 
         var diff = RandomUtils.randomFromList(Arrays.stream(OmenDifficulty.values()).filter(x -> this.info.level >= GameBalanceConfig.get().MAX_LEVEL * x.lvl_req).collect(Collectors.toList()));
 
-        var omen = ExileDB.Omens().getFilterWrapped(x -> this.info.level >= GameBalanceConfig.get().MAX_LEVEL * x.lvl_req).random();
+        var omen = this.omen.get();
+
+        data.lvl = this.info.level;
 
         data.id = omen.GUID();
 
@@ -66,5 +71,10 @@ public class OmenBlueprint extends RarityItemBlueprint {
         var stack = new ItemStack(SlashItems.OMEN.get());
         StackSaving.OMEN.saveTo(stack, data);
         return stack;
+    }
+
+    @Override
+    public void setType(String type) {
+        this.omen.set(ExileDB.Omens().get(type));
     }
 }

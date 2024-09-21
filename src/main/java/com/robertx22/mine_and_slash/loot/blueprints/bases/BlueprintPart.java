@@ -7,7 +7,7 @@ public abstract class BlueprintPart<T, C extends ItemBlueprint> {
 
     private T part;
 
-    C blueprint;
+    protected C blueprint;
 
     public boolean canBeNull = false;
 
