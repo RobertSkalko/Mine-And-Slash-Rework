@@ -82,7 +82,7 @@ public class CachedPlayerStats {
         }
 
 
-        statContexts.addAll(PlayerStatUtils.addToolStats(p));
+        statContexts.addAll(PlayerStatUtils.addToolStats(p)); // todo this needs fixing
 
         statContexts.add(PlayerStatUtils.addBonusExpPerCharacters(p));
 

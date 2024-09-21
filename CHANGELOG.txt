@@ -16,3 +16,4 @@ They don't make or break builds, but are nice thing to hunt for when you're minm
 All the omen requirements are random too.
 
 - slightly nerfed the top corruption outcomes (now gives 1 stat and 1 socket slot, instead of 2 stats)
+- fix aura effect and food buff effect stats multiplying stats infinitely

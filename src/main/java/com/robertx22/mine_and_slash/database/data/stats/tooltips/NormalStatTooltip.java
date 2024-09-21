@@ -87,6 +87,7 @@ public class NormalStatTooltip implements IStatTooltipType {
             text.append(Component.literal(" [" + TooltipUtils.rarityShort(rar).getString() + "]").withStyle(rar.textFormatting()));
         }
 
+
         text.append(Component.literal(" [" + perc + "%]" + " {" + max.minmax.min + "%" + "-" + max.minmax.max + "%}").withStyle(format));
 
         return text;
