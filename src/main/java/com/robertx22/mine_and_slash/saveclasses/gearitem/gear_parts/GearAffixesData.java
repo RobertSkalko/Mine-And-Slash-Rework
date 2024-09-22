@@ -2,6 +2,7 @@ package com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts;
 
 import com.robertx22.mine_and_slash.database.data.affixes.Affix;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IGearPartTooltip;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
@@ -28,7 +29,7 @@ public class GearAffixesData implements IGearPartTooltip {
         return !cor.isEmpty();
     }
 
-
+/*
     public List<TooltipStatWithContext> getAllStatsWithCtx(GearItemData gear, StatRangeInfo info) {
         List<TooltipStatWithContext> list = new ArrayList<>();
         this.suf.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), gear.getRarity())));
@@ -36,6 +37,8 @@ public class GearAffixesData implements IGearPartTooltip {
         this.cor.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), gear.getRarity())));
         return list;
     }
+
+ */
 
     public List<TooltipStatWithContext> getSufStatsWithCtx(GearItemData gear, StatRangeInfo info) {
         List<TooltipStatWithContext> list = new ArrayList<>();
@@ -56,10 +59,12 @@ public class GearAffixesData implements IGearPartTooltip {
     }
 
     @Override
-    public List<Component> GetTooltipString(StatRangeInfo info, GearItemData gear) {
+    public List<Component> GetTooltipString(StatRangeInfo info, ExileStack stack) {
         List<Component> list = new ArrayList<Component>();
 
 
+        var gear = stack.GEAR.get();
+        
         if (!getCorStatsWithCtx(gear, info).isEmpty()) {
             TooltipUtils.addEmpty(list);
             list.add(Itemtips.COR_STATS.locName().withStyle(ChatFormatting.RED));
@@ -85,25 +90,6 @@ public class GearAffixesData implements IGearPartTooltip {
         }
 
 
-        /*
-
-        if (!pre.isEmpty() || !suf.isEmpty()) {
-            TooltipUtils.addEmpty(list);
-            var color = ChatFormatting.GREEN;
-            list.add(Itemtips.AFFIX_STATS.locName().withStyle(color));
-
-            if (!getPreStatsWithCtx(gear, info).isEmpty()) {
-                getPreStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
-
-            }
-            if (!getSufStatsWithCtx(gear, info).isEmpty()) {
-                getSufStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
-            }
-            TooltipUtils.addEmpty(list);
-        }
-
-         */
-
         return list;
     }
 
@@ -122,20 +108,6 @@ public class GearAffixesData implements IGearPartTooltip {
         }
     }
 
-    public boolean canGetMore(Affix.Type type, GearItemData gear) {
-
-
-        int current;
-        if (type == Affix.Type.prefix) {
-            current = pre
-                    .size();
-        } else {
-            current = suf.size();
-        }
-
-        return current < getMaxAffixesPerType(gear);
-
-    }
 
     public int getNumberOfPrefixes() {
         return pre.size();
@@ -154,11 +126,11 @@ public class GearAffixesData implements IGearPartTooltip {
 
         for (int i = 0; i < rar.maximumOfOneAffixType(); i++) {
 
-            AffixData suffix = new AffixData(Affix.Type.suffix);
+            AffixData suffix = new AffixData(Affix.AffixSlot.suffix);
             suffix.RerollFully(gear);
             suf.add(suffix);
 
-            AffixData prefix = new AffixData(Affix.Type.prefix);
+            AffixData prefix = new AffixData(Affix.AffixSlot.prefix);
             prefix.RerollFully(gear);
             pre.add(prefix);
 
@@ -176,11 +148,11 @@ public class GearAffixesData implements IGearPartTooltip {
 
     public void addOneRandomAffix(GearItemData gear) {
         if (getNumberOfPrefixes() > getNumberOfSuffixes()) {
-            AffixData suffix = new AffixData(Affix.Type.suffix);
+            AffixData suffix = new AffixData(Affix.AffixSlot.suffix);
             suffix.RerollFully(gear);
             suf.add(suffix);
         } else {
-            AffixData prefix = new AffixData(Affix.Type.prefix);
+            AffixData prefix = new AffixData(Affix.AffixSlot.prefix);
             prefix.RerollFully(gear);
             pre.add(prefix);
         }

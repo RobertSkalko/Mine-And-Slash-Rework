@@ -1,8 +1,11 @@
 package com.robertx22.mine_and_slash.mixin_methods;
 
+import com.robertx22.library_of_exile.registry.Database;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.database.data.currency.IItemAsCurrency;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.ExileCurrency;
 import com.robertx22.mine_and_slash.database.data.gear_slots.GearSlot;
+import com.robertx22.mine_and_slash.mixin_ducks.tooltip.ItemTooltip;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.saveclasses.unit.Unit;
@@ -12,7 +15,6 @@ import com.robertx22.mine_and_slash.uncommon.interfaces.INeedsNBT;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.TooltipUtils;
-import com.robertx22.library_of_exile.registry.Database;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -27,17 +29,33 @@ import java.util.List;
 
 import static com.robertx22.mine_and_slash.uncommon.utilityclasses.TooltipUtils.splitLongText;
 
+// todo rework this so each data component adds its thing to exiletooltip
 public class TooltipMethod {
     public static List<Component> getTooltip(ItemStack stack, Player entity, TooltipFlag tooltipContext, CallbackInfoReturnable<List<Component>> list) {
 
         List<Component> tooltip = list.getReturnValue();
 
-        boolean addCurrencyTooltip = stack
-                .getItem() instanceof IItemAsCurrency;
+        boolean addCurrencyTooltip = stack.getItem() instanceof IItemAsCurrency;
 
         Player player = Minecraft.getInstance().player;
 
         try {
+            if (player == null || player.level() == null) {
+                return tooltip;
+            }
+            EntityData unitdata = Load.Unit(player);
+
+            if (unitdata == null) {
+                return tooltip;
+            }
+            Unit unit = unitdata.getUnit();
+
+            if (unit == null) {
+                return tooltip;
+            }
+            if (!Database.areDatapacksLoaded(player.level())) {
+                return tooltip;
+            }
 
 
             if (Screen.hasControlDown()) {
@@ -49,23 +67,16 @@ public class TooltipMethod {
                 }
             }
 
-            if (player == null || player.level() == null) {
-                return tooltip;
-            }
 
-            EntityData unitdata = Load.Unit(player);
+            var opt = ExileCurrency.get(stack);
 
-            if (unitdata == null) {
-                return tooltip;
-            }
+            if (opt.isPresent()) {
+                var cur = opt.get();
 
-            Unit unit = unitdata.getUnit();
-
-            if (unit == null) {
-                return tooltip;
-            }
-            if (!Database.areDatapacksLoaded(player.level())) {
-                return tooltip;
+                if (cur != null) {
+                    tooltip.clear();
+                    tooltip.addAll(cur.getTooltip());
+                }
             }
 
 
@@ -112,10 +123,10 @@ public class TooltipMethod {
             }
 
             if (addCurrencyTooltip) {
-                IItemAsCurrency currency = (IItemAsCurrency) stack
-                        .getItem();
+                IItemAsCurrency currency = (IItemAsCurrency) stack.getItem();
                 currency.currencyEffect(stack).addToTooltip(tooltip);
             }
+            ItemTooltip.render(player, tooltip, stack);
 
             tooltip = TooltipUtils.removeDoubleBlankLines(tooltip);
             tooltip = splitLongText(tooltip);

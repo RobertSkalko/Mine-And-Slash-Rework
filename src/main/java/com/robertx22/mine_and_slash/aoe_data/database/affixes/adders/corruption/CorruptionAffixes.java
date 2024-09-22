@@ -19,25 +19,25 @@ public class CorruptionAffixes {
 
     public static void init() {
 
-        of(new MaximumChargesStat(ModEffects.POWER_CHARGE), 1, 1, SlotTags.helmet, SlotTags.ring).Build();
-        of(new MaximumChargesStat(ModEffects.ENDURANCE_CHARGE), 1, 1, SlotTags.boots, SlotTags.ring).Build();
-        of(new MaximumChargesStat(ModEffects.FRENZY_CHARGE), 1, 1, SlotTags.pants, SlotTags.ring).Build();
+        of(new MaximumChargesStat(ModEffects.POWER_CHARGE), 1, 1, SlotTags.helmet, SlotTags.ring).Weight(250).Build();
+        of(new MaximumChargesStat(ModEffects.ENDURANCE_CHARGE), 1, 1, SlotTags.boots, SlotTags.ring).Weight(250).Build();
+        of(new MaximumChargesStat(ModEffects.FRENZY_CHARGE), 1, 1, SlotTags.pants, SlotTags.ring).Weight(250).Build();
 
-        of(AuraCapacity.getInstance(), 1, 3, SlotTags.jewelry_family).Build();
-        of(AuraEffect.getInstance(), 1, 3, SlotTags.jewelry_family).Build();
+        of(AuraCapacity.getInstance(), 1, 3, SlotTags.jewelry_family, SlotTags.offhand_family).Build();
+        of(AuraEffect.getInstance(), 1, 3, SlotTags.jewelry_family, SlotTags.offhand_family).Build();
 
         of(OffenseStats.CRIT_DAMAGE.get(), 3, 15, SlotTags.weapon_family).Build();
         of(OffenseStats.CRIT_CHANCE.get(), 1, 3, SlotTags.weapon_family).Build();
 
-        of(SpellChangeStats.CAST_SPEED.get(), 1, 3, SlotTags.jewelry_family).Build();
-        of(SpellChangeStats.COOLDOWN_REDUCTION.get(), 1, 3, SlotTags.jewelry_family).Build();
+        of(SpellChangeStats.CAST_SPEED.get(), 2, 5, SlotTags.jewelry_family).Build();
+        of(SpellChangeStats.COOLDOWN_REDUCTION.get(), 1, 4, SlotTags.jewelry_family).Build();
 
         of(new ElementalResist(Elements.Physical), 2, 5, SlotTags.armor_family).Build();
 
         for (Elements ele : Elements.getAllSingleElemental()) {
             if (ele != Elements.Physical) {
-                of(new MaxElementalResist(ele), 1, 1, SlotTags.armor_family).Build();
-                of(new ElementalResist(ele), 2, 5, SlotTags.armor_family).Build();
+                of(new MaxElementalResist(ele), 1, 2, SlotTags.armor_family, SlotTags.offhand_family).Build();
+                of(new ElementalResist(ele), 2, 5, SlotTags.armor_family, SlotTags.offhand_family).Build();
             }
         }
 

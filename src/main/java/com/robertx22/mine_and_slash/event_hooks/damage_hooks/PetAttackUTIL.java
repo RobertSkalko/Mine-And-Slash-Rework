@@ -23,7 +23,7 @@ public class PetAttackUTIL {
 
                 var ctx = new SpellCastContext(caster, 0, basic);
 
-                var originctx = new SpellCastContext(caster, 0, spell);
+                //  var originctx = new SpellCastContext(caster, 0, basic); // pet should be using the pet spell here
 
 
                 boolean cancast = false;
@@ -37,8 +37,8 @@ public class PetAttackUTIL {
 
                 if (cancast) {
                     basic.spendResources(ctx);
-                    basic.attached.onCast(SpellCtx.onCast(caster, originctx.calcData));
-                    basic.attached.tryActivate(Spell.DEFAULT_EN_NAME, SpellCtx.onHit(caster, summon, target, originctx.calcData)); // todo this should be reworked.
+                    basic.attached.onCast(SpellCtx.onCast(caster, ctx.calcData));
+                    basic.attached.tryActivate(Spell.DEFAULT_EN_NAME, SpellCtx.onHit(caster, summon, target, ctx.calcData)); // todo this should be reworked.
                     // pet ability should gain the stats of the pet used to summon it, this is a nasty hack
                 }
 

@@ -51,3 +51,9 @@ All the omen requirements are random too.
 
 - slightly nerfed the top corruption outcomes (now gives 1 stat and 1 socket slot, instead of 2 stats)
 - fix aura effect and food buff effect stats multiplying stats infinitely
+
+v.5.7.5
+
+- fixed omens to actually drop
+- omens now unequip if you're too low level
+- fixed omen command to use types correctly

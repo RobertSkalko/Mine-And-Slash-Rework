@@ -86,16 +86,10 @@ public class PlayerBuffData implements IStatCtx {
 
     public void onTick(Player p, int ticks) {
 
-
         for (Buff buff : map.values()) {
             buff.ticks -= ticks;
         }
-
-        for (Map.Entry<Type, Buff> en : new HashMap<>(map).entrySet()) {
-            if (en.getValue().ticks < 1) {
-                map.remove(en.getKey());
-            }
-        }
+        map.entrySet().removeIf(x -> x.getValue().ticks < 1);
     }
 
     public boolean tryAdd(Player p, StatBuff buff, int lvl, int perc, Type type, int ticks) {

@@ -137,8 +137,6 @@ spell_has_tag_shout
 spell_has_tag_shout_is_false
 spell_has_tag_song
 spell_has_tag_song_is_false
-spell_has_tag_staff_spell
-spell_has_tag_staff_spell_is_false
 spell_has_tag_summon
 spell_has_tag_summon_is_false
 spell_has_tag_thorns

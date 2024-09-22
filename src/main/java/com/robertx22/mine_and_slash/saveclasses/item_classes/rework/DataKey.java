@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.saveclasses.item_classes.rework;
 import com.robertx22.library_of_exile.registry.Database;
 import com.robertx22.library_of_exile.registry.ExileRegistry;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.mine_and_slash.itemstack.CustomItemData;
 
 import java.util.HashMap;
 
@@ -142,6 +143,11 @@ public abstract class DataKey<T> {
         @Override
         protected String objectToString(Integer o) {
             return o.toString();
+        }
+
+        public void add(CustomItemData data, int amount) {
+            int total = data.data.get(this) + amount;
+            data.data.set(this, total);
         }
     }
 

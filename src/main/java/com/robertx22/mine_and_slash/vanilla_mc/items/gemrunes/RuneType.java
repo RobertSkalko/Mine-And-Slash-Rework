@@ -132,8 +132,8 @@ public enum RuneType {
             .addWeapon(OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Fire).mod(1, 5))
     ),
     END(300, "end", "End", 4, 0.55f, () -> StatPerType.of()
-            .addArmor(new ElementalResist(Elements.Physical).mod(3, 6))
-            .addJewerly(new ElementalResist(Elements.Physical).mod(3, 6))
+            .addArmor(new ElementalResist(Elements.Physical).mod(1, 3))
+            .addJewerly(new ElementalResist(Elements.Physical).mod(1, 3))
             .addWeapon(OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Physical).mod(1, 5))
     ),
     SID(300, "sid", "Sid", 4, 0.65f, () -> StatPerType.of()

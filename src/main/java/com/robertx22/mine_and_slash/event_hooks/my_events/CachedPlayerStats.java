@@ -15,6 +15,7 @@ import java.util.List;
 public class CachedPlayerStats {
 
     public Player p;
+    public List<StatContext> allStatsWithoutSuppGems = new ArrayList<>();
 
     public List<StatContext> statContexts = new ArrayList<>();
 

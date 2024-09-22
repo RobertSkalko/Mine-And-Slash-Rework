@@ -379,7 +379,6 @@ learn_magma_flower
 learn_meteor
 learn_meteor_arrow
 learn_minion_explosion
-learn_pet_basic
 learn_poison_ball
 learn_poison_cloud
 learn_poison_trap
@@ -574,7 +573,6 @@ plus_lvl_shatter_spells
 plus_lvl_shield_spells
 plus_lvl_shout_spells
 plus_lvl_song_spells
-plus_lvl_staff_spell_spells
 plus_lvl_summon_spells
 plus_lvl_thorns_spells
 plus_lvl_totem_spells
@@ -655,10 +653,6 @@ spell_physical_damage
 spell_water_damage
 spirit_cost
 staff_damage
-staff_spell_cast_time
-staff_spell_cdr
-staff_spell_spell_dmg
-staff_spell_spell_dmg_taken
 str_dmg
 strength
 summon_cast_time

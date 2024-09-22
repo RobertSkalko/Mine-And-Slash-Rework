@@ -1,17 +1,18 @@
 package com.robertx22.mine_and_slash.database.data.chaos_stats;
 
-import com.robertx22.mine_and_slash.database.data.affixes.Affix;
-import com.robertx22.mine_and_slash.database.data.requirements.bases.GearRequestedFor;
-import com.robertx22.mine_and_slash.database.registry.ExileDB;
-import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
-import com.robertx22.mine_and_slash.mmorpg.SlashRef;
-import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.AffixData;
-import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
-import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.FilterListWrap;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
+import com.robertx22.mine_and_slash.database.data.affixes.Affix;
+import com.robertx22.mine_and_slash.database.data.requirements.bases.GearRequestedFor;
+import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
+import com.robertx22.mine_and_slash.itemstack.CustomItemData;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.mmorpg.SlashRef;
+import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.AffixData;
+import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class ChaosStat implements JsonExileRegistry<ChaosStat>, IAutoGson<ChaosS
     public String name = "";
     public int weight = 1000;
     public int affix_number = 0;
-    public Affix.Type affix_type = Affix.Type.chaos_stat;
+    public Affix.AffixSlot affix_type = Affix.AffixSlot.chaos_stat;
     public int bonus_sockets = 0;
     public List<String> for_item_rarities = new ArrayList<>();
 
@@ -35,7 +36,7 @@ public class ChaosStat implements JsonExileRegistry<ChaosStat>, IAutoGson<ChaosS
 
     }
 
-    public ChaosStat(String id, String name, int weight, int affix_number, Affix.Type affix_type, int bonus_sockets, List<String> for_item_rarities) {
+    public ChaosStat(String id, String name, int weight, int affix_number, Affix.AffixSlot affix_type, int bonus_sockets, List<String> for_item_rarities) {
         this.id = id;
         this.name = name;
         this.weight = weight;
@@ -45,10 +46,13 @@ public class ChaosStat implements JsonExileRegistry<ChaosStat>, IAutoGson<ChaosS
         this.for_item_rarities = for_item_rarities;
     }
 
-    public void applyToGear(GearItemData gear) {
+    public void applyToGear(ExileStack stack) {
+        var gear = stack.GEAR.get();
 
-        gear.data.set(GearItemData.KEYS.CORRUPT, true);
-        gear.setPotential(0);
+        stack.CUSTOM.edit(x -> x.data.set(CustomItemData.KEYS.CORRUPT, true));
+
+        stack.POTENTIAL.getOrCreate().potential = 0;
+        stack.POTENTIAL.save();
 
         for (int i = 0; i < bonus_sockets; i++) {
             gear.sockets.addSocket();
@@ -58,11 +62,12 @@ public class ChaosStat implements JsonExileRegistry<ChaosStat>, IAutoGson<ChaosS
         int tries = 0;
         while (gear.affixes.cor.size() < affix_number || tries > 100) {
 
-            FilterListWrap<Affix> list = ExileDB.Affixes().getFilterWrapped(x -> x.type == this.affix_type && x.meetsRequirements(new GearRequestedFor(gear)));
+            FilterListWrap<Affix> list = ExileDB.Affixes().getFilterWrapped(x -> x.type == this.affix_type);
+            list = list.of(x -> x.meetsRequirements(new GearRequestedFor(gear)));
 
             var affix = list.random();
 
-            AffixData data = new AffixData(Affix.Type.chaos_stat);
+            AffixData data = new AffixData(Affix.AffixSlot.chaos_stat);
             data.create(gear, affix);
 
             if (gear.affixes.cor.stream().noneMatch(x -> x.id.equals(affix.GUID()))) {
@@ -71,10 +76,6 @@ public class ChaosStat implements JsonExileRegistry<ChaosStat>, IAutoGson<ChaosS
             tries++;
         }
 
-        for (int i = 0; i < affix_number; i++) {
-
-
-        }
 
     }
 

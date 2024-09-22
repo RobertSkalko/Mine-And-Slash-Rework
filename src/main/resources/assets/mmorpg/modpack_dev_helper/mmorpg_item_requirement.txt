@@ -1,0 +1,31 @@
+These are all default registry entries of this type.
+This registry is modify-able through datapacks.
+can_add_sockets
+has_affix_common
+has_affix_epic
+has_affix_legendary
+has_affix_mythic
+has_affix_rare
+has_affix_runeword
+has_affix_uncommon
+has_affix_unique
+has_affixes
+has_infusion
+is_common
+is_common_or_uncommon
+is_epic
+is_legendary
+is_mythic
+is_not_corrupted
+is_rare
+is_runeword
+is_uncommon
+is_under_20_quality
+is_under_21_quality
+is_unique
+lvl_not_max
+map_has_higher_rar
+max_uses_level_up
+max_uses_random_mythic_affix
+max_uses_sharpening_stone
+not_crafted_gear

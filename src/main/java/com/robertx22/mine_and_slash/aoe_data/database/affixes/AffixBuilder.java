@@ -21,7 +21,7 @@ public class AffixBuilder {
     String langName = "";
     boolean allowDupli = false;
     int weight = 1000;
-    public Affix.Type type;
+    public Affix.AffixSlot type;
 
     public String auraReq = "";
 
@@ -97,42 +97,52 @@ public class AffixBuilder {
     }
 
     public AffixBuilder WatchersEye() {
-        type = Affix.Type.watcher_eye;
+        type = Affix.AffixSlot.watcher_eye;
         return this;
     }
 
     public AffixBuilder JewelCorruption() {
-        type = Affix.Type.jewel_corruption;
+        type = Affix.AffixSlot.jewel_corruption;
         return this;
     }
 
     public AffixBuilder GearCorrupt() {
-        type = Affix.Type.chaos_stat;
+        type = Affix.AffixSlot.chaos_stat;
         return this;
     }
 
     public AffixBuilder Prefix() {
-        type = Affix.Type.prefix;
+        type = Affix.AffixSlot.prefix;
         return this;
     }
 
     public AffixBuilder Tool() {
-        type = Affix.Type.tool;
+        type = Affix.AffixSlot.tool;
         return this;
     }
 
     public AffixBuilder Suffix() {
-        type = Affix.Type.suffix;
+        type = Affix.AffixSlot.suffix;
+        return this;
+    }
+
+    public AffixBuilder Jewel() {
+        type = Affix.AffixSlot.jewel;
+        return this;
+    }
+
+    public AffixBuilder craftedUniqueJewel() {
+        type = Affix.AffixSlot.crafted_jewel_unique;
         return this;
     }
 
     public AffixBuilder Enchant() {
-        type = Affix.Type.enchant;
+        type = Affix.AffixSlot.enchant;
         return this;
     }
 
     public AffixBuilder Implicit() {
-        type = Affix.Type.implicit;
+        type = Affix.AffixSlot.implicit;
         return this;
     }
 

@@ -12,6 +12,7 @@ import com.robertx22.mine_and_slash.gui.inv_gui.actions.auto_salvage.ToggleAutoS
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.*;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.DropLevelBlock;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SkillGemsItems;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
@@ -47,7 +48,7 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
 
     @Override
-    public List<ItemStack> getSalvageResult(ItemStack stack) {
+    public List<ItemStack> getSalvageResult(ExileStack stack) {
         if (!isSalvagable()) {
             return Arrays.asList();
         }
@@ -65,10 +66,6 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
         return id;
     }
 
-    @Override
-    public boolean isSalvagable() {
-        return sal;
-    }
 
     @Override
     public int getLevel() {
@@ -91,7 +88,6 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
     public int perc = 0;
     public String rar = IRarity.COMMON_ID;
     private int links = 1;
-    public boolean sal = true;
 
 
     public void setLinks(int t) {

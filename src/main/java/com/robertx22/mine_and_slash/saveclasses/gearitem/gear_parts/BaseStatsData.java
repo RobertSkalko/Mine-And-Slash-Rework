@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts;
 import com.robertx22.mine_and_slash.database.data.StatMod;
 import com.robertx22.mine_and_slash.database.data.stats.tooltips.StatTooltipType;
 import com.robertx22.mine_and_slash.database.data.stats.types.gear_base.IBaseStatModifier;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IGearPartTooltip;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IRerollable;
@@ -35,10 +36,11 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
 
 
     @Override
-    public List<Component> GetTooltipString(StatRangeInfo info, GearItemData gear) {
+    public List<Component> GetTooltipString(StatRangeInfo info, ExileStack stack) {
 
+        var gear = stack.GEAR.get();
 
-        List<ExactStatData> all = GetAllStats(gear);
+        List<ExactStatData> all = GetAllStats(stack);
 
 
         info.statTooltipType = StatTooltipType.BASE_LOCAL_STATS;
@@ -63,12 +65,14 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
     }
 
     @Override
-    public List<ExactStatData> GetAllStats(GearItemData gear) {
+    public List<ExactStatData> GetAllStats(ExileStack stack) {
+
+        var gear = stack.GEAR.get();
 
         List<ExactStatData> baseStats = new ArrayList<>();
 
         try {
-            int perc = (int) (p * gear.getQualityBaseStatsMulti());
+            int perc = (int) (p * gear.getQualityBaseStatsMulti(stack));
 
             for (StatMod mod : gear.GetBaseGearType().baseStats()) {
                 baseStats.add(mod.ToExactStat(perc, gear.getLevel()));
@@ -78,7 +82,7 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
 
             var allstats = new ArrayList<ExactStatData>();
             for (IStatsContainer cont : list) {
-                allstats.addAll(cont.GetAllStats(gear));
+                allstats.addAll(cont.GetAllStats(stack));
             }
             allstats.removeIf(x -> x.getStat() instanceof IBaseStatModifier == false);
 

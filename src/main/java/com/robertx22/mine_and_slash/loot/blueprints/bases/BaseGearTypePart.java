@@ -13,9 +13,7 @@ public class BaseGearTypePart extends BlueprintPart<BaseGearType, GearBlueprint>
 
     @Override
     protected BaseGearType generateIfNull() {
-
         GearSlot slot = ExileDB.GearSlots().random();
-
 
         return ExileDB.GearTypes()
                 .getFilterWrapped(x -> x.getGearSlot()

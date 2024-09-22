@@ -1,10 +1,10 @@
 package com.robertx22.mine_and_slash.database.data.profession.all;
 
-import com.robertx22.mine_and_slash.database.data.currency.gear.SharpeningStone;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.ExileCurrencies;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.keys.SkillItemTierKey;
 import com.robertx22.mine_and_slash.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.mine_and_slash.database.data.profession.ProfessionRecipe;
 import com.robertx22.mine_and_slash.database.data.profession.buffs.StatBuffs;
-import com.robertx22.mine_and_slash.database.data.profession.items.ProfDropTierPickerCurrency;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RarityItemHolder;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
@@ -75,7 +75,7 @@ public class ProfessionRecipes {
         buffPotion(Professions.ALCHEMY, Professions.FARMING, StatBuffs.CRIT.getHolder(), Items.ENCHANTED_GOLDEN_APPLE);
         buffPotion(Professions.ALCHEMY, Professions.FARMING, StatBuffs.ARCANE.getHolder(), Items.BEETROOT);
         buffPotion(Professions.ALCHEMY, Professions.FARMING, StatBuffs.MIGHT.getHolder(), Items.APPLE);
-   
+
 
         // buff meat
         buffPotion(Professions.COOKING, Professions.HUSBANDRY, StatBuffs.HEALTH.getHolder(), Items.COOKED_BEEF);
@@ -144,7 +144,9 @@ public class ProfessionRecipes {
 
         }
 
-        ProfessionRecipe.TierBuilder.of(x -> new ProfDropTierPickerCurrency(x).getCurrencyItem(), Professions.GEAR_CRAFTING, 1)
+        /* todo
+        ProfessionRecipe.TierBuilder.of(x -> ExileCurrencies.INSTANCE.getItem(e -> e.)
+        new ProfDropTierPickerCurrency(x).getCurrencyItem(), Professions.GEAR_CRAFTING, 1)
                 .onlyOnTier(x -> new ItemStack(RarityItems.RARITY_STONE.get(x.rar).get(), 1 * (x.tier + 1)))
                 .onTierOrAbove(SkillItemTier.TIER0, Items.PAPER, 1)
                 .onTierOrAbove(SkillItemTier.TIER0, Items.INK_SAC, 1)
@@ -152,7 +154,9 @@ public class ProfessionRecipes {
                 .custom(x -> x.recipe.tier = SkillItemTier.TIER0.tier)
                 .buildEachTier();
 
-        ProfessionRecipe.TierBuilder.of(x -> new SharpeningStone(x).getCurrencyItem(), Professions.GEAR_CRAFTING, 1)
+         */
+
+        ProfessionRecipe.TierBuilder.of(x -> ExileCurrencies.INSTANCE.SHARPEN_STONE_QUALITY.get(new SkillItemTierKey(x)).getItem(), Professions.GEAR_CRAFTING, 1)
                 .onlyOnTier(x -> new ItemStack(ProfessionMatItems.TIERED_MAIN_MATS.get(Professions.MINING).get(x).get(), 3 * (x.tier + 1)))
                 .onTierOrAbove(SkillItemTier.TIER0, Items.COAL, 1)
                 .onTierOrAbove(SkillItemTier.TIER1, Items.COPPER_INGOT, 1)

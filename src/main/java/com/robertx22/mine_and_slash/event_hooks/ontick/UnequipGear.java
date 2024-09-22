@@ -25,7 +25,7 @@ public class UnequipGear {
     public static List<EquipmentSlot> SLOTS = Arrays.asList(EquipmentSlot.FEET, EquipmentSlot.LEGS, EquipmentSlot.CHEST, EquipmentSlot.HEAD, EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND);
 
     static void drop(Player player, EquipmentSlot slot, ItemStack stack, MutableComponent txt) {
-        ItemStack old = player.getItemBySlot(slot);
+        //ItemStack old = player.getItemBySlot(slot);
         ItemStack copy = stack.copy();
 
         player.setItemSlot(slot, ItemStack.EMPTY); // todo is this good?
@@ -64,7 +64,11 @@ public class UnequipGear {
 
             if (gear != null) {
                 if (!gear.canPlayerWear(Load.Unit(player))) {
-                    drop(player, slot, stack, Chats.GEAR_DROP.locName().withStyle(ChatFormatting.RED));
+                    if (!gear.isWeapon() && (slot == EquipmentSlot.MAINHAND || slot == EquipmentSlot.OFFHAND)) {
+
+                    } else {
+                        drop(player, slot, stack, Chats.GEAR_DROP.locName().withStyle(ChatFormatting.RED));
+                    }
                 }
             }
         }

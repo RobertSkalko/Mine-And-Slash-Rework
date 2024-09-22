@@ -1,9 +1,9 @@
 package com.robertx22.mine_and_slash.loot.generators;
 
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
+import com.robertx22.mine_and_slash.itemstack.CustomItemData;
 import com.robertx22.mine_and_slash.loot.LootInfo;
 import com.robertx22.mine_and_slash.loot.blueprints.GearBlueprint;
-import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.saveclasses.stat_soul.StatSoulData;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.LootType;
 import net.minecraft.world.item.ItemStack;
@@ -26,7 +26,9 @@ public class SoulLootGen extends BaseLootGen<GearBlueprint> {
     }
 
     public static ItemStack createSoulBasedOnGear(GearBlueprint blueprint) {
-        GearItemData gear = blueprint.createData();
+        var data = blueprint.createData();
+
+        var gear = data.get(x -> x.GEAR);
 
         StatSoulData soul = new StatSoulData();
 
@@ -35,7 +37,7 @@ public class SoulLootGen extends BaseLootGen<GearBlueprint> {
         soul.tier = gear.getTier();
 
         if (gear.isUnique()) {
-            soul.uniq = gear.data.get(GearItemData.KEYS.UNIQUE_ID);
+            soul.uniq = data.getOrCreate(x -> x.CUSTOM).data.get(CustomItemData.KEYS.UNIQUE_ID);
         }
 
         ItemStack stack = soul.toStack();

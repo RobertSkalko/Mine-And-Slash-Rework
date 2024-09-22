@@ -5,6 +5,8 @@ import com.robertx22.mine_and_slash.database.data.MinMax;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarityType;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.VanillaRarities;
+import net.minecraft.world.item.Rarity;
 
 // check if loot drops in maps
 public class GearRaritiesAdder implements ExileRegistryInit {
@@ -15,7 +17,9 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
         GearRarity common = new GearRarity().edit(x -> {
 
+            x.vanilla_rar_enum = Rarity.COMMON.name();
             x.map_resist_req = 0;
+
 
             x.map_tiers = new MinMax(0, 10);
             x.favor_per_hour = 60;
@@ -37,6 +41,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity uncommon = new GearRarity().edit(x -> {
+            x.vanilla_rar_enum = VanillaRarities.UNCOMMON.name();
+
             x.map_resist_req = 10;
 
             x.map_tiers = new MinMax(10, 20);
@@ -59,6 +65,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity rar = new GearRarity().edit(x -> {
+            x.vanilla_rar_enum = Rarity.RARE.name();
+
             x.map_resist_req = 20;
 
             x.map_tiers = new MinMax(20, 40);
@@ -85,6 +93,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
         });
         GearRarity epic = new GearRarity().edit(x -> {
+            x.vanilla_rar_enum = Rarity.EPIC.name();
+
             x.map_resist_req = 30;
 
             x.map_tiers = new MinMax(40, 60);
@@ -112,6 +122,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity legendary = new GearRarity().edit(x -> {
+            x.vanilla_rar_enum = VanillaRarities.LEGENDARY.name();
             x.map_resist_req = 40;
 
             x.map_tiers = new MinMax(60, 80);
@@ -141,6 +152,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity mythic = new GearRarity().edit(x -> {
+            x.vanilla_rar_enum = VanillaRarities.MYTHIC.name();
+
             x.map_resist_req = 50;
 
             x.map_tiers = new MinMax(80, 100);
@@ -171,6 +184,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
 
         GearRarity unique = new GearRarity().edit(x -> {
+            x.vanilla_rar_enum = VanillaRarities.UNIQUE.name();
+
             x.map_resist_req = 50;
             x.type = GearRarityType.UNIQUE;
             x.sockets = new MinMax(1, 2);
@@ -190,6 +205,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
         // todo need to make separate maprarity etc or else this will roll somehow
         GearRarity runeword = new GearRarity().edit(x -> {
+            x.vanilla_rar_enum = VanillaRarities.RUNED.name();
+
             x.map_resist_req = 50;
             x.type = GearRarityType.RUNED;
             x.min_lvl = 15;

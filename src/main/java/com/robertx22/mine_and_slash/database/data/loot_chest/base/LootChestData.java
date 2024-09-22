@@ -1,6 +1,8 @@
 package com.robertx22.mine_and_slash.database.data.loot_chest.base;
 
 import com.google.common.collect.ImmutableList;
+import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
@@ -10,6 +12,7 @@ import com.robertx22.mine_and_slash.gui.texts.textblocks.NameBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.RarityBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.SalvageBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.usableitemblocks.UsageBlock;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.ICommonDataItem;
@@ -17,8 +20,6 @@ import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.localization.ChestContent;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.TooltipUtils;
-import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
-import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.ChatFormatting;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
@@ -129,7 +130,7 @@ public class LootChestData implements ICommonDataItem<GearRarity> {
     }
 
     @Override
-    public List<ItemStack> getSalvageResult(ItemStack stack) {
+    public List<ItemStack> getSalvageResult(ExileStack stack) {
         return Arrays.asList();
     }
 

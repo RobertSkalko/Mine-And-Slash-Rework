@@ -52,6 +52,8 @@ public class GeneratedData {
     // They shouldn't be needed at all to play the game.
     // If it errors without them, then that means i hardcoded something i shouldn't have
     public static void addAllObjectsToGenerate() {
+
+   
         AuraGems.initKeys();
 
         WeaponTypes.registerAll();
@@ -122,5 +124,6 @@ public class GeneratedData {
         c.addToSerializables();
 
         Omens.init();
+
     }
 }

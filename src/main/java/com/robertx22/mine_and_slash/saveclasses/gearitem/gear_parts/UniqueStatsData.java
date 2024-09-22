@@ -3,6 +3,8 @@ package com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts;
 import com.robertx22.mine_and_slash.database.data.StatMod;
 import com.robertx22.mine_and_slash.database.data.unique_items.UniqueGear;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.itemstack.CustomItemData;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.*;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
@@ -59,12 +61,12 @@ public class UniqueStatsData implements IGearPartTooltip, IRerollable, IStatsCon
 
 
     @Override
-    public List<Component> GetTooltipString(StatRangeInfo info, GearItemData gear) {
+    public List<Component> GetTooltipString(StatRangeInfo info, ExileStack stack) {
 
-
+        var gear = stack.GEAR.get();
         List<Component> list = new ArrayList<Component>();
         list.add(Itemtips.UNIQUE_STATS.locName().withStyle(ChatFormatting.YELLOW));
-        getAllStatsWithCtx(gear, new StatRangeInfo(ModRange.of(gear.getRarity().stat_percents))).forEach(x -> {
+        getAllStatsWithCtx(stack, new StatRangeInfo(ModRange.of(gear.getRarity().stat_percents))).forEach(x -> {
             list.addAll(x.GetTooltipString());
         });
 
@@ -72,9 +74,8 @@ public class UniqueStatsData implements IGearPartTooltip, IRerollable, IStatsCon
 
     }
 
-    public UniqueGear getUnique(GearItemData gear) {
-        return ExileDB.UniqueGears().get(gear.data.get(GearItemData.KEYS.UNIQUE_ID));
-
+    public UniqueGear getUnique(ExileStack stack) {
+        return ExileDB.UniqueGears().get(stack.CUSTOM.getOrCreate().data.get(CustomItemData.KEYS.UNIQUE_ID));
     }
 
     @Override
@@ -82,10 +83,11 @@ public class UniqueStatsData implements IGearPartTooltip, IRerollable, IStatsCon
         return Part.UNIQUE_STATS;
     }
 
-    public List<TooltipStatWithContext> getAllStatsWithCtx(GearItemData gear, StatRangeInfo info) {
+    public List<TooltipStatWithContext> getAllStatsWithCtx(ExileStack stack, StatRangeInfo info) {
+        var gear = stack.GEAR.get();
         List<TooltipStatWithContext> list = new ArrayList<>();
         int i = 0;
-        for (StatMod mod : getUnique(gear).uniqueStats()) {
+        for (StatMod mod : getUnique(stack).uniqueStats()) {
             ExactStatData exact = mod.ToExactStat(perc.get(i), gear.getLevel());
             list.add(new TooltipStatWithContext(new TooltipStatInfo(exact, perc.get(i), info), mod, (int) gear.getLevel()));
             i++;
@@ -94,13 +96,13 @@ public class UniqueStatsData implements IGearPartTooltip, IRerollable, IStatsCon
     }
 
     @Override
-    public List<ExactStatData> GetAllStats(GearItemData gear) {
-
+    public List<ExactStatData> GetAllStats(ExileStack stack) {
+        var gear = stack.GEAR.get();
         List<ExactStatData> list = new ArrayList<>();
 
         try {
             int i = 0;
-            for (StatMod mod : getUnique(gear).uniqueStats()) {
+            for (StatMod mod : getUnique(stack).uniqueStats()) {
                 list.add(mod.ToExactStat(perc.get(i), gear.getLevel()));
                 i++;
             }

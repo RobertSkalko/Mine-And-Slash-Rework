@@ -39,10 +39,10 @@ public class CraftedUniqueJewelData {
         if (tier.addsAffix) {// make all rarity upgrades add to affixes, whatever, if its too op, nerf the affixes
 
             Affix affix = ExileDB.Affixes().getFilterWrapped(x -> {
-                return x.getAllTagReq().contains(SlotTags.crafted_jewel_unique.GUID());
+                return x.type == Affix.AffixSlot.crafted_jewel_unique && x.getAllTagReq().contains(SlotTags.crafted_jewel_unique.GUID());
             }).random();
 
-            var affixdata = new AffixData(Affix.Type.jewel);
+            var affixdata = new AffixData(Affix.AffixSlot.crafted_jewel_unique);
             affixdata.randomizeTier(data.getRarity());
             affixdata.p = affixdata.getMinMax().random();
             affixdata.id = affix.guid;

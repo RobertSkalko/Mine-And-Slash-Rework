@@ -24,10 +24,10 @@ public class S2CPacketRegister {
         Packets.registerServerToClient(MMORPG.NETWORK, new TellClientEntityCastingSpell(), i++);
         Packets.registerServerToClient(MMORPG.NETWORK, new SyncAreaLevelPacket(), i++);
         Packets.registerServerToClient(MMORPG.NETWORK, new TellClientEntityIsCastingSpellPacket(), i++);
-        Packets.registerServerToClient(MMORPG.NETWORK, new TotemAnimationPacket(), i++);
         Packets.registerServerToClient(MMORPG.NETWORK, new ParticlesPacket(new ParticlesPacket.Data()), i++);
         Packets.registerServerToClient(MMORPG.NETWORK, new StationPacket(new StationSyncData()), i++);
         Packets.registerServerToClient(MMORPG.NETWORK, new SendStatCalcInfoToClientPacket(new StatCalcInfoData()), i++);
+        Packets.registerServerToClient(MMORPG.NETWORK, new TellClientResetCaches(), i++);
 
 
     }

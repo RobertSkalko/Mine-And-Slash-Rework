@@ -8,6 +8,7 @@ import com.robertx22.mine_and_slash.database.data.gems.Gem;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.OperationTipBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.RarityBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.StatBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.WorksOnBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.DropChanceBlock;
@@ -71,6 +72,8 @@ public abstract class BaseGemItem extends Item {
         ExileTooltips t = new ExileTooltips();
 
         Gem gem = getBaseGem();
+
+        t.accept(new RarityBlock(gem.getRarity()));
 
 
         t.accept(new StatBlock() {

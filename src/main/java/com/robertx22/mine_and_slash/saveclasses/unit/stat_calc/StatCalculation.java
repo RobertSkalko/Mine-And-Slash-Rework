@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.saveclasses.unit.stat_calc;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.capability.player.PlayerData;
 import com.robertx22.mine_and_slash.capability.player.helper.GemInventoryHelper;
+import com.robertx22.mine_and_slash.database.data.spells.components.Spell;
 import com.robertx22.mine_and_slash.database.data.stats.datapacks.stats.AttributeStat;
 import com.robertx22.mine_and_slash.gui.screens.stat_gui.StatCalcInfoData;
 import com.robertx22.mine_and_slash.saveclasses.skill_gem.SkillGemData;
@@ -32,7 +33,6 @@ public class StatCalculation {
     public static List<StatContext> getStatsWithoutSuppGems(LivingEntity entity, EntityData data) {
         List<StatContext> statContexts = new ArrayList<>();
 
-
         statContexts = collectStatsWithCtx(entity, data, data.equipmentCache.getGear());
 
         statContexts.removeIf(x -> x.stats.isEmpty());
@@ -53,7 +53,7 @@ public class StatCalculation {
 
     // the List<StatContext> is modified so i cant reuse it until the code is redone and fixed
     // todo trying to rewrite calc code..
-    public static void calc(Unit unit, List<StatContext> statsWithoutSuppGems, LivingEntity entity, int skillGem) {
+    public static void calc(Unit unit, List<StatContext> statsWithoutSuppGems, LivingEntity entity, Spell spell, int skillGem) {
 
         if (entity.level().isClientSide) {
             return;
@@ -67,6 +67,7 @@ public class StatCalculation {
         if (entity instanceof Player p) {
             PlayerData playerData = Load.player(p);
             gemstats.addAll(collectGemStats(p, data, playerData, skillGem));
+            gemstats.addAll(collectSpellStats(p, data, playerData, spell));
         }
 
         InCalcStatContainer statCalc = new InCalcStatContainer();
@@ -133,12 +134,18 @@ public class StatCalculation {
                     statContexts.add(new SimpleStatCtx(StatContext.StatCtxType.SUPPORT_GEM, d.getSupport().GetAllStats(data, d)));
                 }
             }
-            var spell = gem.getSpell();
-            if (spell != null) {
-                var stats = spell.getStats(p);
-                if (!stats.isEmpty()) {
-                    statContexts.add(new SimpleStatCtx(StatContext.StatCtxType.INNATE_SPELL, stats));
-                }
+
+        }
+        return statContexts;
+    }
+
+    private static List<StatContext> collectSpellStats(Player p, EntityData data, PlayerData playerData, Spell spell) {
+        List<StatContext> statContexts = new ArrayList<>();
+
+        if (spell != null) {
+            var stats = spell.getStats(p);
+            if (!stats.isEmpty()) {
+                statContexts.add(new SimpleStatCtx(StatContext.StatCtxType.INNATE_SPELL, stats));
             }
         }
         return statContexts;

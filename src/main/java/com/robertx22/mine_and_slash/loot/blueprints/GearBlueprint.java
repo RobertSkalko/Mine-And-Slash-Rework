@@ -1,12 +1,12 @@
 package com.robertx22.mine_and_slash.loot.blueprints;
 
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
+import com.robertx22.mine_and_slash.itemstack.ExileStacklessData;
 import com.robertx22.mine_and_slash.loot.LootInfo;
 import com.robertx22.mine_and_slash.loot.blueprints.bases.BaseGearTypePart;
 import com.robertx22.mine_and_slash.loot.blueprints.bases.UniqueGearPart;
 import com.robertx22.mine_and_slash.loot.generators.SoulLootGen;
 import com.robertx22.mine_and_slash.loot.generators.util.GearCreationUtils;
-import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -28,8 +28,15 @@ public class GearBlueprint extends RarityItemBlueprint implements ITypeBlueprint
     public UniqueGearPart uniquePart = new UniqueGearPart(this);
 
 
-    public GearItemData createData() {
-        return GearCreationUtils.CreateData(this);
+    public ExileStacklessData createData() {
+
+        var data = GearCreationUtils.CreateData(this);
+
+        var pot = data.getOrCreate(x -> x.POTENTIAL);
+
+        pot.potential = data.get(x -> x.GEAR).getRarity().pot.total;
+
+        return data;
     }
 
     @Override

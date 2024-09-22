@@ -19,7 +19,7 @@ public class GenericAffixBuilder<T> {
     List<T> elements = new ArrayList<>();
 
     int weight = 1000;
-    Affix.Type type;
+    Affix.AffixSlot type;
 
     TagRequirement tagRequirement = new TagRequirement(TagType.GearSlot, new ArrayList<>(), new ArrayList<>());
 
@@ -65,20 +65,31 @@ public class GenericAffixBuilder<T> {
 
 
     public GenericAffixBuilder<T> Prefix() {
-        type = Affix.Type.prefix;
+        type = Affix.AffixSlot.prefix;
         return this;
     }
 
     public GenericAffixBuilder<T> Suffix() {
-        type = Affix.Type.suffix;
+        type = Affix.AffixSlot.suffix;
+        return this;
+    }
+
+    public GenericAffixBuilder<T> Jewel() {
+        type = Affix.AffixSlot.jewel;
         return this;
     }
 
 
     public GenericAffixBuilder<T> Implicit() {
-        type = Affix.Type.implicit;
+        type = Affix.AffixSlot.implicit;
         return this;
     }
+
+    public GenericAffixBuilder<T> craftedUniqueJewel() {
+        type = Affix.AffixSlot.crafted_jewel_unique;
+        return this;
+    }
+
 
     public void Build() {
 

@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.aoe_data.database.affixes.adders.jewels;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import com.robertx22.mine_and_slash.aoe_data.database.affixes.AffixBuilder;
 import com.robertx22.mine_and_slash.aoe_data.database.affixes.ElementalAffixBuilder;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.OffenseStats;
@@ -16,7 +17,6 @@ import com.robertx22.mine_and_slash.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.mine_and_slash.tags.all.SlotTags;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
 import java.util.Arrays;
 
@@ -35,70 +35,70 @@ public class CraftedJewelAffixes implements ExileRegistryInit {
                 .stats(x -> Arrays.asList(new StatMod(10, 25, new ElementalResist(x), ModType.FLAT)))
                 .includesTags(SlotTags.crafted_jewel_unique)
                 .Weight(5000)
-                .Suffix()
+                .craftedUniqueJewel()
                 .Build();
 
         AffixBuilder.Normal(PREFIX + "aura_cost")
                 .stat(AuraCapacity.getInstance().mod(4, 10))
                 .includesTags(SlotTags.crafted_jewel_unique)
                 .Weight(1000)
-                .Suffix()
+                .craftedUniqueJewel()
                 .Build();
 
         AffixBuilder.Normal(PREFIX + "aura_eff")
                 .stat(AuraEffect.getInstance().mod(4, 10))
                 .includesTags(SlotTags.crafted_jewel_unique)
                 .Weight(1000)
-                .Suffix()
+                .craftedUniqueJewel()
                 .Build();
 
         AffixBuilder.Normal(PREFIX + "hp")
                 .stat(Health.getInstance().mod(5, 15).percent())
                 .includesTags(SlotTags.crafted_jewel_unique)
                 .Weight(1000)
-                .Suffix()
+                .craftedUniqueJewel()
                 .Build();
 
         AffixBuilder.Normal(PREFIX + "ms")
                 .stat(MagicShield.getInstance().mod(5, 15).percent())
                 .includesTags(SlotTags.crafted_jewel_unique)
                 .Weight(1000)
-                .Suffix()
+                .craftedUniqueJewel()
                 .Build();
 
         AffixBuilder.Normal(PREFIX + "armor")
                 .stat(Armor.getInstance().mod(10, 25).percent())
                 .includesTags(SlotTags.crafted_jewel_unique)
                 .Weight(1000)
-                .Suffix()
+                .craftedUniqueJewel()
                 .Build();
 
         AffixBuilder.Normal(PREFIX + "dodge")
                 .stat(DodgeRating.getInstance().mod(10, 25).percent())
                 .includesTags(SlotTags.crafted_jewel_unique)
                 .Weight(1000)
-                .Suffix()
+                .craftedUniqueJewel()
                 .Build();
 
         AffixBuilder.Normal(PREFIX + "cdr")
                 .stat(SpellChangeStats.COOLDOWN_REDUCTION.get().mod(3, 15))
                 .includesTags(SlotTags.crafted_jewel_unique)
                 .Weight(1000)
-                .Suffix()
+                .craftedUniqueJewel()
                 .Build();
 
         AffixBuilder.Normal(PREFIX + "crit")
                 .stat(OffenseStats.CRIT_CHANCE.get().mod(5, 15))
                 .includesTags(SlotTags.crafted_jewel_unique)
                 .Weight(1000)
-                .Suffix()
+                .craftedUniqueJewel()
                 .Build();
 
         AffixBuilder.Normal(PREFIX + "critdmg")
                 .stat(OffenseStats.CRIT_DAMAGE.get().mod(10, 25))
                 .includesTags(SlotTags.crafted_jewel_unique)
                 .Weight(1000)
-                .Suffix()
+                .craftedUniqueJewel()
                 .Build();
 
         ElementalAffixBuilder.start()
@@ -110,7 +110,7 @@ public class CraftedJewelAffixes implements ExileRegistryInit {
                 .stats(x -> Arrays.asList(new StatMod(1, 5, new MaxElementalResist(x), ModType.FLAT)))
                 .includesTags(SlotTags.crafted_jewel_unique)
                 .Weight(500)
-                .Suffix()
+                .craftedUniqueJewel()
                 .Build();
 
     }

@@ -73,9 +73,11 @@ public class MapBlueprint extends RarityItemBlueprint {
         return data;
     }
 
-    private MapItemData genAffixes(MapItemData map, GearRarity rarity) {
+    public static void genAffixes(MapItemData map, GearRarity rarity) {
 
-        int amount = rarity.getAffixAmount() + 2;
+        map.affixes = new ArrayList<>();
+
+        int amount = rarity.getAffixAmount() + 2; // todo
 
         List<String> affixes = new ArrayList<String>();
 
@@ -92,7 +94,6 @@ public class MapBlueprint extends RarityItemBlueprint {
 
         }
 
-        return map;
     }
 
 }

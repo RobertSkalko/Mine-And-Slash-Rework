@@ -33,8 +33,10 @@ public class Requirements implements ITooltipList {
     public List<MutableComponent> GetTooltipString() {
         List<MutableComponent> list = new ArrayList<>();
         this.tag_requirements.forEach(x -> {
-            list.add(ExileText.ofText("").get());
-            list.addAll(x.GetTooltipString());
+            if (!x.isEmpty()) {
+                list.add(ExileText.ofText("").get());
+                list.addAll(x.GetTooltipString());
+            }
         });
         return list;
     }

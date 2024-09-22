@@ -3,8 +3,7 @@ package com.robertx22.mine_and_slash.mmorpg.event_registers;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
 import com.robertx22.mine_and_slash.capability.player.PlayerData;
-import com.robertx22.mine_and_slash.database.data.stats.datapacks.stats.AttributeStat;
-import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.database.DatabaseCaches;
 import com.robertx22.mine_and_slash.event_hooks.damage_hooks.LivingHurtUtils;
 import com.robertx22.mine_and_slash.event_hooks.damage_hooks.reworked.NewDamageMain;
 import com.robertx22.mine_and_slash.event_hooks.entity.OnMobSpawn;
@@ -26,8 +25,6 @@ import com.robertx22.mine_and_slash.saveclasses.unit.ResourceType;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.DamageEvent;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.OnMobKilledByDamageEvent;
-import com.robertx22.mine_and_slash.uncommon.error_checks.base.ErrorChecks;
-import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.Cached;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -48,9 +45,6 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.*;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
-import java.util.ArrayList;
 
 public class CommonEvents {
 
@@ -193,6 +187,12 @@ public class CommonEvents {
             }
         });
 
+        ForgeEvents.registerForgeEvent(PlayerEvent.PlayerRespawnEvent.class, event -> {
+            if (event.getEntity() instanceof ServerPlayer) {
+                Load.Unit(event.getEntity()).setAllDirtyOnLoginEtc();
+            }
+        });
+
         ForgeEvents.registerForgeEvent(LivingEvent.LivingTickEvent.class, event -> {
             OnEntityTick.onTick(event.getEntity());
         });
@@ -260,25 +260,11 @@ public class CommonEvents {
                 OnLogin.onLoad(event.player);
             }
         });
-        ExileEvents.AFTER_DATABASE_LOADED.register(new EventConsumer<ExileEvents.AfterDatabaseLoaded>() {
-            @Override
-            public void accept(ExileEvents.AfterDatabaseLoaded event) {
-                Cached.reset();
-                setupStatsThatAffectVanillaStatsList();
-                ErrorChecks.getAll()
-                        .forEach(x -> x.check());
-            }
-        });
+
+
+        DatabaseCaches.init();
 
     }
 
-    private static void setupStatsThatAffectVanillaStatsList() {
-        Cached.VANILLA_STAT_UIDS_TO_CLEAR_EVERY_STAT_CALC = new ArrayList<>();
 
-        ExileDB.Stats()
-                .getFilterWrapped(x -> x instanceof AttributeStat).list.forEach(x -> {
-                    AttributeStat attri = (AttributeStat) x;
-                    Cached.VANILLA_STAT_UIDS_TO_CLEAR_EVERY_STAT_CALC.add(ImmutablePair.of(attri.attribute, attri.uuid));
-                });
-    }
 }

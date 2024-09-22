@@ -74,6 +74,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     public SpellAnimationData cast_animation = new SpellAnimationData(SpellAnimations.STEADY_CAST);
     public SpellAnimationData cast_finish_animation = new SpellAnimationData(SpellAnimations.CAST_FINISH);
 
+   
     public Boolean hasCost(ResourceType type) {
         if (type == ResourceType.energy) {
             return config.ene_cost.min > 0;

@@ -116,7 +116,7 @@ public class ProfessionToolData implements ITooltip {
         ToolAffix data = new ToolAffix();
         data.rar = rar.GUID();
         data.p = rar.stat_percents.random();
-        data.id = ExileDB.Affixes().getFilterWrapped(x -> x.type == Affix.Type.tool && x.getAllTagReq().contains(getProfession().tool_tag) && x.getAllTagReq().contains(SlotTags.tool.GUID())).random().GUID();
+        data.id = ExileDB.Affixes().getFilterWrapped(x -> x.type == Affix.AffixSlot.tool && x.getAllTagReq().contains(getProfession().tool_tag) && x.getAllTagReq().contains(SlotTags.tool.GUID())).random().GUID();
 
         this.affixes.add(data);
     }

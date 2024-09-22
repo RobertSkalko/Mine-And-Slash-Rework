@@ -12,7 +12,7 @@ public interface IRandomDefault<T extends IhasRequirements & IWeighted> extends 
 
     public default T random(GearRequestedFor gearRequestedFor) {
 
-        if (gearRequestedFor.gearData != null && gearRequestedFor.gearData.GetBaseGearType() == null) {
+        if (gearRequestedFor.forSlot != null) {
             ExileLog.get().warn("Gear slot doesn't exist, or was renamed.");
             return null;
         }
