@@ -353,11 +353,13 @@ learn_entangling_seed
 learn_execute
 learn_explode_minions
 learn_explosive_arrow
+learn_fire_golem_basic
 learn_fire_nova
 learn_fire_trap
 learn_fireball
 learn_flame_strike
 learn_frost_flower
+learn_frost_golem_basic
 learn_frost_lich_armor
 learn_frost_nova
 learn_frost_trap
@@ -371,6 +373,7 @@ learn_heart_of_ice
 learn_hunter_potion
 learn_ice_comet
 learn_ignite_explosion
+learn_lightning_golem_basic
 learn_lightning_nova
 learn_lightning_spear
 learn_lightning_totem
@@ -395,6 +398,7 @@ learn_return_summons
 learn_ritardando
 learn_shooting_star
 learn_shred
+learn_skeleton_basic
 learn_smoke_bomb
 learn_song_of_perseverance
 learn_song_of_valor
@@ -417,6 +421,8 @@ learn_undying_will
 learn_vamp_blood
 learn_whirlwind
 learn_wish
+learn_wolf_basic
+learn_zombie_basic
 lifesteal
 light_res_aura_cost
 lightning_ailment_aura_cost

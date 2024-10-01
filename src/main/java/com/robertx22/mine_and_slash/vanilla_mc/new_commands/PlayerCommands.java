@@ -295,6 +295,8 @@ public class PlayerCommands {
                 var s = STRING.get(e);
                 ResetPlayerData reset = ResetPlayerData.valueOf(s);
                 reset.reset(p);
+                Load.Unit(p).setAllDirtyOnLoginEtc();
+                Load.player(p).playerDataSync.setDirty();
             });
 
         }, "Resets parts of a player's data. You can reset their level, talents etc");

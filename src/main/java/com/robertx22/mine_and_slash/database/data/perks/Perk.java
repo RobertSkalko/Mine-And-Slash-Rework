@@ -5,6 +5,7 @@ import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.mine_and_slash.database.OptScaleExactStat;
 import com.robertx22.mine_and_slash.database.data.spell_school.SpellSchool;
+import com.robertx22.mine_and_slash.database.data.spells.components.Spell;
 import com.robertx22.mine_and_slash.database.data.stats.Stat;
 import com.robertx22.mine_and_slash.database.data.stats.types.LearnSpellStat;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
@@ -55,6 +56,13 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
 
     public boolean isSpell() {
         return this.stats.size() > 0 && stats.get(0).getStat() instanceof LearnSpellStat;
+    }
+
+    public Spell getSpell() {
+        if (stats.get(0).getStat() instanceof LearnSpellStat a) {
+            return a.spell;
+        }
+        return null;
     }
 
     public boolean isPassive() {

@@ -24,7 +24,7 @@ public class TextUtils {
         float yf = (float) ((double) yp * antiScale);
 
 
-        gui.drawString(mc.font, text, (int) xf, (int) yf, color.getColor());
+        gui.drawString(mc.font, text, (int) xf, (int) yf, color.getColor(), true);
 
 
         gui.pose().scale(antiScale, antiScale, antiScale);

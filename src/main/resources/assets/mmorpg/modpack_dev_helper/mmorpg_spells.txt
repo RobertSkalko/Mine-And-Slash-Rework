@@ -27,11 +27,13 @@ entangling_seed
 execute
 explode_minions
 explosive_arrow
+fire_golem_basic
 fire_nova
 fire_trap
 fireball
 flame_strike
 frost_flower
+frost_golem_basic
 frost_lich_armor
 frost_nova
 frost_trap
@@ -45,6 +47,7 @@ heart_of_ice
 hunter_potion
 ice_comet
 ignite_explosion
+lightning_golem_basic
 lightning_nova
 lightning_spear
 lightning_totem
@@ -69,6 +72,7 @@ return_summons
 ritardando
 shooting_star
 shred
+skeleton_basic
 smoke_bomb
 song_of_perseverance
 song_of_valor
@@ -91,3 +95,5 @@ undying_will
 vamp_blood
 whirlwind
 wish
+wolf_basic
+zombie_basic

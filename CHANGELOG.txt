@@ -36,3 +36,4 @@ I will probably stop the item data rework here and wait for next update to finis
 - now only weapons are dropped when in main hand if req not met
 - cached auto items better
 - tiny perf improves to entity data sync
+- spell levels should now be readable in the gui and also they change colors when you level them up

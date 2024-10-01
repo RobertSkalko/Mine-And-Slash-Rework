@@ -230,6 +230,7 @@ fire_any_wep_damage
 fire_any_wep_damage_big
 fire_dot_damage
 fire_dot_damage_big
+fire_golem_basic
 fire_nova
 fire_penetration
 fire_penetration_big
@@ -250,6 +251,7 @@ freeze_damage_big
 freeze_duration
 freeze_duration_big
 frost_flower
+frost_golem_basic
 frost_lich_armor
 frost_nova
 frost_trap
@@ -348,6 +350,7 @@ lightning_any_wep_damage
 lightning_any_wep_damage_big
 lightning_dot_damage
 lightning_dot_damage_big
+lightning_golem_basic
 lightning_nova
 lightning_penetration
 lightning_penetration_big
@@ -521,6 +524,7 @@ shock_proc_chance
 shock_proc_chance_big
 shooting_star
 shred
+skeleton_basic
 small_positive_effect_increase
 smoke_bomb
 sniper
@@ -637,3 +641,5 @@ whirlwind
 wind_dancer
 wish
 witchs_brew
+wolf_basic
+zombie_basic
