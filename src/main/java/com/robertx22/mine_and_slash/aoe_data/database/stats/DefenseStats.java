@@ -90,7 +90,7 @@ public class DefenseStats {
             .setSide(EffectSides.Target)
             .addCondition(StatConditions.IF_RANDOM_ROLL)
             .addEffect(StatEffects.Layers.DAMAGE_REDUCTION_50)
-            .setLocName(x -> "Damage Reduction Chance").
+            .setLocName(x -> "Damage Suppression Chance").
             setLocDesc(x -> "Chance to reduce damage by 50%. This stacks with other [Damage Reduction]s").
             modifyAfterDone(x ->
             {
@@ -99,9 +99,7 @@ public class DefenseStats {
                 x.group = Stat.StatGroup.Misc;
                 x.min = 0;
                 x.max = 100;
-            })
-                    .
-
+            }).
             build();
 
 

@@ -1,8 +1,10 @@
 package com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts;
 
+import com.robertx22.library_of_exile.wrappers.ExileText;
 import com.robertx22.mine_and_slash.database.data.affixes.Affix;
 import com.robertx22.mine_and_slash.database.data.requirements.bases.GearRequestedFor;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IGearPartTooltip;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IRerollable;
@@ -12,7 +14,6 @@ import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
-import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 
@@ -30,7 +31,7 @@ public class ImplicitStatsData implements IGearPartTooltip, IRerollable, IStatsC
 
     @Override
     public void RerollFully(GearItemData gear) {
-        var opt = ExileDB.Affixes().getFilterWrapped(x -> x.type == Affix.Type.implicit && x.meetsRequirements(new GearRequestedFor(gear)));
+        var opt = ExileDB.Affixes().getFilterWrapped(x -> x.type == Affix.AffixSlot.implicit && x.meetsRequirements(new GearRequestedFor(gear)));
         if (!opt.list.isEmpty()) {
             this.imp = opt.random().GUID();
         }
@@ -44,11 +45,12 @@ public class ImplicitStatsData implements IGearPartTooltip, IRerollable, IStatsC
     }
 
     @Override
-    public List<Component> GetTooltipString(StatRangeInfo info, GearItemData gear) {
+    public List<Component> GetTooltipString(StatRangeInfo info, ExileStack stack) {
+        var gear = stack.GEAR.get();
 
         List<Component> list = new ArrayList<>();
 
-        List<ExactStatData> stats = GetAllStats(gear);
+        List<ExactStatData> stats = GetAllStats(stack);
 
 
         if (!stats.isEmpty()) {
@@ -90,9 +92,10 @@ public class ImplicitStatsData implements IGearPartTooltip, IRerollable, IStatsC
     }
 
     @Override
-    public List<ExactStatData> GetAllStats(GearItemData gear) {
+    public List<ExactStatData> GetAllStats(ExileStack stack) {
 
         if (has()) {
+            var gear = stack.GEAR.get();
             return get().getStats()
                     .stream()
                     .map(x -> x.ToExactStat(p, gear.lvl))

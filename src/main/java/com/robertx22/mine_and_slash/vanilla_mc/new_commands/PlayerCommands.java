@@ -3,9 +3,13 @@ package com.robertx22.mine_and_slash.vanilla_mc.new_commands;
 import com.mojang.brigadier.CommandDispatcher;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.mine_and_slash.capability.player.PlayerData;
+import com.robertx22.mine_and_slash.database.data.currency.loc_reqs.LocReqContext;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.ExileCurrency;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModification;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.PlayerPointsType;
 import com.robertx22.mine_and_slash.database.data.profession.Profession;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.loot.LootInfo;
 import com.robertx22.mine_and_slash.loot.blueprints.WatcherEyeBlueprint;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
@@ -15,6 +19,9 @@ import com.robertx22.mine_and_slash.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.mine_and_slash.vanilla_mc.new_commands.parts.ResetPlayerData;
 import com.robertx22.mine_and_slash.vanilla_mc.new_commands.wrapper.*;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.OpenGuiPacket;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Arrays;
@@ -23,6 +30,58 @@ import java.util.stream.Collectors;
 public class PlayerCommands {
 
     public static void init(CommandDispatcher dis) {
+
+        // todo also add a currenccy apply command
+        CommandBuilder.of(dis, x -> {
+            PlayerWrapper PLAYER = new PlayerWrapper();
+            RegistryWrapper<ItemModification> MOD = new RegistryWrapper(ExileRegistryTypes.ITEM_MOD);
+
+            x.addLiteral("item_mod", PermWrapper.OP);
+            x.addLiteral("use", PermWrapper.OP);
+            x.addArg(PLAYER);
+            x.addArg(MOD);
+
+            x.action(e -> {
+                var p = PLAYER.get(e);
+                var mod = MOD.getFromRegistry(e);
+                ItemStack stack = p.getMainHandItem();
+                mod.applyMod(ExileStack.of(stack));
+
+                p.setItemSlot(EquipmentSlot.MAINHAND, stack);
+
+                p.sendSystemMessage(Component.literal("Applied Item Modification from Command").withStyle(ChatFormatting.GREEN));
+            });
+
+        }, "Applies an item modification to the item in player's hand.");
+
+        CommandBuilder.of(dis, x -> {
+            PlayerWrapper PLAYER = new PlayerWrapper();
+            RegistryWrapper<ExileCurrency> CURRENCY = new RegistryWrapper(ExileRegistryTypes.CURRENCY);
+
+            x.addLiteral("currency", PermWrapper.OP);
+            x.addLiteral("use", PermWrapper.OP);
+            x.addArg(PLAYER);
+            x.addArg(CURRENCY);
+
+            x.action(e -> {
+                var p = PLAYER.get(e);
+                var mod = CURRENCY.getFromRegistry(e);
+                ItemStack stack = p.getMainHandItem();
+
+                var ctx = new LocReqContext(p, stack, mod.getItem().getDefaultInstance());
+
+                var ex = mod.canItemBeModified(ctx);
+                if (ex.can) {
+                    var res = mod.modifyItem(ctx);
+                    p.setItemSlot(EquipmentSlot.MAINHAND, res.stack.getStack().copy());
+
+                } else {
+                    p.sendSystemMessage(ex.answer);
+                }
+
+            });
+
+        }, "Tries to apply an item currency to the item in player's hand.");
 
         CommandBuilder.of(dis, x -> {
             PlayerWrapper PLAYER = new PlayerWrapper();

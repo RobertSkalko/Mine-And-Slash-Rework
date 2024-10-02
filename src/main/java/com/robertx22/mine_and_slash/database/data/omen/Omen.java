@@ -31,7 +31,7 @@ public class Omen implements JsonExileRegistry<Omen>, IAutoGson<Omen>, IAutoLocN
 
     public List<StatMod> mods = new ArrayList<>();
 
-    public List<Affix.Type> affix_types = new ArrayList<>(Arrays.asList(Affix.Type.chaos_stat, Affix.Type.jewel_corruption));
+    public List<Affix.AffixSlot> affix_types = new ArrayList<>(Arrays.asList(Affix.AffixSlot.chaos_stat, Affix.AffixSlot.jewel_corruption));
 
     public Omen(String id, String locname, float lvl_req, List<StatMod> mods) {
         this.id = id;
@@ -41,7 +41,7 @@ public class Omen implements JsonExileRegistry<Omen>, IAutoGson<Omen>, IAutoLocN
     }
 
     public Omen addCorruptionAffixes() {
-        this.affix_types.add(Affix.Type.chaos_stat);
+        this.affix_types.add(Affix.AffixSlot.chaos_stat);
         return this;
     }
 

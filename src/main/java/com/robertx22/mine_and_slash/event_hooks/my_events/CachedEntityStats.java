@@ -27,6 +27,7 @@ public class CachedEntityStats {
         this.entity = entity;
     }
 
+
     private List<GearData> gear = new ArrayList<>();
 
     private GearData weapon;

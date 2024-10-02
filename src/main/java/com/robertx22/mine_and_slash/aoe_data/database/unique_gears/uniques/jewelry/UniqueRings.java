@@ -1,8 +1,12 @@
 package com.robertx22.mine_and_slash.aoe_data.database.unique_gears.uniques.jewelry;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import com.robertx22.mine_and_slash.aoe_data.database.ailments.Ailments;
 import com.robertx22.mine_and_slash.aoe_data.database.base_gear_types.BaseGearTypes;
-import com.robertx22.mine_and_slash.aoe_data.database.stats.*;
+import com.robertx22.mine_and_slash.aoe_data.database.stats.EffectStats;
+import com.robertx22.mine_and_slash.aoe_data.database.stats.OffenseStats;
+import com.robertx22.mine_and_slash.aoe_data.database.stats.ResourceStats;
+import com.robertx22.mine_and_slash.aoe_data.database.stats.SpellChangeStats;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.mine_and_slash.aoe_data.database.unique_gears.UniqueGearBuilder;
 import com.robertx22.mine_and_slash.database.data.StatMod;
@@ -26,7 +30,6 @@ import com.robertx22.mine_and_slash.saveclasses.unit.ResourceType;
 import com.robertx22.mine_and_slash.tags.all.EffectTags;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
 import java.util.Arrays;
 
@@ -188,9 +191,10 @@ public class UniqueRings implements ExileRegistryInit {
 
         UniqueGearBuilder.of("piercing_touch", "Piercing Touch", BaseGearTypes.RING)
                 .keepsBaseName()
-                .stat(OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Fire).mod(10, 25))
-                .stat(OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Cold).mod(10, 25))
-                .stat(OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Shadow).mod(10, 20))
+                .stat(OffenseStats.PROJECTILE_DAMAGE.get().mod(10, 25))
+                .stat(OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Fire).mod(15, 40))
+                .stat(OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Cold).mod(15, 40))
+                .stat(OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Shadow).mod(15, 40))
                 .build();
 
 

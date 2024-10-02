@@ -12,16 +12,16 @@ import com.robertx22.mine_and_slash.database.data.requirements.bases.GearRequest
 import com.robertx22.mine_and_slash.database.data.stat_compat.StatCompat;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
+import com.robertx22.mine_and_slash.itemstack.CustomItemData;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
-import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.*;
+import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IStatsContainer;
+import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.StatRequirement;
+import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.*;
-import com.robertx22.mine_and_slash.saveclasses.item_classes.rework.DataKey;
-import com.robertx22.mine_and_slash.saveclasses.item_classes.rework.DataKeyHolder;
-import com.robertx22.mine_and_slash.saveclasses.item_classes.rework.GenericDataHolder;
 import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.StatContext;
-import com.robertx22.mine_and_slash.uncommon.MathHelper;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
@@ -45,24 +45,6 @@ import java.util.stream.Collectors;
 
 public class GearItemData implements ICommonDataItem<GearRarity> {
 
-    public static KeyHolderClass KEYS = new KeyHolderClass();
-
-    // with this custom data will be saved only when needed
-    public static class KeyHolderClass extends DataKeyHolder {
-        // public DataKey.RegistryKey<GearRarity> RARITY = of(new DataKey.RegistryKey<>("rar", ExileRegistryTypes.GEAR_RARITY));
-
-        public DataKey.BooleanKey CORRUPT = of(new DataKey.BooleanKey("cr"));
-        public DataKey.BooleanKey SALVAGING_DISABLED = of(new DataKey.BooleanKey("sl"));
-        public DataKey.BooleanKey USED_SHARPENING_STONE = of(new DataKey.BooleanKey("us"));
-
-        public DataKey.StringKey UNIQUE_ID = of(new DataKey.StringKey("uq"));
-
-        public DataKey.IntKey QUALITY = of(new DataKey.IntKey("ql"));
-        public DataKey.IntKey ENCHANT_TIMES = of(new DataKey.IntKey("et"));
-        public DataKey.IntKey LEVEL_TIMES = of(new DataKey.IntKey("lt"));
-
-    }
-
     // Stats
     public BaseStatsData baseStats = new BaseStatsData();
     public ImplicitStatsData imp = new ImplicitStatsData(); // implicit stats
@@ -71,7 +53,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     public UniqueStatsData uniqueStats;
     public GearInfusionData ench;
 
-    public GenericDataHolder data = new GenericDataHolder();
+    //  public GenericDataHolder data = new GenericDataHolder();
 
     // Stats
 
@@ -79,32 +61,12 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     // apparently people had big issues with many storage mods, So i should try minimize the nbt.
     public String rar = IRarity.COMMON_ID; // rar
 
-
     public int lvl = 1; // lvl
     public String gtype = "";
 
-    // potential
-    // potential number
-    private int pn = 0;
-    // salvagable
 
-
-    public int getQuality() {
-        return data.get(KEYS.QUALITY);
-    }
-
-    public float getQualityBaseStatsMulti() {
-        return 1F + (getQuality() / 100F);
-
-    }
-
-
-    public void setQuality(int a) {
-        this.data.set(KEYS.QUALITY, a);
-    }
-
-    public boolean isCorrupted() {
-        return data.get(KEYS.CORRUPT);
+    public float getQualityBaseStatsMulti(ExileStack stack) {
+        return 1F + (stack.CUSTOM.getOrCreate().data.get(CustomItemData.KEYS.QUALITY) / 100F);
     }
 
 
@@ -166,23 +128,6 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
     }
 
-    public int getPotentialNumber() {
-        return pn;
-    }
-
-
-    public void setPotential(int potential) {
-        this.pn = MathHelper.clamp(potential, 0, 1000000);
-    }
-
-    public GearItemEnum getGearEnum() {
-
-        if (this.isUnique()) {
-            return GearItemEnum.UNIQUE;
-        }
-
-        return GearItemEnum.NORMAL;
-    }
 
     @Override
     public String getRarityId() {
@@ -205,11 +150,11 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
                 .get(gtype);
     }
 
-    public List<MutableComponent> GetDisplayName(ItemStack stack) {
+    public List<MutableComponent> GetDisplayName(ExileStack stack) {
 
         try {
 
-            return getFullAffixedName();
+            return getFullAffixedName(stack);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -217,7 +162,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         return Arrays.asList();
     }
 
-    private MutableComponent prefixChecker() {
+    private MutableComponent prefixChecker(ExileStack stack) {
         if (affixes.hasPrefix()) {
             // find strongest
             AffixData prefix = affixes.pre.stream().sorted(Comparator.comparingInt(x -> -x.p)).findFirst().get();
@@ -227,7 +172,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         }
     }
 
-    private MutableComponent uniqueChecker() {
+    private MutableComponent uniqueChecker(ExileStack stack) {
         var base = GetBaseGearType().locName();
 
         if (imp.has()) {
@@ -236,15 +181,15 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         if (this.uniqueStats == null) {
             return base;
         } else {
-            var uniq = uniqueStats.getUnique(this);
+            var uniq = uniqueStats.getUnique(stack);
             if (uniq.replaces_name) {
                 return uniq.locName().withStyle(getRarity().textFormatting());
             }
-            return Formatter.UNIQUE_NAME_FORMAT.locName(uniqueStats.getUnique(this).locName(), base).withStyle(getRarity().textFormatting());
+            return Formatter.UNIQUE_NAME_FORMAT.locName(uniqueStats.getUnique(stack).locName(), base).withStyle(getRarity().textFormatting());
         }
     }
 
-    private MutableComponent suffixChecker() {
+    private MutableComponent suffixChecker(ExileStack stack) {
 
         if (affixes.hasSuffix()) {
             // find strongest
@@ -257,7 +202,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     }
 
 
-    private List<MutableComponent> getFullAffixedName() {
+    private List<MutableComponent> getFullAffixedName(ExileStack stack) {
         List<MutableComponent> list = new ArrayList<>();
         ChatFormatting format = this.getRarity()
                 .textFormatting();
@@ -266,25 +211,25 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         //String[] name = processStrings(prefixChecker().getString(), uniqueChecker().getString(), suffixChecker().getString());
         MutableComponent text;
 
-        String str1 = prefixChecker().getString();
-        String str2 = uniqueChecker().getString();
-        String str3 = suffixChecker().getString();
+        String str1 = prefixChecker(stack).getString();
+        String str2 = uniqueChecker(stack).getString();
+        String str3 = suffixChecker(stack).getString();
 
         // pre-gear-suf
         if (!str1.isEmpty() && !str2.isEmpty() && !str3.isEmpty()) {
-            text = Formatter.GEAR_ITEM_NAME_ALL.locName(prefixChecker(), uniqueChecker(), suffixChecker());
+            text = Formatter.GEAR_ITEM_NAME_ALL.locName(prefixChecker(stack), uniqueChecker(stack), suffixChecker(stack));
         }
         // gear
         else if (str1.isEmpty() && !str2.isEmpty() && str3.isEmpty()) {
-            text = Formatter.GEAR_ITEM_NAME_ONLY_GEAR.locName(uniqueChecker());
+            text = Formatter.GEAR_ITEM_NAME_ONLY_GEAR.locName(uniqueChecker(stack));
         }
         // pre-gear
         else if (!str1.isEmpty() && !str2.isEmpty() && str3.isEmpty()) {
-            text = Formatter.GEAR_ITEM_NAME_PRE_GEAR.locName(prefixChecker(), uniqueChecker());
+            text = Formatter.GEAR_ITEM_NAME_PRE_GEAR.locName(prefixChecker(stack), uniqueChecker(stack));
         }
         // another
         else {
-            text = Formatter.GEAR_ITEM_NAME_ANOTHER.locName(prefixChecker(), uniqueChecker(), suffixChecker());
+            text = Formatter.GEAR_ITEM_NAME_ANOTHER.locName(prefixChecker(stack), uniqueChecker(stack), suffixChecker(stack));
         }
 
         text.withStyle(format);
@@ -361,11 +306,11 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
     }
 
-    public List<ExactStatData> GetAllStats() {
+    public List<ExactStatData> GetAllStats(ExileStack stack) {
 
         List<ExactStatData> list = new ArrayList<>();
         for (IStatsContainer x : GetAllStatContainers()) {
-            List<ExactStatData> stats = x.GetAllStats(this);
+            List<ExactStatData> stats = x.GetAllStats(stack);
             stats.forEach(s -> {
                 list.add(s);
             });
@@ -379,18 +324,6 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         GearTooltipUtils.BuildTooltip(this, ctx.stack, ctx.tooltip, ctx.data);
     }
 
-    public List<IRerollable> GetAllRerollable() {
-        List<IRerollable> list = new ArrayList<IRerollable>();
-        IfNotNullAdd(baseStats, list);
-
-        affixes.getAllAffixesAndSockets()
-                .forEach(x -> IfNotNullAdd(x, list));
-
-        list.add(imp);
-
-        IfNotNullAdd(uniqueStats, list);
-        return list;
-    }
 
     private <T> void IfNotNullAdd(T obj, List<T> list) {
         if (obj != null) {
@@ -400,9 +333,9 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
 
     @Override
-    public List<ItemStack> getSalvageResult(ItemStack stack) {
+    public List<ItemStack> getSalvageResult(ExileStack stack) {
 
-        if (!data.get(KEYS.SALVAGING_DISABLED)) {
+        if (!stack.CUSTOM.getOrCreate().data.get(CustomItemData.KEYS.SALVAGING_DISABLED)) {
             if (this.isUnique()) {
                 return Arrays.asList(new ItemStack(RandomUtils.randomFromList(RarityItems.RARITY_STONE.values().stream().toList()).get(), RandomUtils.RandomRange(2, 9)));
             }
@@ -414,10 +347,6 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         return Arrays.asList(ItemStack.EMPTY);
     }
 
-    @Override
-    public boolean isSalvagable() {
-        return !data.get(KEYS.SALVAGING_DISABLED);
-    }
 
     @Override
     public ItemstackDataSaver<GearItemData> getStackSaver() {

@@ -104,6 +104,7 @@ public class OnServerTick {
                         player.setGameMode(GameType.ADVENTURE);
                     }
                 } else {
+                    // todo this shouldnt be done like this
                     if (player.gameMode.getGameModeForPlayer() == GameType.ADVENTURE) {
                         player.setGameMode(GameType.SURVIVAL);
                     }
@@ -162,15 +163,7 @@ public class OnServerTick {
 
             if (age % 5 == 0) {
                 var tickrate = 5;
-
-
-                playerData.buff.onTick(player, tickrate);
                 unitdata.getResources().onTickBlock(player, tickrate);
-
-            }
-
-            if (true || age % (20 * 30) == 0) {
-                //     SummonPetAction.despawnIfExceededMaximumSummons(player, (int) unitdata.getUnit().getStatInCalculation(Stats.MAX_SUMMON_CAPACITY.get()).getValue());
             }
 
             if (player.containerMenu instanceof CraftingStationMenu men) {
@@ -182,6 +175,9 @@ public class OnServerTick {
 
 
             if (age % 20 == 0) {
+                
+                playerData.buff.onTick(player, 20);
+
 
                 playerData.favor.onSecond(player);
 

@@ -1,17 +1,18 @@
 package com.robertx22.mine_and_slash.database.data.custom_item;
 
-import com.robertx22.mine_and_slash.database.registry.ExileDB;
-import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
-import com.robertx22.mine_and_slash.loot.LootInfo;
-import com.robertx22.mine_and_slash.loot.blueprints.GearBlueprint;
-import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
-import com.robertx22.mine_and_slash.uncommon.MathHelper;
-import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
-import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.library_of_exile.utils.RandomUtils;
+import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
+import com.robertx22.mine_and_slash.itemstack.CustomItemData;
+import com.robertx22.mine_and_slash.itemstack.ExileStacklessData;
+import com.robertx22.mine_and_slash.loot.LootInfo;
+import com.robertx22.mine_and_slash.loot.blueprints.GearBlueprint;
+import com.robertx22.mine_and_slash.uncommon.MathHelper;
+import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
+import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class CustomItem implements JsonExileRegistry<CustomItem>, IAutoGson<Cust
 
     public boolean disable_salvaging = false;
 
-    public GearItemData create(Player p) {
+    public ExileStacklessData create(Player p) {
 
         int lvl = Load.Unit(p).getLevel();
 
@@ -57,9 +58,8 @@ public class CustomItem implements JsonExileRegistry<CustomItem>, IAutoGson<Cust
         var data = b.createData();
 
         if (disable_salvaging) {
-            data.data.set(GearItemData.KEYS.SALVAGING_DISABLED, true);
+            data.getOrCreate(x -> x.CUSTOM).data.set(CustomItemData.KEYS.SALVAGING_DISABLED, true);
         }
-
 
         return data;
 

@@ -1,11 +1,11 @@
 package com.robertx22.mine_and_slash.gui;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.ModRange;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.SocketData;
-import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -70,7 +70,7 @@ public class SocketTooltip implements ClientTooltipComponent {
     }
 
     public static Component getSocketDesc(ItemStack socketed, SocketData gemStack) {
-        return gemStack.GetTooltipString(new StatRangeInfo(ModRange.always(gemStack.p)), StackSaving.GEARS.loadFrom(socketed), false).get(0);
+        return gemStack.GetTooltipString(new StatRangeInfo(ModRange.always(gemStack.p)), ExileStack.of(socketed), false).get(0);
 
     }
 

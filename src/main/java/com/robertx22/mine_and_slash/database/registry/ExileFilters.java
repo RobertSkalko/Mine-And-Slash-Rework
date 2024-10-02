@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 
 public class ExileFilters {
 
-    public static Predicate<Affix> ofAffixType(Affix.Type type) {
+    public static Predicate<Affix> ofAffixType(Affix.AffixSlot type) {
         return x -> x.type == type;
     }
 

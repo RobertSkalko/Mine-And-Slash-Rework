@@ -83,7 +83,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 
 public class EntityData implements ICap, INeededForClient {
@@ -140,7 +139,26 @@ public class EntityData implements ICap, INeededForClient {
     private static final String MAP_MOB = "map_mob";
 
 
-    public DirtySync sync = new DirtySync("endata sync", x -> syncData());
+    private transient int dontSyncTicks = 0;
+
+    public DirtySync sync = new DirtySync("endata sync", x -> syncData()) {
+        @Override
+        public void onSynced(Entity p) {
+            super.onSynced(p);
+            if (entity instanceof Player == false) {
+                dontSyncTicks = 20; // let's not sync mob data too often
+            }
+        }
+
+        @Override
+        public void onTickTrySync(Entity p) {
+            if (dontSyncTicks-- > 0) {
+                return;
+            }
+            super.onTickTrySync(p);
+        }
+
+    };
     // public DirtySync gear = new DirtySync("gear_recalc", x -> recalcStats());
 
 
@@ -176,7 +194,6 @@ public class EntityData implements ICap, INeededForClient {
     public boolean didStatCalcThisTickForPlayer = false;
 
     private BossData boss = null;
-
 
     public BossData getBossData() {
         return boss;
@@ -222,7 +239,7 @@ public class EntityData implements ICap, INeededForClient {
             }
             LoadSave.Save(statusEffects, nbt, STATUSES);
 
-            if (unit != null) {
+            if (unit != null && entity instanceof Player) {
                 UnitNbt.Save(nbt, unit);
             }
         } catch (Exception e) {
@@ -255,7 +272,9 @@ public class EntityData implements ICap, INeededForClient {
 
             this.statusEffects = loadOrBlank(EntityStatusEffectsData.class, new EntityStatusEffectsData(), nbt, STATUSES, new EntityStatusEffectsData());
 
-            this.unit = UnitNbt.Load(nbt);
+            if (entity instanceof Player) {
+                this.unit = UnitNbt.Load(nbt);
+            }
             if (this.unit == null) {
                 this.unit = new Unit();
             }
@@ -514,10 +533,9 @@ public class EntityData implements ICap, INeededForClient {
         if (entity instanceof Player p) {
             Packets.sendToClient(p, new EntityUnitPacket(p));
         } else {
-            if (!Unit.shouldSendUpdatePackets(entity)) {
-                return;
+            if (Unit.shouldSendUpdatePackets(entity)) {
+                Packets.sendToTracking(Unit.getUpdatePacketFor(entity, this), entity);
             }
-            Packets.sendToTracking(Unit.getUpdatePacketFor(entity, this), entity);
         }
     }
 
@@ -597,25 +615,28 @@ public class EntityData implements ICap, INeededForClient {
             return;
         }
 
+        int oldhp = this.maxHealth;
 
         //Watch watch = new Watch();
         this.unit = new Unit();
 
         var stats = StatCalculation.getStatsWithoutSuppGems(entity, this);
 
-        StatCalculation.calc(unit, stats, entity, -1);
+
+        StatCalculation.calc(unit, stats, entity, null, -1);
 
         if (entity instanceof Player p) {
             this.didStatCalcThisTickForPlayer = true;
 
-
             var data = Load.player(p);
-            var spells = data.spellCastingData.getAllHotbarSpells().stream().map(x -> x.getSpell()).collect(Collectors.toList());
-            data.setSpellUnitsDirty(spells);
+
+            data.cachedStats.allStatsWithoutSuppGems = stats;
+
+            data.setSpellUnitsDirty();
 
             Load.player(p).spellCastingData.calcSpellLevels(unit);
             Load.player(p).getSkillGemInventory().removeAurasIfCantWear(p);
-          
+
             UnequipGear.check(p);
 
             data.getSkillGemInventory().removeSupportGemsIfTooMany(p);
@@ -623,12 +644,15 @@ public class EntityData implements ICap, INeededForClient {
 
             this.maxCharges.calc(this.unit.getStats());
 
+            this.sync.setDirty();
+
+        } else {
+            if (true || oldhp != maxHealth) {
+                this.sync.setDirty();
+            }
         }
 
-
-        this.sync.setDirty();
         //watch.print("stat calc for " + (entity instanceof PlayerEntity ? "player " : "mob "));
-
 
     }
 

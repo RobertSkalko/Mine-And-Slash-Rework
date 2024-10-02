@@ -17,6 +17,9 @@ import com.robertx22.mine_and_slash.aoe_data.database.stats.Stats;
 import com.robertx22.mine_and_slash.characters.PlayerStats;
 import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.ExileCurrencies;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemMods;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.ItemReqs;
 import com.robertx22.mine_and_slash.database.data.league.LeagueMechanics;
 import com.robertx22.mine_and_slash.database.data.loot_chest.base.LootChests;
 import com.robertx22.mine_and_slash.database.data.profession.ProfessionEvents;
@@ -25,10 +28,10 @@ import com.robertx22.mine_and_slash.database.data.spells.map_fields.MapField;
 import com.robertx22.mine_and_slash.database.data.stats.layers.StatLayers;
 import com.robertx22.mine_and_slash.database.data.stats.priority.StatPriority;
 import com.robertx22.mine_and_slash.database.data.stats.types.special.SpecialStats;
-import com.robertx22.mine_and_slash.database.registrators.Currencies;
 import com.robertx22.mine_and_slash.database.registry.ExileDBInit;
 import com.robertx22.mine_and_slash.gui.SocketTooltip;
 import com.robertx22.mine_and_slash.maps.MapEvents;
+import com.robertx22.mine_and_slash.mixin_ducks.tooltip.ItemTooltipsRegister;
 import com.robertx22.mine_and_slash.mmorpg.event_registers.CommonEvents;
 import com.robertx22.mine_and_slash.mmorpg.init.ClientInit;
 import com.robertx22.mine_and_slash.mmorpg.registers.client.KeybindsRegister;
@@ -65,13 +68,14 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.function.Consumer;
 
 @Mod(SlashRef.MODID)
 public class MMORPG {
 
     // DISABLE WHEN PUBLIC BUILD
-    public static boolean RUN_DEV_TOOLS = false;
+    public static boolean RUN_DEV_TOOLS = true;
 
     public static String formatNumber(float num) {
         if (num < 10) {
@@ -80,6 +84,12 @@ public class MMORPG {
             return ((int) num) + "";
         }
     }
+
+    // todo test
+    public static String formatBigNumber(float num) {
+        return NumberFormat.getInstance().format(num);
+    }
+
 
     public static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.00");
 
@@ -96,6 +106,7 @@ public class MMORPG {
     );
 
     public MMORPG() {
+
 
         Watch watch = new Watch();
 
@@ -152,6 +163,8 @@ public class MMORPG {
         bus.addListener(this::commonSetupEvent);
         bus.addListener(this::interMod);
 
+        ItemTooltipsRegister.init();
+
         CurioEvents.reg();
 
 
@@ -171,6 +184,8 @@ public class MMORPG {
         EffectCondition.init();
 
         SlashItemTags.init();
+
+        initLazyExileRegistries();
 
         ExileDBInit.registerAllItems(); // after config registerAll
 
@@ -203,6 +218,14 @@ public class MMORPG {
 
     }
 
+    static void initLazyExileRegistries() {
+
+        ItemReqs.INSTANCE.init();
+        ItemMods.INSTANCE.init();
+        ExileCurrencies.INSTANCE.init();
+
+    }
+
 
     public void interMod(InterModEnqueueEvent event) {
 
@@ -214,8 +237,6 @@ public class MMORPG {
 
     public void commonSetupEvent(FMLCommonSetupEvent event) {
 
-        new Currencies().registerAll();
-
         GeneratedData.addAllObjectsToGenerate();
 
         BossSpells.init();
@@ -225,7 +246,6 @@ public class MMORPG {
         new ProphecyStarts().registerAll();
 
         SlashCapabilities.register();
-
 
     }
 

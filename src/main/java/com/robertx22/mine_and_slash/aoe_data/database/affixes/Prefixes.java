@@ -57,7 +57,7 @@ public class Prefixes implements IRandomDefault<Affix>, ExileRegistryInit {
     public List<Affix> All() {
         return ExileDB.Affixes()
                 .getWrapped()
-                .of(ExileFilters.ofAffixType(Affix.Type.prefix))
+                .of(ExileFilters.ofAffixType(Affix.AffixSlot.prefix))
                 .list;
     }
 

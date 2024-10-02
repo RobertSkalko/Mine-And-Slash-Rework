@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.aoe_data.database.mob_affixes;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import com.robertx22.mine_and_slash.aoe_data.database.ailments.Ailments;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.ResourceStats;
 import com.robertx22.mine_and_slash.database.data.StatMod;
@@ -13,7 +14,6 @@ import com.robertx22.mine_and_slash.database.data.stats.types.misc.ExtraMobDrops
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.health.Health;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.ChatFormatting;
 
 import static com.robertx22.mine_and_slash.uncommon.enumclasses.Elements.*;
@@ -25,7 +25,7 @@ public class MobAffixes implements ExileRegistryInit {
     public static String FULL_LIGHTNING = "full_fire";
 
     static void eleAffix(String name, Elements element) {
-        new MobAffix(element.guidName + "_mob_affix", name, element.format, Affix.Type.prefix)
+        new MobAffix(element.guidName + "_mob_affix", name, element.format, Affix.AffixSlot.prefix)
                 .setMods(
                         new StatMod(25, 25, new PhysicalToElement(element)),
                         new StatMod(100, 100, new BonusPhysicalAsElemental(element), ModType.FLAT),
@@ -35,7 +35,7 @@ public class MobAffixes implements ExileRegistryInit {
     }
 
     static void fullEle(Elements element) {
-        new MobAffix("full_" + element.guidName, "Of " + element.dmgName, element.format, Affix.Type.suffix)
+        new MobAffix("full_" + element.guidName, "Of " + element.dmgName, element.format, Affix.AffixSlot.suffix)
                 .setMods(
                         new StatMod(100, 100, new PhysicalToElement(element)),
                         new StatMod(50, 50, new BonusPhysicalAsElemental(element), ModType.FLAT),
@@ -56,7 +56,7 @@ public class MobAffixes implements ExileRegistryInit {
         eleAffix("Poisoned", Shadow);
 
 
-        new MobAffix("winter", "Winter Lord", Cold.format, Affix.Type.prefix)
+        new MobAffix("winter", "Winter Lord", Cold.format, Affix.AffixSlot.prefix)
                 .setMods(
                         new StatMod(15, 15, Health.getInstance()),
                         new StatMod(5, 5, new AilmentChance(Ailments.FREEZE)),
@@ -67,7 +67,7 @@ public class MobAffixes implements ExileRegistryInit {
                 .setWeight(250)
                 .addToSerializables();
 
-        new MobAffix("fire_lord", "Fire Lord", Fire.format, Affix.Type.prefix)
+        new MobAffix("fire_lord", "Fire Lord", Fire.format, Affix.AffixSlot.prefix)
                 .setMods(
                         new StatMod(15, 15, Health.getInstance()),
                         new StatMod(5, 5, new AilmentChance(Ailments.BURN)),
@@ -78,7 +78,7 @@ public class MobAffixes implements ExileRegistryInit {
                 .setWeight(250)
                 .addToSerializables();
 
-        new MobAffix("nature_lord", "Chaos Lord", Shadow.format, Affix.Type.prefix)
+        new MobAffix("nature_lord", "Chaos Lord", Shadow.format, Affix.AffixSlot.prefix)
                 .setMods(
                         new StatMod(15, 15, Health.getInstance()),
                         new StatMod(5, 5, new AilmentChance(Ailments.POISON)),
@@ -89,7 +89,7 @@ public class MobAffixes implements ExileRegistryInit {
                 .setWeight(250)
                 .addToSerializables();
 
-        new MobAffix("phys_lord", "Fighter Lord", ChatFormatting.GRAY, Affix.Type.prefix)
+        new MobAffix("phys_lord", "Fighter Lord", ChatFormatting.GRAY, Affix.AffixSlot.prefix)
                 .setMods(
                         new StatMod(15, 15, Health.getInstance()),
                         new StatMod(100, 100, new BonusPhysicalAsElemental(Physical)),
@@ -97,7 +97,7 @@ public class MobAffixes implements ExileRegistryInit {
                 .setWeight(250)
                 .addToSerializables();
 
-        new MobAffix("vampire", "Vampriric", ChatFormatting.RED, Affix.Type.prefix)
+        new MobAffix("vampire", "Vampriric", ChatFormatting.RED, Affix.AffixSlot.prefix)
                 .setMods(new StatMod(25, 25, Health.getInstance()),
                         new StatMod(15, 15, ResourceStats.LIFESTEAL.get()),
                         new StatMod(15, 15, ExtraMobDropsStat.getInstance()))

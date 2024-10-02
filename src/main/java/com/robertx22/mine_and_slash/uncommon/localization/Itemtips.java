@@ -82,7 +82,7 @@ public enum Itemtips implements IAutoLocName {
     SOUL_CLEANER_USAGE_AND_WARNING("Click on items to remove their soul.\nThe item remains but the stats will be deleted."),
     SOCKET_EXTRACTOR_USAGE("Extracts a Gem from the Item"),
     INFUSED("Infused(%1$s/10): "),
-    OUTCOME_TIP("%1$s, Chance: %2$s", "for currency tooltips"),
+    OUTCOME_TIP("%1$s - %2$s", "for currency tooltips"),
     Exp("Bonus Exp: %1$s%%"),
     Loot("Bonus Loot: %1$s%%"),
     PREFIX_STATS("Prefix Stats: "),

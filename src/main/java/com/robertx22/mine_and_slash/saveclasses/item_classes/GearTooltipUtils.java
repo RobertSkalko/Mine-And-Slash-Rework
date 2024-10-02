@@ -4,11 +4,15 @@ import com.google.common.collect.ImmutableList;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.energy.Energy;
+import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
 import com.robertx22.mine_and_slash.gui.texts.IgnoreNullList;
 import com.robertx22.mine_and_slash.gui.texts.StatCategory;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.*;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.LeagueBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.gearblocks.DurabilityBlock;
+import com.robertx22.mine_and_slash.itemstack.CustomItemData;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IGearPartTooltip;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.ModRange;
@@ -42,11 +46,14 @@ public class GearTooltipUtils {
         if (gear.GetBaseGearType() == null) {
             return;
         }
+
+        ExileStack exStack = ExileStack.of(stack);
+
         StatRangeInfo info = new StatRangeInfo(ModRange.hide());
         tooltip.clear();
 
-        List<Component> release = new ExileTooltips()
-                .accept(new NameBlock(gear.GetDisplayName(stack)))
+        var etip = new ExileTooltips()
+                .accept(new NameBlock(gear.GetDisplayName(exStack)))
                 .accept(new RarityBlock(gear.getRarity()))
                 .accept(new RequirementBlock()
                         .setStatRequirement(gear.getRequirement())
@@ -92,7 +99,7 @@ public class GearTooltipUtils {
                         this.uniqueStatsData = gearItemData.uniqueStats;
 
                         if (baseStatsData != null) {
-                            list.addAll(baseStatsData.GetTooltipString(tinfo, gearItemData));
+                            list.addAll(baseStatsData.GetTooltipString(tinfo, exStack));
                             list.add(EMPTY_LINE);
                         }
 
@@ -105,12 +112,12 @@ public class GearTooltipUtils {
 
                             List<ExactStatData> stats = new ArrayList<>();
 
-                            stats.addAll(implicitStatsData.GetAllStats(gearItemData));
+                            stats.addAll(implicitStatsData.GetAllStats(exStack));
 
-                            gearAffixesData.getAllAffixesAndSockets().forEach(x -> stats.addAll(x.GetAllStats(gearItemData)));
+                            gearAffixesData.getAllAffixesAndSockets().forEach(x -> stats.addAll(x.GetAllStats(exStack)));
 
                             if (uniqueStatsData != null) {
-                                stats.addAll(uniqueStatsData.GetAllStats(gearItemData));
+                                stats.addAll(uniqueStatsData.GetAllStats(exStack));
                             }
 
                             Map<Boolean, List<ExactStatData>> map = stats.stream().collect(Collectors.groupingBy(x -> x.getStat().is_long));
@@ -181,9 +188,9 @@ public class GearTooltipUtils {
                             List<Component> prefixComps = new ArrayList<>();
                             List<Component> corComps = new ArrayList<>();
                             List<Component> suffixComps = new ArrayList<>();
-                            impComps = implicitStatsData.GetTooltipString(tinfo, gearItemData);
+                            impComps = implicitStatsData.GetTooltipString(tinfo, exStack);
                             if (uniqueStatsData != null)
-                                uniComps = uniqueStatsData.GetTooltipString(tinfo, gearItemData);
+                                uniComps = uniqueStatsData.GetTooltipString(tinfo, exStack);
                             var color = ChatFormatting.BLUE;
                             if (!gearAffixesData.getPreStatsWithCtx(gearItemData, tinfo).isEmpty()) {
                                 prefixComps.add(Itemtips.PREFIX_STATS.locName().withStyle(color));
@@ -226,7 +233,7 @@ public class GearTooltipUtils {
                         IgnoreNullList<IGearPartTooltip> list3 = IgnoreNullList.of(gearSocketsData, gearEnchantData);
                         ListIterator<IGearPartTooltip> iGearPartTooltipListIterator = list3.listIterator();
                         while (iGearPartTooltipListIterator.hasNext()) {
-                            list.addAll(iGearPartTooltipListIterator.next().GetTooltipString(tinfo, gearItemData));
+                            list.addAll(iGearPartTooltipListIterator.next().GetTooltipString(tinfo, exStack));
                             if (iGearPartTooltipListIterator.hasNext()) {
                                 list.add(EMPTY_LINE);
                             }
@@ -237,8 +244,8 @@ public class GearTooltipUtils {
                 })
                 .accept(new AdditionalBlock(
                         ImmutableList.of(
-                                gear.isCorrupted() ? Component.literal("").append(Itemtips.POTENTIAL.locName(gear.getPotentialNumber()).withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.STRIKETHROUGH)).append(Component.literal(" ")).append(Words.Corrupted.locName().withStyle(ChatFormatting.RED)) : Itemtips.POTENTIAL.locName(gear.getPotentialNumber()).withStyle(ChatFormatting.GOLD),
-                                Itemtips.QUALITY.locName(gear.getQuality()).withStyle(ChatFormatting.GOLD)
+                                exStack.isCorrupted() ? Component.literal("").append(Itemtips.POTENTIAL.locName(exStack.POTENTIAL.getOrCreate().potential).withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.STRIKETHROUGH)).append(Component.literal(" ")).append(Words.Corrupted.locName().withStyle(ChatFormatting.RED)) : Itemtips.POTENTIAL.locName(exStack.POTENTIAL.getOrCreate().potential).withStyle(ChatFormatting.GOLD),
+                                Itemtips.QUALITY.locName(exStack.CUSTOM.getOrCreate().data.get(CustomItemData.KEYS.QUALITY)).withStyle(ChatFormatting.GOLD)
                         )
                 ).showWhen(() -> info.hasShiftDown))
                 .accept(new AdditionalBlock(() -> {
@@ -252,13 +259,17 @@ public class GearTooltipUtils {
                             return ImmutableList.of(Itemtips.ITEM_TYPE.locName(gear.GetBaseGearType().locName().withStyle(ChatFormatting.BLUE)),
                                     Words.TAGS.locName().append(TooltipUtils.joinMutableComps(gear.GetBaseGearType().getTags().getTags(SlotTag.SERIALIZER).stream().map(x -> ((SlotTag) x).locName()).toList().iterator(), Gui.COMMA_SEPARATOR.locName())));
                         }).showWhen(() -> info.hasShiftDown)
-                )
-                .accept(new SalvageBlock(gear))
-                .accept(new OperationTipBlock().setAll())
-                .accept(new DurabilityBlock(stack))
-                .release();
+                );
 
-        tooltip.addAll(release);
+        if (gear.isUnique() && !gear.uniqueStats.getUnique(exStack).league.isEmpty()) {
+            etip.accept(new LeagueBlock(ExileDB.LeagueMechanics().get(gear.uniqueStats.getUnique(exStack).league)));
+        }
+
+        etip.accept(new SalvageBlock(gear))
+                .accept(new OperationTipBlock().setAll())
+                .accept(new DurabilityBlock(stack));
+
+        tooltip.addAll(etip.release());
 
 
     }

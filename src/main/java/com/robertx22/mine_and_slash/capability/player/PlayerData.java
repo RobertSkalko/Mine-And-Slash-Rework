@@ -131,7 +131,6 @@ public class PlayerData implements ICap {
 
     public List<String> aurasOn = new ArrayList<>();
 
-    public String name = "";
 
     public int bonusTalents = 0;
 
@@ -178,7 +177,6 @@ public class PlayerData implements ICap {
         nbt.put(AURAS, auraInv.createTag());
         nbt.put(JEWELS, jewelsInv.createTag());
 
-        nbt.putString(NAME, name);
         nbt.putInt(BONUS_TALENTS, bonusTalents);
         nbt.putInt(OMENS_FILLED, omensFilled);
 
@@ -210,7 +208,6 @@ public class PlayerData implements ICap {
         auraInv.fromTag(nbt.getList(AURAS, 10)); // todo
         jewelsInv.fromTag(nbt.getList(JEWELS, 10)); // todo
 
-        this.name = nbt.getString(NAME);
 
         this.bonusTalents = nbt.getInt(BONUS_TALENTS);
         if (bonusTalents < 0) {
@@ -225,7 +222,6 @@ public class PlayerData implements ICap {
     }
 
     transient HashMap<String, Unit> spellUnits = new HashMap<>();
-    transient HashMap<String, Boolean> dirtyUnits = new HashMap<>();
 
 
     // todo cache this maybe too
@@ -256,9 +252,14 @@ public class PlayerData implements ICap {
     }
 
     public Unit getSpellUnitStats(Player p, Spell spell) {
-        if (dirtyUnits.getOrDefault(spell.GUID(), false)) {
-            spellUnits.put(spell.GUID(), calcSpellUnit(spell));
-            dirtyUnits.put(spell.GUID(), false);
+        
+        if (!spellUnits.containsKey(spell.GUID())) {
+            int key = keyOf(spell);
+            if (spell.config.usesSupportGemsFromAnotherSpell()) {
+                key = keyOf(spell.config.getSpellUsedForSuppGems());
+            }
+            var unit = calcSpellUnit(spell, key);
+            spellUnits.put(spell.GUID(), unit);
         }
         if (!spellUnits.containsKey(spell.GUID())) {
             return Load.Unit(p).getUnit();
@@ -266,16 +267,18 @@ public class PlayerData implements ICap {
         return spellUnits.get(spell.GUID());
     }
 
-    public void setSpellUnitsDirty(List<Spell> spells) {
-        for (Spell spell : spells) {
-            dirtyUnits.put(spell.GUID(), true);
-        }
+    public void setSpellUnitsDirty() {
+        spellUnits = new HashMap<>();
     }
 
-    private Unit calcSpellUnit(Spell spell) {
+    public int keyOf(Spell spell) {
         int key = this.spellCastingData.keyOfSpell(spell.GUID());
+        return key;
+    }
+
+    private Unit calcSpellUnit(Spell spell, int key) {
         var unit = new Unit();
-        StatCalculation.calc(unit, StatCalculation.getStatsWithoutSuppGems(this.player, Load.Unit(player)), player, key);
+        StatCalculation.calc(unit, this.cachedStats.allStatsWithoutSuppGems, player, spell, key);
         return unit;
     }
 

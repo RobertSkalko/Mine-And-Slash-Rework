@@ -1,5 +1,11 @@
 "death.attack.mmorpg": "%1$s was slain by %2$s",
 
+"_comment": "LOOT BEAMS COMPAT",
+"uncommon.item": "Uncommon",
+"runed": "Runed",
+"mythic": "Mythic",
+"legendary": "Legendary",
+
 "block.mmorpg.harvest.purple": "Chaotic Seeds",
 "block.mmorpg.harvest.green": "Primal Seeds",
 "block.mmorpg.harvest.blue": "Lucid Seeds",

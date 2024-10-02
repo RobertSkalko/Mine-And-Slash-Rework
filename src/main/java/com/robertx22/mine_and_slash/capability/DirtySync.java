@@ -32,10 +32,16 @@ public class DirtySync {
             dirty = false;
             sync.accept(p);
 
+            onSynced(p);
+
             if (p instanceof Player pl) {
                 //  pl.sendSystemMessage(Component.literal(id));
             }
         }
+    }
+
+    public void onSynced(Entity p) {
+
     }
 
 }

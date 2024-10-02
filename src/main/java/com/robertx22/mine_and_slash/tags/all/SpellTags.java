@@ -26,7 +26,6 @@ public class SpellTags {
     public static SpellTag chaining = SpellTag.of("chaining");
     public static SpellTag golem = SpellTag.of("golem");
     public static SpellTag area = SpellTag.of("area");
-    public static SpellTag staff_spell = SpellTag.of("staff_spell");
     public static SpellTag totem = SpellTag.of("totem");
     public static SpellTag ranged = SpellTag.of("ranged");
     public static SpellTag FIRE = SpellTag.of("fire");

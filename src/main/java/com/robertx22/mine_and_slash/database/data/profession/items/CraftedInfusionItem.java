@@ -3,7 +3,7 @@ package com.robertx22.mine_and_slash.database.data.profession.items;
 import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.mine_and_slash.database.data.affixes.Affix;
 import com.robertx22.mine_and_slash.database.data.currency.IItemAsCurrency;
-import com.robertx22.mine_and_slash.database.data.currency.base.Currency;
+import com.robertx22.mine_and_slash.database.data.currency.base.CodeCurrency;
 import com.robertx22.mine_and_slash.database.data.currency.base.GearCurrency;
 import com.robertx22.mine_and_slash.database.data.currency.base.GearOutcome;
 import com.robertx22.mine_and_slash.database.data.currency.loc_reqs.LocReqContext;
@@ -22,11 +22,11 @@ import com.robertx22.mine_and_slash.gui.texts.textblocks.RequirementBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.WorksOnBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.ProfessionDropSourceBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.usableitemblocks.UsageBlock;
+import com.robertx22.mine_and_slash.itemstack.CustomItemData;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.mmorpg.UNICODE;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.GearInfusionData;
-import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.tags.all.SlotTags;
-import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IRarityItem;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
@@ -92,7 +92,7 @@ public class CraftedInfusionItem extends AutoItem implements IRarityItem, IItemA
     }
 
     @Override
-    public Currency currencyEffect(ItemStack stack) {
+    public CodeCurrency currencyEffect(ItemStack stack) {
         return new GearCurrency() {
             @Override
             public List<GearOutcome> getOutcomes() {
@@ -109,29 +109,28 @@ public class CraftedInfusionItem extends AutoItem implements IRarityItem, IItemA
                             }
 
                             @Override
-                            public ItemStack modify(LocReqContext ctx, GearItemData gear, ItemStack stack) {
+                            public void modify(LocReqContext ctx) {
 
-                                GearInfusionData en = new GearInfusionData();
+                                ctx.stack.GEAR.edit(gear -> {
 
-                                if (en.isEmpty()) {
-                                    Affix affix = ExileDB.Affixes().getFilterWrapped(x -> {
-                                        return x.type == Affix.Type.enchant && x.requirements.satisfiesAllRequirements(new GearRequestedFor(gear)) && x.getAllTagReq().contains(SlotTags.enchantment.GUID());
-                                    }).random();
+                                    GearInfusionData en = new GearInfusionData();
 
-                                    en.en = affix.GUID();
-                                }
+                                    if (en.isEmpty()) {
+                                        Affix affix = ExileDB.Affixes().getFilterWrapped(x -> {
+                                            return x.type == Affix.AffixSlot.enchant && x.requirements.satisfiesAllRequirements(new GearRequestedFor(gear)) && x.getAllTagReq().contains(SlotTags.enchantment.GUID());
+                                        }).random();
 
-                                en.rar = rar;
+                                        en.en = affix.GUID();
+                                    }
+
+                                    en.rar = rar;
 
 
-                                gear.ench = en;
+                                    gear.ench = en;
 
-                                int num = gear.data.get(GearItemData.KEYS.ENCHANT_TIMES) + 1;
-                                gear.data.set(GearItemData.KEYS.ENCHANT_TIMES, num);
+                                    ctx.stack.CUSTOM.edit(x -> CustomItemData.KEYS.ENCHANT_TIMES.add(x, 1));
 
-                                StackSaving.GEARS.saveTo(stack, gear);
-
-                                return stack;
+                                });
                             }
 
                             @Override
@@ -152,12 +151,8 @@ public class CraftedInfusionItem extends AutoItem implements IRarityItem, IItemA
                             }
 
                             @Override
-                            public ItemStack modify(LocReqContext ctx, GearItemData gear, ItemStack stack) {
-                                int num = gear.data.get(GearItemData.KEYS.ENCHANT_TIMES) + 1;
-                                gear.data.set(GearItemData.KEYS.ENCHANT_TIMES, num);
-                                StackSaving.GEARS.saveTo(stack, gear);
-
-                                return stack;
+                            public void modify(LocReqContext ctx) {
+                                ctx.stack.CUSTOM.edit(x -> CustomItemData.KEYS.ENCHANT_TIMES.add(x, 1));
                             }
 
                             @Override
@@ -175,9 +170,11 @@ public class CraftedInfusionItem extends AutoItem implements IRarityItem, IItemA
 
             // todo turn this into a result with chat messages why it doesnt work
             @Override
-            public ExplainedResult canBeModified(GearItemData data) {
+            public ExplainedResult canBeModified(ExileStack stack) {
 
-                SkillItemTier tier = LeveledItem.getTier(stack);
+                var data = stack.GEAR.get();
+
+                SkillItemTier tier = LeveledItem.getTier(stack.getStack());
 
                 if (!tier.levelRange.isLevelInRange(data.lvl)) {
                     return ExplainedResult.failure(Chats.NOT_CORRECT_TIER_LEVEL.locName());
@@ -198,7 +195,7 @@ public class CraftedInfusionItem extends AutoItem implements IRarityItem, IItemA
                 }
 
 
-                if (data.data.get(GearItemData.KEYS.ENCHANT_TIMES) > 9) {
+                if (stack.CUSTOM.getOrCreate().data.get(CustomItemData.KEYS.ENCHANT_TIMES) > 9) {
                     return ExplainedResult.failure(Chats.THIS_ITEM_CANT_BE_USED_MORE_THAN_X_TIMES.locName(10));
                 }
 

@@ -1,5 +1,5 @@
 package com.robertx22.mine_and_slash.database.data.currency.base;
 
 public enum ModifyResult {
-    BREAK, SUCCESS, NONE
+    BREAK, ERROR, SUCCESS, NONE
 }

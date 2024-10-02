@@ -4,6 +4,7 @@ import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.database.data.profession.all.Professions;
 import com.robertx22.mine_and_slash.database.data.profession.screen.CraftingStationMenu;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.mmorpg.ModErrors;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.SlashBlockEntities;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SlashItems;
@@ -321,6 +322,8 @@ public class ProfessionBlockEntity extends BlockEntity {
         if (getProfession().GUID().equals(Professions.SALVAGING)) {
             for (ItemStack stack : this.getMats()) {
 
+                ExileStack ex = ExileStack.of(stack);
+
                 ICommonDataItem data = ICommonDataItem.load(stack);
                 ISalvagable sal = ISalvagable.load(stack);
                 if (data != null && sal != null) {
@@ -329,7 +332,7 @@ public class ProfessionBlockEntity extends BlockEntity {
                         float multi = data.getRarity().item_value_multi;
 
                         List<ItemStack> output = new ArrayList<>();
-                        output.addAll(sal.getSalvageResult(stack));
+                        output.addAll(sal.getSalvageResult(ex));
                         output.addAll(getProfession().getAllDrops(p, ownerLvl, data.getLevel(), multi));
 
                         tryPutToOutputs(output);

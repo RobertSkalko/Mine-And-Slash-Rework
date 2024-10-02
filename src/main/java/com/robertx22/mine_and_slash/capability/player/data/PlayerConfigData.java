@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.capability.player.data;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.ICommonDataItem;
@@ -86,6 +87,9 @@ public class PlayerConfigData {
         // todo test this
         public boolean trySalvageOnPickup(Player player, ItemStack stack) {
 
+
+            ExileStack ex = ExileStack.of(stack);
+
             if (stack.isEnchanted()) {
                 return false; // we don't want to auto salvage gear that is likely to have been worn or important
             }
@@ -110,7 +114,7 @@ public class PlayerConfigData {
                 if (doSalvage) {
                     SoundUtils.playSound(player, SoundEvents.EXPERIENCE_ORB_PICKUP, 0.75F, 1.25F);
                     stack.shrink(100);
-                    data.getSalvageResult(stack).forEach(e -> {
+                    data.getSalvageResult(ex).forEach(e -> {
                         Backpacks backpacks = Load.backpacks(player).getBackpacks();
                         //copy tryAutoPickup() but without playing sound
                         if (player.getInventory().countItem(SlashItems.MASTER_BAG.get()) >= 1) {

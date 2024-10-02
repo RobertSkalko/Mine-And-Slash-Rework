@@ -1,5 +1,7 @@
 package com.robertx22.mine_and_slash.saveclasses.unit;
 
+import com.robertx22.library_of_exile.main.MyPacket;
+import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanceConfig;
@@ -15,8 +17,6 @@ import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.EfficientMobUnitPacket;
-import com.robertx22.library_of_exile.main.MyPacket;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobCategory;
@@ -34,7 +34,7 @@ public class Unit {
 
     private StatContainer stats = new StatContainer();
 
-  
+
     public void toNbt(CompoundTag main) {
         CompoundTag nbt = new CompoundTag();
         int i = 0;
@@ -198,7 +198,9 @@ public class Unit {
 
     public static boolean shouldSendUpdatePackets(LivingEntity en) {
         if (ServerContainer.get().DONT_SYNC_DATA_OF_AMBIENT_MOBS.get()) {
-            return en.getType().getCategory() != MobCategory.AMBIENT && en.getType().getCategory() != MobCategory.WATER_AMBIENT;
+            if (en.getType().getCategory() == MobCategory.AMBIENT || en.getType().getCategory() == MobCategory.WATER_AMBIENT) {
+                return false;
+            }
         }
         return true;
     }

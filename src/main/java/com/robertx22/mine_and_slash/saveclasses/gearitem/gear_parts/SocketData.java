@@ -4,10 +4,10 @@ import com.robertx22.mine_and_slash.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.mine_and_slash.database.data.gems.Gem;
 import com.robertx22.mine_and_slash.database.data.runes.Rune;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IStatsContainer;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.StatRangeInfo;
-import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
@@ -40,7 +40,7 @@ public class SocketData implements IStatsContainer {
         return getRune() != null;
     }
 
-    public List<Component> GetTooltipString(StatRangeInfo info, GearItemData gear, boolean addplaceholder) {
+    public List<Component> GetTooltipString(StatRangeInfo info, ExileStack gear, boolean addplaceholder) {
         List<Component> list = new ArrayList<Component>();
         GetAllStats(gear).forEach(x -> {
             String placeholder = addplaceholder ? "[SOCKET_PLACEHOLDER]" : " ";
@@ -82,7 +82,9 @@ public class SocketData implements IStatsContainer {
     }
 
     @Override
-    public List<ExactStatData> GetAllStats(GearItemData gear) {
+    public List<ExactStatData> GetAllStats(ExileStack stack) {
+        var gear = stack.GEAR.get();
+
         SlotFamily fam = gear.GetBaseGearType()
                 .family();
 

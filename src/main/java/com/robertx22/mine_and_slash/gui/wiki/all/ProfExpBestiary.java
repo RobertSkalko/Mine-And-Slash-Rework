@@ -33,7 +33,7 @@ public class ProfExpBestiary extends BestiaryGroup {
                     tip.add(TooltipUtils.tier(en.getKey()));
                     tip.add(Component.literal(so.id));
 
-                    list.add(new BestiaryEntry.Tooltip(Items.PAPER.getDefaultInstance(), so.id, tip));
+                    list.add(new BestiaryEntry.Tooltip(so, Items.PAPER.getDefaultInstance(), so.id, tip));
                 }
             }
 

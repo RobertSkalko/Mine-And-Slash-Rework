@@ -7,6 +7,24 @@ import java.util.Locale;
 
 // to use a "%" here, do %% or '%'
 public enum Words implements IAutoLocName {
+    LEAGUE("League"),
+    AFFIXES("Affixes"),
+    AFFIX_TYPES("Affix Types"),
+    RUNE_COUNT("Rune Count"),
+    LOAD_CHAR_DESC("Loads this Character."),
+    CHAR_DELETE_CONFIRM("Are you SURE you want to delete this character? (%1$s)"),
+    DELETE("Delete"),
+    DELETE_DESC("Deletes the Character!\n\nWARNING, this can't be undone!"),
+    RENAME("Rename"),
+    RENAME_DESC("Renames the currently selected Character"),
+    NEW_CHARACTER("Create Character"),
+    NEW_CHARACTER_DESC("Creates New Character\n\nName Must be Unique"),
+
+    RANDOM_AFFIX("Random Affix"),
+    RANDOM_RARITY("Random Rarity"),
+    SPECIFIC_RARITY_AFFIX("%1$s Affix"),
+    LOWEST_RARITY_AFFIX("Lowest Rarity Affix"),
+
     PRIMARY_TIER_MAT("Primary Tier/Level Material"),
     PRIMARY_RARITY_MAT("Primary Rarity Material"),
     RARITIES("Rarities:"),
@@ -77,7 +95,7 @@ public enum Words implements IAutoLocName {
     AUTOMATIC_PVE("Players who enable this are considered Teamed up and Allies\n- Must be Nearby (Radius set by config)"),
     STAT_ORDER_TEST("Stat Order Test [Debug Option]\nThis runs a few tests when you attack something to be sure the stats are working in correct order and sends warning message if they don't. Only use when debugging stats. For example, crit chance should work before crit damage stat"),
     DMG_CONFLICT_CHECK("Mod Conflict Check [Debug Option]\n\nChecks if Mine and Slash damage has been overrided by another mod.\nSends a message to player if there's a problem.\n THIS IS A DEBUG OPTION"),
-    AGGRESIVE_SUMMONS("Your summons will now attack anything they guess is an enemy, and on longer need guidance from you.\n\nYou need to Re-Summon your minions for this to take effect"),
+    AGGRESIVE_SUMMONS("Your summons will now attack anything they guess is an enemy, and no longer need guidance from you.\n\nYou need to Re-Summon your minions for this to take effect"),
     EVERYONE_IS_ALLY("By default your spells only target your MNS team members and yourself.\n\nWith this enabled, your heals, buffs etc will target everyone, including possible enemies!"),
     DROP_MAP_CHEST_CONTENTS_ON_GROUND("When you loot chests in maps, should they drop their contents on the ground automatically? \n\nThis is helpful if you use the Master Backpack or other loot filtering mods like Sophisticated Backpacks."),
 
@@ -101,6 +119,8 @@ public enum Words implements IAutoLocName {
     Configs("Features"),
     POSSIBLE_DROPS("Possible Gear Drops:"),
     USABLE_ON("Usable On:"),
+    ALWAYS_DOES("Always does:"),
+    RANDOM_OUTCOME("Random Outcome:"),
     CAN_UPGRADE_MAP_RARITY("Can Upgrade Map Rarity\nThis Depends on Map level"),
     LASTS_SEC("Lasts %1$ss"),
     MOD_NAME("Mine and Slash"),
@@ -279,6 +299,7 @@ public enum Words implements IAutoLocName {
     UNSALVAGEABLE("Unsalvageable"),
 
     SALVAGEABLE("Salvageable"),
+    THIS_IS_NOT_A("This is not a %1$s"),
 
     UsableOn("Usable On: "),
 

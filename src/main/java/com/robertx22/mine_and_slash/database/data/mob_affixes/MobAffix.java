@@ -1,5 +1,8 @@
 package com.robertx22.mine_and_slash.database.data.mob_affixes;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.registry.IAutoGson;
+import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.mine_and_slash.database.data.StatMod;
 import com.robertx22.mine_and_slash.database.data.affixes.Affix;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
@@ -10,9 +13,6 @@ import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
-import com.robertx22.library_of_exile.registry.ExileRegistryType;
-import com.robertx22.library_of_exile.registry.IAutoGson;
-import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.LivingEntity;
 
@@ -22,7 +22,7 @@ import java.util.List;
 
 public class MobAffix implements JsonExileRegistry<MobAffix>, IAutoGson<MobAffix>, IAutoLocName, IStatCtx {
 
-    public Affix.Type type = Affix.Type.prefix;
+    public Affix.AffixSlot type = Affix.AffixSlot.prefix;
     List<StatMod> stats = new ArrayList<>();
     String id = "";
     int weight = 1000;
@@ -30,7 +30,7 @@ public class MobAffix implements JsonExileRegistry<MobAffix>, IAutoGson<MobAffix
     public ChatFormatting format;
     transient String locName;
 
-    public MobAffix(String id, String locName, ChatFormatting format, Affix.Type type) {
+    public MobAffix(String id, String locName, ChatFormatting format, Affix.AffixSlot type) {
         this.id = id;
         this.type = type;
         this.locName = locName;

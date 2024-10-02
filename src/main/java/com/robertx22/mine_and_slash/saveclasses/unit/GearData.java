@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.saveclasses.unit;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.database.data.gear_types.bases.BaseGearType;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.GearStatCtx;
@@ -28,25 +29,35 @@ public class GearData {
 
     public GearData(ItemStack stack, EquipmentSlot slot, EntityData data) {
         this.stack = stack;
+
         if (stack != null) {
             this.gear = StackSaving.GEARS.loadFrom(stack);
         }
 
+
         this.slot = slot;
 
-        if (gear != null) {
-            calcStatUtilization(data);
+        if (stack != null) {
+            var ex = ExileStack.of(stack);
 
-            List<ExactStatData> stats = gear.GetAllStats();
-            if (percentStatUtilization != 100) {
-                // multi stats like for offfhand weapons
-                float multi = percentStatUtilization / 100F;
-                stats.forEach(s -> s.multiplyBy(multi));
-            }
-            cachedStats.add(GearStatCtx.of(gear, stats));
-            var ench = gear.getEnchantCompatStats(stack);
-            if (ench != null) {
-                cachedStats.add(ench);
+            var gear = ex.GEAR.get();
+
+            if (gear != null) {
+                calcStatUtilization(data);
+
+                List<ExactStatData> stats = gear.GetAllStats(ex);
+                if (percentStatUtilization != 100) {
+                    // multi stats like for offfhand weapons
+                    float multi = percentStatUtilization / 100F;
+                    stats.forEach(s -> s.multiplyBy(multi));
+                }
+                cachedStats.add(GearStatCtx.of(gear, stats));
+                var ench = gear.getEnchantCompatStats(stack);
+                if (ench != null) {
+                    cachedStats.add(ench);
+                }
+            } else {
+                percentStatUtilization = 0;
             }
         } else {
             percentStatUtilization = 0;

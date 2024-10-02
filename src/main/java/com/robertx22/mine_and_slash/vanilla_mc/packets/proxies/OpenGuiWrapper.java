@@ -7,7 +7,7 @@ import com.robertx22.mine_and_slash.gui.card_picker.ICard;
 import com.robertx22.mine_and_slash.gui.card_picker.ProphecyCurseCard;
 import com.robertx22.mine_and_slash.gui.screens.character_screen.MainHubScreen;
 import com.robertx22.mine_and_slash.gui.wiki.BestiaryGroup;
-import com.robertx22.mine_and_slash.gui.wiki.BestiaryScreen;
+import com.robertx22.mine_and_slash.gui.wiki.reworked.NewWikiScreen;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
 import net.minecraft.world.entity.player.Player;
@@ -48,7 +48,7 @@ public class OpenGuiWrapper {
 
     public static void openWikiRunewords() {
 
-        var sc = new BestiaryScreen();
+        var sc = new NewWikiScreen();
         net.minecraft.client.Minecraft.getInstance().setScreen(sc);
         sc.setGroup(BestiaryGroup.RUNEWORD);
 

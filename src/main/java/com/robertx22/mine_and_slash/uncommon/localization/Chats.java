@@ -6,6 +6,18 @@ import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
 import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
+    NAME_TOO_LONG("Name can't be longer than 20 letters"),
+    NAME_EMPTY("Name can't be empty"),
+    NAME_SAME("Name must be unique and not used by other characters."),
+
+
+    CREATE_ERROR_NAME("Not a valid character name"),
+    CREATE_ERROR_CHAR_LIMIT("You already have a Maximum amount of Characters allowed."),
+
+    CANT_DEL_CURRENT_CHAT("You can't Delete a Character you're currently playing."),
+    CANT_CHANGE_CHAR_IN_MAP("You can't do that while inside an Adventure Map"),
+    CANT_CHANGE_CHAR_IN_COMBAT("You can't do that while in-Combat"),
+    CANT_LOAD_CURRENT_CHAT("You're already Playing this character."),
     NOT_MEET_MAP_REQ_FIRST_LINE("You haven't met the map requirement: "),
     NOT_MEET_MAP_REQ("%1$s: %2$s/%3$s"),
     PROPHECIES_GUIDE("1) Kill Monsters while Cursed to gain Prophecy Coins\n\n2) You can Buy Rewards in this GUI\n\n3) The More curses you accept, the more coins you will earn.\n\nCoins earned in Low-level maps won't work in High level maps."),
@@ -38,7 +50,7 @@ public enum Chats implements IAutoLocName {
     SOULLESS_GEAR_INFO("This Gear Lacks a Soul\nSouls contain Mine and Slash Stats"),
     SOULLESS_GEAR_MORE_INFO("Souls Are Crafted with MNS Professions or Drop from Mobs"),
 
-    CHARACTER_LOAD_INFO("CLICK to Load this Character\n\nCharacter Feature saves:\n- Your level and exp\n- Your spells, stats, talents, hotbar setup\n\nIt does not save your gear, gems jewels etc.\n\nEach Character starts from Level 1"),
+    CHARACTER_LOAD_INFO("Character Feature saves:\n- Your level and exp\n- Your spells, stats, talents, hotbar setup\n\nIt does not save your gear, gems jewels etc.\n\nEach Character starts from Level 1"),
     NO_DUPLICATE_AURA("You can't equip duplicate aura gems."),
     YOU_LACK_JEWEL_SLOTS("You lack jewel slots! You gain these typically from the Talent tree. You can use the search bar in the Talents screen to find them."),
     LACK_AURA_CAPACITY("You lack the Augment capacity to equip all these Augments."),
@@ -47,7 +59,7 @@ public enum Chats implements IAutoLocName {
     CANT_USE_MULTIPLE_SAME_SUPPORTS("You can't use Multiples of those Support Gems."),
 
     NONE_MAGE("Non Mage weapons can use."),
-    CREATE_NEW_CHARACTER("Create New Character\n\nName Must be Unique"),
+    CREATE_NEW_CHARACTER("Creates New Character\n\nName Must be Unique"),
     ANY_ITEM("Any weapon can use."),
     REQUIRE_MELEE("Requires Melee weapon to use."),
     REQUIRE_MAGE("Requires Mage Weapon to use."),
@@ -82,13 +94,16 @@ public enum Chats implements IAutoLocName {
     CANT_HAVE_MORE_RUNES_THAN_GEMS_IN_NON_RUNED("Normal(Non-Runed) Items Can not have more Runes than Gems socketed"),
     ALREADY_MAX_SOCKETS("Item already has maximum possible sockets."),
     ALREADY_MAX_LINKS("Item already has maximum possible links."),
-    NEEDS_AN_AFFIX("Item needs an affix."),
+    NEEDS_AN_AFFIX("Gear must have affixes."),
     NOT_SKILLGEM("This is not a skill gem."),
     BE_UNIQUE("The item must be of unique rarity."),
+    MAP_DEVICE_DESC("Used to Enter Endgame Dungeon Dimension.\n\nClick with an Adventure Map Item\n\nNOTE: Not the vanilla map item"),
     DESTROYS_OUTPUT("When Placed in a Profession Station with other inputs/materials, it will make all recipes produced give 3X the EXP but it will destroy the output."),
     CANT_GO_ABOVE("Can't upgrade past %1$s"),
+    ITEM_AQUIRED_THROUGH_LEAGUE("This item is obtainable through the Specified League content."),
     AWARDED_POINTS("You have been rewarded %1$s %2$s Points."),
     RESET_POINTS("Your %1$s Points were reset."),
+    MAP_SET_DESC("In case your Map Device was lost.\n\nYou can set your previous adventure map with this item."),
     FAILED_TO_AWARD_POINTS("Failed to give more %1$s points, you have reached the cap. The maximum allowed bonus %1$s points is %2$s. This is controlled by the Game balance datapack"),
 
     NEED_PEARL("You need to have at least one %1$s in your inventory to enter."),

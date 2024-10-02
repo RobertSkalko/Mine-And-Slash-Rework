@@ -42,7 +42,13 @@ public class CharacterData {
         CharacterData d = new CharacterData();
         d.lvl = unit.getLevel();
         d.xp = unit.getExp();
-        d.name = data.name;
+
+
+        var cur = data.characters.getCurrent();
+
+        if (cur != null) {
+            d.name = cur.name;
+        }
 
         d.hotbar = data.spellCastingData.hotbar;
 
@@ -67,8 +73,6 @@ public class CharacterData {
         data.ascClass = this.player_class;
 
         data.spellCastingData.hotbar = this.hotbar;
-
-        data.name = this.name;
 
         unit.setLevel(this.lvl);
         unit.setExp(this.xp);

@@ -2,12 +2,15 @@ package com.robertx22.mine_and_slash.mixins;
 
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.mixin_methods.TooltipMethod;
+import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
@@ -22,6 +25,25 @@ public abstract class ItemStackMixin {
     public ItemStackMixin() {
     }
 
+    @Inject(method = "getRarity", at = @At(value = "HEAD"), cancellable = true)
+    public void hookLoot(CallbackInfoReturnable<Rarity> cir) {
+
+        try {
+
+            ItemStack stack = (ItemStack) (Object) this;
+            // todo
+            if (StackSaving.GEARS.has(stack)) {
+                var rar = StackSaving.GEARS.loadFrom(stack).getRarity().getVanillaRarity();
+                if (rar != null) {
+                    cir.setReturnValue(rar);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Inject(method = "use", at = @At(value = "HEAD"), cancellable = true)
     public void hookLoot(Level world, Player p, InteractionHand pUsedHand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
 
@@ -30,6 +52,7 @@ public abstract class ItemStackMixin {
 
             if (WorldUtils.isDungeonWorld(world)) {
                 if (ServerContainer.get().isItemBanned(stack.getItem())) {
+                    p.sendSystemMessage(Component.literal("This item is banned in Adventure Maps: ").append(stack.getDisplayName()).withStyle(ChatFormatting.BOLD));
                     cir.setReturnValue(InteractionResultHolder.fail(stack));
                 }
             }

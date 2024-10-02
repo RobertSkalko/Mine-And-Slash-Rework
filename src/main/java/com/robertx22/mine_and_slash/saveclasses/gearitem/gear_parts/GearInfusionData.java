@@ -2,11 +2,12 @@ package com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts;
 
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.itemstack.CustomItemData;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IGearPartTooltip;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IStatsContainer;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.StatRangeInfo;
-import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
 import net.minecraft.network.chat.Component;
@@ -36,15 +37,17 @@ public class GearInfusionData implements IStatsContainer, IGearPartTooltip {
     }
 
     @Override
-    public List<Component> GetTooltipString(StatRangeInfo info, GearItemData gear) {
+    public List<Component> GetTooltipString(StatRangeInfo info, ExileStack stack) {
+
+        var gear = stack.GEAR.get();
 
         List<Component> list = new ArrayList<>();
 
         GearRarity rarity = ExileDB.GearRarities().get(rar);
 
-        list.add(Itemtips.INFUSED.locName(Component.literal(gear.data.get(GearItemData.KEYS.ENCHANT_TIMES) + "").withStyle(rarity.textFormatting())).withStyle(rarity.textFormatting()));
+        list.add(Itemtips.INFUSED.locName(Component.literal(stack.CUSTOM.getOrCreate().data.get(CustomItemData.KEYS.ENCHANT_TIMES) + "").withStyle(rarity.textFormatting())).withStyle(rarity.textFormatting()));
 
-        for (ExactStatData stat : GetAllStats(gear)) {
+        for (ExactStatData stat : GetAllStats(stack)) {
             list.addAll(stat.GetTooltipString());
         }
 
@@ -57,7 +60,7 @@ public class GearInfusionData implements IStatsContainer, IGearPartTooltip {
     }
 
     @Override
-    public List<ExactStatData> GetAllStats(GearItemData gear) {
-        return ExileDB.Affixes().get(en).getStats().stream().map(x -> x.ToExactStat(getPercent(), gear.lvl)).collect(Collectors.toList());
+    public List<ExactStatData> GetAllStats(ExileStack stack) {
+        return ExileDB.Affixes().get(en).getStats().stream().map(x -> x.ToExactStat(getPercent(), stack.GEAR.get().lvl)).collect(Collectors.toList());
     }
 }

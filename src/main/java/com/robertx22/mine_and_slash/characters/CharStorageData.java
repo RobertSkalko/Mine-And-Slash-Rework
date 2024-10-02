@@ -3,12 +3,13 @@ package com.robertx22.mine_and_slash.characters;
 import com.robertx22.mine_and_slash.capability.entity.CooldownsData;
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
+import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CharStorageData {
@@ -35,33 +36,24 @@ public class CharStorageData {
 
     public boolean canChangeCharactersRightNow(Player p) {
         if (Load.Unit(p).getCooldowns().isOnCooldown(CooldownsData.IN_COMBAT)) {
+            p.sendSystemMessage(Chats.CANT_CHANGE_CHAR_IN_COMBAT.locName().withStyle(ChatFormatting.RED));
             return false;
         }
         if (WorldUtils.isMapWorldClass(p.level())) {
+            p.sendSystemMessage(Chats.CANT_CHANGE_CHAR_IN_MAP.locName().withStyle(ChatFormatting.RED));
             return false;
         }
         return true;
     }
 
-    public Optional<CharacterData> getByName(String name) {
-        return map.values().stream().filter(x -> x.name.equals(name)).findAny();
-    }
 
-    public int getSlotOf(CharacterData data) {
-        return map.entrySet().stream().filter(x -> x.getValue() == data).map(x -> x.getKey()).findFirst().orElse(-1);
-    }
+    public int tryAddNewCharacter(Player p, String name) {
 
-    public void tryAddNewCharacter(Player p, String name) {
+        if (!nameIsValid(p, name)) {
+            p.sendSystemMessage(Chats.CREATE_ERROR_NAME.locName().withStyle(ChatFormatting.RED));
+            return -1;
+        }
 
-        if (name.isEmpty()) {
-            return;
-        }
-        if (getAllCharacters().stream().anyMatch(x -> x.name.equals(name))) {
-            return;
-        }
-        if (name.length() > 20) {
-            return;
-        }
         int amount = getAllCharacters().size();
 
         if (amount < ServerContainer.get().MAX_CHARACTERS.get()) {
@@ -77,11 +69,31 @@ public class CharStorageData {
             for (int i = 0; i < ServerContainer.get().MAX_CHARACTERS.get(); i++) {
                 if (map.get(i) == null) {
                     map.put(i, data);
-                    break;
+                    return i;
                 }
             }
+        } else {
+            p.sendSystemMessage(Chats.CREATE_ERROR_CHAR_LIMIT.locName().withStyle(ChatFormatting.RED));
         }
 
+        return -1;
+    }
+
+    public boolean nameIsValid(Player p, String name) {
+
+        if (name.isEmpty()) {
+            p.sendSystemMessage(Chats.NAME_EMPTY.locName().withStyle(ChatFormatting.RED));
+            return false;
+        }
+        if (getAllCharacters().stream().anyMatch(x -> x.name.equals(name))) {
+            p.sendSystemMessage(Chats.NAME_SAME.locName().withStyle(ChatFormatting.RED));
+            return false;
+        }
+        if (name.length() > 20) {
+            p.sendSystemMessage(Chats.NAME_TOO_LONG.locName().withStyle(ChatFormatting.RED));
+            return false;
+        }
+        return true;
     }
 
 

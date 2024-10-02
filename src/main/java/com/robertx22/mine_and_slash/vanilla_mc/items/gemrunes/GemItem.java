@@ -11,7 +11,7 @@ import com.robertx22.mine_and_slash.aoe_data.datapacks.models.IAutoModel;
 import com.robertx22.mine_and_slash.aoe_data.datapacks.models.ItemModelManager;
 import com.robertx22.mine_and_slash.database.data.StatMod;
 import com.robertx22.mine_and_slash.database.data.currency.IItemAsCurrency;
-import com.robertx22.mine_and_slash.database.data.currency.base.Currency;
+import com.robertx22.mine_and_slash.database.data.currency.base.CodeCurrency;
 import com.robertx22.mine_and_slash.database.data.currency.base.GearCurrency;
 import com.robertx22.mine_and_slash.database.data.currency.base.GearOutcome;
 import com.robertx22.mine_and_slash.database.data.currency.base.IShapelessRecipe;
@@ -25,12 +25,11 @@ import com.robertx22.mine_and_slash.database.data.stats.types.resources.energy.E
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.health.HealthRegen;
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.GemItems;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.SocketData;
-import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.saveclasses.unit.ResourceType;
-import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.AttackType;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
@@ -111,7 +110,7 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
     }
 
     @Override
-    public Currency currencyEffect(ItemStack stack) {
+    public CodeCurrency currencyEffect(ItemStack stack) {
         return new GearCurrency() {
             @Override
             public List<GearOutcome> getOutcomes() {
@@ -128,21 +127,20 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
                             }
 
                             @Override
-                            public ItemStack modify(LocReqContext ctx, GearItemData gear, ItemStack stack) {
-                                GemItem gitem = (GemItem) ctx.Currency.getItem();
-                                Gem gem = gitem.getGem();
+                            public void modify(LocReqContext ctx) {
 
-                                SocketData socket = new SocketData();
-                                socket.g = gem.identifier;
+                                ctx.stack.GEAR.edit(gear -> {
+                                    GemItem gitem = (GemItem) ctx.Currency.getItem();
+                                    Gem gem = gitem.getGem();
 
-                                gear.sockets.getSocketed().add(socket);
+                                    SocketData socket = new SocketData();
+                                    socket.g = gem.identifier;
 
-                                ctx.player.displayClientMessage(Chats.GEM_SOCKETED.locName(), false);
+                                    gear.sockets.getSocketed().add(socket);
 
-                                StackSaving.GEARS.saveTo(stack, gear);
+                                    ctx.player.displayClientMessage(Chats.GEM_SOCKETED.locName(), false);
 
-
-                                return stack;
+                                });
                             }
 
                             @Override
@@ -159,7 +157,9 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
             }
 
             @Override
-            public ExplainedResult canBeModified(GearItemData data) {
+            public ExplainedResult canBeModified(ExileStack stack) {
+                var data = stack.GEAR.get();
+                
                 if (data.getEmptySockets() < 1) {
                     return ExplainedResult.failure(Chats.NEED_EMPTY_SOCKET.locName());
                 }
@@ -346,14 +346,15 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
 
 
     public enum GemRank implements IAutoLocName {
-        CRACKED("Cracked", 0, 0.1F, 100, 100999, 0F),
-        CHIPPED("Chipped", 1, 0.2F, 75, 25999, 0.1F),
-        FLAWED("Flawed", 2, 0.3F, 50, 5000, 0.2F),
-        REGULAR("Regular", 3, 0.4F, 25, 1000, 0.5F),
-        GRAND("Grand", 4, 0.6F, 10, 200, 0.75F),
-        GLORIOUS("Glorious", 5, 0.8F, 5, 25, 0.9F),
-        DIVINE("Divine", 6, 1F, 0, 1, 0.95F);
+        CRACKED("Cracked", 0, 0.1F, 100, 100999, 0F, IRarity.COMMON_ID),
+        CHIPPED("Chipped", 1, 0.2F, 75, 25999, 0.1F, IRarity.COMMON_ID),
+        FLAWED("Flawed", 2, 0.3F, 50, 5000, 0.2F, IRarity.UNCOMMON),
+        REGULAR("Regular", 3, 0.4F, 25, 1000, 0.5F, IRarity.RARE_ID),
+        GRAND("Grand", 4, 0.6F, 10, 200, 0.75F, IRarity.EPIC_ID),
+        GLORIOUS("Glorious", 5, 0.8F, 5, 25, 0.9F, IRarity.LEGENDARY_ID),
+        DIVINE("Divine", 6, 1F, 0, 1, 0.95F, IRarity.MYTHIC_ID);
 
+        public String rar;
         public String locName;
         public int tier;
         public float statmulti;
@@ -361,8 +362,9 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
         public int weight;
         public float lvlToDropmulti;
 
-        GemRank(String locName, int tier, float statmulti, int upgradeChance, int weight, float lvlToDropmulti) {
+        GemRank(String locName, int tier, float statmulti, int upgradeChance, int weight, float lvlToDropmulti, String rar) {
             this.locName = locName;
+            this.rar = rar;
             this.weight = weight;
             this.lvlToDropmulti = lvlToDropmulti;
             this.tier = tier;

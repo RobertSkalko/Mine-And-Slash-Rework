@@ -452,7 +452,6 @@ p_totem_dmg
 p_trap_cdr
 p_trap_dmg
 performer
-pet_basic
 phys_to_all
 phys_to_all_big
 phys_to_chaos

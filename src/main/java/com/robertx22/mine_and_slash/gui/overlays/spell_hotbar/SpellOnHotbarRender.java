@@ -176,6 +176,7 @@ public class SpellOnHotbarRender {
                 txt = "UNBOUND KEY";
             }
         }
+        // todo renderScaledText doesnt do push and pop but does antiscale.. FIX THIS
         GuiUtils.renderScaledText(gui, xkey - 1, ykey, 1, txt, ChatFormatting.GREEN);
 
         var key = KeybindsRegister.getSpellHotbar(keyNum);

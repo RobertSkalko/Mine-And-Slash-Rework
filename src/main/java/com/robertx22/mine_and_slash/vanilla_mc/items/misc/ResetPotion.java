@@ -103,8 +103,8 @@ public class ResetPotion extends AutoItem implements IShapedRecipe {
     @Override
     public ShapedRecipeBuilder getRecipe() {
         return shaped(this)
-                .define('t', reset.mat.get())
-                .define('v', pointsType.matItem())
+                .define('v', reset.mat.get())
+                .define('t', pointsType.matItem())
                 .define('b', Items.GLASS_BOTTLE)
                 .pattern("vvv")
                 .pattern("vtv")
