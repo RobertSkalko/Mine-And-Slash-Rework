@@ -7,6 +7,8 @@ import java.util.Locale;
 
 // to use a "%" here, do %% or '%'
 public enum Words implements IAutoLocName {
+    CURRENT_POINTS("%1$s Points: %2$s"),
+
     LEAGUE("League"),
     AFFIXES("Affixes"),
     AFFIX_TYPES("Affix Types"),

@@ -193,6 +193,7 @@ public class ResourceStats {
                 x.group = Stat.StatGroup.RESTORATION;
             })
             .build();
+
     public static DataPackStatAccessor<EmptyAccessor> REJUV_HEAL_SELF = DatapackStatBuilder
             .ofSingle("rejuv_eff_on_self", Elements.ALL)
             .worksWithEvent(RestoreResourceEvent.ID)

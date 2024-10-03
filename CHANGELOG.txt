@@ -37,3 +37,4 @@ I will probably stop the item data rework here and wait for next update to finis
 - cached auto items better
 - tiny perf improves to entity data sync
 - spell levels should now be readable in the gui and also they change colors when you level them up
+- fixed profession recipes not being craftable if they don't have both a tier and a rarity item material

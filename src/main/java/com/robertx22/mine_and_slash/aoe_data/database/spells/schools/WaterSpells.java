@@ -120,10 +120,10 @@ public class WaterSpells implements ExileRegistryInit {
                         .put(MapField.TRACKS_ENEMIES, true)
                         .put(MapField.EXPIRE_ON_ENTITY_HIT, false)
                 ))
-                .onTick(ParticleBuilder.of(ParticleTypes.SNOWFLAKE, 0.15F).amount(2).build())
-                .onTick(ParticleBuilder.of(ParticleTypes.ITEM_SNOWBALL, 0.15F).amount(7).build())
-                .onTick(ParticleBuilder.of(ParticleTypes.SNOWFLAKE, 3F).amount(15).build().tick(20D))
-                .onTick(ParticleBuilder.of(ParticleTypes.ITEM_SNOWBALL, 3F).amount(5).build().tick(20D))
+                .onTick(ParticleBuilder.of(ParticleTypes.SNOWFLAKE, 0.15F).amount(2).tickReq(3).build())
+                .onTick(ParticleBuilder.of(ParticleTypes.ITEM_SNOWBALL, 0.15F).amount(7).tickReq(3).build())
+                .onTick(ParticleBuilder.of(ParticleTypes.SNOWFLAKE, 3F).amount(15).tickReq(3).build().tick(20D))
+                .onTick(ParticleBuilder.of(ParticleTypes.ITEM_SNOWBALL, 3F).amount(5).tickReq(3).build().tick(20D))
 
                 .onTick(DamageBuilder.radius(Elements.Cold, 3, SpellCalcs.ICEBALL).build().tick(20D))
 

@@ -2,11 +2,7 @@ package com.robertx22.mine_and_slash.loot.blueprints;
 
 import com.robertx22.mine_and_slash.loot.LootInfo;
 import com.robertx22.mine_and_slash.loot.blueprints.bases.LevelPart;
-import com.robertx22.mine_and_slash.loot.generators.stack_changers.IStackAction;
 import net.minecraft.world.item.ItemStack;
-
-import java.util.ArrayList;
-import java.util.List;
 
 // use once and discard!
 public abstract class ItemBlueprint {
@@ -23,8 +19,6 @@ public abstract class ItemBlueprint {
     }
 
 
-    public List<IStackAction> actionsAfterGeneration = new ArrayList<>();
-
     boolean itemWasGenerated = false;
 
     void onConstruct() {
@@ -39,7 +33,6 @@ public abstract class ItemBlueprint {
     final public ItemStack createStack() {
         checkAndSetGeneratedBoolean();
         ItemStack stack = generate();
-        actionsAfterGeneration.forEach(x -> x.changeStack(stack));
         return stack;
     }
 
