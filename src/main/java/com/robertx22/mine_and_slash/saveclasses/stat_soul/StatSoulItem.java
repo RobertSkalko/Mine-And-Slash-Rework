@@ -9,6 +9,7 @@ import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.NameBlock;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
@@ -64,7 +65,7 @@ public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt, iHideJ
 
                 var geardata = data.createGearData(null, p);
 
-                Item item = geardata.get(x -> x.GEAR).GetBaseGearType().getRandomItem(data.getRarity());
+                Item item = geardata.get(StackKeys.GEAR).GetBaseGearType().getRandomItem(data.getRarity());
 
                 ItemStack stack = item.getDefaultInstance();
 

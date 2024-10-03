@@ -5,6 +5,7 @@ import com.robertx22.mine_and_slash.database.data.affixes.Affix;
 import com.robertx22.mine_and_slash.database.data.requirements.bases.GearRequestedFor;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IGearPartTooltip;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IRerollable;
@@ -46,7 +47,7 @@ public class ImplicitStatsData implements IGearPartTooltip, IRerollable, IStatsC
 
     @Override
     public List<Component> GetTooltipString(StatRangeInfo info, ExileStack stack) {
-        var gear = stack.GEAR.get();
+        var gear = stack.get(StackKeys.GEAR).get();
 
         List<Component> list = new ArrayList<>();
 
@@ -95,7 +96,7 @@ public class ImplicitStatsData implements IGearPartTooltip, IRerollable, IStatsC
     public List<ExactStatData> GetAllStats(ExileStack stack) {
 
         if (has()) {
-            var gear = stack.GEAR.get();
+            var gear = stack.get(StackKeys.GEAR).get();
             return get().getStats()
                     .stream()
                     .map(x -> x.ToExactStat(p, gear.lvl))

@@ -5,6 +5,7 @@ import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.AdditionalBlock;
 import com.robertx22.mine_and_slash.itemstack.CustomItemData;
 import com.robertx22.mine_and_slash.itemstack.ExileTipCtx;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import net.minecraft.ChatFormatting;
@@ -34,17 +35,17 @@ public class PotentialAndCorruptionTip extends TooltipStrategy {
     public void apply(ExileTooltips tip, ExileTipCtx ctx) {
         var exStack = ctx.stack;
 
-        int pot = exStack.POTENTIAL.getOrCreate().potential;
+        int pot = exStack.get(StackKeys.POTENTIAL).getOrCreate().potential;
 
-        boolean hasPot = exStack.POTENTIAL.has();
-        boolean hasQual = exStack.CUSTOM.hasAndTrue(x -> x.data.get(CustomItemData.KEYS.QUALITY) > 0);
+        boolean hasPot = exStack.get(StackKeys.POTENTIAL).has();
+        boolean hasQual = exStack.get(StackKeys.CUSTOM).hasAndTrue(x -> x.data.get(CustomItemData.KEYS.QUALITY) > 0);
 
         // todo have to rework this so it works for items without any or with all
 
         tip.accept(new AdditionalBlock(
                 ImmutableList.of(
                         exStack.isCorrupted() ? Component.literal("").append(Itemtips.POTENTIAL.locName(pot).withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.STRIKETHROUGH)).append(Component.literal(" ")).append(Words.Corrupted.locName().withStyle(ChatFormatting.RED)) : Itemtips.POTENTIAL.locName(pot).withStyle(ChatFormatting.GOLD),
-                        Itemtips.QUALITY.locName(exStack.CUSTOM.getOrCreate().data.get(CustomItemData.KEYS.QUALITY)).withStyle(ChatFormatting.GOLD)
+                        Itemtips.QUALITY.locName(exStack.get(StackKeys.CUSTOM).getOrCreate().data.get(CustomItemData.KEYS.QUALITY)).withStyle(ChatFormatting.GOLD)
                 )
         ).showWhen(() -> ctx.shift));
     }

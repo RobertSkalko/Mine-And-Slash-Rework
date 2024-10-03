@@ -6,6 +6,7 @@ import com.robertx22.mine_and_slash.database.data.profession.ExplainedResult;
 import com.robertx22.mine_and_slash.database.data.runewords.RuneWord;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IGearPartTooltip;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IStatsContainer;
@@ -103,7 +104,7 @@ public class GearSocketsData implements IStatsContainer, IGearPartTooltip {
 
     @Override
     public List<ExactStatData> GetAllStats(ExileStack stack) {
-        var gear = stack.GEAR.get();
+        var gear = stack.get(StackKeys.GEAR).get();
         List<ExactStatData> list = new ArrayList<>();
         for (SocketData s : this.getSocketed()) {
             list.addAll(s.GetAllStats(stack));
@@ -120,7 +121,7 @@ public class GearSocketsData implements IStatsContainer, IGearPartTooltip {
 
     @Override
     public List<Component> GetTooltipString(StatRangeInfo info, ExileStack stack) {
-        var gear = stack.GEAR.get();
+        var gear = stack.get(StackKeys.GEAR).get();
         List<Component> list = new ArrayList<Component>();
 
         try {

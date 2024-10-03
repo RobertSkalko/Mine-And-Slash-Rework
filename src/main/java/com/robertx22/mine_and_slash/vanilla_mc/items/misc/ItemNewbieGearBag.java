@@ -6,6 +6,7 @@ import com.robertx22.mine_and_slash.database.data.perks.Perk;
 import com.robertx22.mine_and_slash.database.data.talent_tree.TalentTree;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.itemstack.CustomItemData;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.loot.LootInfo;
 import com.robertx22.mine_and_slash.loot.blueprints.GearBlueprint;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
@@ -88,9 +89,9 @@ public class ItemNewbieGearBag extends Item {
 
                 var ex = b.createData();
 
-                var data = ex.get(e -> e.GEAR);
+                var data = ex.get(StackKeys.GEAR);
 
-                ex.get(e -> e.CUSTOM).data.set(CustomItemData.KEYS.SALVAGING_DISABLED, true);
+                ex.get(StackKeys.CUSTOM).data.set(CustomItemData.KEYS.SALVAGING_DISABLED, true);
 
                 ItemStack stack = data.GetBaseGearType().getRandomItem(data.getRarity()).getDefaultInstance();
 

@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ge
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.GearModification;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationSers;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import net.minecraft.network.chat.MutableComponent;
 
 public class AddSocketItemMod extends GearModification {
@@ -20,7 +21,7 @@ public class AddSocketItemMod extends GearModification {
 
     @Override
     public void modifyGear(ExileStack stack) {
-        stack.GEAR.edit(gear -> {
+        stack.get(StackKeys.GEAR).edit(gear -> {
             for (int i = 0; i < data.add_sockets; i++) {
                 if (gear.sockets.canAddSocket(gear).can) {
                     gear.sockets.addSocket();

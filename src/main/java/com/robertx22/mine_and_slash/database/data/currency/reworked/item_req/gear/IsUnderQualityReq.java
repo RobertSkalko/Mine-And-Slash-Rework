@@ -4,6 +4,7 @@ import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.Gea
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.ItemReqSers;
 import com.robertx22.mine_and_slash.itemstack.CustomItemData;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import net.minecraft.network.chat.MutableComponent;
 
 public class IsUnderQualityReq extends GearRequirement {
@@ -38,6 +39,6 @@ public class IsUnderQualityReq extends GearRequirement {
 
     @Override
     public boolean isGearValid(ExileStack stack) {
-        return stack.CUSTOM.getOrCreate().data.get(CustomItemData.KEYS.QUALITY) < data.max_quality;
+        return stack.get(StackKeys.CUSTOM).getOrCreate().data.get(CustomItemData.KEYS.QUALITY) < data.max_quality;
     }
 }

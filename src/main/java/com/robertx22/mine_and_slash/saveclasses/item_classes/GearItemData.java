@@ -14,6 +14,7 @@ import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
 import com.robertx22.mine_and_slash.itemstack.CustomItemData;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IStatsContainer;
@@ -66,7 +67,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
 
     public float getQualityBaseStatsMulti(ExileStack stack) {
-        return 1F + (stack.CUSTOM.getOrCreate().data.get(CustomItemData.KEYS.QUALITY) / 100F);
+        return 1F + (stack.get(StackKeys.CUSTOM).getOrCreate().data.get(CustomItemData.KEYS.QUALITY) / 100F);
     }
 
 
@@ -335,7 +336,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     @Override
     public List<ItemStack> getSalvageResult(ExileStack stack) {
 
-        if (!stack.CUSTOM.getOrCreate().data.get(CustomItemData.KEYS.SALVAGING_DISABLED)) {
+        if (!stack.get(StackKeys.CUSTOM).getOrCreate().data.get(CustomItemData.KEYS.SALVAGING_DISABLED)) {
             if (this.isUnique()) {
                 return Arrays.asList(new ItemStack(RandomUtils.randomFromList(RarityItems.RARITY_STONE.values().stream().toList()).get(), RandomUtils.RandomRange(2, 9)));
             }

@@ -5,6 +5,7 @@ import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.Gea
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationSers;
 import com.robertx22.mine_and_slash.itemstack.CustomItemData;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import net.minecraft.network.chat.MutableComponent;
 
 public class AddQualityItemMod extends GearModification {
@@ -21,7 +22,7 @@ public class AddQualityItemMod extends GearModification {
 
     @Override
     public void modifyGear(ExileStack stack) {
-        stack.CUSTOM.edit(gear -> {
+        stack.get(StackKeys.CUSTOM).edit(gear -> {
             gear.data.set(CustomItemData.KEYS.QUALITY, gear.data.get(CustomItemData.KEYS.QUALITY) + data.add_quality.random());
         });
     }

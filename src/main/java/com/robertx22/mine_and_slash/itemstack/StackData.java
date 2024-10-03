@@ -15,6 +15,8 @@ public class StackData<T> {
     public StackData(ExileStack stack, ItemstackDataSaver<T> saver) {
         this.stack = stack;
         this.saver = saver;
+
+        stack.map.put(getId(), this);
     }
 
 

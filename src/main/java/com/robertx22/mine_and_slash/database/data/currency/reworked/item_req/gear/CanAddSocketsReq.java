@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.ge
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.GearRequirement;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.ItemReqSers;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import net.minecraft.network.chat.MutableComponent;
 
 public class CanAddSocketsReq extends GearRequirement {
@@ -28,7 +29,7 @@ public class CanAddSocketsReq extends GearRequirement {
 
     @Override
     public boolean isGearValid(ExileStack stack) {
-        var gear = stack.GEAR.get();
+        var gear = stack.get(StackKeys.GEAR).get();
         return gear.sockets.canAddSocket(gear).can;
     }
 }

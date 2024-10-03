@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.je
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationSers;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.JewelModification;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import net.minecraft.network.chat.MutableComponent;
 
 // todo probably turn corruption stats into its own component later on
@@ -28,7 +29,7 @@ public class CorruptJewelItemMod extends JewelModification {
 
     @Override
     public void modifyJewel(ExileStack data) {
-        data.JEWEL.edit(x -> x.corrupt());
+        data.get(StackKeys.JEWEL).edit(x -> x.corrupt());
     }
 
     @Override

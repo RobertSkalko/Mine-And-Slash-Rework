@@ -27,6 +27,7 @@ import com.robertx22.mine_and_slash.gui.texts.textblocks.RarityBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.WorksOnBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.LeagueBlock;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.loot.req.DropRequirement;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.mmorpg.UNICODE;
@@ -90,7 +91,7 @@ public class ExileCurrency implements IAutoLocName, IAutoGson<ExileCurrency>, Js
             if (potential_cost < 1) {
                 return true;
             }
-            return stack.POTENTIAL.hasAndTrue(x -> x.potential >= this.potential_cost);
+            return stack.get(StackKeys.POTENTIAL).hasAndTrue(x -> x.potential >= this.potential_cost);
         }
     }
 
@@ -150,7 +151,7 @@ public class ExileCurrency implements IAutoLocName, IAutoGson<ExileCurrency>, Js
         try {
 
             if (this.potential.potential_cost > 0) {
-                stack.POTENTIAL.edit(x -> x.spend(potential.potential_cost));
+                stack.get(StackKeys.POTENTIAL).edit(x -> x.spend(potential.potential_cost));
             }
 
             for (ItemModData mod : this.always_do_item_mods) {

@@ -10,6 +10,7 @@ public class StackKey<T> {
     public StackKey(String id, Function<ExileStack, StackData<T>> sup) {
         this.key = id;
         this.sup = sup;
+        
     }
 
     public StackData<T> get(ExileStack stack) {

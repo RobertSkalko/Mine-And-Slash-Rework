@@ -4,6 +4,7 @@ import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.Ite
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationSers;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.custom.MaximumUsesReq;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.rework.DataKey;
 import net.minecraft.network.chat.MutableComponent;
 
@@ -18,7 +19,7 @@ public class IncrementUsesItemMod extends ItemModification {
 
     @Override
     public void applyINTERNAL(ExileStack stack) {
-        stack.CUSTOM.edit(gear -> {
+        stack.get(StackKeys.CUSTOM).edit(gear -> {
             var key = new DataKey.IntKey(use_key);
             int uses = gear.data.get(key) + 1;
             gear.data.set(key, uses);

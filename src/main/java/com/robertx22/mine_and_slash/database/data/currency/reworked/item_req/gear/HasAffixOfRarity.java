@@ -5,6 +5,7 @@ import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.Ite
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import net.minecraft.network.chat.MutableComponent;
 
 public class HasAffixOfRarity extends GearRequirement {
@@ -40,7 +41,7 @@ public class HasAffixOfRarity extends GearRequirement {
 
     @Override
     public boolean isGearValid(ExileStack stack) {
-        var gear = stack.GEAR.get();
+        var gear = stack.get(StackKeys.GEAR).get();
         return gear.affixes.getPrefixesAndSuffixes().stream().anyMatch(x -> x.rar.equals(data.rar));
     }
 }

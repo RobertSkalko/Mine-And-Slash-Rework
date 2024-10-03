@@ -10,6 +10,7 @@ import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.Ite
 import com.robertx22.mine_and_slash.database.data.profession.items.CraftedSoulItem;
 import com.robertx22.mine_and_slash.database.data.runewords.RuneWord;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.mmorpg.ForgeEvents;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
@@ -299,7 +300,7 @@ public class OnItemInteract {
                                 soul.slot = gear.GetBaseGearType().getGearSlot().GUID();
                                 var ex = ExileStack.of(craftedStack);
 
-                                soul.gear = new SavedGearSoul(ex.GEAR.get(), ex.POTENTIAL.getOrCreate(), ex.CUSTOM.getOrCreate());
+                                soul.gear = new SavedGearSoul(ex.get(StackKeys.GEAR).get(), ex.get(StackKeys.POTENTIAL).getOrCreate(), ex.get(StackKeys.CUSTOM).getOrCreate());
 
                                 ItemStack soulstack = soul.toStack();
 

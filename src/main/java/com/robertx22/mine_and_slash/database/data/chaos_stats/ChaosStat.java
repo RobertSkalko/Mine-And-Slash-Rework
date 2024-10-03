@@ -10,6 +10,7 @@ import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
 import com.robertx22.mine_and_slash.itemstack.CustomItemData;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.AffixData;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
@@ -47,12 +48,13 @@ public class ChaosStat implements JsonExileRegistry<ChaosStat>, IAutoGson<ChaosS
     }
 
     public void applyToGear(ExileStack stack) {
-        var gear = stack.GEAR.get();
 
-        stack.CUSTOM.edit(x -> x.data.set(CustomItemData.KEYS.CORRUPT, true));
+        var gear = stack.get(StackKeys.GEAR).get();
 
-        stack.POTENTIAL.getOrCreate().potential = 0;
-        stack.POTENTIAL.save();
+        stack.get(StackKeys.CUSTOM).edit(x -> x.data.set(CustomItemData.KEYS.CORRUPT, true));
+
+        stack.get(StackKeys.POTENTIAL).getOrCreate().potential = 0;
+        stack.get(StackKeys.POTENTIAL).save();
 
         for (int i = 0; i < bonus_sockets; i++) {
             gear.sockets.addSocket();

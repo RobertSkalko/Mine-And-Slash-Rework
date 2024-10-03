@@ -4,6 +4,7 @@ import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.GearStatCtx;
@@ -40,7 +41,7 @@ public class GearData {
         if (stack != null) {
             var ex = ExileStack.of(stack);
 
-            var gear = ex.GEAR.get();
+            var gear = ex.get(StackKeys.GEAR).get();
 
             if (gear != null) {
                 calcStatUtilization(data);

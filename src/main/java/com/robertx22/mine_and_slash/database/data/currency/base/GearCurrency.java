@@ -7,6 +7,7 @@ import com.robertx22.mine_and_slash.database.data.currency.loc_reqs.LocReqContex
 import com.robertx22.mine_and_slash.database.data.profession.ExplainedResult;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.WorksOnBlock;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import net.minecraft.sounds.SoundEvents;
@@ -37,8 +38,8 @@ public abstract class GearCurrency extends CodeCurrency {
 
         GearOutcome outcome = getOutcome();
 
-        ctx.stack.POTENTIAL.edit(x -> x.spend(getPotentialLoss()));
-      
+        ctx.stack.get(StackKeys.POTENTIAL).edit(x -> x.spend(getPotentialLoss()));
+
         Player player = ctx.player;
         if (outcome.getOutcomeType() == GearOutcome.OutcomeType.GOOD) {
             SoundUtils.ding(player.level(), player.blockPosition());
@@ -56,7 +57,7 @@ public abstract class GearCurrency extends CodeCurrency {
 
     @Override
     public ExplainedResult canItemBeModified(LocReqContext context) {
-        GearItemData data = context.stack.GEAR.get();
+        GearItemData data = context.stack.get(StackKeys.GEAR).get();
 
 
         if (data == null) {
@@ -67,7 +68,7 @@ public abstract class GearCurrency extends CodeCurrency {
             return ExplainedResult.failure(Chats.CORRUPT_CANT_BE_MODIFIED.locName());
         }
 
-        if (context.stack.POTENTIAL.get().potential < 1) {
+        if (context.stack.get(StackKeys.POTENTIAL).get().potential < 1) {
             if (this.spendsGearPotential()) {
                 return ExplainedResult.failure(Chats.GEAR_NO_POTENTIAL.locName());
             }

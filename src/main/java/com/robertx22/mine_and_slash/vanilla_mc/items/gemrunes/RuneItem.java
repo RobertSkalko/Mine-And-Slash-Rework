@@ -26,6 +26,7 @@ import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.DropChanceBl
 import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.DropLevelBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.usableitemblocks.UsageBlock;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.loot.blueprints.bases.RunePart;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.SocketData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
@@ -87,7 +88,7 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
                         @Override
                         public void modify(LocReqContext ctx) {
 
-                            ctx.stack.GEAR.edit(gear -> {
+                            ctx.stack.get(StackKeys.GEAR).edit(gear -> {
                                 //todo actually make this based on gear rarities
                                 var rune = new SocketData();
                                 boolean add = true;
@@ -152,7 +153,7 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
 
         @Override
         public ExplainedResult canBeModified(ExileStack stack) {
-            var data = stack.GEAR.get();
+            var data = stack.get(StackKeys.GEAR).get();
             if (data.uniqueStats != null && data.isUnique() && !data.uniqueStats.getUnique(stack).runable) {
                 return ExplainedResult.failure(Chats.CANT_RUNE_THIS_UNIQUE.locName());
             }

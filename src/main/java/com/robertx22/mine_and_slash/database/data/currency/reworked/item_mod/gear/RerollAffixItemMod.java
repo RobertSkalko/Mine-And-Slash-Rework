@@ -4,6 +4,7 @@ import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.Gea
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationSers;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.AffixData;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import net.minecraft.network.chat.Component;
@@ -29,7 +30,7 @@ public class RerollAffixItemMod extends GearModification {
 
     @Override
     public void modifyGear(ExileStack stack) {
-        stack.GEAR.edit(gear -> {
+        stack.get(StackKeys.GEAR).edit(gear -> {
             var opt = data.finder_data.finder().getAffix(gear, data.finder_data);
 
             if (opt.isPresent()) {

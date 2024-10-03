@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.ma
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.ItemReqSers;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.MapRequirement;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import net.minecraft.network.chat.MutableComponent;
 
 public class MapHasHigherRarityReq extends MapRequirement {
@@ -23,7 +24,7 @@ public class MapHasHigherRarityReq extends MapRequirement {
 
     @Override
     public boolean isMapValid(ExileStack stack) {
-        var data = stack.MAP.get();
+        var data = stack.get(StackKeys.MAP).get();
         if (!data.getRarity().hasHigherRarity()) {
             return false;
         }

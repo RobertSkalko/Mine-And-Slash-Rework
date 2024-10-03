@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.cu
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.ItemReqSers;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.ItemRequirement;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.rework.DataKey;
 import net.minecraft.network.chat.MutableComponent;
 
@@ -37,7 +38,7 @@ public class MaximumUsesReq extends ItemRequirement {
 
     @Override
     public boolean isValid(ExileStack stack) {
-        var uses = stack.CUSTOM.getOrCreate().data.get(new DataKey.IntKey(data.use_id));
+        var uses = stack.get(StackKeys.CUSTOM).getOrCreate().data.get(new DataKey.IntKey(data.use_id));
         return uses < data.max_uses;
     }
 }

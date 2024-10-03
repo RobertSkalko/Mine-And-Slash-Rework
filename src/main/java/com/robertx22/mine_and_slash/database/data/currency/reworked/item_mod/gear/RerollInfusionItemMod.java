@@ -6,6 +6,7 @@ import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.Ite
 import com.robertx22.mine_and_slash.database.data.requirements.bases.GearRequestedFor;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.GearInfusionData;
 import com.robertx22.mine_and_slash.tags.all.SlotTags;
 import net.minecraft.network.chat.MutableComponent;
@@ -20,7 +21,7 @@ public class RerollInfusionItemMod extends GearModification {
 
     @Override
     public void modifyGear(ExileStack stack) {
-        stack.GEAR.edit(gear -> {
+        stack.get(StackKeys.GEAR).edit(gear -> {
             GearInfusionData en = new GearInfusionData();
 
             Affix affix = ExileDB.Affixes().getFilterWrapped(x -> {

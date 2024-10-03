@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.al
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModification;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationSers;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import net.minecraft.network.chat.MutableComponent;
 
 public class AddPotentialItemMod extends ItemModification {
@@ -25,7 +26,7 @@ public class AddPotentialItemMod extends ItemModification {
 
     @Override
     public void applyINTERNAL(ExileStack stack) {
-        stack.POTENTIAL.edit(pot -> {
+        stack.get(StackKeys.POTENTIAL).edit(pot -> {
             pot.add(data.add_potential);
         });
     }

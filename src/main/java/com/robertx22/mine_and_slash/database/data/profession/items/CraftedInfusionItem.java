@@ -24,6 +24,7 @@ import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.ProfessionDr
 import com.robertx22.mine_and_slash.gui.texts.textblocks.usableitemblocks.UsageBlock;
 import com.robertx22.mine_and_slash.itemstack.CustomItemData;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.mmorpg.UNICODE;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.GearInfusionData;
 import com.robertx22.mine_and_slash.tags.all.SlotTags;
@@ -111,7 +112,7 @@ public class CraftedInfusionItem extends AutoItem implements IRarityItem, IItemA
                             @Override
                             public void modify(LocReqContext ctx) {
 
-                                ctx.stack.GEAR.edit(gear -> {
+                                ctx.stack.get(StackKeys.GEAR).edit(gear -> {
 
                                     GearInfusionData en = new GearInfusionData();
 
@@ -128,7 +129,7 @@ public class CraftedInfusionItem extends AutoItem implements IRarityItem, IItemA
 
                                     gear.ench = en;
 
-                                    ctx.stack.CUSTOM.edit(x -> CustomItemData.KEYS.ENCHANT_TIMES.add(x, 1));
+                                    ctx.stack.get(StackKeys.CUSTOM).edit(x -> CustomItemData.KEYS.ENCHANT_TIMES.add(x, 1));
 
                                 });
                             }
@@ -152,7 +153,7 @@ public class CraftedInfusionItem extends AutoItem implements IRarityItem, IItemA
 
                             @Override
                             public void modify(LocReqContext ctx) {
-                                ctx.stack.CUSTOM.edit(x -> CustomItemData.KEYS.ENCHANT_TIMES.add(x, 1));
+                                ctx.stack.get(StackKeys.CUSTOM).edit(x -> CustomItemData.KEYS.ENCHANT_TIMES.add(x, 1));
                             }
 
                             @Override
@@ -172,7 +173,7 @@ public class CraftedInfusionItem extends AutoItem implements IRarityItem, IItemA
             @Override
             public ExplainedResult canBeModified(ExileStack stack) {
 
-                var data = stack.GEAR.get();
+                var data = stack.get(StackKeys.GEAR).get();
 
                 SkillItemTier tier = LeveledItem.getTier(stack.getStack());
 
@@ -195,7 +196,7 @@ public class CraftedInfusionItem extends AutoItem implements IRarityItem, IItemA
                 }
 
 
-                if (stack.CUSTOM.getOrCreate().data.get(CustomItemData.KEYS.ENCHANT_TIMES) > 9) {
+                if (stack.get(StackKeys.CUSTOM).getOrCreate().data.get(CustomItemData.KEYS.ENCHANT_TIMES) > 9) {
                     return ExplainedResult.failure(Chats.THIS_ITEM_CANT_BE_USED_MORE_THAN_X_TIMES.locName(10));
                 }
 

@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ma
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationSers;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.MapModification;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.loot.blueprints.MapBlueprint;
 import net.minecraft.network.chat.MutableComponent;
 
@@ -28,7 +29,7 @@ public class UpgradeMapRarityItemMod extends MapModification {
 
     @Override
     public void modifyMap(ExileStack stack) {
-        stack.MAP.edit(data -> {
+        stack.get(StackKeys.MAP).edit(data -> {
             data.rar = data.getRarity().getHigherRarity().GUID();
             MapBlueprint.genAffixes(data, data.getRarity());
             data.tier = data.getRarity().map_tiers.random();

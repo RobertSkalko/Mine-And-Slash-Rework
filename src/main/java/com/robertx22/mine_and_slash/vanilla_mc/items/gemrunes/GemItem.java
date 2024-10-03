@@ -26,6 +26,7 @@ import com.robertx22.mine_and_slash.database.data.stats.types.resources.health.H
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.GemItems;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.SocketData;
@@ -129,7 +130,7 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
                             @Override
                             public void modify(LocReqContext ctx) {
 
-                                ctx.stack.GEAR.edit(gear -> {
+                                ctx.stack.get(StackKeys.GEAR).edit(gear -> {
                                     GemItem gitem = (GemItem) ctx.Currency.getItem();
                                     Gem gem = gitem.getGem();
 
@@ -158,8 +159,8 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
 
             @Override
             public ExplainedResult canBeModified(ExileStack stack) {
-                var data = stack.GEAR.get();
-                
+                var data = stack.get(StackKeys.GEAR).get();
+
                 if (data.getEmptySockets() < 1) {
                     return ExplainedResult.failure(Chats.NEED_EMPTY_SOCKET.locName());
                 }

@@ -7,6 +7,7 @@ import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.itemstack.CustomItemData;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.itemstack.ExileStacklessData;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.loot.blueprints.GearBlueprint;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.BaseStatsData;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.UniqueStatsData;
@@ -55,7 +56,7 @@ public class GearCreationUtils {
             gear.rar = ExileDB.GearRarities().get(unique.rarity).GUID();
 
             gear.gtype = unique.base_gear;
-            data.getOrCreate(x -> x.CUSTOM).data.set(CustomItemData.KEYS.UNIQUE_ID, unique.GUID());
+            data.getOrCreate(StackKeys.CUSTOM).data.set(CustomItemData.KEYS.UNIQUE_ID, unique.GUID());
             gear.uniqueStats = new UniqueStatsData();
             gear.uniqueStats.RerollFully(gear);
 
@@ -71,7 +72,7 @@ public class GearCreationUtils {
         gear.affixes.randomize(gear);
 
 
-        data.set(x -> x.GEAR, gear);
+        data.set(StackKeys.GEAR, gear);
 
         return data;
     }

@@ -4,6 +4,7 @@ import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.Gea
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationSers;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import net.minecraft.network.chat.MutableComponent;
 
 public class AddGearLevelItemMod extends GearModification {
@@ -21,7 +22,7 @@ public class AddGearLevelItemMod extends GearModification {
 
     @Override
     public void modifyGear(ExileStack stack) {
-        stack.GEAR.edit(gear -> {
+        stack.get(StackKeys.GEAR).edit(gear -> {
             gear.lvl += data.add_levels;
 
             if (gear.lvl > GameBalanceConfig.get().MAX_LEVEL) {

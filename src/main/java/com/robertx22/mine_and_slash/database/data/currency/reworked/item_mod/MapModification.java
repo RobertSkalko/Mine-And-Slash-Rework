@@ -1,6 +1,7 @@
 package com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod;
 
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 
 public abstract class MapModification extends ItemModification {
 
@@ -12,7 +13,7 @@ public abstract class MapModification extends ItemModification {
 
     @Override
     public void applyINTERNAL(ExileStack stack) {
-        var map = stack.MAP.get();
+        var map = stack.get(StackKeys.MAP).get();
 
         if (map != null) {
             modifyMap(stack);

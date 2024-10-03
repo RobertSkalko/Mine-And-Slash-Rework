@@ -5,6 +5,7 @@ import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.Ite
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import net.minecraft.network.chat.MutableComponent;
 
 public class IsRarityReq extends GearRequirement {
@@ -41,6 +42,6 @@ public class IsRarityReq extends GearRequirement {
 
     @Override
     public boolean isGearValid(ExileStack stack) {
-        return stack.GEAR.hasAndTrue(x -> x.rar.equals(data.rarity));
+        return stack.get(StackKeys.GEAR).hasAndTrue(x -> x.rar.equals(data.rarity));
     }
 }

@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.ge
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.ItemReqSers;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.ItemRequirement;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import net.minecraft.network.chat.MutableComponent;
 
 public class IsNotCorruptedReq extends ItemRequirement {
@@ -23,7 +24,7 @@ public class IsNotCorruptedReq extends ItemRequirement {
 
     @Override
     public boolean isValid(ExileStack stack) {
-        if (stack.CUSTOM.hasAndTrue(x -> x.isCorrupted())) {
+        if (stack.get(StackKeys.CUSTOM).hasAndTrue(x -> x.isCorrupted())) {
             return false;
         }
         return true;

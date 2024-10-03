@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts;
 import com.robertx22.mine_and_slash.database.data.affixes.Affix;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IGearPartTooltip;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
@@ -63,8 +64,8 @@ public class GearAffixesData implements IGearPartTooltip {
         List<Component> list = new ArrayList<Component>();
 
 
-        var gear = stack.GEAR.get();
-        
+        var gear = stack.get(StackKeys.GEAR).get();
+
         if (!getCorStatsWithCtx(gear, info).isEmpty()) {
             TooltipUtils.addEmpty(list);
             list.add(Itemtips.COR_STATS.locName().withStyle(ChatFormatting.RED));

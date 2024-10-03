@@ -1,65 +1,44 @@
 package com.robertx22.mine_and_slash.itemstack;
 
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+
 import java.util.HashMap;
-import java.util.function.Function;
+import java.util.Map;
 
 public class ExileStacklessData {
 
     public HashMap<String, Object> map = new HashMap<>();
+    public HashMap<String, StackKey> keys = new HashMap<>();
 
-    private transient ExileStack stack = ExileStack.of(null);
+    private transient ExileStack stack = ExileStack.of(new ItemStack(Items.STONE_SWORD));
 
-    private <T> T get(StackData<T> data) {
-        return (T) map.get(data.getId());
+    
+    public <T> T get(StackKey<T> key) {
+        return (T) map.get(key.key);
     }
 
-    // todo switch all these to stackkeys
-
-    public <T> T get(Function<ExileStack, StackData<T>> data) {
-        var o = data.apply(this.stack);
-        return get(o);
-    }
-
-    private <T> T getOrCreate(StackData<T> data) {
-        if (!map.containsKey(data.getId())) {
-            map.put(data.getId(), data.createDefault());
+    public <T> T getOrCreate(StackKey<T> key) {
+        var o = stack.get(key);
+        if (!map.containsKey(key.key)) {
+            map.put(key.key, o.getOrCreate());
+            keys.put(key.key, key);
         }
-        return get(data);
+        return get(key);
     }
 
-    public <T> T getOrCreate(Function<ExileStack, StackData<T>> data) {
-        var o = data.apply(this.stack);
-        return getOrCreate(o);
-    }
 
-    private <T> void set(StackData<T> data, T obj) {
-        map.put(data.getId(), obj);
-    }
+    public <T> void set(StackKey<T> key, T obj) {
+        map.put(key.key, obj);
+        keys.put(key.key, key);
 
-    public <T> void set(Function<ExileStack, StackData<T>> data, T obj) {
-        var o = data.apply(this.stack);
-        set(o, obj);
     }
 
     public void apply(ExileStack stack) {
-
-
-        for (StackData data : stack.getAll()) {
-            if (map.containsKey(data.getId())) {
-                var d = map.get(data.getId());
-                data.set(d);
-            }
+        for (Map.Entry<String, Object> en : map.entrySet()) {
+            var key = keys.get(en.getKey());
+            stack.get(key).set(map.get(key.key));
         }
-    }
-
-    public static ExileStacklessData from(ExileStack stack) {
-        var b = new ExileStacklessData();
-        for (StackData data : stack.getAll()) {
-            if (data.has()) {
-                b.set(data, data.get());
-            }
-        }
-        return b;
     }
 
 

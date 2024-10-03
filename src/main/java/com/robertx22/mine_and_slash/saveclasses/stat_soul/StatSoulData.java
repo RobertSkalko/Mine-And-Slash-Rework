@@ -15,6 +15,7 @@ import com.robertx22.mine_and_slash.gui.texts.textblocks.usableitemblocks.UsageB
 import com.robertx22.mine_and_slash.itemstack.CustomItemData;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.itemstack.ExileStacklessData;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.loot.LootInfo;
 import com.robertx22.mine_and_slash.loot.blueprints.GearBlueprint;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RarityItems;
@@ -180,9 +181,9 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
 
         var ex = b.createData();
 
-        ex.getOrCreate(x -> x.POTENTIAL).potential *= GameBalanceConfig.get().CRAFTED_GEAR_POTENTIAL_MULTI;
-        ex.getOrCreate(x -> x.CUSTOM).data.set(CustomItemData.KEYS.CRAFTED, true);
-        ex.getOrCreate(x -> x.CUSTOM).data.set(CustomItemData.KEYS.SALVAGING_DISABLED, !this.can_sal);
+        ex.getOrCreate(StackKeys.POTENTIAL).potential *= GameBalanceConfig.get().CRAFTED_GEAR_POTENTIAL_MULTI;
+        ex.getOrCreate(StackKeys.CUSTOM).data.set(CustomItemData.KEYS.CRAFTED, true);
+        ex.getOrCreate(StackKeys.CUSTOM).data.set(CustomItemData.KEYS.SALVAGING_DISABLED, !this.can_sal);
 
         return ex;
     }

@@ -5,6 +5,7 @@ import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.Ite
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.itemstack.CustomItemData;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import net.minecraft.network.chat.MutableComponent;
 
 public class CorruptGearItemMod extends GearModification {
@@ -20,14 +21,14 @@ public class CorruptGearItemMod extends GearModification {
 
     @Override
     public void modifyGear(ExileStack stack) {
-        stack.GEAR.edit(gear -> {
+        stack.get(StackKeys.GEAR).edit(gear -> {
             if (data.adds_affixes) {
                 // todo will this work
                 var chaos = ExileDB.ChaosStats().getFilterWrapped(x -> x.for_item_rarities.contains(gear.rar)).random();
                 chaos.applyToGear(stack);
             } else {
-                stack.CUSTOM.edit(x -> x.data.set(CustomItemData.KEYS.CORRUPT, true));
-                stack.POTENTIAL.edit(e -> e.potential = 0);
+                stack.get(StackKeys.CUSTOM).edit(x -> x.data.set(CustomItemData.KEYS.CORRUPT, true));
+                stack.get(StackKeys.POTENTIAL).edit(e -> e.potential = 0);
             }
         });
     }

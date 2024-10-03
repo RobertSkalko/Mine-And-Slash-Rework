@@ -2,6 +2,7 @@ package com.robertx22.mine_and_slash.loot.blueprints;
 
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import com.robertx22.mine_and_slash.itemstack.ExileStacklessData;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.loot.LootInfo;
 import com.robertx22.mine_and_slash.loot.blueprints.bases.BaseGearTypePart;
 import com.robertx22.mine_and_slash.loot.blueprints.bases.UniqueGearPart;
@@ -32,9 +33,9 @@ public class GearBlueprint extends RarityItemBlueprint implements ITypeBlueprint
 
         var data = GearCreationUtils.CreateData(this);
 
-        var pot = data.getOrCreate(x -> x.POTENTIAL);
+        var pot = data.getOrCreate(StackKeys.POTENTIAL);
 
-        pot.potential = data.get(x -> x.GEAR).getRarity().pot.total;
+        pot.potential = data.get(StackKeys.GEAR).getRarity().pot.total;
 
         return data;
     }

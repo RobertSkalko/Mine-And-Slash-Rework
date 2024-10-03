@@ -5,6 +5,7 @@ import com.robertx22.mine_and_slash.database.data.gems.Gem;
 import com.robertx22.mine_and_slash.database.data.runes.Rune;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IStatsContainer;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.StatRangeInfo;
@@ -83,7 +84,7 @@ public class SocketData implements IStatsContainer {
 
     @Override
     public List<ExactStatData> GetAllStats(ExileStack stack) {
-        var gear = stack.GEAR.get();
+        var gear = stack.get(StackKeys.GEAR).get();
 
         SlotFamily fam = gear.GetBaseGearType()
                 .family();

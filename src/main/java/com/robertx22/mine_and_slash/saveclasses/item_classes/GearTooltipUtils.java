@@ -13,6 +13,7 @@ import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.LeagueBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.gearblocks.DurabilityBlock;
 import com.robertx22.mine_and_slash.itemstack.CustomItemData;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IGearPartTooltip;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.ModRange;
@@ -244,8 +245,8 @@ public class GearTooltipUtils {
                 })
                 .accept(new AdditionalBlock(
                         ImmutableList.of(
-                                exStack.isCorrupted() ? Component.literal("").append(Itemtips.POTENTIAL.locName(exStack.POTENTIAL.getOrCreate().potential).withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.STRIKETHROUGH)).append(Component.literal(" ")).append(Words.Corrupted.locName().withStyle(ChatFormatting.RED)) : Itemtips.POTENTIAL.locName(exStack.POTENTIAL.getOrCreate().potential).withStyle(ChatFormatting.GOLD),
-                                Itemtips.QUALITY.locName(exStack.CUSTOM.getOrCreate().data.get(CustomItemData.KEYS.QUALITY)).withStyle(ChatFormatting.GOLD)
+                                exStack.isCorrupted() ? Component.literal("").append(Itemtips.POTENTIAL.locName(exStack.get(StackKeys.POTENTIAL).getOrCreate().potential).withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.STRIKETHROUGH)).append(Component.literal(" ")).append(Words.Corrupted.locName().withStyle(ChatFormatting.RED)) : Itemtips.POTENTIAL.locName(exStack.get(StackKeys.POTENTIAL).getOrCreate().potential).withStyle(ChatFormatting.GOLD),
+                                Itemtips.QUALITY.locName(exStack.get(StackKeys.CUSTOM).getOrCreate().data.get(CustomItemData.KEYS.QUALITY)).withStyle(ChatFormatting.GOLD)
                         )
                 ).showWhen(() -> info.hasShiftDown))
                 .accept(new AdditionalBlock(() -> {

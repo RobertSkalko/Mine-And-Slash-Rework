@@ -8,6 +8,7 @@ import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
 import com.robertx22.mine_and_slash.itemstack.CustomItemData;
 import com.robertx22.mine_and_slash.itemstack.ExileStacklessData;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.loot.LootInfo;
 import com.robertx22.mine_and_slash.loot.blueprints.GearBlueprint;
 import com.robertx22.mine_and_slash.uncommon.MathHelper;
@@ -58,7 +59,7 @@ public class CustomItem implements JsonExileRegistry<CustomItem>, IAutoGson<Cust
         var data = b.createData();
 
         if (disable_salvaging) {
-            data.getOrCreate(x -> x.CUSTOM).data.set(CustomItemData.KEYS.SALVAGING_DISABLED, true);
+            data.getOrCreate(StackKeys.CUSTOM).data.set(CustomItemData.KEYS.SALVAGING_DISABLED, true);
         }
 
         return data;
