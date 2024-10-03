@@ -15,8 +15,6 @@ public class StackData<T> {
     public StackData(ExileStack stack, ItemstackDataSaver<T> saver) {
         this.stack = stack;
         this.saver = saver;
-
-        stack.allDatas.add(this);
     }
 
 
@@ -84,6 +82,6 @@ public class StackData<T> {
     public void resetGetterCache() {
         getter = Suppliers.memoize(getterNon);
     }
-    
+
 
 }

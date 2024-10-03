@@ -78,6 +78,7 @@ public class MMORPG {
     public static boolean RUN_DEV_TOOLS = true;
 
     public static String formatNumber(float num) {
+    
         if (num < 10) {
             return DECIMAL_FORMAT.format(num);
         } else {

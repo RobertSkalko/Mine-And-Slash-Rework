@@ -13,6 +13,8 @@ public class ExileStacklessData {
         return (T) map.get(data.getId());
     }
 
+    // todo switch all these to stackkeys
+
     public <T> T get(Function<ExileStack, StackData<T>> data) {
         var o = data.apply(this.stack);
         return get(o);
@@ -40,7 +42,9 @@ public class ExileStacklessData {
     }
 
     public void apply(ExileStack stack) {
-        for (StackData data : stack.allDatas) {
+
+
+        for (StackData data : stack.getAll()) {
             if (map.containsKey(data.getId())) {
                 var d = map.get(data.getId());
                 data.set(d);
@@ -50,7 +54,7 @@ public class ExileStacklessData {
 
     public static ExileStacklessData from(ExileStack stack) {
         var b = new ExileStacklessData();
-        for (StackData data : stack.allDatas) {
+        for (StackData data : stack.getAll()) {
             if (data.has()) {
                 b.set(data, data.get());
             }

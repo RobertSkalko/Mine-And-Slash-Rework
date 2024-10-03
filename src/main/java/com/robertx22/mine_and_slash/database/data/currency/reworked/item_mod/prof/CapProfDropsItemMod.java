@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.pr
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationSers;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ProfessionModification;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import net.minecraft.network.chat.MutableComponent;
 
 public class CapProfDropsItemMod extends ProfessionModification {
@@ -35,7 +36,7 @@ public class CapProfDropsItemMod extends ProfessionModification {
 
     @Override
     public void modifyProfessionItem(ExileStack data) {
-        data.TOOL.edit(x -> x.force_lvl = this.data.lvl);
+        data.get(StackKeys.TOOL).edit(x -> x.force_lvl = this.data.lvl);
     }
 
     @Override
