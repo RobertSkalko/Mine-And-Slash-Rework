@@ -20,8 +20,8 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -156,8 +156,6 @@ public abstract class CraftingStationScreen extends AbstractContainerScreen<Craf
 
     public List<ProfessionRecipe> getPossibleRecipes() {
 
-        List<ProfessionRecipe> list = new ArrayList<>();
-
 
         Item v1 = null;
         Item v2 = null;
@@ -169,15 +167,20 @@ public abstract class CraftingStationScreen extends AbstractContainerScreen<Craf
                 v2 = mat;
             }
         }
+
+        var recipes = new HashSet<>(ExileDB.Recipes().getFilterWrapped(x -> x.profession.equals(prof.GUID())).list);
+
         if (v1 != null && v2 != null) {
             for (ProfessionRecipe rec : ExileDB.Recipes().getFilterWrapped(x -> x.profession.equals(prof.GUID())).list) {
-                if (rec.isMadeWithPrimaryMats(v1, v2)) {
-                    list.add(rec);
+                if (!rec.isMadeWithPrimaryMats(v1, v2)) {
+                    recipes.removeIf(x -> x.GUID().equals(rec.GUID()));
                 }
             }
+        } else {
+            recipes = new HashSet<>();
         }
-
-        return list;
+        recipes.addAll(ExileDB.Recipes().getFilterWrapped(x -> x.profession.equals(prof.GUID()) && x.canCraft(menu.getItems())).list);
+        return recipes.stream().toList();
 
     }
 
