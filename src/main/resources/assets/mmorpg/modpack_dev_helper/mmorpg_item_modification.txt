@@ -8,12 +8,6 @@ add_gear_quality
 add_potential
 add_socket
 affix_number_reroll
-cap_prof_drops_0
-cap_prof_drops_1
-cap_prof_drops_2
-cap_prof_drops_3
-cap_prof_drops_4
-cap_prof_drops_5
 corrupt_gear
 corrupt_gear_no_affix
 destroy_item

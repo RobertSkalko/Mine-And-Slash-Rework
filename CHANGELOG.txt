@@ -39,3 +39,8 @@ I will probably stop the item data rework here and wait for next update to finis
 - spell levels should now be readable in the gui and also they change colors when you level them up
 - fixed profession recipes not being craftable if they don't have both a tier and a rarity item material
 - you can no longer use stat source command on some1 else
+- removed mastery seals, just use downrank recipes
+- fixed leech % dmg as x stat
+- added one_of_a_kind to affix datapack
+- added "of paragon's" suffixes, one of a kind rare suffixes that provide multiple stats alongside new jewel effect stat
+- simplified the max runes limit on items, now 1 per item, except on runed items

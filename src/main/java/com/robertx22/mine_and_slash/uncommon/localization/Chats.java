@@ -6,6 +6,11 @@ import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
 import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
+    NOT_ENOUGH_POINTS("No Points to Spend."),
+    PERK_MAXED("Perk is maxed out, can't spend points anymore!"),
+    MAX_2_CLASSES("You can't spend points in more than 2 classes."),
+
+
     NAME_TOO_LONG("Name can't be longer than 20 letters"),
     NAME_EMPTY("Name can't be empty"),
     NAME_SAME("Name must be unique and not used by other characters."),
@@ -91,7 +96,7 @@ public enum Chats implements IAutoLocName {
     NOT_TOOL("This is not a tool item, or the tool has no stats yet."),
     NEED_EMPTY_SOCKET("Requires an empty socket"),
     CANT_HAVE_MORE_GEMS_THAN_RUNES_IN_RUNEWORD("Runeword Items Can not have more Gems than Runes socketed"),
-    CANT_HAVE_MORE_RUNES_THAN_GEMS_IN_NON_RUNED("Normal(Non-Runed) Items Can not have more Runes than Gems socketed"),
+    MAX_RUNES_PER_RARITY("Can't have more than %1$s Runes in %2$s Rarity Item"),
     ALREADY_MAX_SOCKETS("Item already has maximum possible sockets."),
     ALREADY_MAX_LINKS("Item already has maximum possible links."),
     NEEDS_AN_AFFIX("Gear must have affixes."),

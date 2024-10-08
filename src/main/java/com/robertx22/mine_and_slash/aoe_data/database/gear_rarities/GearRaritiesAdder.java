@@ -133,7 +133,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.favor_loot_multi = 1.2F;
             x.favor_needed = 500;
             x.sockets = new MinMax(1, 2);
-            x.min_lvl = 50;
+            x.min_lvl = 40;
             x.min_map_rarity_to_drop = IRarity.COMMON_ID;
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
             x.pot = new GearRarity.Potential(75);
@@ -165,7 +165,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.favor_loot_multi = 1.25F;
             x.favor_needed = 1000;
             x.sockets = new MinMax(2, 2);
-            x.min_lvl = 75;
+            x.min_lvl = 50;
             x.min_map_rarity_to_drop = IRarity.EPIC_ID;
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
             x.pot = new GearRarity.Potential(100);
@@ -206,6 +206,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         // todo need to make separate maprarity etc or else this will roll somehow
         GearRarity runeword = new GearRarity().edit(x -> {
             x.vanilla_rar_enum = VanillaRarities.RUNED.name();
+
+            x.max_runes = 10;
 
             x.map_resist_req = 50;
             x.type = GearRarityType.RUNED;

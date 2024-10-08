@@ -8,7 +8,6 @@ import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.all
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.gear.*;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.jewel.CorruptJewelItemMod;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.map.UpgradeMapRarityItemMod;
-import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.prof.CapProfDropsItemMod;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.ItemReqs;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.keys.*;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
@@ -37,12 +36,7 @@ public class ItemMods extends ExileKeyHolder<ItemModification> {
                 return new SetAffixRarityItemMod(id, new SetAffixRarityItemMod.Data(new UpgradeAffixItemMod.AffixFinderData(UpgradeAffixItemMod.AffixFinder.LOWEST_RARITY_AFFIX, ""), info.rar));
             });
 
-    public ExileKeyMap<ItemModification, SkillItemTierKey> CAP_PROF_DROPS = new ExileKeyMap<ItemModification, SkillItemTierKey>(this, "cap_prof_drops")
-            .ofSkillItemTiers()
-            .build((id, info) -> {
-                return new CapProfDropsItemMod(id, new CapProfDropsItemMod.Data(info.tier.levelRange.getMinLevel()));
-            });
-
+    
     public ExileKeyMap<ItemModification, MaxUsesKey> MAXIMUM_USES = new ExileKeyMap<ItemModification, MaxUsesKey>(this, "increment_uses")
             .ofList(ItemReqs.Datas.allMaxUses(), x -> new MaxUsesKey(x))
             .build((id, info) -> new IncrementUsesItemMod(id, info.data));

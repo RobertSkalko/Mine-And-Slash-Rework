@@ -5,6 +5,7 @@ import com.robertx22.mine_and_slash.database.data.affixes.Affix;
 import com.robertx22.mine_and_slash.database.data.requirements.Requirements;
 import com.robertx22.mine_and_slash.database.data.requirements.TagRequirement;
 import com.robertx22.mine_and_slash.database.data.stats.Stat;
+import com.robertx22.mine_and_slash.database.data.stats.types.JewelEffect;
 import com.robertx22.mine_and_slash.tags.TagType;
 import com.robertx22.mine_and_slash.tags.imp.SlotTag;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
@@ -24,6 +25,7 @@ public class AffixBuilder {
     public Affix.AffixSlot type;
 
     public String auraReq = "";
+    public String oneofakind = "";
 
     TagRequirement tagRequirement = new TagRequirement(TagType.GearSlot, new ArrayList<>(), new ArrayList<>());
 
@@ -35,6 +37,14 @@ public class AffixBuilder {
         return new AffixBuilder(id);
     }
 
+    public static AffixBuilder Paragon(String id, String name) {
+        return AffixBuilder.Normal("paragon_" + id)
+                .Named("Of Paragon's " + name)
+                .Weight(50)
+                .stats(JewelEffect.getInstance().mod(1, 5))
+                .Suffix();
+    }
+
     public AffixBuilder Named(String name) {
         langName = name;
         return this;
@@ -44,6 +54,12 @@ public class AffixBuilder {
         auraReq = aura;
         return this;
     }
+
+    public AffixBuilder OneOfAKind(String one) {
+        oneofakind = one;
+        return this;
+    }
+
 
     public AffixBuilder includesTags(SlotTag... tags) {
         this.tagRequirement.included.addAll(Arrays.stream(tags)
@@ -150,6 +166,8 @@ public class AffixBuilder {
 
         Affix affix = new Affix();
         affix.guid = guid;
+
+        affix.one_of_a_kind = oneofakind;
 
         affix.requirements = new Requirements(this.tagRequirement);
 

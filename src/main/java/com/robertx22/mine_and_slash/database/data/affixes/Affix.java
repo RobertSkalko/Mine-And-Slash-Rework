@@ -41,6 +41,7 @@ public class Affix implements IWeighted, IGUID, IAutoLocName, IhasRequirements,
     public String eye_aura_req = "";
     public transient String loc_name;
     public boolean only_one_per_item = true;
+    public String one_of_a_kind = "";
     public int weight = 1000;
     public Requirements requirements;
     public AffixSlot type;

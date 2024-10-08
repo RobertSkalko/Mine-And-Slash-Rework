@@ -124,6 +124,9 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         if (affix.only_one_per_item && affixes.containsAffix(affix)) {
             return false;
         }
+        if (!affix.one_of_a_kind.isEmpty() && affixes.getPrefixesAndSuffixes().stream().anyMatch(x -> x.getAffix().one_of_a_kind.equals(affix.one_of_a_kind))) {
+            return false;
+        }
 
         return affix.meetsRequirements(new GearRequestedFor(this));
 

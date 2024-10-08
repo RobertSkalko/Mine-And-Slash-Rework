@@ -18,12 +18,6 @@ harvest_essence_4
 jewel_corrupt
 level_up_orb
 map_rarity_upgrade
-mastery_seal_0
-mastery_seal_1
-mastery_seal_2
-mastery_seal_3
-mastery_seal_4
-mastery_seal_5
 orb_of_quality
 sharpening_stone_0
 sharpening_stone_1

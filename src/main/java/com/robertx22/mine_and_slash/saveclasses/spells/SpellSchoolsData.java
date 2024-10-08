@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.saveclasses.spells;
 import com.robertx22.mine_and_slash.database.OptScaleExactStat;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.PlayerPointsType;
 import com.robertx22.mine_and_slash.database.data.perks.Perk;
+import com.robertx22.mine_and_slash.database.data.profession.ExplainedResult;
 import com.robertx22.mine_and_slash.database.data.spell_school.SpellSchool;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
@@ -10,6 +11,8 @@ import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IStatCtx;
 import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
+import com.robertx22.mine_and_slash.uncommon.localization.Chats;
+import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
@@ -99,23 +102,27 @@ public class SpellSchoolsData implements IStatCtx {
         return total;
     }
 
-    public boolean canLearn(Player en, SpellSchool school, Perk perk) {
+    public ExplainedResult canLearn(Player en, SpellSchool school, Perk perk) {
 
         PointType type = perk.getPointType();
 
         if (type.getGeneralType().getFreePoints(en) < 1) {
-            return false;
+            return ExplainedResult.failure(Chats.NOT_ENOUGH_POINTS.locName().withStyle(ChatFormatting.RED));
         }
         if (!school.isLevelEnoughFor(en, perk)) {
-            return false;
+            return ExplainedResult.failure(Chats.TOO_LOW_LEVEL.locName().withStyle(ChatFormatting.RED));
+        }
+        if (!school.isLevelEnoughForSpellLevelUp(en, perk, this.getLevel(perk.GUID()))) {
+            return ExplainedResult.failure(Chats.TOO_LOW_LEVEL.locName().withStyle(ChatFormatting.RED));
         }
         if (this.school().size() > 1 && !this.school().contains(school.GUID())) {
-            return false;
+            return ExplainedResult.failure(Chats.MAX_2_CLASSES.locName().withStyle(ChatFormatting.RED));
         }
         if (allocated_lvls.getOrDefault(perk.GUID(), 0) >= perk.getMaxLevel()) {
-            return false;
+            return ExplainedResult.failure(Chats.PERK_MAXED.locName().withStyle(ChatFormatting.RED));
         }
-        return true;
+
+        return ExplainedResult.success();
     }
 
     public boolean canUnlearn(Player en, SpellSchool school, Perk perk) {

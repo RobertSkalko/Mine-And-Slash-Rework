@@ -148,6 +148,9 @@ public class MapData {
             int x = RandomUtils.RandomRange(50, max);
             int z = RandomUtils.RandomRange(50, max);
 
+            // x = max;
+            // z = max; // todo even at max it doesnt trigger world border, so it shouldnt be this
+
             pos = new ChunkPos(x, z);
             pos = getStartChunk(pos.getMiddleBlockPosition(50));
 

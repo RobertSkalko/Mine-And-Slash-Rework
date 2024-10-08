@@ -17,7 +17,6 @@ public class ItemModificationSers {
     public static String REROLL_AFFIX = "reroll_affix";
     public static String REROLL_INFUSION = "reroll_infusion";
     public static String UPGRADE_MAP_RARITY = "upgrade_map_rarity";
-    public static String CAP_PROF_DROPS = "cap_prof_drops";
     public static String JEWEL_CORRUPT = "corrupt_jewel";
     public static String REROLL_AFFIX_NUMBERS = "corrupt_jewel";
 

@@ -9,11 +9,8 @@ import com.robertx22.mine_and_slash.database.data.currency.reworked.keys.*;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.WorksOnBlock;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
-import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import net.minecraft.world.item.Items;
-
-import java.util.Map;
 
 
 public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
@@ -42,6 +39,7 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
                         .buildCurrency(this);
             });
 
+    /*
     public ExileKeyMap<ExileCurrency, SkillItemTierKey> PROF_DROPS_CAP = new ExileKeyMap<ExileCurrency, SkillItemTierKey>(this, "mastery_seal")
             .ofSkillItemTiers()
             .build((id, info) -> {
@@ -51,6 +49,7 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
                         .weight(0)
                         .buildCurrency(this);
             });
+     */
 
     public ExileKey<ExileCurrency, IdKey> CORRUPT_GEAR = ExileCurrency.Builder.of("chaos_orb", "Orb of Chaos", WorksOnBlock.ItemType.GEAR)
             .addRequirement(ItemReqs.INSTANCE.IS_NOT_CORRUPTED)
@@ -85,9 +84,9 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
             .addRequirement(ItemReqs.INSTANCE.IS_NOT_CORRUPTED)
             .rarity(IRarity.RARE_ID)
             .addRequirement(ItemReqs.INSTANCE.IS_RARITY.map.get(new RarityKeyInfo(IRarity.UNIQUE_ID)))
-            .addModification(ItemMods.INSTANCE.ADD_5_PERCENT_UNIQUE_STATS, 50)
-            .addModification(ItemMods.INSTANCE.REDUCE_5_PERCENT_UNIQUE_STATS, 50)
-            .potentialCost(5)
+            .addModification(ItemMods.INSTANCE.ADD_5_PERCENT_UNIQUE_STATS, 60)
+            .addModification(ItemMods.INSTANCE.REDUCE_5_PERCENT_UNIQUE_STATS, 40)
+            .potentialCost(10)
             .weight(CodeCurrency.Weights.UBER)
             .build(this);
 
@@ -104,6 +103,7 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
             .rarity(IRarity.MYTHIC_ID)
             .addRequirement(ItemReqs.INSTANCE.IS_NOT_CORRUPTED)
             .addRequirement(ItemReqs.INSTANCE.HAS_AFFIXES)
+            .addRequirement(ItemReqs.INSTANCE.NOT_CRAFTED)
             .addRequirement(ItemReqs.INSTANCE.IS_RARITY.get(new RarityKeyInfo(IRarity.MYTHIC_ID)))
             .addModification(ItemMods.INSTANCE.REROLL_RANDOM_AFFIX_INTO_MYTHIC, 100)
             .maxUses(new MaxUsesKey(ItemReqs.Datas.RANDOM_MYTHIC_AFFIX))
@@ -115,8 +115,8 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
             .addRequirement(ItemReqs.INSTANCE.IS_NOT_CORRUPTED)
             .rarity(IRarity.RARE_ID)
             .addRequirement(ItemReqs.INSTANCE.HAS_AFFIXES)
-            .addModification(ItemMods.INSTANCE.UPGRADE_RANDOM_AFFIX, 50)
-            .addModification(ItemMods.INSTANCE.DOWNGRADE_RANDOM_AFFIX, 50)
+            .addModification(ItemMods.INSTANCE.UPGRADE_RANDOM_AFFIX, 60)
+            .addModification(ItemMods.INSTANCE.DOWNGRADE_RANDOM_AFFIX, 40)
             .potentialCost(5)
             .weight(CodeCurrency.Weights.COMMON)
             .build(this);
@@ -179,17 +179,6 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
 
     @Override
     public void loadClass() {
-
-        for (Map.Entry<SkillItemTierKey, ExileKey<ExileCurrency, SkillItemTierKey>> en : PROF_DROPS_CAP.map.entrySet()) {
-            en.getValue().addRecipe(ExileRegistryTypes.CURRENCY, x -> {
-                return IShapedRecipe.of(x.getItem(), 1)
-                        .define('X', Items.IRON_PICKAXE)
-                        .define('Y', RarityItems.RARITY_STONE.get(en.getKey().tier.rar).get())
-                        .pattern("YYY")
-                        .pattern("YXY")
-                        .pattern("YYY");
-            });
-        }
 
         MAP_RARITY_UPGRADE.addRecipe(ExileRegistryTypes.CURRENCY, x -> {
             return IShapedRecipe.of(x.getItem(), 3)

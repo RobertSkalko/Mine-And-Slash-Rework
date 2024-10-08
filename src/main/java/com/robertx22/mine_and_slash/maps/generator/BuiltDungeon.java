@@ -2,7 +2,6 @@ package com.robertx22.mine_and_slash.maps.generator;
 
 
 import com.google.common.base.Preconditions;
-import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.mine_and_slash.maps.DungeonRoom;
 import com.robertx22.mine_and_slash.maps.MapData;
@@ -139,70 +138,6 @@ public class BuiltDungeon {
 
     }
 
-    public boolean checkMissing() {
-        boolean did = false;
-
-
-        for (int x = 0; x < rooms.length; x++) {
-            for (int z = 0; z < rooms[x].length; z++) {
-                var room = getRoom(x, z);
-                if (room != null) {
-
-                    for (Direction dir : room.data.sides.getDoorSides()) {
-                        var other = getRoomFacing(dir, x, z);
-
-                        if (other.data.sides.getSideOfDirection(dir.getOpposite()) != RoomSide.DOOR) {
-                            ExileLog.get().warn("Room has no matching door " + x + "_" + z);
-                        }
-                    }
-                }
-            }
-        }
-        return did;
-    }
-
-
-
-    /*
-    public boolean addMissingRooms() {
-        this.startFinishing = true;
-        boolean did = false;
-
-
-        List<Direction> dirs = Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST);
-
-        for (int x = 0; x < rooms.length; x++) {
-            for (int z = 0; z < rooms[x].length; z++) {
-                if (getRoom(x, z) != null) {
-                    for (Direction dir : dirs) {
-                        if (hasDoorButNoRoom(new PointData(x, z), dir)) {
-                            this.addRandomRoom(x, z);
-                            ExileLog.get().log("added missing room at " + x + "_" + z);
-                            did = true;
-                        }
-                    }
-                }
-            }
-        }
-        return did;
-    }
-
-
-     */
-
-    /*
-    private boolean hasDoorButNoRoom(PointData p, Direction dir) {
-        if (getSideOfRoomFacing(dir, p.x, p.y) != RoomSide.DOOR && getRoom(p.x, p.y).data.sides.getSideOfDirection(dir) == RoomSide.DOOR) {
-            return true;
-        }
-        if (getSideOfRoomFacing(dir, p.x, p.y) == RoomSide.DOOR && getRoom(p.x, p.y).data.sides.getSideOfDirection(dir) != RoomSide.DOOR) {
-            return true;
-        }
-        return false;
-    }
-
-     */
-
 
     public BuiltRoom getRoomFacing(Direction dir, int x, int z) {
         PointData coords = getCoordsOfRoomFacing(dir, x, z);
@@ -246,26 +181,6 @@ public class BuiltDungeon {
         return unbuilt;
     }
 
-
-    public void addRandomRoom(int x, int z) {
-
-        UnbuiltRoom unbuilt = getUnbuiltFor(x, z);
-        Preconditions.checkNotNull(unbuilt);
-
-        RoomRotation rot = randomDungeonRoom(unbuilt, new PointData(x, z));
-        Preconditions.checkNotNull(rot);
-
-        DungeonRoom dRoom = rot.type.getRandomRoom(b.dungeon, b);
-        Preconditions.checkNotNull(dRoom);
-
-        BuiltRoom theroom = new BuiltRoom(b.dungeon, rot, dRoom);
-        Preconditions.checkNotNull(theroom);
-
-        addRoom(x, z, theroom);
-
-    }
-
-    // todo i think this is the problem
     private void buildConnectedRooms(int x, int z, BuiltRoom room) {
 
         List<Direction> dirs = room.data.sides.getDoorSides();

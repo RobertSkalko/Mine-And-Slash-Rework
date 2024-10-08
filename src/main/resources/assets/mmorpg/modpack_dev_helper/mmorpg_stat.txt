@@ -324,6 +324,7 @@ increased_quantity
 int_dmg
 int_dmg_per_5_strength
 intelligence
+jewel_effect
 jewel_socket
 knockback_resist
 learn_arrow_barrage

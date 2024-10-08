@@ -1,10 +1,7 @@
 package com.robertx22.mine_and_slash.aoe_data.database.affixes;
 
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
-import com.robertx22.mine_and_slash.aoe_data.database.affixes.adders.EnchantAffixes;
-import com.robertx22.mine_and_slash.aoe_data.database.affixes.adders.GearSlotPowerAffixesAdder;
-import com.robertx22.mine_and_slash.aoe_data.database.affixes.adders.NonWeaponSuffixes;
-import com.robertx22.mine_and_slash.aoe_data.database.affixes.adders.WeaponSuffixes;
+import com.robertx22.mine_and_slash.aoe_data.database.affixes.adders.*;
 import com.robertx22.mine_and_slash.aoe_data.database.affixes.adders.jewelry.JewelrySuffixes;
 import com.robertx22.mine_and_slash.database.base.IRandomDefault;
 import com.robertx22.mine_and_slash.database.data.affixes.Affix;
@@ -26,6 +23,8 @@ public class Suffixes implements IRandomDefault<Affix>, ExileRegistryInit {
         new WeaponSuffixes().registerAll();
         new NonWeaponSuffixes().registerAll();
         new JewelrySuffixes().registerAll();
+
+        new ParagonGearAffixes().registerAll();
 
     }
 

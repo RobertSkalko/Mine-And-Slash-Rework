@@ -10,6 +10,7 @@ import com.robertx22.mine_and_slash.database.data.profession.screen.InfusingScre
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.SlashBlocks;
+import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SlashItems;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
@@ -55,6 +56,8 @@ public class JeiIntegration implements IModPlugin {
                 itemsToHide.add(item.getDefaultInstance());
             }
         }
+        itemsToHide.add(SlashItems.INVISIBLE_ICON.get().getDefaultInstance());
+        
         jeiRuntime.getIngredientManager().removeIngredientsAtRuntime(VanillaTypes.ITEM_STACK, itemsToHide);
     }
 

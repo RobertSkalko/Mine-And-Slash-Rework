@@ -53,6 +53,7 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     public int min_affixes = 0;
     public MinMax sockets = new MinMax(0, 2);
     public int item_tier = -1;
+    public int max_runes = 1;
     public float item_tier_power;
     public int min_lvl = 0;
     public String min_map_rarity_to_drop = IRarity.COMMON_ID;
