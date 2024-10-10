@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.capability.player.data;
 
+import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.mine_and_slash.capability.player.container.BackpackMenu;
 import com.robertx22.mine_and_slash.capability.player.helper.BackpackInventory;
 import com.robertx22.mine_and_slash.database.data.currency.IItemAsCurrency;
@@ -9,7 +10,6 @@ import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.vanilla_mc.items.gemrunes.RuneItem;
 import com.robertx22.mine_and_slash.vanilla_mc.items.misc.RarityStoneItem;
-import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -116,6 +116,11 @@ public class Backpacks {
 
     public void openBackpack(BackpackType type, Player p, int rows) {
         if (!p.level().isClientSide) {
+
+            if (!p.getMainHandItem().is(SlashItems.MASTER_BAG.get())) {
+                return;
+            }
+
             BackpackInventory inv = getInv(type);
             //inv.throwOutBlockedSlotItems(rows * 9);
             p.openMenu(new SimpleMenuProvider((i, playerInventory, playerEntity) -> {

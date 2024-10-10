@@ -57,7 +57,9 @@ public class JeiIntegration implements IModPlugin {
             }
         }
         itemsToHide.add(SlashItems.INVISIBLE_ICON.get().getDefaultInstance());
-        
+        itemsToHide.add(SlashItems.TEST_GEN.get().getDefaultInstance());
+        itemsToHide.add(SlashItems.LOOT_CRATE.get().getDefaultInstance());
+
         jeiRuntime.getIngredientManager().removeIngredientsAtRuntime(VanillaTypes.ITEM_STACK, itemsToHide);
     }
 

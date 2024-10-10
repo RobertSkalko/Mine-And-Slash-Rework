@@ -24,6 +24,7 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
 
 
     public HarvestCurrencies HARVEST = new HarvestCurrencies(this);
+    public JewelCurrencies JEWEL = new JewelCurrencies(this);
 
 
     public ExileKeyMap<ExileCurrency, SkillItemTierKey> SHARPEN_STONE_QUALITY = new ExileKeyMap<ExileCurrency, SkillItemTierKey>(this, "sharpening_stone")
@@ -39,17 +40,6 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
                         .buildCurrency(this);
             });
 
-    /*
-    public ExileKeyMap<ExileCurrency, SkillItemTierKey> PROF_DROPS_CAP = new ExileKeyMap<ExileCurrency, SkillItemTierKey>(this, "mastery_seal")
-            .ofSkillItemTiers()
-            .build((id, info) -> {
-                return ExileCurrency.Builder.of(id, info.tier.word + " Mastery Seal", WorksOnBlock.ItemType.TOOL)
-                        .addModification(ItemMods.INSTANCE.CAP_PROF_DROPS.get(info), 100)
-                        .potentialCost(0)
-                        .weight(0)
-                        .buildCurrency(this);
-            });
-     */
 
     public ExileKey<ExileCurrency, IdKey> CORRUPT_GEAR = ExileCurrency.Builder.of("chaos_orb", "Orb of Chaos", WorksOnBlock.ItemType.GEAR)
             .addRequirement(ItemReqs.INSTANCE.IS_NOT_CORRUPTED)
@@ -149,14 +139,6 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
             .weight(CodeCurrency.Weights.COMMON)
             .build(this);
 
-    public ExileKey<ExileCurrency, IdKey> JEWEL_CORRUPT = ExileCurrency.Builder.of("jewel_corrupt", "Orb of Mesmerizing Chaos", WorksOnBlock.ItemType.JEWEL)
-            .addRequirement(ItemReqs.INSTANCE.IS_NOT_CORRUPTED)
-            .rarity(IRarity.UNIQUE_ID)
-            .addModification(ItemMods.INSTANCE.JEWEL_CORRUPTION, 50)
-            .addModification(ItemMods.INSTANCE.DESTROY_ITEM, 50)
-            .potentialCost(0)
-            .weight(CodeCurrency.Weights.RARE)
-            .build(this);
 
     public ExileKey<ExileCurrency, IdKey> UPGRADE_COMMON_AFFIX = ExileCurrency.Builder.of("upgrade_common_affix", "Orb of Fledgling's Reprieve", WorksOnBlock.ItemType.GEAR)
             .rarity(IRarity.RARE_ID)

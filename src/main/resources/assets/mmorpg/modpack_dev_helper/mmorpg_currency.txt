@@ -16,6 +16,8 @@ harvest_essence_2
 harvest_essence_3
 harvest_essence_4
 jewel_corrupt
+jewel_sure_upgrade
+jewel_upgrade_affix
 level_up_orb
 map_rarity_upgrade
 orb_of_quality

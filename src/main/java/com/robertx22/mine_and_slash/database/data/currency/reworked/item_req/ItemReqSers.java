@@ -7,7 +7,6 @@ public class ItemReqSers {
     public static String IS_RARITY = "is_rarity";
     public static String HAS_AFFIXES = "has_affixes";
     public static String IS_NOT_CORRUPTED = "is_not_corrupted";
-    public static String IS_JEWEL_NOT_CORRUPTED = "is_jewel_not_corrupted";
     public static String HAS_INFUSION = "has_infusion";
     public static String CAN_ADD_SOCKETS = "can_add_sockets";
     public static String IS_UNDER_QUALITY = "is_under_quality";
@@ -16,5 +15,6 @@ public class ItemReqSers {
     public static String IS_NONE = "is_none";
     public static String HAS_RARITY_AFFIX = "has_affix_of_rar";
     public static String NOT_CRAFTED_GEAR = "not_crafted_gear";
+    public static String JEWEL_HAS_AFFIXES = "jewel_has_affixes";
 
 }

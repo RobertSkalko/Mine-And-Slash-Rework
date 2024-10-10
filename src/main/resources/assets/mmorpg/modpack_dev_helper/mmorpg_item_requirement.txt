@@ -23,9 +23,11 @@ is_uncommon
 is_under_20_quality
 is_under_21_quality
 is_unique
+jewel_has_affixes
 lvl_not_max
 map_has_higher_rar
 max_uses_level_up
 max_uses_random_mythic_affix
 max_uses_sharpening_stone
+max_uses_sure_jewel_up
 not_crafted_gear

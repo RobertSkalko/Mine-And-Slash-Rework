@@ -3,6 +3,8 @@ package com.robertx22.mine_and_slash.loot.blueprints;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.mine_and_slash.database.data.affixes.Affix;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.loot.LootInfo;
 import com.robertx22.mine_and_slash.saveclasses.jewel.CraftedUniqueJewelData;
 import com.robertx22.mine_and_slash.saveclasses.jewel.JewelItemData;
@@ -33,9 +35,15 @@ public class JewelBlueprint extends RarityItemBlueprint {
 
         ItemStack stack = data.getItem().getDefaultInstance();
 
+
         StackSaving.JEWEL.saveTo(stack, data);
 
-        return stack;
+
+        ExileStack ex = ExileStack.of(stack);
+
+        ex.get(StackKeys.POTENTIAL).edit(x -> x.potential = 50);
+
+        return ex.getStack();
 
     }
 

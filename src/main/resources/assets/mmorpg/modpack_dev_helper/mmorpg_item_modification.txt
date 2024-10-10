@@ -16,6 +16,7 @@ downgrade_random_affix
 increment_uses_level_up
 increment_uses_random_mythic_affix
 increment_uses_sharpening_stone
+increment_uses_sure_jewel_up
 jewel_corrupt
 map_rarity_upgrade
 reduce_5_perc_unique_stats
@@ -37,6 +38,7 @@ sharpening_stone_quality_2
 sharpening_stone_quality_3
 sharpening_stone_quality_4
 sharpening_stone_quality_5
+upgrade_jewel_affix_rarity
 upgrade_lowest_affix
 upgrade_random_affix
 upgrade_specific_rar_common

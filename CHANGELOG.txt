@@ -44,3 +44,5 @@ I will probably stop the item data rework here and wait for next update to finis
 - added one_of_a_kind to affix datapack
 - added "of paragon's" suffixes, one of a kind rare suffixes that provide multiple stats alongside new jewel effect stat
 - simplified the max runes limit on items, now 1 per item, except on runed items
+- fixed master bag bug when moving it while open
+- added new currencies to upgrade jewels, jewels now have potential

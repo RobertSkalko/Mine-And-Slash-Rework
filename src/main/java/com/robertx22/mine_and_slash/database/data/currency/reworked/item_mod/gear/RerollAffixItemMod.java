@@ -31,7 +31,7 @@ public class RerollAffixItemMod extends GearModification {
     @Override
     public void modifyGear(ExileStack stack) {
         stack.get(StackKeys.GEAR).edit(gear -> {
-            var opt = data.finder_data.finder().getAffix(gear, data.finder_data);
+            var opt = data.finder_data.finder().getAffix(gear.affixes.getPrefixesAndSuffixes(), data.finder_data);
 
             if (opt.isPresent()) {
                 AffixData affixData = opt.get();
