@@ -16,7 +16,7 @@ public class ItemTypeTargetFilter extends GroupFilterEntry {
 
     @Override
     public boolean isValid(BestiaryEntry e) {
-        return e.obj instanceof ExileCurrency u && u.item_type == type;
+        return e.obj instanceof ExileCurrency u && u.item_type.contains(type);
     }
 
     @Override

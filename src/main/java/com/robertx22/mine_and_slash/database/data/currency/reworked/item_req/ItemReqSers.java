@@ -6,6 +6,7 @@ public class ItemReqSers {
     public static String MAX_USES = "max_uses";
     public static String IS_RARITY = "is_rarity";
     public static String HAS_AFFIXES = "has_affixes";
+    public static String HAS_CORRUPTION_AFFIXES = "has_corrupt_affixes";
     public static String IS_NOT_CORRUPTED = "is_not_corrupted";
     public static String HAS_INFUSION = "has_infusion";
     public static String CAN_ADD_SOCKETS = "can_add_sockets";

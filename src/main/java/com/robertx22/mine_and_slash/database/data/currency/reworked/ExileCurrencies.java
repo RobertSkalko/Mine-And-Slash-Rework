@@ -158,6 +158,16 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
             .weight(CodeCurrency.Weights.COMMON)
             .build(this);
 
+    public ExileKey<ExileCurrency, IdKey> UPGRADE_CORRUPTION_AFFIX = ExileCurrency.Builder.of("up_corrupt_affix", "Orb of Foolish Risk",
+                    WorksOnBlock.ItemType.GEAR, WorksOnBlock.ItemType.JEWEL)
+            .rarity(IRarity.EPIC_ID)
+            .addRequirement(ItemReqs.INSTANCE.HAS_CORRUPTION_AFFIXES)
+            .addModification(ItemMods.INSTANCE.UPGRADE_CORRUPTION_AFFIX_RARITY, 90)
+            .addModification(ItemMods.INSTANCE.DESTROY_ITEM, 10)
+            .potentialCost(0)
+            .weight(CodeCurrency.Weights.COMMON)
+            .build(this);
+
 
     @Override
     public void loadClass() {

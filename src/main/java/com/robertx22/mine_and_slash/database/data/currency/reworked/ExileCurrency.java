@@ -36,6 +36,7 @@ import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.mine_and_slash.wip.ExileCached;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -119,7 +120,7 @@ public class ExileCurrency implements IAutoLocName, IAutoGson<ExileCurrency>, Js
     }
 
 
-    public WorksOnBlock.ItemType item_type = WorksOnBlock.ItemType.GEAR;
+    public List<WorksOnBlock.ItemType> item_type = new ArrayList<>(Arrays.asList(WorksOnBlock.ItemType.GEAR));
 
 
     @Override
@@ -242,9 +243,17 @@ public class ExileCurrency implements IAutoLocName, IAutoGson<ExileCurrency>, Js
     }
 
     public ExplainedResult canItemBeModified(LocReqContext context) {
-        if (!this.item_type.worksOn.apply(context.stack.getStack())) {
-            return ExplainedResult.failure(Words.THIS_IS_NOT_A.locName(item_type.name.locName().withStyle(ChatFormatting.RED)));
+
+
+        if (item_type.stream().noneMatch(type -> type.worksOn.apply(context.stack.getStack()))) {
+            if (item_type.size() == 1) {
+                return ExplainedResult.failure(Words.THIS_IS_NOT_A.locName(item_type.get(0).name.locName()));
+
+            } else {
+                return ExplainedResult.failure(Words.THIS_IS_NOT_A.locName(TooltipUtils.joinMutableComps(item_type.stream().map(x -> x.name.locName()).iterator(), Component.literal(" or "))));
+            }
         }
+
         if (!this.potential.has(context.stack)) {
             return ExplainedResult.failure(Chats.GEAR_NO_POTENTIAL.locName());
         }
@@ -310,16 +319,16 @@ public class ExileCurrency implements IAutoLocName, IAutoGson<ExileCurrency>, Js
         private PotentialData pot = new PotentialData(1);
         private int weight = 1000;
         private String name;
-        private WorksOnBlock.ItemType type;
+        private List<WorksOnBlock.ItemType> type;
         private String rar = IRarity.RARE_ID;
 
-        public static Builder of(String id, String name, WorksOnBlock.ItemType type) {
+        public static Builder of(String id, String name, WorksOnBlock.ItemType... type) {
             return new Builder(id, name, type);
         }
 
-        public Builder(String id, String name, WorksOnBlock.ItemType type) {
+        public Builder(String id, String name, WorksOnBlock.ItemType... type) {
             this.id = id;
-            this.type = type;
+            this.type = Arrays.asList(type);
             this.name = name;
         }
 

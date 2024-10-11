@@ -8,6 +8,7 @@ public class ItemModificationSers {
     public static String INCREMENT_USES = "increment_uses";
     public static String ADD_SOCKET = "add_socket";
     public static String UPGRADE_AFFIX_RARITY = "upgrade_affix_rarity";
+    public static String UPGRADE_CORRUPT_AFFIX_RARITY = "upgrade_corrupt_affix_rarity";
     public static String UPGRADE_JEWEL_AFFIX_RARITY = "upgrade_jewel_affix_rarity";
     public static String SET_AFFIX_RARITY = "set_affix_rarity";
     public static String DOWNGRADE_AFFIX_RARITY = "downgrade_affix_rarity";

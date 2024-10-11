@@ -111,7 +111,10 @@ public class AffixData implements IRerollable, IStatsContainer {
     }
 
     public void RerollNumbers() {
-        p = getMinMax().random();
+
+        var minmax = getMinMax();
+
+        p = minmax.random();
     }
 
     public final Affix BaseAffix() {

@@ -32,6 +32,10 @@ public class WorksOnBlock extends AbstractTextBlock {
     List<ItemType> items = new ArrayList<>();
 
     public static WorksOnBlock usableOn(ItemType type) {
+        return new WorksOnBlock(Type.USABLE_ON).itemTypes(Arrays.asList(type));
+    }
+
+    public static WorksOnBlock usableOn(List<ItemType> type) {
         return new WorksOnBlock(Type.USABLE_ON).itemTypes(type);
     }
 
@@ -61,8 +65,8 @@ public class WorksOnBlock extends AbstractTextBlock {
         return this;
     }
 
-    private WorksOnBlock itemTypes(ItemType... item) {
-        items.addAll(Arrays.asList(item));
+    private WorksOnBlock itemTypes(List<ItemType> item) {
+        items.addAll(item);
         return this;
     }
 

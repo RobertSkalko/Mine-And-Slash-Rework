@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.database.data.currency.reworked.item_req;
 
+import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.custom.HasCorruptAffixes;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.custom.IsAnyReq;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.custom.MaximumUsesReq;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.gear.*;
@@ -16,6 +17,7 @@ import java.util.List;
 public class ItemReqs extends ExileKeyHolder<ItemRequirement> {
 
     public static class Datas {
+
         public static MaximumUsesReq.Data MAX_LEVEL_USES = new MaximumUsesReq.Data("level_up", 5);
         public static MaximumUsesReq.Data RANDOM_MYTHIC_AFFIX = new MaximumUsesReq.Data("random_mythic_affix", 1);
         public static MaximumUsesReq.Data MAX_SHARPENING_STONE_USES = new MaximumUsesReq.Data("sharpening_stone", 1);
@@ -42,6 +44,7 @@ public class ItemReqs extends ExileKeyHolder<ItemRequirement> {
 
     public ExileKey<ItemRequirement, KeyInfo> LEVEL_NOT_MAX = ExileKey.ofId(this, "lvl_not_max", x -> new LevelNotMaxReq(x.GUID()));
     public ExileKey<ItemRequirement, KeyInfo> HAS_AFFIXES = ExileKey.ofId(this, "has_affixes", x -> new MustHaveAffixesReq(x.GUID()));
+    public ExileKey<ItemRequirement, KeyInfo> HAS_CORRUPTION_AFFIXES = ExileKey.ofId(this, "has_corrupt_affixes", x -> new HasCorruptAffixes(x.GUID()));
     public ExileKey<ItemRequirement, KeyInfo> IS_NOT_CORRUPTED = ExileKey.ofId(this, "is_not_corrupted", x -> new IsNotCorruptedReq(x.GUID()));
     public ExileKey<ItemRequirement, KeyInfo> HAS_INFUSION = ExileKey.ofId(this, "has_infusion", x -> new HasInfusionReq(x.GUID()));
     public ExileKey<ItemRequirement, KeyInfo> CAN_ADD_SOCKETS = ExileKey.ofId(this, "can_add_sockets", x -> new CanAddSocketsReq(x.GUID()));

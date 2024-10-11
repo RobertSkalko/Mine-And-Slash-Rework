@@ -38,6 +38,7 @@ sharpening_stone_quality_2
 sharpening_stone_quality_3
 sharpening_stone_quality_4
 sharpening_stone_quality_5
+up_corrupt_affix
 upgrade_jewel_affix_rarity
 upgrade_lowest_affix
 upgrade_random_affix

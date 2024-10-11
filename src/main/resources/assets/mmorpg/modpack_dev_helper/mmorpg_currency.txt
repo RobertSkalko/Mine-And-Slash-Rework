@@ -29,4 +29,5 @@ sharpening_stone_4
 sharpening_stone_5
 socket_adder
 unique_reroll
+up_corrupt_affix
 upgrade_common_affix

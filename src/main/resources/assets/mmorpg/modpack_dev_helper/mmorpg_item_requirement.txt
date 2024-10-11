@@ -10,6 +10,7 @@ has_affix_runeword
 has_affix_uncommon
 has_affix_unique
 has_affixes
+has_corrupt_affixes
 has_infusion
 is_common
 is_common_or_uncommon

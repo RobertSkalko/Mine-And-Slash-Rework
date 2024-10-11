@@ -67,6 +67,12 @@ public class StackData<T> {
         save();
     }
 
+    public void editIfHas(Consumer<T> c) {
+        if (has()) {
+            edit(c);
+        }
+    }
+
     public boolean setIfHas(T data) {
         if (has()) {
             set(data);

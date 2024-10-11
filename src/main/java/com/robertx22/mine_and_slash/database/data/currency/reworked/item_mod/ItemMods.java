@@ -1,10 +1,7 @@
 package com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod;
 
 import com.robertx22.mine_and_slash.database.data.MinMax;
-import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.all.AddPotentialItemMod;
-import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.all.DestroyItemMod;
-import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.all.DoNothingItemMod;
-import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.all.IncrementUsesItemMod;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.all.*;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.gear.*;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.jewel.CorruptJewelItemMod;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.jewel.UpgradeJewelAffixRarityMod;
@@ -67,6 +64,11 @@ public class ItemMods extends ExileKeyHolder<ItemModification> {
 
     // jewels
     public ExileKey<ItemModification, KeyInfo> UPGRADE_JEWEL_AFFIX_RARITY = ExileKey.ofId(this, "upgrade_jewel_affix_rarity", x -> new UpgradeJewelAffixRarityMod(x.GUID(), UpgradeAffixItemMod.AffixFinder.RANDOM_AFFIX.get()));
+
+
+    // any
+
+    public ExileKey<ItemModification, KeyInfo> UPGRADE_CORRUPTION_AFFIX_RARITY = ExileKey.ofId(this, "up_corrupt_affix", x -> new UpgradeCorruptionAffixMod(x.GUID(), UpgradeAffixItemMod.AffixFinder.RANDOM_AFFIX.get()));
 
 
     @Override

@@ -39,7 +39,7 @@ public class CorruptJewelAffixes {
 
         for (Elements ele : Elements.getAllSingleElemental()) {
             if (ele != Elements.Physical) {
-                of(new MaxElementalResist(ele), 1, 2).Build();
+                of(new MaxElementalResist(ele), 1, 3).Build();
             }
         }
 
