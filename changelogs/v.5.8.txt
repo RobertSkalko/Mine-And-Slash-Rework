@@ -46,3 +46,10 @@ I will probably stop the item data rework here and wait for next update to finis
 - simplified the max runes limit on items, now 1 per item, except on runed items
 - fixed master bag bug when moving it while open
 - added new currencies to upgrade jewels, jewels now have potential
+
+v.5.8.1
+
+- added config to disable spell animations
+- fixed newbie bag
+- salvage station now drops items that aren't salvagable
+- fixed stat soul bugs

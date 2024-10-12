@@ -74,7 +74,7 @@ public class PlayerAnimations {
     // todo need to cleanup this lol
     public static void onSpellCast(Player player, Spell spell, CastEnum c) {
 
-        if (ClientConfigs.CLIENT.USE_SPELL_ANIMATIONS.get()) {
+        if (!ClientConfigs.CLIENT.USE_SPELL_ANIMATIONS.get()) {
             return;
         }
 

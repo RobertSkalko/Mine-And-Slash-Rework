@@ -1,8 +1,6 @@
 Changelog of recent updates: https://github.com/RobertSkalko/Mine-And-Slash-Rework/blob/1.20-Forge/changelogs/v.5.8.txt
 
-v.5.8.1
+v.5.8.2
 
-- added config to disable spell animations
-- fixed newbie bag
-- salvage station now drops items that aren't salvagable
-- fixed stat soul bugs
+- fixed orb of ciphers
+- fixed opposite spell anim boolean
