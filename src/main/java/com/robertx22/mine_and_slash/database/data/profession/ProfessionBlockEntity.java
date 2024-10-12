@@ -12,6 +12,7 @@ import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.ISalvagable;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
+import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -326,24 +327,36 @@ public class ProfessionBlockEntity extends BlockEntity {
 
                 ICommonDataItem data = ICommonDataItem.load(stack);
                 ISalvagable sal = ISalvagable.load(stack);
-                if (data != null && sal != null) {
-                    if (sal.isSalvagable()) {
+                if (data != null && sal != null && sal.isSalvagable(ex)) {
 
-                        float multi = data.getRarity().item_value_multi;
+                    float multi = data.getRarity().item_value_multi;
 
-                        List<ItemStack> output = new ArrayList<>();
-                        output.addAll(sal.getSalvageResult(ex));
-                        output.addAll(getProfession().getAllDrops(p, ownerLvl, data.getLevel(), multi));
+                    List<ItemStack> output = new ArrayList<>();
+                    output.addAll(sal.getSalvageResult(ex));
+                    output.addAll(getProfession().getAllDrops(p, ownerLvl, data.getLevel(), multi));
 
-                        tryPutToOutputs(output);
+                    tryPutToOutputs(output);
 
-                        this.addExp(data.getSalvageExpReward());
+                    this.addExp(data.getSalvageExpReward());
 
-                        stack.shrink(1);
+                    stack.shrink(1);
 
-                        this.setChanged();
+                    this.setChanged();
 
-                        return ExplainedResult.success();
+                    return ExplainedResult.success();
+
+                } else {
+                    if (stack != null && !stack.isEmpty()) {
+
+                        ItemStack copy = stack.copy();
+
+                        stack.shrink(stack.getCount());
+
+                        ItemEntity itementity = new ItemEntity(level, this.getBlockPos().getX(), getBlockPos().getY() + 1.5, getBlockPos().getZ(), copy);
+                        itementity.setDefaultPickUpDelay();
+                        level.addFreshEntity(itementity);
+
+                        p.sendSystemMessage(Words.UNSALVAGEABLE.locName().append(": ").append(copy.getDisplayName()));
                     }
                 }
             }

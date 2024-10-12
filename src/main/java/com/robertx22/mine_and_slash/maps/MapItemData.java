@@ -139,7 +139,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
         return affixes.stream().filter(x -> x.getAffix() != null && x.getAffix().affected == aff).collect(Collectors.toList());
     }
 
-    public List<Component> getTooltip() {
+    public List<Component> getTooltip(ExileStack stack) {
         MapItemData thisMapItemData = this;
         StatRangeInfo tooltipInfo = new StatRangeInfo(ModRange.of(getRarity().stat_percents));
         var tip = new ExileTooltips()
@@ -210,7 +210,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                 .accept(WorksOnBlock.possibleDrops(ExileDB.GearRarities().getFilterWrapped(
                         x -> this.tier >= ExileDB.GearRarities().get(x.min_map_rarity_to_drop).map_tiers.min
                 ).list))
-                .accept(new SalvageBlock(this));
+                .accept(new SalvageBlock(this, stack));
         if (this.isUber()) {
             tip.accept(new AdditionalBlock(Collections.singletonList(Words.AreaContains.locName().withStyle(ChatFormatting.RED))));
         }
@@ -225,7 +225,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
     public void BuildTooltip(TooltipContext ctx) {
         if (ctx.data != null) {
             ctx.tooltip.clear();
-            ctx.tooltip.addAll(getTooltip());
+            ctx.tooltip.addAll(getTooltip(ExileStack.of(ctx.stack)));
 
         }
     }

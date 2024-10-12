@@ -152,7 +152,7 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
             });
         }
         tip.accept(new RequirementBlock(this.lvl))
-                .accept(new SalvageBlock(this))
+                .accept(new SalvageBlock(this, ex))
                 .accept(new AdditionalBlock(() -> {
                     var up = uniq.getCraftedTier().upgradeStack.get();
                     return ImmutableList.of(

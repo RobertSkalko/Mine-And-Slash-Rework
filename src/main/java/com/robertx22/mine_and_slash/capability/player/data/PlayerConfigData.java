@@ -98,7 +98,7 @@ public class PlayerConfigData {
             boolean doSalvage = false;
 
             if (data != null) {
-                if (data.isSalvagable()) {
+                if (data.isSalvagable(ex)) {
 
                     Optional<Boolean> typeSalvageEnabled = checkTypeSalvageConfig(data.getSalvageType(), data.getSalvageConfigurationId());
 

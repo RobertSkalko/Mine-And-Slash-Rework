@@ -20,10 +20,7 @@ public interface ISalvagable {
         return null;
     }
 
-    default boolean isSalvagable() {
-        return true;
-    }
-
+  
     default boolean isSalvagable(ExileStack stack) {
         return !stack.get(StackKeys.CUSTOM).getOrCreate().data.get(CustomItemData.KEYS.SALVAGING_DISABLED);
     }

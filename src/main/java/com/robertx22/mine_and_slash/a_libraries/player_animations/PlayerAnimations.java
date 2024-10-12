@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.a_libraries.player_animations;
 
+import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
 import com.robertx22.mine_and_slash.database.data.spells.components.Spell;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import dev.kosmx.playerAnim.api.firstPerson.FirstPersonConfiguration;
@@ -72,6 +73,10 @@ public class PlayerAnimations {
 
     // todo need to cleanup this lol
     public static void onSpellCast(Player player, Spell spell, CastEnum c) {
+
+        if (ClientConfigs.CLIENT.USE_SPELL_ANIMATIONS.get()) {
+            return;
+        }
 
         var x = spell.getAnimation(c);
 

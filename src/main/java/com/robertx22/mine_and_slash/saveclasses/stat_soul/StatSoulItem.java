@@ -69,9 +69,10 @@ public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt, iHideJ
 
                 ItemStack stack = item.getDefaultInstance();
 
-                geardata.apply(ExileStack.of(stack));
+                var ex = ExileStack.of(stack);
+                geardata.apply(ex);
 
-                PlayerUtils.giveItem(stack, p);
+                PlayerUtils.giveItem(ex.getStack(), p);
                 itemstack.shrink(1);
             }
 

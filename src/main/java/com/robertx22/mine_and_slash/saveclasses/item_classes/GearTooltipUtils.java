@@ -260,7 +260,7 @@ public class GearTooltipUtils {
             etip.accept(new LeagueBlock(ExileDB.LeagueMechanics().get(gear.uniqueStats.getUnique(exStack).league)));
         }
 
-        etip.accept(new SalvageBlock(gear))
+        etip.accept(new SalvageBlock(gear, exStack))
                 .accept(new OperationTipBlock().setAll())
                 .accept(new DurabilityBlock(stack));
 

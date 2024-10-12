@@ -122,7 +122,6 @@ public class ProcessChunkBlocks {
 
                             BuiltRoom room = builder.builtDungeon.getRoomForChunk(cpos);
 
-
                             var ran = DungeonBuilder.createRandom(0l, cpos);
 
                             for (LeagueMechanic mech : opt.get().leagues.getLeagueMechanics()) {
@@ -153,7 +152,6 @@ public class ProcessChunkBlocks {
 
                             chunkdata.generatedMobs = true;
 
-
                             BuiltRoom room = builder.builtDungeon.getRoomForChunk(cpos);
 
                             // this will gen both the league mechs and the dungeon if it runs after the league mechs gen
@@ -174,7 +172,7 @@ public class ProcessChunkBlocks {
         }
     }
 
-    static void generateData(ServerLevel level, LevelChunk chunk, BuiltRoom room) {
+    public static void generateData(ServerLevel level, LevelChunk chunk, BuiltRoom room) {
 
 
         ChunkProcessData data = new ChunkProcessData(chunk, room);

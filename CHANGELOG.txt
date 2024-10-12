@@ -1,48 +1,8 @@
 Changelog of recent updates: https://github.com/RobertSkalko/Mine-And-Slash-Rework/blob/1.20-Forge/changelogs/v.5.8.txt
 
-v.5.8.0
+v.5.8.1
 
-Currencies Rework
-
- * All Currencies are now datapacks! They are separated into item requirement datapacks and item modification datapacks.
-Every currency is now a list of requirements and modifications.
-
-* Totally revamped the In-Game library gui!
-Search bar, filter types, scrolling..
-
-* Characters gui reworked! 
-Added rename and delete character options
-
-NOTE: Some items will probably break or lose some of their data this update, because I refactored some code to better prepare for next minecraft versions.
-What will probably break: unique items, corruption tag, max uses.
-I will probably stop the item data rework here and wait for next update to finish it.
-
-- Datapack change: spells can now allow other spells to benefit from their support gems! This can be used to:
-	* make summons use their basic spell attacks and those attacks will benefit from supp gems used on the summon spell
-	* spells that cause procs to also allow the proc spells to benefit
-- changed summons to now use their basic attack as the spell now that they benefit from supp gems without hardcoded workarounds
-- added new currency: Orb of Divine Benevolence
-- added new /mine_and_slash item_mod use command to test out item modifications
-- added new /mine_and_slash currency use command to use currency on mainhand item only if the requirements on the item pass
-- some item ids were changed for currencies like sharpening stones
-- added more tooltips
-- currencies now have rarities shown in inventory
-- new currencies from harvest league
-- added even more new currencies
-- gems now have rarities (mostly just cosmetic)
-- slight perf tweak for stat calc
-- some affix.types have been tweaked
-- mns gears now override vanilla rarity of the itemstack so it should work with mods like lootbeams. (this will get a performance boost when i totally refactor item data in next mc version port)
-- now only weapons are dropped when in main hand if req not met
-- cached auto items better
-- tiny perf improves to entity data sync
-- spell levels should now be readable in the gui and also they change colors when you level them up
-- fixed profession recipes not being craftable if they don't have both a tier and a rarity item material
-- you can no longer use stat source command on some1 else
-- removed mastery seals, just use downrank recipes
-- fixed leech % dmg as x stat
-- added one_of_a_kind to affix datapack
-- added "of paragon's" suffixes, one of a kind rare suffixes that provide multiple stats alongside new jewel effect stat
-- simplified the max runes limit on items, now 1 per item, except on runed items
-- fixed master bag bug when moving it while open
-- added new currencies to upgrade jewels, jewels now have potential
+- added config to disable spell animations
+- fixed newbie bag
+- salvage station now drops items that aren't salvagable
+- fixed stat soul bugs

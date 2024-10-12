@@ -112,7 +112,7 @@ public class LootChestData implements ICommonDataItem<GearRarity> {
                         return EMPTY_LIST;
                     }
                 }).showWhen(this::isLocked))
-                .accept(new SalvageBlock(this))
+                .accept(new SalvageBlock(this, ExileStack.of(ctx.stack)))
                 .release());
 
 
@@ -134,10 +134,6 @@ public class LootChestData implements ICommonDataItem<GearRarity> {
         return Arrays.asList();
     }
 
-    @Override
-    public boolean isSalvagable() {
-        return false;
-    }
 
     @Override
     public int getLevel() {

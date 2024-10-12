@@ -15,7 +15,6 @@ import com.robertx22.mine_and_slash.loot.blueprints.LootChestBlueprint;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.uncommon.MathHelper;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
-import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.LevelUtils;
@@ -66,13 +65,7 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
 
     public List<ItemStack> getAllDrops(Player p, int lvl, int recipelvl, float dropChanceMulti) {
 
-        var data = StackSaving.TOOL.loadFrom(p.getMainHandItem());
-        if (data != null) {
-            if (data.force_lvl > -1) {
-                lvl = data.force_lvl;
-            }
-        }
-
+     
         List<ItemStack> list = new ArrayList<>();
 
         ProfessionRecipe.RecipeDifficulty diff = ProfessionRecipe.RecipeDifficulty.get(lvl, recipelvl);

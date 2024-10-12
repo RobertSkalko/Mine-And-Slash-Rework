@@ -196,7 +196,9 @@ public class OnItemInteract {
                     if (data != null) {
                         if (data.canInsertIntoStack(craftedStack)) {
                             if (craftedStack.getCount() == 1) {
-                                data.insertAsUnidentifiedOn(craftedStack, player);
+                                ItemStack result = data.insertAsUnidentifiedOn(craftedStack, player);
+                                craftedStack.shrink(1);
+                                slot.set(result);
                                 currency.shrink(1);
                                 return new Result(true).ding();
                             }

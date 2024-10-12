@@ -31,7 +31,6 @@ public enum Itemtips implements IAutoLocName {
     SOUL_MODIFIER_TIP("Soul modifier can be applied to gear soul, which then generate \nonly the corresponding gear type when use."),
     DRAG_AND_DROP_TO_USE("[Drag and Drop on item to Use]"),
     DRAG_AND_DROP_TO_USE_DESC("- Hold the item in inventory, drag it towards the item you want to use it on, and click."),
-    PROF_TOOL_LEVEL_CAP("Capped Drops to LVL %1$s"),
     PROF_TOOL_STATS_TIP("Tool Stats: "),
     PROF_TOOL_EXP_TIP("Exp: %1$s/%2$s"),
     SOUL_TIER_TIP("Soul tier determine the level range of generated gear"),

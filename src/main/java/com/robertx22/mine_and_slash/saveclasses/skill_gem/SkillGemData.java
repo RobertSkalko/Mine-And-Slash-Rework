@@ -49,7 +49,7 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
     @Override
     public List<ItemStack> getSalvageResult(ExileStack stack) {
-        if (!isSalvagable()) {
+        if (!isSalvagable(stack)) {
             return Arrays.asList();
         }
         int amount = 1; // todo
