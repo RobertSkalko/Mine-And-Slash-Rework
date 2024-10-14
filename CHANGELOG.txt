@@ -6,3 +6,4 @@ v.5.8.3
 Should be useful when testing or fixing dungeons: /mine_and_slash builder_tool_warning generate_dungeon_pieces
 - map device now drops when broken
 - crafted gear is now labeled
+- gear souls now provide error messages when trying to apply to incorrect item types

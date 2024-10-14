@@ -6,6 +6,11 @@ import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
 import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
+    NOT_GEAR_OR_NOT_COMPAT("Not a Gear Item or not recognized as such."),
+    NOT_MATCHING_GEAR_FAMILY("That Gear isn't of the correct Gear Family (Armors, Weapons, Jewelry, Offhands)"),
+    NOT_MATCHING_GEAR_SLOT("Not the correct gear slot type."),
+    ALREADY_HAS_SOUL("Item Already has a Soul."),
+
     NOT_ENOUGH_POINTS("No Points to Spend."),
     PERK_MAXED("Perk is maxed out, can't spend points anymore!"),
     MAX_2_CLASSES("You can't spend points in more than 2 classes."),

@@ -194,13 +194,19 @@ public class OnItemInteract {
                         data = cs.getSoul(currency);
                     }
                     if (data != null) {
-                        if (data.canInsertIntoStack(craftedStack)) {
+                        var res = data.canInsertIntoStack(craftedStack);
+
+                        if (res.can) {
                             if (craftedStack.getCount() == 1) {
                                 ItemStack result = data.insertAsUnidentifiedOn(craftedStack, player);
                                 craftedStack.shrink(1);
                                 slot.set(result);
                                 currency.shrink(1);
                                 return new Result(true).ding();
+                            }
+                        } else {
+                            if (res.answer != null) {
+                                player.sendSystemMessage(res.answer);
                             }
                         }
                     }
