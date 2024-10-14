@@ -251,23 +251,4 @@ public class MMORPG {
     }
 
 
-    public static void devToolsErrorLog(String string) {
-        if (RUN_DEV_TOOLS) {
-            try {
-                throw new Exception(string);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public static void logError(String s) {
-        try {
-            throw new Exception(s);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
 }

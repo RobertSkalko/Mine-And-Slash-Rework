@@ -1,7 +1,7 @@
 package com.robertx22.mine_and_slash.loot.blueprints.bases;
 
+import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.mine_and_slash.loot.blueprints.ItemBlueprint;
-import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 
 public abstract class BlueprintPart<T, C extends ItemBlueprint> {
 
@@ -22,7 +22,7 @@ public abstract class BlueprintPart<T, C extends ItemBlueprint> {
         if (part == null) {
             part = t;
         } else {
-            MMORPG.devToolsErrorLog("Do not override an already set and created part!");
+            ExileLog.get().warn("Do not override an already set and created part!");
         }
     }
 
@@ -42,7 +42,7 @@ public abstract class BlueprintPart<T, C extends ItemBlueprint> {
 
         if (!canBeNull) {
             if (part == null) {
-                MMORPG.devToolsErrorLog("Item is null even after being generated!");
+                ExileLog.get().warn("Item is null even after being generated!");
             }
         }
 

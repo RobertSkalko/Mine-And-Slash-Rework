@@ -1,16 +1,16 @@
 package com.robertx22.mine_and_slash.database.data.value_calc;
 
+import com.robertx22.library_of_exile.main.ExileLog;
+import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.registry.IAutoGson;
+import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.mine_and_slash.database.data.stats.StatScaling;
 import com.robertx22.mine_and_slash.database.data.stats.types.offense.WeaponDamage;
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.health.Health;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
-import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
-import com.robertx22.library_of_exile.registry.ExileRegistryType;
-import com.robertx22.library_of_exile.registry.IAutoGson;
-import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -44,7 +44,7 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
 
     public int getCalculatedBaseValue(LivingEntity en, MaxLevelProvider provider) {
         if (base_scaling_type == null) {
-            MMORPG.logError("base scaling type null");
+            ExileLog.get().log("base scaling type null");
             return 0;
         }
 
