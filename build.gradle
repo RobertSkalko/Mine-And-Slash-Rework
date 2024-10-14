@@ -116,6 +116,7 @@ dependencies {
     if (System.getProperty("idea.sync.active") != "true") {
         annotationProcessor 'org.spongepowered:mixin:0.8.3:processor'
     }
+    //implementation fg.deobf("blank:lootr-forge-1.20:0.7.34.89")
 
     implementation fg.deobf("blank:Library_of_Exile-1.20.1:${exile_library_version}")
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
@@ -171,7 +172,7 @@ publishMods {
 
         requires { slug = "library-of-exile" }
         requires { slug = "curios" }
-		requires { slug = "playeranimator" }
+        requires { slug = "playeranimator" }
 
     }
 }

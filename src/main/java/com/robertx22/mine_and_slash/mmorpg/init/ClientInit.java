@@ -39,7 +39,7 @@ public class ClientInit {
 
     public static void onInitializeClient(final FMLClientSetupEvent event) {
         OverlayPresets.init();
-        
+
         PlayerAnimations.initClient();
 
         AtomicInteger sounds = new AtomicInteger();
@@ -59,20 +59,6 @@ public class ClientInit {
             }
         });
 
-        /*
-        ForgeEvents.registerForgeEvent(ScreenEvent.Init.class, x -> {
-            if (x.getScreen() instanceof BackpackScreen) {
-                if (MOUSEPOS.SET_MOUSE) {
-                    MOUSEPOS.SET_MOUSE = false;
-
-                    MouseMixin acc = (MouseMixin) Minecraft.getInstance().mouseHandler;
-                    acc.setXpos(MOUSEPOS.X);
-                    acc.setYpos(MOUSEPOS.Y);
-                }
-            }
-        });
-
-         */
 
         var todisable = Arrays.asList(
                 VanillaGuiOverlay.ARMOR_LEVEL,
@@ -80,6 +66,7 @@ public class ClientInit {
                 VanillaGuiOverlay.PLAYER_HEALTH,
                 VanillaGuiOverlay.EXPERIENCE_BAR
         );
+        
         ForgeEvents.registerForgeEvent(RenderGuiOverlayEvent.class, x -> {
             if (ClientConfigs.getConfig().GUI_POSITION.get() == GuiPosition.OVER_VANILLA) {
                 if (todisable.stream().anyMatch(e -> e.id().equals(x.getOverlay().id()))) {

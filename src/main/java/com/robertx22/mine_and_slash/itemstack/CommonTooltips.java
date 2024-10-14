@@ -7,10 +7,15 @@ import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommonTooltips {
 
     public static AdditionalBlock potentialCorruptionAndQuality(ExileStack exStack) {
+
         return new AdditionalBlock(
                 ImmutableList.of(
                         exStack.isCorrupted() ? Component.literal("").append(Itemtips.POTENTIAL.locName(exStack.get(StackKeys.POTENTIAL).getOrCreate().potential).withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.STRIKETHROUGH)).append(Component.literal(" ")).append(Words.Corrupted.locName().withStyle(ChatFormatting.RED)) : Itemtips.POTENTIAL.locName(exStack.get(StackKeys.POTENTIAL).getOrCreate().potential).withStyle(ChatFormatting.GOLD),
@@ -18,4 +23,13 @@ public class CommonTooltips {
                 )
         ).showWhen(() -> Screen.hasShiftDown());
     }
+
+    public static AdditionalBlock craftedItem(ExileStack exStack) {
+        List<MutableComponent> all = new ArrayList<>();
+        if (exStack.get(StackKeys.CUSTOM).hasAndTrue(x -> x.data.get(CustomItemData.KEYS.CRAFTED))) {
+            all.add(Words.CRAFTED.locName().withStyle(ChatFormatting.LIGHT_PURPLE));
+        }
+        return new AdditionalBlock(all).showWhen(() -> Screen.hasShiftDown());
+    }
+
 }

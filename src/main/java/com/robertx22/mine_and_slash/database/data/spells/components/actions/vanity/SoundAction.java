@@ -1,9 +1,9 @@
 package com.robertx22.mine_and_slash.database.data.spells.components.actions.vanity;
 
+import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.mine_and_slash.database.data.spells.components.MapHolder;
 import com.robertx22.mine_and_slash.database.data.spells.components.actions.SpellAction;
 import com.robertx22.mine_and_slash.database.data.spells.spell_classes.SpellCtx;
-import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,10 +23,8 @@ public class SoundAction extends SpellAction {
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
         if (!ctx.world.isClientSide) {
 
-            float pitch = data.get(PITCH)
-                    .floatValue();
-            float volume = data.get(VOLUME)
-                    .floatValue();
+            float pitch = data.get(PITCH).floatValue();
+            float volume = data.get(VOLUME).floatValue();
             SoundEvent sound = data.getSound();
 
             SoundUtils.playSound(ctx.world, ctx.getBlockPos(), sound, volume, pitch);

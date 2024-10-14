@@ -140,6 +140,9 @@
 "item.mmorpg.skill_gems.support.dex": "Support Gem",
 "item.mmorpg.skill_gems.support.str": "Support Gem",
 
+"item.mmorpg.skill_gems.aura.int": "Augment",
+"item.mmorpg.skill_gems.aura.dex": "Augment",
+"item.mmorpg.skill_gems.aura.str": "Augment",
 
 "stat.mmorpg.levels_gained": "M&S Level",
 "stat.mmorpg.mana": "M&S Max Mana",

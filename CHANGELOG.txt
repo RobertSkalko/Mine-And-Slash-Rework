@@ -1,6 +1,8 @@
 Changelog of recent updates: https://github.com/RobertSkalko/Mine-And-Slash-Rework/blob/1.20-Forge/changelogs/v.5.8.txt
 
-v.5.8.2
+v.5.8.3
 
-- fixed orb of ciphers
-- fixed opposite spell anim boolean
+- added builder utility commands to load all of a dungeon's structure blocks. 
+Should be useful when testing or fixing dungeons: /mine_and_slash builder_tool_warning generate_dungeon_pieces
+- map device now drops when broken
+- crafted gear is now labeled

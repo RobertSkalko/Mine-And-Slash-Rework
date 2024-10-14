@@ -163,7 +163,7 @@ public class EffectStats {
             .setSide(EffectSides.Source)
             .addEffect(e -> StatEffects.INCREASE_EFFECT_DURATION)
             .setLocName(x -> "Effect Duration")
-            .setLocDesc(x -> "")
+            .setLocDesc(x -> "Increases duration of effects you cast.")
             .modifyAfterDone(x -> {
                 x.is_perc = true;
             })
