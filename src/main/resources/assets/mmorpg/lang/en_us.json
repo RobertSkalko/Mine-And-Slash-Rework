@@ -1787,6 +1787,46 @@
 "_comment": " [CATEGORY]: FORMATTER - NAMES",
 
 
+"_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
+
+	"mmorpg.gear_type.bow": "Bow",
+	"mmorpg.gear_type.cloth_boots": "Cloth Boots",
+	"mmorpg.gear_type.cloth_chest": "Cloth Chest",
+	"mmorpg.gear_type.cloth_helmet": "Cloth Helmet",
+	"mmorpg.gear_type.cloth_pants": "Cloth Pants",
+	"mmorpg.gear_type.crossbow": "Crossbow",
+	"mmorpg.gear_type.leather_boots": "Leather Boots",
+	"mmorpg.gear_type.leather_chest": "Leather Chest",
+	"mmorpg.gear_type.leather_helmet": "Leather Helmet",
+	"mmorpg.gear_type.leather_pants": "Leather Pants",
+	"mmorpg.gear_type.necklace": "Necklace",
+	"mmorpg.gear_type.plate_boots": "Plate Boots",
+	"mmorpg.gear_type.plate_chest": "Plate Chest",
+	"mmorpg.gear_type.plate_helmet": "Plate Helmet",
+	"mmorpg.gear_type.plate_pants": "Plate Pants",
+	"mmorpg.gear_type.ring": "Ring",
+	"mmorpg.gear_type.shield": "Tower Shield",
+	"mmorpg.gear_type.staff": "Staff",
+	"mmorpg.gear_type.sword": "Sword",
+	"mmorpg.gear_type.tome": "Tome",
+	"mmorpg.gear_type.totem": "Totem",
+	"mmorpg.gearslot.boots": "Boots",
+	"mmorpg.gearslot.bow": "Bow",
+	"mmorpg.gearslot.chest": "Chest",
+	"mmorpg.gearslot.crossbow": "Crossbow",
+	"mmorpg.gearslot.helmet": "Helmet",
+	"mmorpg.gearslot.necklace": "Necklace",
+	"mmorpg.gearslot.pants": "Pants",
+	"mmorpg.gearslot.ring": "Ring",
+	"mmorpg.gearslot.shield": "Shield",
+	"mmorpg.gearslot.staff": "Staff",
+	"mmorpg.gearslot.sword": "Sword",
+	"mmorpg.gearslot.tome": "Tome",
+	"mmorpg.gearslot.totem": "Totem",
+
+"_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
+
+
 "_comment": " [CATEGORY]: UNIQUE ITEMS - NAMES",
 
 	"mmorpg.unique_gear.air_disaster.name": "Aria of Disaster",
@@ -1844,44 +1884,20 @@
 "_comment": " [CATEGORY]: UNIQUE ITEMS - NAMES",
 
 
-"_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
+"_comment": " [CATEGORY]: GEAR ITEMS - NAMES",
 
-	"mmorpg.gear_type.bow": "Bow",
-	"mmorpg.gear_type.cloth_boots": "Cloth Boots",
-	"mmorpg.gear_type.cloth_chest": "Cloth Chest",
-	"mmorpg.gear_type.cloth_helmet": "Cloth Helmet",
-	"mmorpg.gear_type.cloth_pants": "Cloth Pants",
-	"mmorpg.gear_type.crossbow": "Crossbow",
-	"mmorpg.gear_type.leather_boots": "Leather Boots",
-	"mmorpg.gear_type.leather_chest": "Leather Chest",
-	"mmorpg.gear_type.leather_helmet": "Leather Helmet",
-	"mmorpg.gear_type.leather_pants": "Leather Pants",
-	"mmorpg.gear_type.necklace": "Necklace",
-	"mmorpg.gear_type.plate_boots": "Plate Boots",
-	"mmorpg.gear_type.plate_chest": "Plate Chest",
-	"mmorpg.gear_type.plate_helmet": "Plate Helmet",
-	"mmorpg.gear_type.plate_pants": "Plate Pants",
-	"mmorpg.gear_type.ring": "Ring",
-	"mmorpg.gear_type.shield": "Tower Shield",
-	"mmorpg.gear_type.staff": "Staff",
-	"mmorpg.gear_type.sword": "Sword",
-	"mmorpg.gear_type.tome": "Tome",
-	"mmorpg.gear_type.totem": "Totem",
-	"mmorpg.gearslot.boots": "Boots",
-	"mmorpg.gearslot.bow": "Bow",
-	"mmorpg.gearslot.chest": "Chest",
-	"mmorpg.gearslot.crossbow": "Crossbow",
-	"mmorpg.gearslot.helmet": "Helmet",
-	"mmorpg.gearslot.necklace": "Necklace",
-	"mmorpg.gearslot.pants": "Pants",
-	"mmorpg.gearslot.ring": "Ring",
-	"mmorpg.gearslot.shield": "Shield",
-	"mmorpg.gearslot.staff": "Staff",
-	"mmorpg.gearslot.sword": "Sword",
-	"mmorpg.gearslot.tome": "Tome",
-	"mmorpg.gearslot.totem": "Totem",
+	"item.mmorpg.jewelry.necklace.diamond": "Necklace",
+	"item.mmorpg.jewelry.necklace.gold": "Necklace",
+	"item.mmorpg.jewelry.necklace.iron": "Necklace",
+	"item.mmorpg.jewelry.ring.diamond": "Ring",
+	"item.mmorpg.jewelry.ring.gold": "Ring",
+	"item.mmorpg.jewelry.ring.iron": "Ring",
+	"item.mmorpg.omen": "Omen",
+	"item.mmorpg.weapon.staff.diamond": "Staff",
+	"item.mmorpg.weapon.staff.iron": "Staff",
+	"item.mmorpg.weapon.staff.wood": "Staff",
 
-"_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
+"_comment": " [CATEGORY]: GEAR ITEMS - NAMES",
 
 
 "_comment": " [CATEGORY]: STATPRIORITY - NAMES",
@@ -1897,22 +1913,6 @@
 	"mmorpg.stat_priority.hit_prevention": "HIT_PREVENTION",
 
 "_comment": " [CATEGORY]: STATPRIORITY - NAMES",
-
-
-"_comment": " [CATEGORY]: GEAR ITEMS - NAMES",
-
-	"item.mmorpg.jewelry.necklace.diamond": "Necklace",
-	"item.mmorpg.jewelry.necklace.gold": "Necklace",
-	"item.mmorpg.jewelry.necklace.iron": "Necklace",
-	"item.mmorpg.jewelry.ring.diamond": "Ring",
-	"item.mmorpg.jewelry.ring.gold": "Ring",
-	"item.mmorpg.jewelry.ring.iron": "Ring",
-	"item.mmorpg.omen": "Omen",
-	"item.mmorpg.weapon.staff.diamond": "Staff",
-	"item.mmorpg.weapon.staff.iron": "Staff",
-	"item.mmorpg.weapon.staff.wood": "Staff",
-
-"_comment": " [CATEGORY]: GEAR ITEMS - NAMES",
 
 
 "_comment": " [CATEGORY]: STAT LAYER - NAMES",
@@ -2827,6 +2827,18 @@
 "_comment": " [CATEGORY]: WORDS - NAMES",
 
 
+"_comment": " [CATEGORY]: CHAOS STAT - NAMES",
+
+	"mmorpg.chaos_stat.normal_high": "Ascended",
+	"mmorpg.chaos_stat.normal_low": "Upgraded",
+	"mmorpg.chaos_stat.normal_med": "Elevated",
+	"mmorpg.chaos_stat.unique_high": "Ascended",
+	"mmorpg.chaos_stat.unique_low": "Upgraded",
+	"mmorpg.chaos_stat.unique_med": "Elevated",
+
+"_comment": " [CATEGORY]: CHAOS STAT - NAMES",
+
+
 "_comment": " [CATEGORY]: OMENS - NAMES",
 
 	"mmorpg.omen.blood": "Omen of Blood",
@@ -2839,18 +2851,6 @@
 	"mmorpg.omen.waves": "Omen of Waves",
 
 "_comment": " [CATEGORY]: OMENS - NAMES",
-
-
-"_comment": " [CATEGORY]: CHAOS STAT - NAMES",
-
-	"mmorpg.chaos_stat.normal_high": "Ascended",
-	"mmorpg.chaos_stat.normal_low": "Upgraded",
-	"mmorpg.chaos_stat.normal_med": "Elevated",
-	"mmorpg.chaos_stat.unique_high": "Ascended",
-	"mmorpg.chaos_stat.unique_low": "Upgraded",
-	"mmorpg.chaos_stat.unique_med": "Elevated",
-
-"_comment": " [CATEGORY]: CHAOS STAT - NAMES",
 
 
 "_comment": " [CATEGORY]: LOOTMODIFIER - NAMES",
@@ -3487,13 +3487,6 @@
 "_comment": " [CATEGORY]: STATS - DESCRIPTIONS",
 
 
-"_comment": " [CATEGORY]: UBER MAP - DESCRIPTIONS",
-
-	"mmorpg.uber_map.desc.uber1": "A living mortal, in MY Realm?",
-
-"_comment": " [CATEGORY]: UBER MAP - DESCRIPTIONS",
-
-
 "_comment": " [CATEGORY]: STATUSEFFECTS - DESCRIPTIONS",
 
 	"mmorpg.ailment.desc.bleed": "Deals 120% of the damage as \u00A76\u2600 Physical\u00A77\u00A79 Damage for 5s.",
@@ -3503,7 +3496,14 @@
 	"mmorpg.ailment.desc.poison": "Deals 150% of the damage as \u00A75\u2600 Chaos\u00A77\u00A79 Damage for 10s.",
 	"mmorpg.effect.desc.thorn": "Attacking an enemy with Thorns consumes the thorns to deal [calc:thorn_bush] \u00A76\u2600 Physical\u00A77 Damage",
 
-"_comment": " [CATEGORY]: STATUSEFFECTS - DESCRIPTIONS"
+"_comment": " [CATEGORY]: STATUSEFFECTS - DESCRIPTIONS",
+
+
+"_comment": " [CATEGORY]: UBER MAP - DESCRIPTIONS",
+
+	"mmorpg.uber_map.desc.uber1": "A living mortal, in MY Realm?",
+
+"_comment": " [CATEGORY]: UBER MAP - DESCRIPTIONS"
 
 
 }

@@ -15,6 +15,8 @@ import java.util.List;
 
 public class DataProcessors {
 
+    public static DataProcessor MOB = new MobProcessor();
+
     static List<DataProcessor> all = new ArrayList<>();
 
     public static List<DataProcessor> getAll() {
@@ -23,7 +25,7 @@ public class DataProcessors {
         if (all.isEmpty()) {
             all.add(new BossProcessor());
             all.add(new EliteProcessor());
-            all.add(new MobProcessor());
+            all.add(MOB);
             all.add(new ChestProcessor());
             all.add(new MobHordeProcessor());
             all.add(new EliteMobHorde());

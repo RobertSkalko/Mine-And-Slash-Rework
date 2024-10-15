@@ -11,7 +11,7 @@ import com.robertx22.mine_and_slash.database.data.stats.name_regex.StatNameRegex
 import com.robertx22.mine_and_slash.database.data.stats.types.core_stats.base.ICoreStat;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.saveclasses.unit.InCalcStatContainer;
-import com.robertx22.mine_and_slash.saveclasses.unit.InCalcStatData;
+import com.robertx22.mine_and_slash.saveclasses.unit.StatData;
 
 import java.util.Arrays;
 import java.util.List;
@@ -81,10 +81,11 @@ public class BonusStatPerEffectStacks extends BaseDatapackStat implements ICoreS
         return data.stats;
     }
 
+
     @Override
-    public void addToOtherStats(EntityData endata, InCalcStatContainer unitdata, InCalcStatData data) {
+    public void affectStats(EntityData endata, StatData data, InCalcStatContainer incalc) {
         for (ExactStatData x : getMods(endata, (int) data.getValue())) {
-            x.applyToStatInCalc(unitdata);
+            x.applyToStatInCalc(incalc);
         }
     }
 

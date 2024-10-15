@@ -5,6 +5,7 @@ import com.robertx22.mine_and_slash.capability.player.PlayerData;
 import com.robertx22.mine_and_slash.capability.player.helper.GemInventoryHelper;
 import com.robertx22.mine_and_slash.database.data.spells.components.Spell;
 import com.robertx22.mine_and_slash.database.data.stats.datapacks.stats.AttributeStat;
+import com.robertx22.mine_and_slash.database.data.stats.types.core_stats.base.ICoreStat;
 import com.robertx22.mine_and_slash.gui.screens.stat_gui.StatCalcInfoData;
 import com.robertx22.mine_and_slash.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.mine_and_slash.saveclasses.unit.GearData;
@@ -94,6 +95,16 @@ public class StatCalculation {
         var stats = new HashMap<String, StatData>(unit.getStats().stats);
 
         var copiedStats = unit.getStats().clone();
+
+        // we add calculated corestats to incalc so %intellect works
+        for (Map.Entry<String, StatData> en : stats.entrySet()) {
+            if (en.getValue().GetStat() instanceof ICoreStat aff) {
+                aff.affectStats(data, en.getValue(), statCalc);
+            }
+        }
+        unit.setStats(statCalc.calculate());
+        copiedStats = unit.getStats().clone();
+
 
         for (Map.Entry<String, StatData> en : stats.entrySet()) {
             if (en.getValue().GetStat() instanceof AddToAfterCalcEnd aff) {

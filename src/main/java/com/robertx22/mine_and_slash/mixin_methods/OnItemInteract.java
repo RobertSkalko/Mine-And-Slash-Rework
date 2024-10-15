@@ -253,8 +253,6 @@ public class OnItemInteract {
                     if (gear != null) {
                         if (gear.sockets != null && gear.sockets.getSocketed().size() > 0) {
                             try {
-
-
                                 int index = gear.sockets.lastFilledSocketIndex();
 
                                 if (index > -1) {
