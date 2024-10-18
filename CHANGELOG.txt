@@ -11,3 +11,4 @@ Should be useful when testing or fixing dungeons: /mine_and_slash builder_tool_w
 this means maps should now hopefully have more modded mobs (if datapack-ed in) instead of zombies and skellies
 - stats like "more x per y" and intellect% etc should now benefit from % modifiers. So 5 hp per 1 dodge should now benefit from both hp and dodge, and intellect % should increase mana etc
 WARNING, this bugfix will probably boost player power quite a bit! Probably a good idea to nerf % int etc sources 
+- should fix swords only hitting 1 enemy

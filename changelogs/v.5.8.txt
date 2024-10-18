@@ -53,3 +53,21 @@ v.5.8.1
 - fixed newbie bag
 - salvage station now drops items that aren't salvagable
 - fixed stat soul bugs
+
+v.5.8.2
+
+    fixed orb of ciphers
+    fixed opposite spell anim boole
+	
+v.5.8.3
+
+- added builder utility commands to load all of a dungeon's structure blocks. 
+Should be useful when testing or fixing dungeons: /mine_and_slash builder_tool_warning generate_dungeon_pieces
+- map device now drops when broken
+- crafted gear is now labeled
+- gear souls now provide error messages when trying to apply to incorrect item types
+- removed the complex mob processor (the 'spawn;rarity;mobtype' one), it will now just delegate to normal `mob` processor, 
+this means maps should now hopefully have more modded mobs (if datapack-ed in) instead of zombies and skellies
+- stats like "more x per y" and intellect% etc should now benefit from % modifiers. So 5 hp per 1 dodge should now benefit from both hp and dodge, and intellect % should increase mana etc
+WARNING, this bugfix will probably boost player power quite a bit! Probably a good idea to nerf % int etc sources 
+- should fix swords only hitting 1 enemy
