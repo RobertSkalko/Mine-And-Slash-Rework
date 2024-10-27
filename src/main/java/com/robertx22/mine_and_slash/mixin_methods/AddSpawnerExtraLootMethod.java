@@ -20,6 +20,7 @@ import java.util.List;
 
 public class AddSpawnerExtraLootMethod {
 
+
     public static void hookLoot(LootContext context, CallbackInfoReturnable<List<ItemStack>> ci) {
 
         try {

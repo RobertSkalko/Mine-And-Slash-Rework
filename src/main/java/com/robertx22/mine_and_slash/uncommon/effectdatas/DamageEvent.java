@@ -217,6 +217,7 @@ public class DamageEvent extends EffectEvent {
         return dmg;
     }
 
+
     private void calcAttackCooldown() {
         float cool = 1;
 
@@ -234,7 +235,11 @@ public class DamageEvent extends EffectEvent {
                     if (gear != null) {
                         float atkpersec = 1;
 
-                        float secWaited = (float) (source.tickCount - source.getLastHurtMobTimestamp()) / 20F;
+                        float secWaited = (float) (target.tickCount - target.getLastHurtByMobTimestamp()) / 20F;
+
+                        if (secWaited < 0) {
+                            secWaited = 555; // its minus if you never hit the mob before or on fresh worlds?
+                        }
 
                         float secNeededToWaitForFull = 1F / atkpersec;
 
@@ -242,13 +247,16 @@ public class DamageEvent extends EffectEvent {
 
                         cool = Mth.clamp(cool, 0F, 1F);
 
+                        if (cool < 0.3) {
+                            this.cancelDamage();
+                        }
+
                     }
                 }
             }
         }
         data.setupNumber(EventData.ATTACK_COOLDOWN, cool);
     }
-
 
     private float getAttackSpeedDamageMulti() {
 
@@ -273,6 +281,7 @@ public class DamageEvent extends EffectEvent {
         return multi;
 
     }
+
 
     private void modifyIfArrowDamage() {
         if (attackInfo != null && attackInfo.getSource() != null) {
@@ -354,7 +363,6 @@ public class DamageEvent extends EffectEvent {
                 this.addMoreMulti(Words.ATTACK_SPEED_MULTI.locName(), EventData.NUMBER, getAttackSpeedDamageMulti());
             }
             modifyIfArrowDamage();
-
         }
 
         // todo this should be in layers too or multis

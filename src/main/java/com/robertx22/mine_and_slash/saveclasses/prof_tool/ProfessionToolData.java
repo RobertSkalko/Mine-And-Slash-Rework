@@ -158,9 +158,9 @@ public class ProfessionToolData implements ITooltip {
                         .accept(Itemtips.PROF_TOOL_STATS_TIP.locName(), this.GetAllStats()))
                 .accept(new OperationTipBlock().setCtrl().setAlt());
 
-     
+
         List<Component> tooltip = ctx.tooltip;
-        tooltip.clear();
+        //tooltip.clear();
         tooltip.addAll(exileTooltips.release());
 
 

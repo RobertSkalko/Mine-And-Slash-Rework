@@ -18,10 +18,12 @@ import com.robertx22.mine_and_slash.saveclasses.stat_soul.SavedGearSoul;
 import com.robertx22.mine_and_slash.saveclasses.stat_soul.StatSoulData;
 import com.robertx22.mine_and_slash.saveclasses.stat_soul.StatSoulItem;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
+import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.mine_and_slash.vanilla_mc.items.SoulExtractorItem;
 import com.robertx22.mine_and_slash.vanilla_mc.items.TagForceSoulItem;
 import com.robertx22.mine_and_slash.vanilla_mc.items.misc.RarityStoneItem;
+import net.minecraft.ChatFormatting;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
@@ -168,6 +170,7 @@ public class OnItemInteract {
                 if (craftedStack.isDamaged() && currency.getItem() instanceof RarityStoneItem) {
 
                     if (!StackSaving.GEARS.has(craftedStack)) {
+                        player.sendSystemMessage(Chats.NOT_GEAR_OR_LACKS_SOUL.locName().withStyle(ChatFormatting.RED));
                         return new Result(false);
                     }
                     RarityStoneItem essence = (RarityStoneItem) currency.getItem();
@@ -194,13 +197,19 @@ public class OnItemInteract {
                         data = cs.getSoul(currency);
                     }
                     if (data != null) {
-                        if (data.canInsertIntoStack(craftedStack)) {
+                        var res = data.canInsertIntoStack(craftedStack);
+
+                        if (res.can) {
                             if (craftedStack.getCount() == 1) {
                                 ItemStack result = data.insertAsUnidentifiedOn(craftedStack, player);
                                 craftedStack.shrink(1);
                                 slot.set(result);
                                 currency.shrink(1);
                                 return new Result(true).ding();
+                            }
+                        } else {
+                            if (res.answer != null) {
+                                player.sendSystemMessage(res.answer);
                             }
                         }
                     }
@@ -247,8 +256,6 @@ public class OnItemInteract {
                     if (gear != null) {
                         if (gear.sockets != null && gear.sockets.getSocketed().size() > 0) {
                             try {
-
-
                                 int index = gear.sockets.lastFilledSocketIndex();
 
                                 if (index > -1) {

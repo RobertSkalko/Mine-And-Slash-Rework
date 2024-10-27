@@ -1,6 +1,7 @@
 package com.robertx22.mine_and_slash.aoe_data.database.spells;
 
-// todo this should be a datapack
+// todo this is not used anywhere???
+
 public enum SummonType {
     TOTAL("total", "Total", 5),
     GOLEM("golem", "Golem", 3),

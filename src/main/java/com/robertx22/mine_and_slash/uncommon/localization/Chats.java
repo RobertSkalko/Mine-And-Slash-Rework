@@ -6,6 +6,11 @@ import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
 import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
+    NOT_GEAR_OR_NOT_COMPAT("Not a Gear Item or not recognized as such."),
+    NOT_MATCHING_GEAR_FAMILY("That Gear isn't of the correct Gear Family (Armors, Weapons, Jewelry, Offhands)"),
+    NOT_MATCHING_GEAR_SLOT("Not the correct gear slot type."),
+    ALREADY_HAS_SOUL("Item Already has a Soul."),
+
     NOT_ENOUGH_POINTS("No Points to Spend."),
     PERK_MAXED("Perk is maxed out, can't spend points anymore!"),
     MAX_2_CLASSES("You can't spend points in more than 2 classes."),
@@ -85,6 +90,7 @@ public enum Chats implements IAutoLocName {
     ENCHANT_UPGRADE_RARITY("Infusions must be applied consecutively. A common Infusion has to come before an uncommon Infusion may be applied."),
     THIS_ITEM_CANT_BE_USED_MORE_THAN_X_TIMES("This item has already reached maximum uses: (%1$s)"),
     NOT_GEAR("This is not a gear item."),
+    NOT_GEAR_OR_LACKS_SOUL("This is either not a gear item or the gear lacks a soul."),
     CANT_RUNE_THIS_UNIQUE("Can't insert Runes into this Unique"),
     RUNE_IS_ALREADY_MAXED("The inserted Rune is already at 100%. You can't to upgrade it any more."),
     GEAR_NO_POTENTIAL("Gear Has no remaining potential and Can't be crafted any further. Note, you can still use currencies that cost 0 potential to craft, like gems, runes etc."),

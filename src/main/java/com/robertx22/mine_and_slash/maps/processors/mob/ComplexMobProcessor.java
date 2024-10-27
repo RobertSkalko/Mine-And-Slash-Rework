@@ -1,15 +1,16 @@
 package com.robertx22.mine_and_slash.maps.processors.mob;
 
+import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.maps.generator.ChunkProcessData;
 import com.robertx22.mine_and_slash.maps.processors.DataProcessor;
+import com.robertx22.mine_and_slash.maps.processors.DataProcessors;
 import com.robertx22.mine_and_slash.maps.processors.helpers.MobBuilder;
 import com.robertx22.mine_and_slash.maps.spawned_map_mobs.SpawnedMob;
 import com.robertx22.mine_and_slash.tags.imp.MobTag;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.StringUTIL;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -36,6 +37,10 @@ public class ComplexMobProcessor extends DataProcessor {
     public void processImplementation(String key, BlockPos pos, Level world, ChunkProcessData data) {
 
         try {
+            DataProcessors.MOB.processImplementation(key, pos, world, data);
+            if (true) {
+                return;
+            }
 
             var map = Load.mapAt(world, pos);
 
@@ -69,12 +74,9 @@ public class ComplexMobProcessor extends DataProcessor {
             }
 
             for (String x : parts) {
-
                 if (x.equals("boss")) {
                     isBoss = true;
                 }
-
-
             }
             if (rarity == null) {
                 rarity = ExileDB.GearRarities().random();

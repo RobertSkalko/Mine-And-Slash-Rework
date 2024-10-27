@@ -1,12 +1,12 @@
 package com.robertx22.mine_and_slash.vanilla_mc.packets.perks;
 
+import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;
 import com.robertx22.mine_and_slash.capability.player.PlayerData;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.PlayerPointsType;
 import com.robertx22.mine_and_slash.database.data.talent_tree.TalentTree;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
-import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.saveclasses.PointData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
@@ -66,7 +66,7 @@ public class PerkChangePacket extends MyPacket<PerkChangePacket> {
         PlayerPointsType type = sc.getSchool_type().getPointType();
 
         if (sc == null) {
-            MMORPG.logError("school is null: " + this.school);
+            ExileLog.get().warn("school is null: " + this.school);
             return;
         }
 

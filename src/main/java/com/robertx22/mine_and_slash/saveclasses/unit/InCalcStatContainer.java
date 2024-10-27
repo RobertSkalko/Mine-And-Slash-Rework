@@ -20,7 +20,7 @@ public class InCalcStatContainer {
                 .forEach(x -> {
                     c.stats.put(x.id, x.getCalculated());
                 });
-        statsInCalc.clear();
+        // statsInCalc.clear();
         return c;
     }
 

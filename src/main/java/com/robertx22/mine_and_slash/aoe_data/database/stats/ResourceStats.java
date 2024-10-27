@@ -30,7 +30,7 @@ public class ResourceStats {
             .addEffect(e -> StatEffects.LEECH_RESTORE_RESOURCE_BASED_ON_STAT_DATA.get(e.resource)) // todo maybe make this not capped by leech
             .setLocName(x ->
                     Stat.format(
-                            "Gain " + Stat.VAL1 + " " + x.resource.locname + " on " + x.actionName
+                            "Leech " + Stat.VAL1 + " " + x.resource.locname + " on " + x.actionName
                     )
             )
             .setLocDesc(x -> "")

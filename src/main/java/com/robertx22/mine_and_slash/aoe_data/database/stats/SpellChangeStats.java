@@ -55,7 +55,7 @@ public class SpellChangeStats {
             .setSide(EffectSides.Source)
             .addEffect(StatEffects.INCREASE_MANA_COST)
             .setLocName(x -> "Mana Cost")
-            .setLocDesc(x -> "")
+            .setLocDesc(x -> "Modifies mana cost of spells")
             .modifyAfterDone(x -> {
                 x.is_perc = true;
                 x.base = 0;
@@ -64,6 +64,7 @@ public class SpellChangeStats {
                 x.minus_is_good = true;
             })
             .build();
+    
     public static DataPackStatAccessor<EmptyAccessor> CAST_SPEED = DatapackStatBuilder
             .ofSingle("cast_speed", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
@@ -149,7 +150,7 @@ public class SpellChangeStats {
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.projectile))
             .addEffect(StatEffects.INCREASE_PROJ_SPEED)
             .setLocName(x -> "Projectile Speed")
-            .setLocDesc(x -> "")
+            .setLocDesc(x -> "Makes your spell projectiles faster")
             .modifyAfterDone(x -> {
                 x.is_perc = true;
                 x.icon = "\u27B9";

@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.aoe_data.database.perks;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.OffenseStats;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.ResourceStats;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.SpellChangeStats;
@@ -21,7 +22,6 @@ import com.robertx22.mine_and_slash.database.data.stats.types.resources.mana.Man
 import com.robertx22.mine_and_slash.saveclasses.unit.ResourceType;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
 public class GameChangerPerks implements ExileRegistryInit {
 
@@ -30,7 +30,7 @@ public class GameChangerPerks implements ExileRegistryInit {
 
 
         PerkBuilder.gameChanger("summoner", "Summoner",
-                new OptScaleExactStat(+3, SpellChangeStats.MAX_SUMMON_CAPACITY.get(), ModType.FLAT),
+                new OptScaleExactStat(3, SpellChangeStats.MAX_SUMMON_CAPACITY.get(), ModType.FLAT),
                 new OptScaleExactStat(50, OffenseStats.SUMMON_DAMAGE.get(), ModType.MORE),
                 new OptScaleExactStat(-25, OffenseStats.TOTAL_DAMAGE.get(), ModType.MORE)
         );

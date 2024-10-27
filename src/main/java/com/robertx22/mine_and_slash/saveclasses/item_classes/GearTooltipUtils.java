@@ -243,6 +243,7 @@ public class GearTooltipUtils {
                     }
                 })
                 .accept(CommonTooltips.potentialCorruptionAndQuality(exStack))
+                .accept(CommonTooltips.craftedItem(exStack))
                 .accept(new AdditionalBlock(() -> {
                             int cost = (int) Energy.getInstance().scale(ModType.FLAT, gear.GetBaseGearType().getGearSlot().weapon_data.energy_cost_per_swing, data.getLevel());
                             int permob = (int) Energy.getInstance().scale(ModType.FLAT, gear.GetBaseGearType().getGearSlot().weapon_data.energy_cost_per_mob_attacked, data.getLevel());
