@@ -1796,7 +1796,7 @@
     "mmorpg.stat_layer.flat_damage_reduction": "고정 피해 감소",
     "mmorpg.stat_layer.physical_mitigation": "물리 저항",
     "mmorpg.chat.already_casting": "이미 스킬을 시전중입니다",
-    "mmorpg.chat.already_has_soul": "Item Already has a Soul.",
+    "mmorpg.chat.already_has_soul": "아이템에 이미 영혼이 부여되어 있습니다.",
     "mmorpg.chat.already_max_links": "아이템에 들어갈 링크가 이미 가득찼습니다.",
     "mmorpg.chat.already_max_sockets": "아이템에 들어갈 소켓이 이미 가득찼습니다.",
     "mmorpg.chat.alt_to_show_other_spell": "[Alt] 를 눌러 다른 스킬을 확인하세요",
