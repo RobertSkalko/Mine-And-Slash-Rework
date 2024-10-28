@@ -1,11 +1,11 @@
 package com.robertx22.mine_and_slash.content.ubers;
 
+import com.robertx22.library_of_exile.utils.SoundUtils;
+import com.robertx22.library_of_exile.utils.geometry.MyPosition;
 import com.robertx22.mine_and_slash.mmorpg.ModErrors;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
-import com.robertx22.library_of_exile.utils.SoundUtils;
-import com.robertx22.library_of_exile.utils.geometry.MyPosition;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -44,8 +44,12 @@ public class UberBossAltarBlock extends Block {
                     //OnMobSpawn.setupNewMob(en, Load.Unit(en), null);
                     //Load.Unit(en).setRarity(IRarity.UBER);
 
+
                     level.addFreshEntity(en);
+
                     Load.Unit(en).setRarity(IRarity.UBER); // todo does this work
+
+                    Load.Unit(en).recalcStats_DONT_CALL();
 
                     p.sendSystemMessage(uber.locDesc().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
 

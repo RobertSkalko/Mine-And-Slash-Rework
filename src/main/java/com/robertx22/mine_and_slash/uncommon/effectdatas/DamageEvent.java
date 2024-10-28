@@ -78,6 +78,9 @@ public class DamageEvent extends EffectEvent {
 
         addMobDamageMultipliers();
 
+        if (this.targetData.immuneTicks > 0) {
+            this.cancelDamage();
+        }
     }
 
     public void addMobDamageMultipliers() {

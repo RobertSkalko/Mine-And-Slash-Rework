@@ -64,8 +64,11 @@ public class OnEntityTick {
             }
 
             data.equipmentCache.onTick();
-            
+
             data.sync.onTickTrySync(entity);
+
+
+            data.immuneTicks--;
 
         } catch (Exception e) {
             e.printStackTrace();

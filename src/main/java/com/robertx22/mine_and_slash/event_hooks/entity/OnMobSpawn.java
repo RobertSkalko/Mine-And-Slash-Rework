@@ -43,6 +43,8 @@ public class OnMobSpawn {
             }
         }
 
+        Load.Unit(entity).immuneTicks = 10;
+
         setupNewMobOnSpawn((LivingEntity) entity);
 
     }

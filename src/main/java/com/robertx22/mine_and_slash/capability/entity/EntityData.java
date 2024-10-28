@@ -162,6 +162,8 @@ public class EntityData implements ICap, INeededForClient {
     // public DirtySync gear = new DirtySync("gear_recalc", x -> recalcStats());
 
 
+    public int immuneTicks = 0;
+
     public UnsavedMaxEffectStacksData maxCharges = new UnsavedMaxEffectStacksData();
 
     public DamageEvent lastDamageTaken = null;

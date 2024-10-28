@@ -5,3 +5,6 @@ v.5.8.4
 - tool tooltips no longer clear tooltips..
 - added error msg when trying to repair a non gear item or non souled
 - should fix prophecies dropping bugged unique jewels
+- fixes barrage gem making projectiles merge when looking up/down
+- updated Japanase translation
+- attempt to fix uber maps being killable first tick they spawn
