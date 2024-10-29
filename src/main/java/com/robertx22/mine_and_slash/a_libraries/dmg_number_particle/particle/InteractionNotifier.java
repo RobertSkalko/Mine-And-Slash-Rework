@@ -10,7 +10,6 @@ import net.minecraft.world.entity.LivingEntity;
 public class InteractionNotifier {
 
     public static void notifyClient(IParticleSpawnMaterial notifier, ServerPlayer source, LivingEntity target){
-        if (!ClientConfigs.getConfig().ENABLE_FLOATING_DMG.get()) return;
         Packets.sendToClient(source, new ExileInteractionResultPacket(target.getId(), notifier));
     }
 

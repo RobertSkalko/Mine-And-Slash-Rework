@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.vanilla_mc.packets.interaction;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.InteractionResultHandler;
+import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -46,6 +47,7 @@ public class ExileInteractionResultPacket extends MyPacket<ExileInteractionResul
 
     @Override
     public void onReceived(ExilePacketContext exilePacketContext) {
+        if (!ClientConfigs.getConfig().ENABLE_FLOATING_DMG.get()) return;
         Entity entity = exilePacketContext.getPlayer().level().getEntity(id);
         type.getStrategy().get().accept(notifier, entity);
     }
