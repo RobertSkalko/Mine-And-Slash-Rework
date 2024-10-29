@@ -56,7 +56,7 @@ public class ClientConfigs {
         GUI_POSITION = b.defineEnum("GUI_POSITION", GuiPosition.TOP_LEFT);
         ITEM_RARITY_BACKGROUND_TYPE = b.defineEnum("ITEM_RARITY_BACKGROUND_TYPE", GlintType.FULL);
         PLAYER_GUI_TYPE = b.defineEnum("PLAYER_GUI_TYPE", PlayerGUIs.RPG);
-        DAMAGE_PARTICLE_STYLE = b.defineEnum("DAMAGE_PARTICLE_STYLE", InteractionResultHandler.ClientReactionStrategy.ORIGINAL);
+        DAMAGE_PARTICLE_STYLE = b.defineEnum("DAMAGE_PARTICLE_STYLE", InteractionResultHandler.ClientReactionStrategy.DEFAULT);
         SKILL_TREE_ZOOM_SPEED = b.defineInRange("SKILL_TREE_ZOOM_SPEED", 0.15D, 0.000001D, 1D);
 
         REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES = b.defineInRange("REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES", 42, 0, 1000);

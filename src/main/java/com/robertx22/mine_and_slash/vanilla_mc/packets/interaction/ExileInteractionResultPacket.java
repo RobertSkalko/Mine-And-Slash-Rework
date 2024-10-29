@@ -47,7 +47,7 @@ public class ExileInteractionResultPacket extends MyPacket<ExileInteractionResul
     @Override
     public void onReceived(ExilePacketContext exilePacketContext) {
         Entity entity = exilePacketContext.getPlayer().level().getEntity(id);
-        type.strategy.accept(notifier, entity);
+        type.getStrategy().get().accept(notifier, entity);
     }
 
     @Override

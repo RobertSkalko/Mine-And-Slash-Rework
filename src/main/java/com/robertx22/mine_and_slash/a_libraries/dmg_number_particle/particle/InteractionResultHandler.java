@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.impl.DamageNullifiedParticle;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.impl.ElementDamageParticle;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.impl.HealParticle;
-import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.style.Original;
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.style.Default;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.style.Row;
 import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
@@ -20,27 +20,43 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.Random;
 import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 public class InteractionResultHandler {
 
 
 
     public enum ParticleSpawnType {
-        DAMAGE(ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().damageStrategy, new ElementDamageParticle.DamageInformation(null, null, false)),
-        NULLIFIED_DAMAGE(ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().nullifiedDamageStrategy, DamageNullifiedParticle.Type.DODGE),
-        HEAL(ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().healStrategy, new HealParticle.HealNumber(0.0f));
-        public final BiConsumer<IParticleSpawnMaterial, Entity> strategy;
+        DAMAGE(new IParticleSpawnMaterial.DamageInformation(null, null, false)) {
+            @Override
+            public Supplier<BiConsumer<IParticleSpawnMaterial, Entity>> getStrategy() {
+                return () -> ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().damageStrategy;
+            }
+        },
+        NULLIFIED_DAMAGE(IParticleSpawnMaterial.Type.DODGE) {
+            @Override
+            public Supplier<BiConsumer<IParticleSpawnMaterial, Entity>> getStrategy() {
+                return () -> ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().nullifiedDamageStrategy;
+            }
+        },
+        HEAL(new IParticleSpawnMaterial.HealNumber(0.0f)) {
+            @Override
+            public Supplier<BiConsumer<IParticleSpawnMaterial, Entity>> getStrategy() {
+                return () -> ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().healStrategy;
+            }
+        };
         public final IParticleSpawnMaterial target;
 
-        ParticleSpawnType(BiConsumer<IParticleSpawnMaterial, Entity> strategy, IParticleSpawnMaterial target) {
-            this.strategy = strategy;
+        public abstract Supplier<BiConsumer<IParticleSpawnMaterial, Entity>> getStrategy();
+
+        ParticleSpawnType(IParticleSpawnMaterial target) {
             this.target = target;
         }
     }
 
     public enum ClientReactionStrategy {
-        ORIGINAL((info, entity) -> {
-            var mat = (ElementDamageParticle.DamageInformation) info;
+        DEFAULT((info, entity) -> {
+            var mat = (IParticleSpawnMaterial.DamageInformation) info;
             ImmutableMap<Elements, Float> dmgMap = mat.getDmgMap();
 
             boolean crit = mat.isCrit();
@@ -53,29 +69,29 @@ public class InteractionResultHandler {
                     double y = entity.getEyeY();
                     double z = entity.getRandomZ(0.5D);
                     String damageString = NumberUtils.format(damage);
-                    Minecraft.getInstance().particleEngine.add(new ElementDamageParticle(Minecraft.getInstance().level, x, y, z, new Original(), entry.getKey().format.getColor(), crit ? damageString + "!" : damageString));
+                    Minecraft.getInstance().particleEngine.add(new ElementDamageParticle(Minecraft.getInstance().level, x, y, z, new Default(), entry.getKey().format.getColor(), crit ? damageString + "!" : damageString));
                 }
             }
         },
                 (type, entity) -> {
-                    var mat = (DamageNullifiedParticle.Type) type;
+                    var mat = (IParticleSpawnMaterial.Type) type;
                     double x = entity.getRandomX(0.5D);
                     double y = entity.getEyeY();
                     double z = entity.getRandomZ(0.5D);
-                    Minecraft.getInstance().particleEngine.add(new DamageNullifiedParticle(Minecraft.getInstance().level, x, y, z, new Original(), mat));
+                    Minecraft.getInstance().particleEngine.add(new DamageNullifiedParticle(Minecraft.getInstance().level, x, y, z, new Default(), mat));
                     ClientOnly.getPlayer().level().playLocalSound(entity.blockPosition(), mat.sound, SoundSource.PLAYERS, 1, 1.5F, true);
                 },
                 (type, entity) -> {
-                    var mat = (HealParticle.HealNumber) type;
+                    var mat = (IParticleSpawnMaterial.HealNumber) type;
                     double x = entity.getRandomX(0.5D);
                     double y = entity.getEyeY();
                     double z = entity.getRandomZ(0.5D);
-                    Minecraft.getInstance().particleEngine.add(new HealParticle(Minecraft.getInstance().level, x, y, z, new Original(), mat.number()));
+                    Minecraft.getInstance().particleEngine.add(new HealParticle(Minecraft.getInstance().level, x, y, z, new Default(), mat.number()));
                 }),
 
 
         ROW((info, entity) -> {
-            var mat = (ElementDamageParticle.DamageInformation) info;
+            var mat = (IParticleSpawnMaterial.DamageInformation) info;
             ImmutableMap<Elements, Float> dmgMap = mat.getDmgMap();
 
             boolean crit = mat.isCrit();
@@ -93,14 +109,14 @@ public class InteractionResultHandler {
 
         },
                 (type, entity) -> {
-            var mat = (DamageNullifiedParticle.Type) type;
+            var mat = (IParticleSpawnMaterial.Type) type;
                     double x = entity.getX();
                     double y = entity.getEyeY();
                     double z = entity.getZ();
             Minecraft.getInstance().particleEngine.add(new DamageNullifiedParticle(Minecraft.getInstance().level, x, y, z, new Row(), mat));
         },
                 (type, entity) -> {
-                    var mat = (HealParticle.HealNumber) type;
+                    var mat = (IParticleSpawnMaterial.HealNumber) type;
                     double x = entity.getX();
                     double y = entity.getEyeY();
                     double z = entity.getZ();

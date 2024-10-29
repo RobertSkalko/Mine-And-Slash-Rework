@@ -101,12 +101,12 @@ public class Row implements IParticleRenderStrategy {
 
     @Override
     public void renderNullifiedDamage(ExileInteractionResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack, String text, int color) {
-        new Original().renderNullifiedDamage(particle, vertexConsumer, camera, partialTick, posestack, text, color);
+        new Default().renderNullifiedDamage(particle, vertexConsumer, camera, partialTick, posestack, text, color);
     }
 
     @Override
     public void renderHeal(ExileInteractionResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack, String text, int color) {
-        new Original().renderHeal(particle, vertexConsumer, camera, partialTick, posestack, text, color);
+        new Default().renderHeal(particle, vertexConsumer, camera, partialTick, posestack, text, color);
     }
 
     @Override

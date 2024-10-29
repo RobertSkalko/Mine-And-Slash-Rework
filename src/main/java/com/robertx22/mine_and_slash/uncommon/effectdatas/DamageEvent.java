@@ -3,8 +3,6 @@ package com.robertx22.mine_and_slash.uncommon.effectdatas;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.InteractionNotifier;
-import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.impl.DamageNullifiedParticle;
-import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.impl.ElementDamageParticle;
 import com.robertx22.mine_and_slash.aoe_data.database.ailments.Ailment;
 import com.robertx22.mine_and_slash.capability.entity.CooldownsData;
 import com.robertx22.mine_and_slash.capability.player.data.PlayerConfigData;
@@ -36,6 +34,7 @@ import com.robertx22.mine_and_slash.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.*;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.DmgNumPacket;
+import com.robertx22.mine_and_slash.vanilla_mc.packets.interaction.IParticleSpawnMaterial;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -495,7 +494,7 @@ public class DamageEvent extends EffectEvent {
                 attackInfo.setCanceled(true);
             }
             cancelDamage();
-            InteractionNotifier.notifyClient(getAttackType().isAttack() ? DamageNullifiedParticle.Type.DODGE : DamageNullifiedParticle.Type.RESIST, (ServerPlayer) source, target);
+            InteractionNotifier.notifyClient(getAttackType().isAttack() ? IParticleSpawnMaterial.Type.DODGE : IParticleSpawnMaterial.Type.RESIST, (ServerPlayer) source, target);
             //sendDamageParticle(info);
 
             //move this sound to InteractionResultHandler.
@@ -645,7 +644,7 @@ public class DamageEvent extends EffectEvent {
                     threatEvent.Activate();
                 }
             }
-            InteractionNotifier.notifyClient(ElementDamageParticle.DamageInformation.fromDmgByElement(info, data.isCrit()), (ServerPlayer) source, target);
+            InteractionNotifier.notifyClient(IParticleSpawnMaterial.DamageInformation.fromDmgByElement(info, data.isCrit()), (ServerPlayer) source, target);
             //sendDamageParticle(info);
 
             // target.invulnerableTime = 20;
