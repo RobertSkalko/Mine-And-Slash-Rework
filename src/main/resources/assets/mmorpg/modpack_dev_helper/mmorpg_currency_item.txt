@@ -1,28 +1,2 @@
 These are all default registry entries of this type.
 This registry can't be modified or added to.
-affix_common_reroll
-affix_tier_up_down
-chaos_orb
-enchant_reroll
-entangled_affix_upgrade
-entangled_potential
-entangled_quality
-entangled_unique_reroll
-jewel_corrupt
-level_up_orb
-map_rarity_upgrade
-mastery_seal0
-mastery_seal1
-mastery_seal2
-mastery_seal3
-mastery_seal4
-mastery_seal5
-orb_of_quality
-sharpening_stone0
-sharpening_stone1
-sharpening_stone2
-sharpening_stone3
-sharpening_stone4
-sharpening_stone5
-socket_adder
-unique_reroll

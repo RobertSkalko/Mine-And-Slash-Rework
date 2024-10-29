@@ -9,7 +9,7 @@ import com.robertx22.mine_and_slash.aoe_data.database.stats.OffenseStats;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.ResourceStats;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.SpellChangeStats;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.old.DatapackStats;
-import com.robertx22.mine_and_slash.characters.gui.CharacterSelectScreen;
+import com.robertx22.mine_and_slash.characters.reworked_gui.ToonScreen;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.PlayerPointsType;
 import com.robertx22.mine_and_slash.database.data.stats.Stat;
 import com.robertx22.mine_and_slash.database.data.stats.datapacks.stats.CoreStat;
@@ -46,7 +46,7 @@ import com.robertx22.mine_and_slash.gui.screens.skill_tree.AscendancyTree;
 import com.robertx22.mine_and_slash.gui.screens.skill_tree.TalentsScreen;
 import com.robertx22.mine_and_slash.gui.screens.spell.SpellSchoolScreen;
 import com.robertx22.mine_and_slash.gui.screens.stat_gui.StatScreen;
-import com.robertx22.mine_and_slash.gui.wiki.BestiaryScreen;
+import com.robertx22.mine_and_slash.gui.wiki.reworked.NewWikiScreen;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.prophecy.gui.ProphecyScreen;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
@@ -61,6 +61,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Tooltip;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
+import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -265,8 +267,8 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
 
         List<INamedScreen> leftButtons = new ArrayList<>();
 
-        leftButtons.add(new BestiaryScreen());
-        leftButtons.add(new CharacterSelectScreen());
+        leftButtons.add(new ToonScreen());
+        leftButtons.add(new NewWikiScreen());
         leftButtons.add(new OpenInvGuiScreen(Words.Salvaging, "salvage", GuiInventoryGrids.ofSalvageConfig()));
         leftButtons.add(new OpenInvGuiScreen(Words.Configs, "configs", GuiInventoryGrids.ofConfigs()));
         leftButtons.add(new StatScreen());
@@ -387,6 +389,11 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
             });
             this.stat = ExileDB.Stats()
                     .get(stat);
+        }
+
+        @Override
+        protected ClientTooltipPositioner createTooltipPositioner() {
+            return DefaultTooltipPositioner.INSTANCE;
         }
 
         @Override

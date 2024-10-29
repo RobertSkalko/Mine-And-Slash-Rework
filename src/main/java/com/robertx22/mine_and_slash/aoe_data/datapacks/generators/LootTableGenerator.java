@@ -1,24 +1,18 @@
 package com.robertx22.mine_and_slash.aoe_data.datapacks.generators;
 
 import com.google.gson.Gson;
-import com.robertx22.mine_and_slash.database.data.currency.base.Currency;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.ExileCurrency;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.GemItems;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RuneItems;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.storage.loot.Deserializers;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.fml.loading.FMLPaths;
 
@@ -99,44 +93,18 @@ public class LootTableGenerator {
         LootPool.Builder curLoot = LootPool.lootPool();
         curLoot.setRolls(UniformGenerator.between(1, 3));
 
-        for (Currency x : ExileDB.CurrencyItems().getList()) {
-            curLoot.add(LootItem.lootTableItem(x.getCurrencyItem())
-                    .setWeight(x
-                            .Weight()));
+        for (ExileCurrency x : ExileDB.Currency().getList()) {
+            curLoot.add(LootItem.lootTableItem(x.getItem()).setWeight(x.Weight()));
         }
         currencies.withPool(curLoot);
 
+        // todo what are these loot tables for?
         map.put(RUNE_SALVAGE_RECIPE, runes.build());
         map.put(GEM_SALVAGE_RECIPE, gems.build());
         map.put(CURRENCIES_SALVAGE_RECIPE, currencies.build());
 
         return map;
 
-    }
-
-    private void addFarming(Block block, Item item, Item seed, int age, HashMap<ResourceLocation, LootTable> map) {
-
-        LootItemCondition.Builder condition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
-                .setProperties(StatePropertiesPredicate.Builder.properties()
-                        .hasProperty(CropBlock.AGE, age));
-
-        LootTable.Builder b = LootTable.lootTable();
-
-        LootPool.Builder loot = LootPool.lootPool();
-        loot.when(condition);
-        loot.setRolls(UniformGenerator.between(1, 3));
-        loot.add(LootItem.lootTableItem(item));
-        b.withPool(loot);
-
-        if (seed != null) {
-            LootPool.Builder seedpool = LootPool.lootPool();
-            seedpool.when(condition);
-            seedpool.setRolls(UniformGenerator.between(1, 2));
-            seedpool.add(LootItem.lootTableItem(seed));
-            b.withPool(seedpool);
-        }
-
-        map.put(block.getLootTable(), b.build());
     }
 
 }

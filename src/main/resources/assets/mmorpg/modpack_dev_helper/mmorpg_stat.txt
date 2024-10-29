@@ -288,10 +288,6 @@ health_regen
 health_regen_per_10_intelligence
 health_regen_per_1_magic_shield_regen
 hit_damage
-holy_cast_time
-holy_cdr
-holy_spell_dmg
-holy_spell_dmg_taken
 hp_resto_to_blood
 husbandry_core_drop_bonus
 husbandry_double_drop
@@ -328,6 +324,7 @@ increased_quantity
 int_dmg
 int_dmg_per_5_strength
 intelligence
+jewel_effect
 jewel_socket
 knockback_resist
 learn_arrow_barrage
@@ -357,11 +354,13 @@ learn_entangling_seed
 learn_execute
 learn_explode_minions
 learn_explosive_arrow
+learn_fire_golem_basic
 learn_fire_nova
 learn_fire_trap
 learn_fireball
 learn_flame_strike
 learn_frost_flower
+learn_frost_golem_basic
 learn_frost_lich_armor
 learn_frost_nova
 learn_frost_trap
@@ -375,6 +374,7 @@ learn_heart_of_ice
 learn_hunter_potion
 learn_ice_comet
 learn_ignite_explosion
+learn_lightning_golem_basic
 learn_lightning_nova
 learn_lightning_spear
 learn_lightning_totem
@@ -383,7 +383,6 @@ learn_magma_flower
 learn_meteor
 learn_meteor_arrow
 learn_minion_explosion
-learn_pet_basic
 learn_poison_ball
 learn_poison_cloud
 learn_poison_trap
@@ -400,6 +399,7 @@ learn_return_summons
 learn_ritardando
 learn_shooting_star
 learn_shred
+learn_skeleton_basic
 learn_smoke_bomb
 learn_song_of_perseverance
 learn_song_of_valor
@@ -422,6 +422,8 @@ learn_undying_will
 learn_vamp_blood
 learn_whirlwind
 learn_wish
+learn_wolf_basic
+learn_zombie_basic
 lifesteal
 light_res_aura_cost
 lightning_ailment_aura_cost
@@ -564,7 +566,6 @@ plus_lvl_fire_spells
 plus_lvl_golem_spells
 plus_lvl_has_pet_ability_spells
 plus_lvl_heal_spells
-plus_lvl_holy_spells
 plus_lvl_lightning_spells
 plus_lvl_magic_spells
 plus_lvl_melee_spells
@@ -579,7 +580,6 @@ plus_lvl_shatter_spells
 plus_lvl_shield_spells
 plus_lvl_shout_spells
 plus_lvl_song_spells
-plus_lvl_staff_spell_spells
 plus_lvl_summon_spells
 plus_lvl_thorns_spells
 plus_lvl_totem_spells
@@ -660,10 +660,6 @@ spell_physical_damage
 spell_water_damage
 spirit_cost
 staff_damage
-staff_spell_cast_time
-staff_spell_cdr
-staff_spell_spell_dmg
-staff_spell_spell_dmg_taken
 str_dmg
 strength
 summon_cast_time

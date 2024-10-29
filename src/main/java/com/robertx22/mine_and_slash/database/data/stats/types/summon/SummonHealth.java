@@ -11,6 +11,7 @@ import com.robertx22.mine_and_slash.uncommon.effectdatas.DamageEvent;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
 
+// todo this is bugged and needs reworking
 public class SummonHealth extends SummonStat {
 
     public static String GUID = "summon_health";

@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.mine_and_slash.aoe_data.datapacks.models.IAutoModel;
 import com.robertx22.mine_and_slash.aoe_data.datapacks.models.ItemModelManager;
-import com.robertx22.mine_and_slash.database.data.currency.base.Currency;
+import com.robertx22.mine_and_slash.database.data.currency.base.CodeCurrency;
 import com.robertx22.mine_and_slash.database.data.currency.base.GearCurrency;
 import com.robertx22.mine_and_slash.database.data.currency.base.GearOutcome;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
@@ -28,9 +28,9 @@ import java.util.List;
 
 public class CurrencyItem extends Item implements IItemAsCurrency, IAutoLocName, IAutoModel, IAutoLocDesc {
 
-    Currency effect;
+    CodeCurrency effect;
 
-    public CurrencyItem(Currency effect) {
+    public CurrencyItem(CodeCurrency effect) {
         super(new Item.Properties());
         this.effect = effect;
 
@@ -70,7 +70,7 @@ public class CurrencyItem extends Item implements IItemAsCurrency, IAutoLocName,
     }
 
     @Override
-    public Currency currencyEffect(ItemStack stack) {
+    public CodeCurrency currencyEffect(ItemStack stack) {
         return effect;
     }
 

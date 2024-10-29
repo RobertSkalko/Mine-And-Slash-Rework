@@ -176,6 +176,10 @@ of_the_troll
 of_the_wind
 of_treasure
 of_vampirism
+paragon_generosity
+paragon_grace
+paragon_heart
+paragon_virtue
 physical_damage_eye
 physical_wep_dmg
 precise

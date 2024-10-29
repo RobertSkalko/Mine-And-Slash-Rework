@@ -14,7 +14,8 @@ public class Dungeons {
         Dungeon.Builder.of("bastion", "The Bastion", new BastionRoomAdder()).weight(2000).build();
         Dungeon.Builder.of("sewer2", "Slime Sewers", new Sewer2RoomAdder()).weight(2000).build();
 
-        Dungeon.Builder.of("pyramid", "The Pyramid", new PyramidRoomAdder()).weight(500).build();
+        // todo fix this dungeon
+        Dungeon.Builder.of("pyramid", "The Pyramid", new PyramidRoomAdder()).weight(100).build();
 
 
         Dungeon.Builder.of("nature", "Natural", new NatureRoomAdder()).tags(DungeonTags.FOREST).weight(300).build();

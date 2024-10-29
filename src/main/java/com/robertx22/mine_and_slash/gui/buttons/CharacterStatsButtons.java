@@ -1,5 +1,7 @@
 package com.robertx22.mine_and_slash.gui.buttons;
 
+import com.robertx22.library_of_exile.utils.TextUTIL;
+import com.robertx22.library_of_exile.wrappers.ExileText;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.database.data.stats.IUsableStat;
 import com.robertx22.mine_and_slash.database.data.stats.Stat;
@@ -7,12 +9,12 @@ import com.robertx22.mine_and_slash.gui.screens.character_screen.MainHubScreen;
 import com.robertx22.mine_and_slash.saveclasses.unit.StatData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.NumberUtils;
-import com.robertx22.library_of_exile.utils.TextUTIL;
-import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Tooltip;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
+import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
 import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
@@ -30,6 +32,11 @@ public class CharacterStatsButtons extends ImageButton {
 
         });
         this.type = type;
+    }
+
+    @Override
+    protected ClientTooltipPositioner createTooltipPositioner() {
+        return DefaultTooltipPositioner.INSTANCE;
     }
 
     @Override

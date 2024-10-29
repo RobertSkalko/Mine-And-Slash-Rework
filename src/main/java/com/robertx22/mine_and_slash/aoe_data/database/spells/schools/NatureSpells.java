@@ -1,5 +1,7 @@
 package com.robertx22.mine_and_slash.aoe_data.database.spells.schools;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
+import com.robertx22.mine_and_slash.a_libraries.player_animations.SpellAnimations;
 import com.robertx22.mine_and_slash.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.PartBuilder;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.SpellBuilder;
@@ -15,7 +17,6 @@ import com.robertx22.mine_and_slash.mmorpg.registers.common.SlashSounds;
 import com.robertx22.mine_and_slash.tags.all.SpellTags;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.PlayStyle;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Items;
@@ -37,11 +38,12 @@ public class NatureSpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        SpellBuilder.of(CHAOS_TOTEM, PlayStyle.STR, SpellConfiguration.Builder.instant(40, 20 * 60), "Chaos Totem",
+        SpellBuilder.of(CHAOS_TOTEM, PlayStyle.STR, SpellConfiguration.Builder.nonInstant(40, 20 * 60, 40), "Chaos Totem",
                         Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.totem, SpellTags.CHAOS))
 
                 .manualDesc("Summons a totem that spawns chaos meteors, dealing " + SpellCalcs.CHAOS_TOTEM.getLocDmgTooltip(Elements.Shadow)
                         + " in an area.")
+                .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.STAFF_CAST_FINISH)
 
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 0D)))
@@ -123,6 +125,8 @@ public class NatureSpells implements ExileRegistryInit {
                 .manualDesc(
                         "Refreshes all your cooldowns by 1 minute.")
 
+                .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.STAFF_CAST_FINISH)
+
                 .weaponReq(CastingWeapon.ANY_WEAPON)
                 .onCast(PartBuilder.playSound(SlashSounds.FREEZE.get(), 1D, 1D))
 
@@ -178,6 +182,9 @@ public class NatureSpells implements ExileRegistryInit {
                                 .setChargesAndRegen(GARDEN_OF_THORNS, 3, 20 * 30), "Garden of Thorns",
                         Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.thorns, SpellTags.PHYSICAL)
                 )
+
+                .animations(SpellAnimations.SHOOT_ARROW_FAST, SpellAnimations.CAST_FINISH)
+
                 .manualDesc("Deals " + SpellCalcs.THORN_CONSUME.getLocDmgTooltip(Elements.Physical) +
                         " in the area and applies Thorns. Gives you Inner Calm which restores " + SpellCalcs.INNER_CALM.getLocDmgTooltip() + " Mana/s.")
 
@@ -185,11 +192,11 @@ public class NatureSpells implements ExileRegistryInit {
 
                 .onCast(PartBuilder.giveSelfExileEffect(ModEffects.INNER_CALM, 20 * 5D))
 
-                .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 7D)))
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 4D)))
                 .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(Blocks.CACTUS, 200D)
                         .put(MapField.ENTITY_NAME, "block")
                         .put(MapField.FIND_NEAREST_SURFACE, false)
-                        .put(MapField.BLOCK_FALL_SPEED, -0.02D)
+                        .put(MapField.BLOCK_FALL_SPEED, -0.05D)
                         .put(MapField.IS_BLOCK_FALLING, true)))
                 .onExpire("block", PartBuilder.damageInAoe(SpellCalcs.THORN_CONSUME, Elements.Physical, 3D).noKnock())
                 .onExpire("block", PartBuilder.addExileEffectToEnemiesInAoe(ModEffects.THORN.resourcePath, 3D, 20 * 10D))

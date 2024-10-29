@@ -18,6 +18,7 @@ import com.robertx22.mine_and_slash.saveclasses.item_classes.tooltips.TooltipSta
 import com.robertx22.mine_and_slash.saveclasses.unit.StatData;
 import com.robertx22.mine_and_slash.saveclasses.unit.Unit;
 import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.modify.IStatCtxModifier;
+import com.robertx22.mine_and_slash.uncommon.STATICS;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocDesc;
@@ -63,7 +64,7 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     public transient IStatCtxModifier statContextModifier;
 
     public float min = -1000;
-    public float max = 99999999F;
+    public float max = STATICS.MAX_FLOAT;
     private float softcap = 0;
     public boolean has_softcap = false;
     public float base = 0;
@@ -95,7 +96,7 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     }
 
     public final String getHardCapTooltipText() {
-        if (max >= Integer.MAX_VALUE) {
+        if (max >= STATICS.MAX_FLOAT) {
             return "Inf";
         }
         return ((int) this.max) + "";

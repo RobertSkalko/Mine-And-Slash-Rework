@@ -2,11 +2,14 @@ package com.robertx22.mine_and_slash.saveclasses.stat_soul;
 
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.utils.LoadSave;
+import com.robertx22.mine_and_slash.a_libraries.jei.iHideJei;
 import com.robertx22.mine_and_slash.database.data.gear_slots.GearSlot;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.NameBlock;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
@@ -32,7 +35,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt {
+public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt, iHideJei {
 
     public static String TAG = "stat_soul";
 
@@ -62,13 +65,14 @@ public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt {
 
                 var geardata = data.createGearData(null, p);
 
-                Item item = geardata.GetBaseGearType().getRandomItem(data.getRarity());
+                Item item = geardata.get(StackKeys.GEAR).GetBaseGearType().getRandomItem(data.getRarity());
 
                 ItemStack stack = item.getDefaultInstance();
 
-                StackSaving.GEARS.saveTo(stack, geardata);
+                var ex = ExileStack.of(stack);
+                geardata.apply(ex);
 
-                PlayerUtils.giveItem(stack, p);
+                PlayerUtils.giveItem(ex.getStack(), p);
                 itemstack.shrink(1);
             }
 
@@ -143,7 +147,7 @@ public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt {
             if (data != null) {
                 tooltip.clear();
                 if (Screen.hasShiftDown() && data.gear != null) {
-                    data.gear.BuildTooltip(new TooltipContext(stack, tooltip, Load.Unit(ClientOnly.getPlayer())));
+                    data.gear.gear.BuildTooltip(new TooltipContext(stack, tooltip, Load.Unit(ClientOnly.getPlayer())));
                 } else {
                     ExileTooltips exileTooltips = data.getTooltip(stack, false);
                     exileTooltips.accept(new NameBlock(Collections.singletonList(stack.getHoverName())));

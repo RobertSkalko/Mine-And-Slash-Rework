@@ -20,6 +20,7 @@ import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.Style;
@@ -27,10 +28,21 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.GameType;
+
+import java.util.UUID;
 
 public class OnServerTick {
 
+    public static AttributeModifier CASTING_SPEED_SLOW = new AttributeModifier(
+            UUID.fromString("3fb10485-f309-128f-afc6-a23b0d6cf4c1"),
+            BuiltInRegistries.ATTRIBUTE.getKey(Attributes.MOVEMENT_SPEED).toString(),
+            -0.5,
+            AttributeModifier.Operation.MULTIPLY_TOTAL
+    );
 
     public static void onEndTick(ServerPlayer player) {
         try {
@@ -92,6 +104,7 @@ public class OnServerTick {
                         player.setGameMode(GameType.ADVENTURE);
                     }
                 } else {
+                    // todo this shouldnt be done like this
                     if (player.gameMode.getGameModeForPlayer() == GameType.ADVENTURE) {
                         player.setGameMode(GameType.SURVIVAL);
                     }
@@ -116,8 +129,11 @@ public class OnServerTick {
                 event.Activate();
             }
 
-            if (age % (20 * 3) == 0) {
+            if (age % (20 * 10) == 0) {
                 unitdata.setEquipsChanged();
+            }
+
+            if (age % (20 * 3) == 0) {
                 playerData.playerDataSync.setDirty();
             }
 
@@ -125,21 +141,29 @@ public class OnServerTick {
                 playerData.miscInfo.area_lvl = LevelUtils.determineLevel(null, player.level(), player.blockPosition(), player, false).getLevel();
             }
 
-            if (age % 5 == 0) {
-                var tickrate = 5;
-
-                if (player.isBlocking()) {
-                    if (playerData.spellCastingData.isCasting()) {
-                        playerData.spellCastingData.cancelCast(player);
+            AttributeInstance atri = player.getAttribute(Attributes.MOVEMENT_SPEED);
+            if (atri != null) {
+                if (playerData.spellCastingData.isCasting() && playerData.spellCastingData.castTickLeft > 0) {
+                    if (!atri.hasModifier(CASTING_SPEED_SLOW)) {
+                        if (playerData.spellCastingData.getSpellBeingCast() != null && playerData.spellCastingData.getSpellBeingCast().config.slows_when_casting) {
+                            atri.addTransientModifier(CASTING_SPEED_SLOW);
+                        }
+                    }
+                } else {
+                    if (atri.hasModifier(CASTING_SPEED_SLOW)) {
+                        atri.removeModifier(CASTING_SPEED_SLOW);
                     }
                 }
-                playerData.buff.onTick(player, tickrate);
-                unitdata.getResources().onTickBlock(player, tickrate);
-
+            }
+            if (player.isBlocking()) {
+                if (playerData.spellCastingData.isCasting()) {
+                    playerData.spellCastingData.cancelCast(player);
+                }
             }
 
-            if (true || age % (20 * 30) == 0) {
-                //     SummonPetAction.despawnIfExceededMaximumSummons(player, (int) unitdata.getUnit().getStatInCalculation(Stats.MAX_SUMMON_CAPACITY.get()).getValue());
+            if (age % 5 == 0) {
+                var tickrate = 5;
+                unitdata.getResources().onTickBlock(player, tickrate);
             }
 
             if (player.containerMenu instanceof CraftingStationMenu men) {
@@ -151,6 +175,9 @@ public class OnServerTick {
 
 
             if (age % 20 == 0) {
+                
+                playerData.buff.onTick(player, 20);
+
 
                 playerData.favor.onSecond(player);
 
@@ -203,19 +230,22 @@ public class OnServerTick {
                         RestoreResourceEvent hpevent = EventBuilder.ofRestore(player, player, ResourceType.health, RestoreType.regen, 0)
                                 .build();
                         hpevent.Activate();
-
                     }
                 }
 
 
             }
 
-            playerData.playerDataSync.onTickTrySync(player);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        try {
+            Load.player(player).playerDataSync.onTickTrySync(player);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

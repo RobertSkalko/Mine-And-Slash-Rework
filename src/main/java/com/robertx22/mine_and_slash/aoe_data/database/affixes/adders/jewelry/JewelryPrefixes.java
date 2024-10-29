@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.aoe_data.database.affixes.adders.jewelry;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import com.robertx22.mine_and_slash.aoe_data.database.affixes.AffixBuilder;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.ResourceStats;
 import com.robertx22.mine_and_slash.database.data.StatMod;
@@ -7,7 +8,6 @@ import com.robertx22.mine_and_slash.database.data.stats.types.loot.TreasureQuali
 import com.robertx22.mine_and_slash.saveclasses.unit.ResourceType;
 import com.robertx22.mine_and_slash.tags.all.SlotTags;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
 public class JewelryPrefixes implements ExileRegistryInit {
     @Override
@@ -32,6 +32,7 @@ public class JewelryPrefixes implements ExileRegistryInit {
                 .Named("Scavanger")
                 .stats(new StatMod(2, 8, ResourceStats.RESOURCE_ON_KILL.get(ResourceType.health)))
                 .includesTags(SlotTags.jewelry_family)
+                
                 .Prefix()
                 .Build();
 

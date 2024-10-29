@@ -10,17 +10,19 @@ import com.robertx22.mine_and_slash.database.data.profession.screen.InfusingScre
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.SlashBlocks;
+import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SlashItems;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.*;
+import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @JeiPlugin
 public class JeiIntegration implements IModPlugin {
@@ -43,6 +45,22 @@ public class JeiIntegration implements IModPlugin {
             Profession pro = ExileDB.Professions().get(en.getKey());
             registration.addRecipeCategories(new CraftingCategory(pro.id, helper, en.getValue(), pro.locName()));
         }
+    }
+
+    @Override
+    public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
+
+        List<ItemStack> itemsToHide = new ArrayList<>();
+        for (var item : ForgeRegistries.ITEMS) {
+            if (item instanceof iHideJei) {
+                itemsToHide.add(item.getDefaultInstance());
+            }
+        }
+        itemsToHide.add(SlashItems.INVISIBLE_ICON.get().getDefaultInstance());
+        itemsToHide.add(SlashItems.TEST_GEN.get().getDefaultInstance());
+        itemsToHide.add(SlashItems.LOOT_CRATE.get().getDefaultInstance());
+
+        jeiRuntime.getIngredientManager().removeIngredientsAtRuntime(VanillaTypes.ITEM_STACK, itemsToHide);
     }
 
     @Override

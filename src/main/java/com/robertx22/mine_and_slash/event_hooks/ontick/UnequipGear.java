@@ -1,6 +1,7 @@
 package com.robertx22.mine_and_slash.event_hooks.ontick;
 
 import com.robertx22.mine_and_slash.a_libraries.curios.MyCurioUtils;
+import com.robertx22.mine_and_slash.database.data.omen.OmenData;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
@@ -24,13 +25,12 @@ public class UnequipGear {
     public static List<EquipmentSlot> SLOTS = Arrays.asList(EquipmentSlot.FEET, EquipmentSlot.LEGS, EquipmentSlot.CHEST, EquipmentSlot.HEAD, EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND);
 
     static void drop(Player player, EquipmentSlot slot, ItemStack stack, MutableComponent txt) {
-        ItemStack old = player.getItemBySlot(slot);
+        //ItemStack old = player.getItemBySlot(slot);
         ItemStack copy = stack.copy();
 
         player.setItemSlot(slot, ItemStack.EMPTY); // todo is this good?
 
-        if (player.getItemBySlot(slot)
-                .isEmpty()) {
+        if (player.getItemBySlot(slot).isEmpty()) {
             if (slot == EquipmentSlot.MAINHAND) {
                 var en = player.spawnAtLocation(stack, 1F);
                 en.setPickUpDelay(40);
@@ -56,17 +56,19 @@ public class UnequipGear {
 
     public static void check(Player player) {
 
-
         for (EquipmentSlot slot : SLOTS) {
 
             ItemStack stack = player.getItemBySlot(slot);
 
             GearItemData gear = StackSaving.GEARS.loadFrom(stack);
 
-
             if (gear != null) {
                 if (!gear.canPlayerWear(Load.Unit(player))) {
-                    drop(player, slot, stack, Chats.GEAR_DROP.locName().withStyle(ChatFormatting.RED));
+                    if (!gear.isWeapon() && (slot == EquipmentSlot.MAINHAND || slot == EquipmentSlot.OFFHAND)) {
+
+                    } else {
+                        drop(player, slot, stack, Chats.GEAR_DROP.locName().withStyle(ChatFormatting.RED));
+                    }
                 }
             }
         }
@@ -88,6 +90,17 @@ public class UnequipGear {
                             drop(player, handler, i, stack, Chats.GEAR_DROP.locName().withStyle(ChatFormatting.RED));
                         }
                     }
+                    if (StackSaving.OMEN.has(stack)) {
+                        OmenData omen = StackSaving.OMEN.loadFrom(stack);
+
+                        if (omen != null) {
+                            if (omen.lvl > Load.Unit(player).getLevel()) {
+                                drop(player, handler, i, stack, Chats.GEAR_DROP.locName().withStyle(ChatFormatting.RED));
+                            }
+                        }
+
+                    }
+
                 }
 
             }

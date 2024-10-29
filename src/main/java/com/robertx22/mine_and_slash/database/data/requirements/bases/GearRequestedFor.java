@@ -6,16 +6,16 @@ import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 public class GearRequestedFor {
 
     public BaseGearType forSlot;
-    public GearItemData gearData;
+    // public GearItemData gearData;
 
     public GearRequestedFor(GearItemData data) {
         this.forSlot = data.GetBaseGearType();
-        this.gearData = data;
+        //    this.gearData = data;
     }
 
     public GearRequestedFor(BaseGearType slot) {
         this.forSlot = slot;
-        this.gearData = new GearItemData();
+        //   this.gearData = new GearItemData();
     }
 
 }

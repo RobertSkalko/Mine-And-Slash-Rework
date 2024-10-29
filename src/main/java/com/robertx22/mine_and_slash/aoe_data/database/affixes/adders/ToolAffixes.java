@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.aoe_data.database.affixes.adders;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import com.robertx22.mine_and_slash.aoe_data.database.affixes.AffixBuilder;
 import com.robertx22.mine_and_slash.database.data.StatMod;
 import com.robertx22.mine_and_slash.database.data.profession.Profession;
@@ -11,7 +12,6 @@ import com.robertx22.mine_and_slash.database.data.profession.stat.TripleDropChan
 import com.robertx22.mine_and_slash.tags.all.SlotTags;
 import com.robertx22.mine_and_slash.tags.imp.SlotTag;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
 import java.util.HashMap;
 
@@ -31,21 +31,21 @@ public class ToolAffixes implements ExileRegistryInit {
 
             AffixBuilder.Normal(prof + "_double")
                     .Named("")
-                    .stats(new StatMod(1, 10, new DoubleDropChance(prof), ModType.FLAT))
+                    .stats(new StatMod(2, 15, new DoubleDropChance(prof), ModType.FLAT))
                     .includesTags(SlotTags.tool, map.get(prof))
                     .Tool()
                     .Build();
 
             AffixBuilder.Normal(prof + "_triple")
                     .Named("")
-                    .stats(new StatMod(1, 10, new TripleDropChance(prof), ModType.FLAT))
+                    .stats(new StatMod(2, 15, new TripleDropChance(prof), ModType.FLAT))
                     .includesTags(SlotTags.tool, map.get(prof))
                     .Tool()
                     .Build();
 
             AffixBuilder.Normal(prof + "_exp")
                     .Named("")
-                    .stats(new StatMod(3, 15, new ProfExp(prof), ModType.FLAT))
+                    .stats(new StatMod(3, 20, new ProfExp(prof), ModType.FLAT))
                     .includesTags(SlotTags.tool, map.get(prof))
                     .Tool()
                     .Build();

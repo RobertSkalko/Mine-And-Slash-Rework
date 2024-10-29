@@ -18,8 +18,7 @@ public enum SlotFamily {
 
     public String id;
     public Supplier<Item> craftItem;
-    public Supplier<Item> enchantItem;
-
+  
     public String locname() {
         return StringUTIL.capitalise(id);
     }

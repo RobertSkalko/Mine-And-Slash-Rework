@@ -21,6 +21,7 @@ public enum Gui implements IAutoLocName {
     STATS_POINTS("Points: "),
     AREA_LEVEL("Area Level: "),
     TALENT_RESET_POINTS("Respecs: "),
+    RESPEC_POINTS("Respec Points: %1$s"),
     TALENT_POINTS("Points: "),
     PASSIVE_POINTS("Passive Points: "),
     SPELL_POINTS("Spell Points: "),

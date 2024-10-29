@@ -8,7 +8,9 @@ import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientTextureUtils;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Rarity;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -42,7 +44,7 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     }
 
     public int affix_rarity_weight = 1000;
-
+    public GearRarityType type = GearRarityType.NORMAL;
 
     public LootableGearTier lootable_gear_tier = LootableGearTier.LOW;
     public int item_model_data_num = -1;
@@ -51,6 +53,7 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     public int min_affixes = 0;
     public MinMax sockets = new MinMax(0, 2);
     public int item_tier = -1;
+    public int max_runes = 1;
     public float item_tier_power;
     public int min_lvl = 0;
     public String min_map_rarity_to_drop = IRarity.COMMON_ID;
@@ -60,12 +63,18 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     public boolean is_unique_item = false;
     public MinMax map_tiers = new MinMax(0, 100);
 
+    public String vanilla_rar_enum = "";
+
     public int map_lives = 5;
 
     public float map_xp_multi = 1;
 
 
     public int map_resist_req = 0;
+
+    public Rarity getVanillaRarity() {
+        return Rarity.valueOf(vanilla_rar_enum);
+    }
 
     transient ResourceLocation glintFull;
     transient ResourceLocation glintCircle;
@@ -92,6 +101,10 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
         }
     }
 
+
+    public MutableComponent coloredName() {
+        return locName().withStyle(textFormatting());
+    }
 
     @Override
     public Class<GearRarity> getClassForSerialization() {

@@ -15,7 +15,9 @@ import com.robertx22.mine_and_slash.database.data.aura.AuraGem;
 import com.robertx22.mine_and_slash.database.data.auto_item.AutoItem;
 import com.robertx22.mine_and_slash.database.data.base_stats.BaseStatsConfig;
 import com.robertx22.mine_and_slash.database.data.chaos_stats.ChaosStat;
-import com.robertx22.mine_and_slash.database.data.currency.base.Currency;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.ExileCurrency;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModification;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.ItemRequirement;
 import com.robertx22.mine_and_slash.database.data.custom_item.CustomItem;
 import com.robertx22.mine_and_slash.database.data.exile_effects.ExileEffect;
 import com.robertx22.mine_and_slash.database.data.gear_slots.GearSlot;
@@ -25,6 +27,7 @@ import com.robertx22.mine_and_slash.database.data.league.LeagueMechanic;
 import com.robertx22.mine_and_slash.database.data.loot_chest.base.LootChest;
 import com.robertx22.mine_and_slash.database.data.map_affix.MapAffix;
 import com.robertx22.mine_and_slash.database.data.mob_affixes.MobAffix;
+import com.robertx22.mine_and_slash.database.data.omen.Omen;
 import com.robertx22.mine_and_slash.database.data.perks.Perk;
 import com.robertx22.mine_and_slash.database.data.profession.Profession;
 import com.robertx22.mine_and_slash.database.data.profession.ProfessionRecipe;
@@ -46,6 +49,7 @@ import com.robertx22.mine_and_slash.database.data.unique_items.UniqueGear;
 import com.robertx22.mine_and_slash.database.data.value_calc.ValueCalculation;
 import com.robertx22.mine_and_slash.maps.dungeon_reg.Dungeon;
 import com.robertx22.mine_and_slash.maps.spawned_map_mobs.SpawnedMobList;
+import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.rework.action.StatEffect;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.rework.condition.StatCondition;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.WeaponTypes;
@@ -114,10 +118,13 @@ public class ExileDB {
     }
 
 
+    /*
     public static ExileRegistryContainer<Currency> CurrencyItems() {
         return Database.getRegistry(ExileRegistryTypes.CURRENCY_ITEMS);
     }
 
+
+     */
     public static ExileRegistryContainer<DimensionConfig> DimensionConfigs() {
         return Database.getRegistry(ExileRegistryTypes.DIMENSION_CONFIGS);
     }
@@ -161,8 +168,8 @@ public class ExileDB {
         return Database.getRegistry(ExileRegistryTypes.AFFIX);
     }
 
-    public static RarityRegistryContainer<GearRarity> GearRarities() {
-        return (RarityRegistryContainer<GearRarity>) Database.getRegistry(ExileRegistryTypes.GEAR_RARITY);
+    public static ExileRegistryContainer<GearRarity> GearRarities() {
+        return (ExileRegistryContainer<GearRarity>) Database.getRegistry(ExileRegistryTypes.GEAR_RARITY);
     }
 
     public static ExileRegistryContainer<MobRarity> MobRarities() {
@@ -204,6 +211,22 @@ public class ExileDB {
 
     public static ExileRegistryContainer<SpawnedMobList> MapMobs() {
         return Database.getRegistry(ExileRegistryTypes.SPAWNED_MOBS);
+    }
+
+    public static ExileRegistryContainer<Omen> Omens() {
+        return Database.getRegistry(ExileRegistryTypes.OMEN);
+    }
+
+    public static ExileRegistryContainer<ExileCurrency> Currency() {
+        return Database.getRegistry(ExileRegistryTypes.CURRENCY);
+    }
+
+    public static ExileRegistryContainer<ItemModification> ItemMods() {
+        return Database.getRegistry(ExileRegistryTypes.ITEM_MOD);
+    }
+
+    public static ExileRegistryContainer<ItemRequirement> ItemReq() {
+        return Database.getRegistry(ExileRegistryTypes.ITEM_REQ);
     }
 
 
@@ -296,13 +319,12 @@ public class ExileDB {
 
         for (ExileRegistryType type : ExileRegistryType.getAllInRegisterOrder()) {
             var reg = Database.getRegistry(type);
-
             var em = reg.getDefault();
-
             if (em == null) {
-                ExileLog.get().warn(type.id + " default is null or not registered");
+                if (MMORPG.RUN_DEV_TOOLS) {
+                    ExileLog.get().warn(type.id + " default is null or not registered");
+                }
             }
-
         }
     }
 

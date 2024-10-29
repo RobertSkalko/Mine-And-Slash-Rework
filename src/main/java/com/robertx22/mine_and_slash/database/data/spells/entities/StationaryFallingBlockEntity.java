@@ -1,13 +1,13 @@
 package com.robertx22.mine_and_slash.database.data.spells.entities;
 
 import com.google.gson.Gson;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import com.robertx22.mine_and_slash.database.data.spells.components.MapHolder;
 import com.robertx22.mine_and_slash.database.data.spells.map_fields.MapField;
 import com.robertx22.mine_and_slash.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.mine_and_slash.mixin_ducks.FallingBlockAccessor;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.SlashEntities;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.rework.EventData;
-import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -103,9 +103,7 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
 
                 float speed = entityData.get(FALL_SPEED);
                 speed *= 1 + 0.03F * tickCount;
-
-                this.setDeltaMovement(this.getDeltaMovement()
-                        .add(0.0D, speed, 0.0D));
+                this.setDeltaMovement(this.getDeltaMovement().add(0.0D, speed, 0.0D));
             }
             this.move(MoverType.SELF, this.getDeltaMovement());
 

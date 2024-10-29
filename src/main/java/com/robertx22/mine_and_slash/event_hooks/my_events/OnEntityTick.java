@@ -4,8 +4,6 @@ import com.robertx22.mine_and_slash.capability.bases.EntityGears;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.characters.PlayerStats;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
-import com.robertx22.library_of_exile.events.base.EventConsumer;
-import com.robertx22.library_of_exile.events.base.ExileEvents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -15,12 +13,10 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.Map;
 
-public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
+public class OnEntityTick {
 
-    @Override
-    public void accept(ExileEvents.OnEntityTick onEntityTick) {
-        LivingEntity entity = onEntityTick.entity;
 
+    public static void onTick(LivingEntity entity) {
 
         try {
 
@@ -59,7 +55,7 @@ public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
 
                 if (entity.tickCount % 100 == 0) {
                     Player p = (Player) entity;
-                    for(Map.Entry<String, ResourceLocation> set :  PlayerStats.REGISTERED_STATS.entrySet()){
+                    for (Map.Entry<String, ResourceLocation> set : PlayerStats.REGISTERED_STATS.entrySet()) {
                         int max = Math.round(data.getUnit().getCalculatedStat(set.getKey()).getValue());
                         p.resetStat(Stats.CUSTOM.get(PlayerStats.REGISTERED_STATS.get(set.getKey())));
                         p.awardStat(Stats.CUSTOM.get(PlayerStats.REGISTERED_STATS.get(set.getKey())), max);
@@ -67,9 +63,12 @@ public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
                 }
             }
 
+            data.equipmentCache.onTick();
 
-            data.gear.onTickTrySync(entity);
             data.sync.onTickTrySync(entity);
+
+
+            data.immuneTicks--;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,30 +89,28 @@ public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
 
         EntityGears gears = data.getCurrentGears();
 
-        boolean calc = false;
+        boolean gearChanged = false;
+        boolean weaponchanged = false;
 
         for (EquipmentSlot s : EquipmentSlot.values()) {
             ItemStack now = entity.getItemBySlot(s);
             ItemStack before = gears.get(s);
 
             if (now != before) {
-                calc = true;
+                if (s == EquipmentSlot.MAINHAND) {
+                    weaponchanged = true;
+                } else {
+                    gearChanged = true;
+                }
             }
             gears.put(s, now);
         }
 
-        if (calc) {
-            on$change(entity);
+        if (gearChanged) {
+            data.equipmentCache.GEAR.setDirty();
         }
-
-    }
-
-    private static void on$change(LivingEntity entity) {
-        if (entity != null) {
-
-            EntityData data = Load.Unit(entity);
-            data.setEquipsChanged();
-
+        if (weaponchanged) {
+            data.equipmentCache.WEAPON.setDirty();
         }
 
     }

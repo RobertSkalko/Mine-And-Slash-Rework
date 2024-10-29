@@ -1,0 +1,36 @@
+These are all default registry entries of this type.
+This registry is modify-able through datapacks.
+affix_common_reroll
+affix_number_reroll
+affix_random_mythic_reroll
+affix_tier_up_down
+chaos_orb
+enchant_reroll
+entangled_affix_upgrade
+entangled_potential
+entangled_quality
+entangled_unique_reroll
+harvest_essence_0
+harvest_essence_1
+harvest_essence_2
+harvest_essence_3
+harvest_essence_4
+jewel_corrupt
+level_up_orb
+map_rarity_upgrade
+mastery_seal_0
+mastery_seal_1
+mastery_seal_2
+mastery_seal_3
+mastery_seal_4
+mastery_seal_5
+orb_of_quality
+sharpening_stone_0
+sharpening_stone_1
+sharpening_stone_2
+sharpening_stone_3
+sharpening_stone_4
+sharpening_stone_5
+socket_adder
+unique_reroll
+upgrade_common_affix

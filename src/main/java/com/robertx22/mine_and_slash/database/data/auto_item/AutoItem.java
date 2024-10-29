@@ -1,16 +1,20 @@
 package com.robertx22.mine_and_slash.database.data.auto_item;
 
-import com.robertx22.mine_and_slash.database.registry.ExileDB;
-import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
-import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
+import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
+import com.robertx22.mine_and_slash.itemstack.ExileStacklessData;
+import com.robertx22.mine_and_slash.wip.ExileCached;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,20 +38,30 @@ public class AutoItem implements JsonExileRegistry<AutoItem>, IAutoGson<AutoItem
         b.addToSerializables();
     }
 
-    public GearItemData create(Player p) {
+    public ExileStacklessData create(Player p) {
         return ExileDB.CustomItemGenerations().get(custom_item_generation).create(p);
     }
 
-    static HashMap<Item, List<AutoItem>> cached = new HashMap<>();
+    public static ExileCached<HashMap<Item, List<AutoItem>>> CACHED_MAP = new ExileCached<>(() -> {
+        HashMap<Item, List<AutoItem>> map = new HashMap<>();
 
-    public static AutoItem get(Item item) {
-        if (!cached.containsKey(item)) {
-            var list = ExileDB.AutoItems().getFilterWrapped(x -> x.item_id.equals(VanillaUTIL.REGISTRY.items().getKey(item).toString())).list;
-            cached.put(item, list);
+        
+        for (AutoItem auto : ExileDB.AutoItems().getList()) {
+            var item = VanillaUTIL.REGISTRY.items().get(new ResourceLocation(auto.item_id));
+            if (item != Items.AIR) {
+                if (!map.containsKey(item)) {
+                    map.put(item, new ArrayList<>());
+                }
+                map.get(item).add(auto);
+            }
         }
+        return map;
+    });
 
-        var list = cached.get(item);
-        if (!list.isEmpty()) {
+
+    public static AutoItem getRandom(Item item) {
+        var list = CACHED_MAP.get().get(item);
+        if (list != null && !list.isEmpty()) {
             var result = RandomUtils.weightedRandom(list);
             return result;
         }

@@ -1,7 +1,6 @@
 package com.robertx22.mine_and_slash.saveclasses.unit.stat_calc;
 
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
-import com.robertx22.mine_and_slash.database.data.stats.types.core_stats.base.ICoreStat;
 import com.robertx22.mine_and_slash.database.data.stats.types.core_stats.base.ITransferToOtherStats;
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.health.Health;
 import com.robertx22.mine_and_slash.saveclasses.unit.InCalcStatContainer;
@@ -40,10 +39,13 @@ public class InCalc {
             }
         });
         // apply core stats
+        /*
         calc.modifyInCalc(calcStat -> {
             if (calcStat.GetStat() instanceof ICoreStat core) {
                 core.addToOtherStats(data, calc, calcStat);
             }
         });
+
+         */
     }
 }

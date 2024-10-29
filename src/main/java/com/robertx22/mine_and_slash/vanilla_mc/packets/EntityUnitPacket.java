@@ -1,9 +1,9 @@
 package com.robertx22.mine_and_slash.vanilla_mc.packets;
 
-import com.robertx22.mine_and_slash.mmorpg.SlashRef;
-import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;
+import com.robertx22.mine_and_slash.mmorpg.SlashRef;
+import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -21,8 +21,7 @@ public class EntityUnitPacket extends MyPacket<EntityUnitPacket> {
 
     public EntityUnitPacket(Entity entity) {
         this.id = entity.getId();
-        this.nbt = Load.Unit(entity)
-                .serializeNBT();
+        this.nbt = Load.Unit(entity).serializeNBT();
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanc
 import com.robertx22.mine_and_slash.database.data.gear_slots.GearSlot;
 import com.robertx22.mine_and_slash.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.mine_and_slash.database.data.level_ranges.LevelRange;
+import com.robertx22.mine_and_slash.database.data.profession.ExplainedResult;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.database.data.unique_items.UniqueGear;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
@@ -12,6 +13,10 @@ import com.robertx22.mine_and_slash.gui.inv_gui.actions.auto_salvage.ToggleAutoS
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.*;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.usableitemblocks.UsageBlock;
+import com.robertx22.mine_and_slash.itemstack.CustomItemData;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.ExileStacklessData;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.loot.LootInfo;
 import com.robertx22.mine_and_slash.loot.blueprints.GearBlueprint;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RarityItems;
@@ -19,7 +24,6 @@ import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.ModRange;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.TooltipContext;
-import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.uncommon.MathHelper;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
@@ -58,7 +62,7 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
     public boolean can_sal = true;
 
 
-    public GearItemData gear = null;
+    public SavedGearSoul gear = null;
 
 
     // todo how do i make the result accept nbt.
@@ -99,12 +103,19 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
 
     }
 
-    public void insertAsUnidentifiedOn(ItemStack stack, Player p) {
+    public ItemStack insertAsUnidentifiedOn(ItemStack s, Player p) {
+
+        ItemStack copy = s.copy();
+
+        // todo replacing souls needs to support replacing more than just gearitemdata.. otherwise you could just delete potential or corruption or whatever
         if (gear != null) {
-            StackSaving.GEARS.saveTo(stack, gear);
+            gear.saveTo(copy);
+            return copy;
         } else {
-            StackSaving.GEARS.saveTo(stack, this.createGearData(stack, p));
-            //LoadSave.Save(this, stack.getOrCreateTag(), StatSoulItem.TAG);
+            var e = this.createGearData(copy, p);
+            var ex = ExileStack.of(copy);
+            e.apply(ex);
+            return ex.getStack();
         }
     }
 
@@ -128,29 +139,36 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
         return this.fam == SlotFamily.Armor || (!this.slot.isEmpty() && ExileDB.GearSlots().get(slot).fam == SlotFamily.Armor);
     }
 
-    public boolean canApplyTo(ItemStack stack) {
+    public ExplainedResult canApplyTo(ItemStack stack) {
         GearSlot slot = GearSlot.getSlotOf(stack.getItem());
 
         if (slot == null) {
-            return false;
-        }
-        if (canBeOnAnySlot()) {
-            return slot != null;
+            return ExplainedResult.failure(Chats.NOT_GEAR_OR_NOT_COMPAT.locName());
         }
         if (fam != SlotFamily.NONE) {
-            if (slot.fam == fam) {
-                return true;
+            if (slot.fam != fam) {
+                return ExplainedResult.failure(Chats.NOT_MATCHING_GEAR_FAMILY.locName());
+            } else {
+                return ExplainedResult.success();
             }
         }
-        if (!this.slot.isEmpty()) {
-            return this.slot.equals(slot.GUID());
+        if (canBeOnAnySlot()) {
+            return ExplainedResult.success();
         }
 
-        return false;
+        if (!this.slot.isEmpty()) {
+            if (this.slot.equals(slot.GUID())) {
+                return ExplainedResult.success();
+            } else {
+                return ExplainedResult.failure(Chats.NOT_MATCHING_GEAR_SLOT.locName());
+            }
+        }
+
+        return ExplainedResult.silentlyFail();
     }
 
 
-    public GearItemData createGearData(@Nullable ItemStack stack, Player p) {
+    public ExileStacklessData createGearData(@Nullable ItemStack stack, Player p) {
 
         int lvl = MathHelper.clamp(Load.Unit(p).getLevel(), LevelUtils.tierToLevel(tier).getMinLevel(), LevelUtils.tierToLevel(tier).getMaxLevel());
 
@@ -175,26 +193,31 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
             b.gearItemSlot.set(uniq.getBaseGear());
         }
 
-        GearItemData gear = b.createData();
+        var ex = b.createData();
 
-        gear.setPotential((int) (gear.getPotentialNumber() * GameBalanceConfig.get().CRAFTED_GEAR_POTENTIAL_MULTI));
+        ex.getOrCreate(StackKeys.POTENTIAL).potential *= GameBalanceConfig.get().CRAFTED_GEAR_POTENTIAL_MULTI;
+        ex.getOrCreate(StackKeys.CUSTOM).data.set(CustomItemData.KEYS.CRAFTED, true);
+        ex.getOrCreate(StackKeys.CUSTOM).data.set(CustomItemData.KEYS.SALVAGING_DISABLED, !this.can_sal);
 
-        gear.data.set(GearItemData.KEYS.SALVAGING_DISABLED, !this.can_sal);
-        return gear;
+        return ex;
     }
 
-    public boolean canInsertIntoStack(ItemStack stack) {
+    public ExplainedResult canInsertIntoStack(ItemStack stack) {
 
         if (stack.isEmpty()) {
-            return false;
+            return ExplainedResult.silentlyFail();
         }
 
         if (StackSaving.GEARS.has(stack)) {
-            return false;
+            return ExplainedResult.failure(Chats.ALREADY_HAS_SOUL.locName());
         }
 
         if (this.gear != null) {
-            return GearSlot.isItemOfThisSlot(gear.GetBaseGearType().getGearSlot(), stack.getItem());
+            if (GearSlot.isItemOfThisSlot(gear.gear.GetBaseGearType().getGearSlot(), stack.getItem())) {
+                return ExplainedResult.success();
+            } else {
+                return ExplainedResult.failure(Chats.NOT_MATCHING_GEAR_SLOT.locName());
+            }
         }
 
         return canApplyTo(stack);
@@ -253,7 +276,7 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
                     .withStyle(ChatFormatting.GOLD));
             //tooltip.add(TooltipUtils.gearTier(this.tier));
             if (new StatRangeInfo(ModRange.hide()).hasAltDown) {
-                tooltip.add(Component.literal("[" + Itemtips.MAP_TIER_TIP.locName().getString() + "]").withStyle(ChatFormatting.BLUE));
+                // tooltip.add(Component.literal("[" + Itemtips.MAP_TIER_TIP.locName().getString() + "]").withStyle(ChatFormatting.BLUE));
             }
             if (this.canBeOnAnySlot()) {
 
@@ -272,13 +295,13 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
                 });
             }
             exileTooltips.accept(new UsageBlock(tooltip));
-            exileTooltips.accept(new OperationTipBlock().setAlt());
+            exileTooltips.accept(new OperationTipBlock().setShift());
         }
         exileTooltips.accept(WorksOnBlock.usableOn(WorksOnBlock.ItemType.SOULLESS_GEAR));
 
         exileTooltips
                 .accept(new AdditionalBlock(Collections.singletonList(Chats.RIGHT_CLICK_TO_GEN_ITEM.locName().withStyle(ChatFormatting.BLUE))).showWhen(() -> cangen))
-                .accept(new SalvageBlock(this));
+                .accept(new SalvageBlock(this, ExileStack.of(stack)));
 
         return exileTooltips;
     }
@@ -289,7 +312,7 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
     }
 
     @Override
-    public List<ItemStack> getSalvageResult(ItemStack stack) {
+    public List<ItemStack> getSalvageResult(ExileStack stack) {
         int amount = 1;
         return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.getOrDefault(getRarity().GUID(), RarityItems.RARITY_STONE.get(IRarity.COMMON_ID)).get(), amount));
     }

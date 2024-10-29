@@ -28,6 +28,7 @@ public class LearnClassPointButton extends ImageButton {
 
     static ResourceLocation SPELL_SLOT = SlashRef.guiId("spells/slots/spell");
     static ResourceLocation PASSIVE = SlashRef.guiId("spells/slots/passive");
+    static ResourceLocation OVERLAY = SlashRef.guiId("spells/slots/overlay");
 
     public static int BUTTON_SIZE_X = 18;
     public static int BUTTON_SIZE_Y = 18;
@@ -87,11 +88,42 @@ public class LearnClassPointButton extends ImageButton {
 
         gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
         gui.blit(perk.getIcon(), getX() + 1, getY() + 1, 16, 16, 16, 16, 16, 16);
+        gui.blit(OVERLAY, getX(), getY(), BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X);
+
 
         int currentlvl = Load.player(mc.player).ascClass.getLevel(perk.GUID());
+
+        ChatFormatting color = ChatFormatting.GRAY;
+
         int maxlvl = perk.getMaxLevel();
+        if (this.perk.isSpell()) {
+            int lvl = perk.getSpell().getLevelOf(mc.player);
+            if (lvl > currentlvl) {
+                currentlvl = lvl;
+            }
+        }
+        float perc = ((float) currentlvl / maxlvl);
+
+        if (currentlvl < 1) {
+            color = ChatFormatting.GRAY;
+        } else {
+
+            if (perc > 1f) {
+                color = ChatFormatting.DARK_PURPLE;
+            } else if (perc > 0.7f) {
+                color = ChatFormatting.GOLD;
+            } else if (perc > 0.5f) {
+                color = ChatFormatting.LIGHT_PURPLE;
+            } else if (perc > 0.3f) {
+                color = ChatFormatting.AQUA;
+            } else {
+                color = ChatFormatting.GREEN;
+            }
+        }
+
+
         String lvltext = currentlvl + "/" + maxlvl;
-        TextUtils.renderText(gui, 0.8F, lvltext, getX() + BUTTON_SIZE_X / 2, (int) (getY() + BUTTON_SIZE_Y * 0.85F), ChatFormatting.GREEN);
+        TextUtils.renderText(gui, 0.8F, lvltext, getX() + BUTTON_SIZE_X / 2, (int) (getY() + BUTTON_SIZE_Y * 0.85F), color);
 
         super.render(gui, mouseX, mouseY, delta);
 

@@ -14,9 +14,11 @@ import java.util.List;
 public class Affix implements IWeighted, IGUID, IAutoLocName, IhasRequirements,
         JsonExileRegistry<Affix>, IAutoGson<Affix> {
 
-    public enum Type {
+    // where the affix goes, is it a gear prefix, a jewel affix, a gear corruption affix?
+    public enum AffixSlot {
         prefix,
         suffix,
+        crafted_jewel_unique,
         watcher_eye,
         jewel_corruption,
         enchant,
@@ -39,9 +41,10 @@ public class Affix implements IWeighted, IGUID, IAutoLocName, IhasRequirements,
     public String eye_aura_req = "";
     public transient String loc_name;
     public boolean only_one_per_item = true;
+    public String one_of_a_kind = "";
     public int weight = 1000;
     public Requirements requirements;
-    public Type type;
+    public AffixSlot type;
 
     public List<StatMod> stats = new ArrayList<>();
 
@@ -50,6 +53,7 @@ public class Affix implements IWeighted, IGUID, IAutoLocName, IhasRequirements,
         requirements.tag_requirements.forEach(x -> list.addAll(x.included));
         return list;
     }
+
 
     @Override
     public boolean isRegistryEntryValid() {

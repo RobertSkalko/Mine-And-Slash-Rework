@@ -1,6 +1,8 @@
 package com.robertx22.mine_and_slash.database.data;
 
 import com.google.gson.JsonObject;
+import com.robertx22.library_of_exile.registry.serialization.ISerializable;
+import com.robertx22.library_of_exile.wrappers.ExileText;
 import com.robertx22.mine_and_slash.database.data.stats.Stat;
 import com.robertx22.mine_and_slash.database.data.stats.name_regex.StatNameRegex;
 import com.robertx22.mine_and_slash.database.data.stats.tooltips.StatTooltipType;
@@ -12,8 +14,6 @@ import com.robertx22.mine_and_slash.saveclasses.item_classes.tooltips.TooltipSta
 import com.robertx22.mine_and_slash.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.TooltipUtils;
-import com.robertx22.library_of_exile.registry.serialization.ISerializable;
-import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -94,16 +94,16 @@ public class StatMod implements ISerializable<StatMod> {
         fmin = (int) GetStat().scale(getModType(), min, lvl);
         fmax = (int) GetStat().scale(getModType(), max, lvl);
 
-        String text = fmin + " -> " + fmax;
+        Boolean perc = GetStat().IsPercent() || getModType().isPercent();
+        String ptext = perc ? "%" : "";
 
-        if (GetStat().IsPercent() || getModType().isPercent()) {
-            text = text + "%";
-        } else if (getModType() == ModType.MORE) {
+        String text = fmin + ptext + " -> " + fmax + ptext;
+
+        if (!perc && getModType() == ModType.MORE) {
             if (fmin > 0) {
                 text = text + " " + GetStat().getMultiUseType().prefixWord.locName().getString();
             } else {
                 text = text + " " + GetStat().getMultiUseType().prefixLessWord.locName().getString();
-
             }
         }
 

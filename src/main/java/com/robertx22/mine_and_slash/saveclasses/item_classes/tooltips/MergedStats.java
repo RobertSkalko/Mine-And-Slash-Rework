@@ -1,9 +1,9 @@
 package com.robertx22.mine_and_slash.saveclasses.item_classes.tooltips;
 
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IGearPartTooltip;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.StatRangeInfo;
-import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class MergedStats implements IGearPartTooltip {
     }
 
     @Override
-    public List<Component> GetTooltipString(StatRangeInfo info, GearItemData gear) {
+    public List<Component> GetTooltipString(StatRangeInfo info, ExileStack gear) {
         List<Component> tooltip = new ArrayList<>();
         mergedList.forEach(x -> tooltip.addAll(x.GetTooltipString()));
         return tooltip;

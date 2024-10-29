@@ -1,5 +1,7 @@
 package com.robertx22.mine_and_slash.aoe_data.database.spells.schools;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
+import com.robertx22.mine_and_slash.a_libraries.player_animations.SpellAnimations;
 import com.robertx22.mine_and_slash.aoe_data.database.ailments.Ailments;
 import com.robertx22.mine_and_slash.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.PartBuilder;
@@ -20,7 +22,6 @@ import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.PlayStyle;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.EntityFinder;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffects;
@@ -42,8 +43,12 @@ public class SummonSpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        SpellBuilder.of(SUMMON_FIRE_GOLEM, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(40, 20 * 60, 30).setSummonType(SummonType.GOLEM), "Summon Fire Golem",
+        SpellBuilder.of(SUMMON_FIRE_GOLEM, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(40, 20 * 60, 30)
+                                .setSummonBasicAttack(PetSpells.FIRE_GOLEM).setSummonType(SummonType.GOLEM), "Summon Fire Golem",
                         Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.golem, SpellTags.has_pet_ability, SpellTags.FIRE))
+
+                .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.CAST_FINISH)
+
                 .manualDesc("Summon a Golem that can cast Fire Nova to aid you in combat.")
                 .summons(SlashEntities.FIRE_GOLEM.get(), 20 * 60 * 3, 1, SummonType.GOLEM)
                 .levelReq(20)
@@ -53,9 +58,12 @@ public class SummonSpells implements ExileRegistryInit {
 
                 .build();
 
-        SpellBuilder.of(SUMMON_COLD_GOLEM, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(40, 20 * 60, 30).setSummonType(SummonType.GOLEM), "Summon Frost Golem",
+        SpellBuilder.of(SUMMON_COLD_GOLEM, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(40, 20 * 60, 30)
+                                .setSummonBasicAttack(PetSpells.FROST_GOLEM).setSummonType(SummonType.GOLEM), "Summon Frost Golem",
                         Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.golem, SpellTags.has_pet_ability, SpellTags.COLD))
                 .manualDesc("Summon a Golem that can cast Frost Nova to aid you in combat.")
+                .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.CAST_FINISH)
+
                 .summons(SlashEntities.COLD_GOLEM.get(), 20 * 60 * 3, 1, SummonType.GOLEM)
                 .levelReq(20)
                 .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(10, 50))
@@ -63,9 +71,12 @@ public class SummonSpells implements ExileRegistryInit {
                 .addStat(EffectStats.APPLY_GOLEM_EFFECT.get(ModEffects.ICE_GOLEM_BUFF).mod(1, 1))
                 .build();
 
-        SpellBuilder.of(SUMMON_LIGHTNING_GOLEM, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(40, 20 * 60, 30).setSummonType(SummonType.GOLEM), "Summon Lightning Golem",
+        SpellBuilder.of(SUMMON_LIGHTNING_GOLEM, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(40, 20 * 60, 30)
+                                .setSummonBasicAttack(PetSpells.LIGHTNING_GOLEM).setSummonType(SummonType.GOLEM), "Summon Lightning Golem",
                         Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.golem, SpellTags.has_pet_ability, SpellTags.LIGHTNING))
                 .manualDesc("Summon a Golem that can cast Lightning Nova to aid you in combat .")
+                .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.CAST_FINISH)
+
                 .summons(SlashEntities.LIGHTNING_GOLEM.get(), 20 * 60 * 3, 1, SummonType.GOLEM)
                 .levelReq(20)
                 .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(10, 50))
@@ -74,18 +85,25 @@ public class SummonSpells implements ExileRegistryInit {
                 .build();
 
 
-        SpellBuilder.of(SUMMON_SPIRIT_WOLF, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(30, 30 * 20, 30).setSummonType(SummonType.BEAST), "Summon Spirit Wolf",
+        SpellBuilder.of(SUMMON_SPIRIT_WOLF, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(30, 30 * 20, 30)
+                                .setSummonBasicAttack(PetSpells.WOLF)
+                                .setSummonType(SummonType.BEAST), "Summon Spirit Wolf",
                         Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.beast, SpellTags.has_pet_ability, SpellTags.PHYSICAL))
                 .manualDesc("Summon a Spirit Wolf to aid you in combat.")
+
                 .summons(SlashEntities.SPIRIT_WOLF.get(), 20 * 30, 1, SummonType.BEAST)
                 .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(5, 25))
                 .addStat(new SummonHealth().mod(30, 300))
                 .levelReq(1)
                 .build();
 
-        SpellBuilder.of(SUMMON_ZOMBIE, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(30, 20 * 60, 40).setSummonType(SummonType.UNDEAD), "Summon Zombie",
+        SpellBuilder.of(SUMMON_ZOMBIE, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(30, 20 * 60, 40)
+                                .setSummonBasicAttack(PetSpells.ZOMBIE)
+                                .setSummonType(SummonType.UNDEAD), "Summon Zombie",
                         Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.has_pet_ability, SpellTags.PHYSICAL))
                 .manualDesc("Summon a Zombie to aid you in combat.")
+                .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.CAST_FINISH)
+
                 .summons(SlashEntities.ZOMBIE.get(), 20 * 60 * 2, 1, SummonType.UNDEAD)
                 .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(10, 50))
                 .addStat(new SummonHealth().mod(20, 200))
@@ -97,15 +115,21 @@ public class SummonSpells implements ExileRegistryInit {
                                 .setChargesAndRegen("spider", 3, 20 * 15).setSummonType(SummonType.UNDEAD), "Summon Spider",
                         Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.has_pet_ability, SpellTags.CHAOS))
                 .manualDesc("Summon a fast moving spider to aid you in combat.")
+                .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.CAST_FINISH)
+
                 .summons(SlashEntities.SPIDER.get(), 20 * 60 * 2, 1, SummonType.SPIDER)
                 .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(5, 25))
                 .addStat(new AilmentChance(Ailments.POISON).mod(10, 50))
                 .levelReq(1)
                 .build();
 
-        SpellBuilder.of(SUMMON_SKELETAL_ARMY, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(35, 20 * 3, 40).setSummonType(SummonType.UNDEAD), "Summon Skeleton",
+        SpellBuilder.of(SUMMON_SKELETAL_ARMY, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(35, 20 * 3, 40)
+                                .setSummonBasicAttack(PetSpells.SKELETON)
+                                .setSummonType(SummonType.UNDEAD), "Summon Skeleton",
                         Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.has_pet_ability, SpellTags.PHYSICAL))
                 .manualDesc("Summon Skeleton to fight for you using ranged attacks.")
+                .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.CAST_FINISH)
+
                 .summons(SlashEntities.SKELETON.get(), 20 * 60 * 3, 1, SummonType.UNDEAD)
                 .levelReq(30)
                 .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(10, 150))
@@ -116,8 +140,10 @@ public class SummonSpells implements ExileRegistryInit {
 
         SpellBuilder.of(RETURN_SUMMONS, PlayStyle.STR, SpellConfiguration.Builder.instant(15, 20 * 30), "Return Summons",
                         Arrays.asList(SpellTags.area, SpellTags.heal, SpellTags.summon))
+                .singleAnimation(SpellAnimations.PULL)
+
                 .manualDesc("Regroup your summons and heal them for " + SpellCalcs.HEALING_AURA.getLocDmgTooltip() + " health.")
-                .onCast(PartBuilder.playSound(SoundEvents.ANVIL_HIT, 1D, 1D))
+                .onCast(PartBuilder.playSound(SoundEvents.STONE_BREAK, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.TP_TARGET_TO_SELF.create())
                         .addActions(SpellAction.POTION.createGive(MobEffects.MOVEMENT_SLOWDOWN, 20D * 5))
                         .addActions(SpellAction.DEAL_DAMAGE.create(SpellCalcs.PULL, Elements.Physical))

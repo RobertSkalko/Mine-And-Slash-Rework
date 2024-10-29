@@ -5,9 +5,11 @@ import com.robertx22.mine_and_slash.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.mine_and_slash.database.data.perks.Perk;
 import com.robertx22.mine_and_slash.database.data.talent_tree.TalentTree;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.itemstack.CustomItemData;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.loot.LootInfo;
 import com.robertx22.mine_and_slash.loot.blueprints.GearBlueprint;
-import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.PlayerUtils;
@@ -38,7 +40,7 @@ public class ItemNewbieGearBag extends Item {
 
     static HashMap<String, NewbieContent> MAP = new HashMap<>();
     static NewbieContent defaultContent = new NewbieContent(Arrays.asList(GearSlots.STAFF, GearSlots.SWORD, GearSlots.BOW));
-   
+
     static {
     }
 
@@ -73,25 +75,6 @@ public class ItemNewbieGearBag extends Item {
 
         public void give(Player player) {
 
-            // todo if i create a choose gui, give players a choice of 1 spell
-            // items.forEach(x -> PlayerUtils.giveItem(new ItemStack(x.get()), player));
-            /*
-            for (String s : spells) {
-                SkillGemBlueprint b = new SkillGemBlueprint(LootInfo.ofLevel(1), SkillGemData.SkillGemType.SKILL);
-                b.level.set(1);
-
-                var data = b.createData();
-                data.id = s;
-                data.sal = false;
-
-                ItemStack stack = data.getItem().getDefaultInstance();
-
-                StackSaving.SKILL_GEM.saveTo(stack, data);
-
-                PlayerUtils.giveItem(stack, player);
-            }
-                         */
-
 
             gearslots.forEach(x -> {
                 BaseGearType gear = ExileDB.GearTypes()
@@ -105,12 +88,22 @@ public class ItemNewbieGearBag extends Item {
                 b.gearItemSlot.set(gear);
 
 
-                GearItemData data = b.createData();
-                data.data.set(GearItemData.KEYS.SALVAGING_DISABLED, true);
+                var ex = b.createData();
+
+                var data = ex.get(StackKeys.GEAR);
+
+                ex.getOrCreate(StackKeys.CUSTOM).data.set(CustomItemData.KEYS.SALVAGING_DISABLED, true);
 
                 ItemStack stack = data.GetBaseGearType().getRandomItem(data.getRarity()).getDefaultInstance();
 
                 data.saveToStack(stack);
+
+                
+                var exfi = ExileStack.of(stack);
+
+                ex.apply(exfi);
+
+                stack = exfi.getStack();
 
                 EnchantedBookItem.addEnchantment(stack, new EnchantmentInstance(Enchantments.UNBREAKING, 3));
 

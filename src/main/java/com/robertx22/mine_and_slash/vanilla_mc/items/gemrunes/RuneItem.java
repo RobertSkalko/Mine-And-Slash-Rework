@@ -8,7 +8,7 @@ import com.robertx22.mine_and_slash.aoe_data.datapacks.models.ItemModelManager;
 import com.robertx22.mine_and_slash.database.data.MinMax;
 import com.robertx22.mine_and_slash.database.data.StatMod;
 import com.robertx22.mine_and_slash.database.data.currency.IItemAsCurrency;
-import com.robertx22.mine_and_slash.database.data.currency.base.Currency;
+import com.robertx22.mine_and_slash.database.data.currency.base.CodeCurrency;
 import com.robertx22.mine_and_slash.database.data.currency.base.GearCurrency;
 import com.robertx22.mine_and_slash.database.data.currency.base.GearOutcome;
 import com.robertx22.mine_and_slash.database.data.currency.loc_reqs.LocReqContext;
@@ -25,12 +25,12 @@ import com.robertx22.mine_and_slash.gui.texts.textblocks.WorksOnBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.DropChanceBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.DropLevelBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.usableitemblocks.UsageBlock;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.loot.blueprints.bases.RunePart;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.SocketData;
-import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
-import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
@@ -38,6 +38,7 @@ import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.mine_and_slash.vanilla_mc.LuckyRandom;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.proxies.OpenGuiWrapper;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -62,7 +63,7 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
     public int weight = 1000;
 
     @Override
-    public Currency currencyEffect(ItemStack stack) {
+    public CodeCurrency currencyEffect(ItemStack stack) {
         return new RuneCurrency();
     }
 
@@ -84,54 +85,56 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
                         }
 
                         @Override
-                        public ItemStack modify(LocReqContext ctx, GearItemData gear, ItemStack stack) {
+                        public void modify(LocReqContext ctx) {
 
-                            //todo actually make this based on gear rarities
-                            var rune = new SocketData();
-                            boolean add = true;
-                            var opt = gear.sockets.getSocketed().stream().filter(x -> x.isRune() && x.getRune().GUID().equals(RuneItem.this.type.id)).findAny();
-                            if (opt.isPresent()) {
-                                rune = opt.get();
-                                add = false;
-                            }
+                            ctx.stack.get(StackKeys.GEAR).edit(gear -> {
+                                //todo actually make this based on gear rarities
+                                var rune = new SocketData();
+                                boolean add = true;
+                                var opt = gear.sockets.getSocketed().stream().filter(x -> x.isRune() && x.getRune().GUID().equals(RuneItem.this.type.id)).findAny();
+                                if (opt.isPresent()) {
+                                    rune = opt.get();
+                                    add = false;
+                                }
 
-                            rune.g = RuneItem.this.type.id;
+                                rune.g = RuneItem.this.type.id;
 
-                            int val = LuckyRandom.randomInt(0, 100, LuckyRandom.LuckyUnlucky.UNLUCKY, 2);
+                                int val = LuckyRandom.randomInt(0, 100, LuckyRandom.LuckyUnlucky.UNLUCKY, 2);
 
-                            if (!rune.getRune().uses_unlucky_ran) {
-                                val = new MinMax(0, 100).random();
-                            }
+                                if (!rune.getRune().uses_unlucky_ran) {
+                                    val = new MinMax(0, 100).random();
+                                }
 
-                            if (val > rune.p) {
-                                rune.p = val;
-                            }
+                                if (val > rune.p) {
+                                    rune.p = val;
+                                }
 
-                            if (add) {
-                                gear.sockets.getSocketed().add(rune);
-                            }
+                                if (add) {
+                                    gear.sockets.getSocketed().add(rune);
+                                }
 
 
-                            if (gear.getRarity().can_have_runewords) {
-                                var list = ExileDB.RuneWords().getFilterWrapped(x -> x.canApplyOnItem(stack) && x.hasMatchingRunesToCreate(gear)).list;
-                                if (!list.isEmpty()) {
-                                    var biggest = list.stream().max(Comparator.comparingInt(x -> x.runes.size())).get();
+                                if (gear.getRarity().can_have_runewords) {
+                                    var list = ExileDB.RuneWords().getFilterWrapped(x -> x.canApplyOnItem(ctx.stack.getStack()) && x.hasMatchingRunesToCreate(gear)).list;
+                                    if (!list.isEmpty()) {
+                                        var biggest = list.stream().max(Comparator.comparingInt(x -> x.runes.size())).get();
 
-                                    var current = gear.sockets.getRuneWord();
+                                        var current = gear.sockets.getRuneWord();
 
-                                    int currentSize = 0;
+                                        int currentSize = 0;
 
-                                    if (current != null && !current.isEmpty()) {
-                                        currentSize = current.runes.size();
-                                    }
-                                    if (biggest.runes.size() > currentSize) {
-                                        gear.sockets.setRuneword(biggest);
+                                        if (current != null && !current.isEmpty()) {
+                                            currentSize = current.runes.size();
+                                        }
+                                        if (biggest.runes.size() > currentSize) {
+                                            gear.sockets.setRuneword(biggest);
+                                        }
                                     }
                                 }
-                            }
 
-                            gear.saveToStack(stack);
-                            return stack;
+                            });
+
+
                         }
 
                         @Override
@@ -148,20 +151,17 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
         }
 
         @Override
-        public ExplainedResult canBeModified(GearItemData data) {
-
-            if (data.uniqueStats != null && data.isUnique() && !data.uniqueStats.getUnique(data).runable) {
+        public ExplainedResult canBeModified(ExileStack stack) {
+            var data = stack.get(StackKeys.GEAR).get();
+            if (data.uniqueStats != null && data.isUnique() && !data.uniqueStats.getUnique(stack).runable) {
                 return ExplainedResult.failure(Chats.CANT_RUNE_THIS_UNIQUE.locName());
             }
 
-            if (!data.rar.equals(IRarity.RUNEWORD_ID)) {
-                int runes = (int) data.sockets.getSocketed().stream().filter(x -> x.isRune()).count();
-                int gems = (int) data.sockets.getSocketed().stream().filter(x -> x.isGem()).count();
-                runes++;
-                if (gems > runes) {
-                    return ExplainedResult.failure(Chats.CANT_HAVE_MORE_RUNES_THAN_GEMS_IN_NON_RUNED.locName());
-                }
+            int runes = (int) data.sockets.getSocketed().stream().filter(x -> x.isRune()).count();
+            if (runes >= data.getRarity().max_runes) {
+                return ExplainedResult.failure(Chats.MAX_RUNES_PER_RARITY.locName(data.getRarity().max_runes, data.getRarity().coloredName()));
             }
+
 
             Rune rune = ExileDB.Runes().get(RuneItem.this.type.id);
 
@@ -284,17 +284,20 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
                     return statsTooltip();
                 }
             });
-            t.accept(new UsageBlock(splitLongText(Itemtips.RUNE_ITEM_USAGE.locName().withStyle(ChatFormatting.BLUE))));
+
             t.accept(WorksOnBlock.usableOn(WorksOnBlock.ItemType.GEAR));
             t.accept(new OperationTipBlock().setAlt().setShift());
             Rune rune = this.getRune();
 
-            if (rune.Weight() > 0) {
-                var lvl = Load.Unit(ClientOnly.getPlayer()).getLevel();
-                t.accept(new DropLevelBlock(rune.getReqLevelToDrop(), GameBalanceConfig.get().MAX_LEVEL));
-                t.accept(new DropChanceBlock(RunePart.droppableAtLevel(lvl).getDropChance(rune)));
-            } else {
-                t.accept(new AdditionalBlock(Itemtips.NOT_A_RANDOM_MNS_DROP_CHECK_MODPACK.locName().withStyle(ChatFormatting.BLUE)));
+            if (Screen.hasShiftDown()) {
+                t.accept(new UsageBlock(splitLongText(Itemtips.RUNE_ITEM_USAGE.locName().withStyle(ChatFormatting.BLUE))));
+                if (rune.Weight() > 0) {
+                    var lvl = Load.Unit(ClientOnly.getPlayer()).getLevel();
+                    t.accept(new DropLevelBlock(rune.getReqLevelToDrop(), GameBalanceConfig.get().MAX_LEVEL));
+                    t.accept(new DropChanceBlock(RunePart.droppableAtLevel(lvl).getDropChance(rune)));
+                } else {
+                    t.accept(new AdditionalBlock(Itemtips.NOT_A_RANDOM_MNS_DROP_CHECK_MODPACK.locName().withStyle(ChatFormatting.BLUE)));
+                }
             }
 
             tooltip.addAll(t.release());

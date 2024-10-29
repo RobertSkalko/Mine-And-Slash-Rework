@@ -31,6 +31,10 @@ public class MinMax {
         return RandomUtils.RandomRange(min, max);
     }
 
+    public boolean hasRange() {
+        return min != max;
+    }
+
     public int getMiddle() {
         return (int) ((min + max) / 2F);
     }

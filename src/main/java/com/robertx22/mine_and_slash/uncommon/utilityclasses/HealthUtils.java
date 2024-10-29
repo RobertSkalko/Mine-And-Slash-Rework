@@ -38,9 +38,7 @@ public class HealthUtils {
         }
 
         try {
-            return data.getUnit()
-                    .healthData()
-                    .getValue();
+            return data.getUnit().healthData().getValue();
         } catch (Exception e) {
             return 1;
         }

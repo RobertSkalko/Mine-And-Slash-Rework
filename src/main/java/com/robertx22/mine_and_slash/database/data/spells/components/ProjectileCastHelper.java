@@ -9,6 +9,7 @@ import com.robertx22.mine_and_slash.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.library_of_exile.utils.geometry.MyPosition;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -68,39 +69,21 @@ public class ProjectileCastHelper {
 
         Level world = caster.level();
 
-        float addYaw = 0;
-
-        Vec3 posAdd = new Vec3(0, 0, 0);
-
-
         for (int i = 0; i < projectilesAmount; i++) {
+            float addYaw = 0;
+            Vec3 posAdd = new Vec3(0, 0, 0);
 
-            if (this.castType == CastType.SPREAD_OUT_IN_RADIUS) {
-                if (projectilesAmount > 1) {
-                    if (i < projectilesAmount / 2) {
-                        addYaw -= apart / projectilesAmount;
-                    } else if (i == projectilesAmount / 2) {
-                        addYaw = 0;
-                    } else if (i > projectilesAmount / 2) {
-                        addYaw += apart / projectilesAmount;
-                    }
+            if (projectilesAmount > 1) {
+                float offset = i - (float)(projectilesAmount - 1) / 2;
+
+                if (this.castType == CastType.SPREAD_OUT_IN_RADIUS) {
+                    // total cone is apart * (projectilesAmount - 1) / projectilesAmount
+                    addYaw = offset * apart / projectilesAmount;
+                } else if (this.castType == CastType.SPREAD_OUT_HORIZONTAL) {
+                    // 1m between each projectile
+                    posAdd = getSideVelocity(caster).multiply(offset, offset, offset);
                 }
             }
-
-            if (this.castType == CastType.SPREAD_OUT_HORIZONTAL) { // this seems to work
-                if (projectilesAmount > 1) {
-                    int m = 1 + i;
-                    int off = projectilesAmount / 2;
-                    if (i < projectilesAmount / 2) {
-                        posAdd = getSideVelocity(caster).multiply(m, m, m);
-                    } else if (i == projectilesAmount / 2) {
-                        posAdd = Vec3.ZERO;
-                    } else if (i > projectilesAmount / 2) {
-                        posAdd = geOppositeSideVelocity(caster).multiply(i - off, i - off, i - off);
-                    }
-                }
-            }
-
             // copied from multishot crossbow code
             Vec3 vec31 = this.caster.getUpVector(1.0F);
             Quaternionf quaternionf = (new Quaternionf()).setAngleAxis((double) (addYaw * ((float) java.lang.Math.PI / 180F)), vec31.x, vec31.y, vec31.z);
@@ -159,15 +142,8 @@ public class ProjectileCastHelper {
     }
 
     public Vec3 getSideVelocity(Entity shooter) {
-        float yaw = shooter.getYRot() - 90;
-        float x = -Math.sin(yaw * 0.017453292F) * Math.cos(shooter.getXRot() * 0.017453292F);
-        float y = -Math.sin((shooter.getXRot()) * 0.017453292F);
-        float z = Math.cos(yaw * 0.017453292F) * Math.cos(shooter.getXRot() * 0.017453292F);
-        return (new Vec3(x, y, z)).normalize();
-    }
-
-    public Vec3 geOppositeSideVelocity(Entity shooter) {
-        return getSideVelocity(shooter).multiply(-1, -1, -1);
+        float yaw = shooter.getYRot() * Mth.DEG_TO_RAD;
+        return new Vec3(Math.cos(yaw), 0, Math.sin(yaw));
     }
 
 }

@@ -11,6 +11,9 @@ import com.robertx22.mine_and_slash.database.data.aura.AuraGem;
 import com.robertx22.mine_and_slash.database.data.auto_item.AutoItem;
 import com.robertx22.mine_and_slash.database.data.base_stats.BaseStatsConfig;
 import com.robertx22.mine_and_slash.database.data.chaos_stats.ChaosStat;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.ExileCurrency;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModification;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.ItemRequirement;
 import com.robertx22.mine_and_slash.database.data.custom_item.CustomItem;
 import com.robertx22.mine_and_slash.database.data.exile_effects.ExileEffect;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanceConfig;
@@ -19,6 +22,7 @@ import com.robertx22.mine_and_slash.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.mine_and_slash.database.data.gems.Gem;
 import com.robertx22.mine_and_slash.database.data.map_affix.MapAffix;
 import com.robertx22.mine_and_slash.database.data.mob_affixes.MobAffix;
+import com.robertx22.mine_and_slash.database.data.omen.Omen;
 import com.robertx22.mine_and_slash.database.data.perks.Perk;
 import com.robertx22.mine_and_slash.database.data.profession.Profession;
 import com.robertx22.mine_and_slash.database.data.profession.ProfessionRecipe;
@@ -48,6 +52,13 @@ import net.minecraft.ChatFormatting;
 
 public class ExileRegistryTypes {
 
+    /*
+    public static ExileDBWrap TEST = ExileDBWrap.ofDatapack("test", 0, null, SyncTime.ON_LOGIN)
+            .container("def")
+            .registerClass(() -> new Runewords().registerAll());
+
+     */
+
     public static ExileRegistryType GEAR_RARITY = ExileRegistryType.register(SlashRef.MODID, "gear_rarity", 0, GearRarity.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType WEAPON_TYPE = ExileRegistryType.register(SlashRef.MODID, "weapon_type", 0, WeaponTypes.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType STAT_LAYER = ExileRegistryType.register(SlashRef.MODID, "stat_layer", 0, StatLayer.SERIALIZER, SyncTime.ON_LOGIN);
@@ -58,16 +69,10 @@ public class ExileRegistryTypes {
     public static ExileRegistryType GEAR_TYPE = ExileRegistryType.register(SlashRef.MODID, "base_gear_types", 4, BaseGearType.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType GEM = ExileRegistryType.register(SlashRef.MODID, "gems", 6, Gem.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType RUNE = ExileRegistryType.register(SlashRef.MODID, "runes", 7, Rune.SERIALIZER, SyncTime.ON_LOGIN);
-    public static ExileRegistryType MOB_AFFIX = ExileRegistryType.register(SlashRef.MODID, "mob_affix", 8, new MobAffix("empty", "empty", ChatFormatting.AQUA, Affix.Type.prefix), SyncTime.ON_LOGIN);
+    public static ExileRegistryType MOB_AFFIX = ExileRegistryType.register(SlashRef.MODID, "mob_affix", 8, new MobAffix("empty", "empty", ChatFormatting.AQUA, Affix.AffixSlot.prefix), SyncTime.ON_LOGIN);
     public static ExileRegistryType AFFIX = ExileRegistryType.register(SlashRef.MODID, "affixes", 10, AffixSerializer.getInstance(), SyncTime.ON_LOGIN);
     public static ExileRegistryType UNIQUE_GEAR = ExileRegistryType.register(SlashRef.MODID, "unique_gears", 11, UniqueGear.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType RUNEWORDS = ExileRegistryType.register(SlashRef.MODID, "runeword", 12, RuneWord.SERIALIZER, SyncTime.ON_LOGIN);
-    public static ExileRegistryType CURRENCY_ITEMS = ExileRegistryType.register(new ExileRegistryType(SlashRef.MODID, "currency_item", 12, null, SyncTime.NEVER) {
-        @Override
-        public BaseDataPackLoader getLoader() {
-            return null;
-        }
-    });
     public static ExileRegistryType DIMENSION_CONFIGS = ExileRegistryType.register(SlashRef.MODID, "dimension", 13, DimensionConfig.EMPTY, SyncTime.ON_LOGIN);
     public static ExileRegistryType ENTITY_CONFIGS = ExileRegistryType.register(SlashRef.MODID, "entity", 14, Serializers.ENTITY_CONFIG_SER, SyncTime.NEVER);
     public static ExileRegistryType SPELL = ExileRegistryType.register(SlashRef.MODID, "spells", 17, Spell.SERIALIZER, SyncTime.ON_LOGIN);
@@ -111,6 +116,11 @@ public class ExileRegistryTypes {
     public static ExileRegistryType STAT_COMPAT = ExileRegistryType.register(SlashRef.MODID, "stat_compat", 44, StatCompat.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType UBER_BOSS = ExileRegistryType.register(SlashRef.MODID, "uber_boss", 45, UberBossArena.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType SPAWNED_MOBS = ExileRegistryType.register(SlashRef.MODID, "map_mob_list", 46, SpawnedMobList.SERIALIZER, SyncTime.NEVER);
+    public static ExileRegistryType OMEN = ExileRegistryType.register(SlashRef.MODID, "omen", 47, Omen.SERIALIZER, SyncTime.ON_LOGIN);
+
+    public static ExileRegistryType ITEM_MOD = ExileRegistryType.register(SlashRef.MODID, "item_modification", 48, ItemModification.SERIALIZER, SyncTime.ON_LOGIN);
+    public static ExileRegistryType ITEM_REQ = ExileRegistryType.register(SlashRef.MODID, "item_requirement", 49, ItemRequirement.SERIALIZER, SyncTime.ON_LOGIN);
+    public static ExileRegistryType CURRENCY = ExileRegistryType.register(SlashRef.MODID, "currency", 50, ExileCurrency.SERIALIZER, SyncTime.ON_LOGIN);
 
 
 }

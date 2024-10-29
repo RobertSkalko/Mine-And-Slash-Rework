@@ -1,15 +1,17 @@
 package com.robertx22.mine_and_slash.gui.screens.character_screen;
 
+import com.robertx22.library_of_exile.utils.RenderUtils;
 import com.robertx22.mine_and_slash.gui.bases.IAlertScreen;
 import com.robertx22.mine_and_slash.gui.bases.IContainerNamedScreen;
 import com.robertx22.mine_and_slash.gui.bases.INamedScreen;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
-import com.robertx22.library_of_exile.utils.RenderUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
+import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
 import net.minecraft.resources.ResourceLocation;
 
 public class MainHubButton extends ImageButton {
@@ -44,6 +46,11 @@ public class MainHubButton extends ImageButton {
             this.shouldAlert = alert.shouldAlert();
         }
 
+    }
+
+    @Override
+    protected ClientTooltipPositioner createTooltipPositioner() {
+        return DefaultTooltipPositioner.INSTANCE;
     }
 
     @Override

@@ -66,7 +66,7 @@ public class ExilePotionEvent extends EffectEvent {
             extraData.stacks = Mth.clamp(extraData.stacks, 0, effect.getMaxCharges(this.targetData));
             extraData.str_multi = data.getNumber();
 
-            Load.Unit(target).setEquipsChanged();
+            Load.Unit(target).equipmentCache.STATUS.setDirty();
         } else {
 
 
@@ -90,7 +90,7 @@ public class ExilePotionEvent extends EffectEvent {
             effect.onApply(target);
         }
 
-        Load.Unit(target).setEquipsChanged();
+        Load.Unit(target).equipmentCache.STATUS.setDirty();
     }
 
 

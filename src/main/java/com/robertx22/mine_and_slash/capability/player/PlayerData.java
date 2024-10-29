@@ -4,13 +4,17 @@ import com.robertx22.library_of_exile.components.ICap;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.packets.SyncPlayerCapToClient;
 import com.robertx22.library_of_exile.utils.LoadSave;
+import com.robertx22.mine_and_slash.a_libraries.curios.MyCurioUtils;
+import com.robertx22.mine_and_slash.a_libraries.curios.RefCurio;
 import com.robertx22.mine_and_slash.capability.DirtySync;
 import com.robertx22.mine_and_slash.capability.player.data.*;
 import com.robertx22.mine_and_slash.capability.player.helper.GemInventoryHelper;
 import com.robertx22.mine_and_slash.capability.player.helper.JewelInvHelper;
 import com.robertx22.mine_and_slash.capability.player.helper.MyInventory;
 import com.robertx22.mine_and_slash.characters.CharStorageData;
+import com.robertx22.mine_and_slash.database.data.omen.OmenData;
 import com.robertx22.mine_and_slash.database.data.spells.components.Spell;
+import com.robertx22.mine_and_slash.event_hooks.my_events.CachedPlayerStats;
 import com.robertx22.mine_and_slash.gui.screens.stat_gui.StatCalcInfoData;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.prophecy.PlayerProphecies;
@@ -20,13 +24,14 @@ import com.robertx22.mine_and_slash.saveclasses.spells.SpellCastingData;
 import com.robertx22.mine_and_slash.saveclasses.spells.SpellSchoolsData;
 import com.robertx22.mine_and_slash.saveclasses.unit.Unit;
 import com.robertx22.mine_and_slash.saveclasses.unit.stat_calc.StatCalculation;
-import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
+import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
@@ -90,6 +95,7 @@ public class PlayerData implements ICap {
     private static final String BONUS_TALENTS = "btal";
     private static final String POINTS = "points";
     private static final String MISC_INFO = "minfo";
+    private static final String OMENS_FILLED = "ofi";
 
     public DirtySync playerDataSync = new DirtySync("playerdata_sync", x -> syncData());
 
@@ -125,16 +131,20 @@ public class PlayerData implements ICap {
 
     public List<String> aurasOn = new ArrayList<>();
 
-    public String name = "";
 
     public int bonusTalents = 0;
 
     public int emptyMapTicks = 0;
 
+    public int omensFilled = 0;
+
     public PlayerData(Player player) {
         this.player = player;
+        this.cachedStats = new CachedPlayerStats(player);
     }
 
+
+    public CachedPlayerStats cachedStats;
 
     public JewelInvHelper getJewels() {
         return new JewelInvHelper(jewelsInv);
@@ -167,8 +177,8 @@ public class PlayerData implements ICap {
         nbt.put(AURAS, auraInv.createTag());
         nbt.put(JEWELS, jewelsInv.createTag());
 
-        nbt.putString(NAME, name);
         nbt.putInt(BONUS_TALENTS, bonusTalents);
+        nbt.putInt(OMENS_FILLED, omensFilled);
 
         return nbt;
     }
@@ -198,12 +208,12 @@ public class PlayerData implements ICap {
         auraInv.fromTag(nbt.getList(AURAS, 10)); // todo
         jewelsInv.fromTag(nbt.getList(JEWELS, 10)); // todo
 
-        this.name = nbt.getString(NAME);
 
         this.bonusTalents = nbt.getInt(BONUS_TALENTS);
         if (bonusTalents < 0) {
             bonusTalents = 0;
         }
+        this.omensFilled = nbt.getInt(OMENS_FILLED);
 
     }
 
@@ -213,26 +223,62 @@ public class PlayerData implements ICap {
 
     transient HashMap<String, Unit> spellUnits = new HashMap<>();
 
+
+    // todo cache this maybe too
+    public void recalcOmensFilled() {
+        try {
+            omensFilled = 0;
+            ItemStack stack = MyCurioUtils.get(RefCurio.OMEN, player, 0);
+            if (StackSaving.OMEN.has(stack)) {
+                var omen = StackSaving.OMEN.loadFrom(stack);
+                this.omensFilled = omen.calcPiecesEquipped(player);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public OmenData getOmen() {
+        try {
+            ItemStack stack = MyCurioUtils.get(RefCurio.OMEN, player, 0);
+            if (StackSaving.OMEN.has(stack)) {
+                var omen = StackSaving.OMEN.loadFrom(stack);
+                return omen;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public Unit getSpellUnitStats(Player p, Spell spell) {
+        
+        if (!spellUnits.containsKey(spell.GUID())) {
+            int key = keyOf(spell);
+            if (spell.config.usesSupportGemsFromAnotherSpell()) {
+                key = keyOf(spell.config.getSpellUsedForSuppGems());
+            }
+            var unit = calcSpellUnit(spell, key);
+            spellUnits.put(spell.GUID(), unit);
+        }
         if (!spellUnits.containsKey(spell.GUID())) {
             return Load.Unit(p).getUnit();
-            // todo will this break anything
-            //   spellUnits.put(spell.GUID(), getSpellStats(spell));
         }
         return spellUnits.get(spell.GUID());
     }
 
-    public void calcSpellUnits(List<Spell> spells, List<StatContext> stats) {
-        for (Spell spell : spells) {
-            spellUnits.put(spell.GUID(), getSpellStats(spell, stats));
-        }
+    public void setSpellUnitsDirty() {
+        spellUnits = new HashMap<>();
     }
 
-
-    private Unit getSpellStats(Spell spell, List<StatContext> stats) {
+    public int keyOf(Spell spell) {
         int key = this.spellCastingData.keyOfSpell(spell.GUID());
+        return key;
+    }
+
+    private Unit calcSpellUnit(Spell spell, int key) {
         var unit = new Unit();
-        StatCalculation.calc(unit, StatCalculation.getStatsWithoutSuppGems(this.player, Load.Unit(player), null), player, key, null);
+        StatCalculation.calc(unit, this.cachedStats.allStatsWithoutSuppGems, player, spell, key);
         return unit;
     }
 

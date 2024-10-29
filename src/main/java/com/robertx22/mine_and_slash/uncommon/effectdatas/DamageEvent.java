@@ -29,7 +29,6 @@ import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.uncommon.MathHelper;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
-import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.rework.EventData;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.AttackType;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
@@ -86,6 +85,9 @@ public class DamageEvent extends EffectEvent {
 
         addMobDamageMultipliers();
 
+        if (this.targetData.immuneTicks > 0) {
+            this.cancelDamage();
+        }
     }
 
     @Override
@@ -228,6 +230,7 @@ public class DamageEvent extends EffectEvent {
         return dmg;
     }
 
+
     private void calcAttackCooldown() {
         float cool = 1;
 
@@ -238,19 +241,30 @@ public class DamageEvent extends EffectEvent {
             if (this.source instanceof Player) {
 
 
-                GearItemData gear = StackSaving.GEARS.loadFrom(source.getMainHandItem());
+                var wep = this.sourceData.equipmentCache.getWeapon();
+                if (wep != null) {
+                    GearItemData gear = wep.gear;
 
-                if (gear != null) {
-                    float atkpersec = 1;
+                    if (gear != null) {
+                        float atkpersec = 1;
 
-                    float secWaited = (float) (source.tickCount - source.getLastHurtMobTimestamp()) / 20F;
+                        float secWaited = (float) (target.tickCount - target.getLastHurtByMobTimestamp()) / 20F;
 
-                    float secNeededToWaitForFull = 1F / atkpersec;
+                        if (secWaited < 0) {
+                            secWaited = 555; // its minus if you never hit the mob before or on fresh worlds?
+                        }
 
-                    cool = secWaited / secNeededToWaitForFull;
+                        float secNeededToWaitForFull = 1F / atkpersec;
 
-                    cool = Mth.clamp(cool, 0F, 1F);
+                        cool = secWaited / secNeededToWaitForFull;
 
+                        cool = Mth.clamp(cool, 0F, 1F);
+
+                        if (cool < 0.3) {
+                            this.cancelDamage();
+                        }
+
+                    }
                 }
             }
         }
@@ -280,6 +294,7 @@ public class DamageEvent extends EffectEvent {
         return multi;
 
     }
+
 
     private void modifyIfArrowDamage() {
         if (attackInfo != null && attackInfo.getSource() != null) {
@@ -352,7 +367,6 @@ public class DamageEvent extends EffectEvent {
                 this.addMoreMulti(Words.ATTACK_SPEED_MULTI.locName(), EventData.NUMBER, getAttackSpeedDamageMulti());
             }
             modifyIfArrowDamage();
-
         }
 
         // todo this should be in layers too or multis

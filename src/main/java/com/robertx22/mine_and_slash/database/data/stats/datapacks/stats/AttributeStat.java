@@ -56,7 +56,7 @@ public class AttributeStat extends BaseDatapackStat {
         if (cut_by_hundred) {
             val = val / 100F;
         }
-   
+
         AttributeModifier mod = new AttributeModifier(
                 uuid,
                 attributeId,
@@ -72,7 +72,6 @@ public class AttributeStat extends BaseDatapackStat {
             }
             atri.addTransientModifier(mod);
         }
-
 
     }
 }

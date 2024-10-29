@@ -58,9 +58,7 @@ public enum AllyOrEnemy {
     allies() {
         @Override
         public <T extends LivingEntity> List<T> getMatchingEntities(List<T> list, Entity caster) {
-
-            return list.stream().filter(x -> is(caster, x))
-                    .collect(Collectors.toList());
+            return list.stream().filter(x -> is(caster, x)).collect(Collectors.toList());
         }
 
         @Override
@@ -71,6 +69,22 @@ public enum AllyOrEnemy {
         @Override
         public boolean includesCaster() {
             return true;
+        }
+    },
+    allies_not_self() {
+        @Override
+        public <T extends LivingEntity> List<T> getMatchingEntities(List<T> list, Entity caster) {
+            return list.stream().filter(x -> is(caster, x)).collect(Collectors.toList());
+        }
+
+        @Override
+        public boolean is(Entity caster, LivingEntity target) {
+            return allies.is(caster, target);
+        }
+
+        @Override
+        public boolean includesCaster() {
+            return false;
         }
     },
     pets() {

@@ -4,7 +4,8 @@ import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.mine_and_slash.a_libraries.jei.LockRecipePacket;
 import com.robertx22.mine_and_slash.capability.player.data.Backpacks;
 import com.robertx22.mine_and_slash.characters.CreateCharPacket;
-import com.robertx22.mine_and_slash.characters.LoadCharPacket;
+import com.robertx22.mine_and_slash.characters.ToonActionPacket;
+import com.robertx22.mine_and_slash.characters.reworked_gui.ToonActionButton;
 import com.robertx22.mine_and_slash.gui.screens.stat_gui.RequestStatCalcInfoPacket;
 import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.prophecy.AcceptProphecyAffixPacket;
@@ -31,7 +32,7 @@ public class C2SPacketRegister {
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new CraftPacket(), i++);
 
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new CreateCharPacket(""), i++);
-        Packets.registerClientToServerPacket(MMORPG.NETWORK, new LoadCharPacket(0), i++);
+        Packets.registerClientToServerPacket(MMORPG.NETWORK, new ToonActionPacket(ToonActionButton.Action.LOAD, 0, ""), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new AcceptProphecyPacket(""), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new AcceptProphecyAffixPacket(""), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new LockTogglePacket(), i++);

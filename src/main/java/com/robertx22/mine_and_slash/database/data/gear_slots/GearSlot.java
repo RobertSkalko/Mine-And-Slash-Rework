@@ -1,5 +1,8 @@
 package com.robertx22.mine_and_slash.database.data.gear_slots;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.registry.IAutoGson;
+import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.mine_and_slash.a_libraries.curios.RefCurio;
 import com.robertx22.mine_and_slash.aoe_data.database.gear_slots.GearSlots;
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
@@ -10,9 +13,6 @@ import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
 import com.robertx22.mine_and_slash.vanilla_mc.items.gearitems.bases.DodgeOffhandItem;
 import com.robertx22.mine_and_slash.vanilla_mc.items.gearitems.bases.TomeItem;
 import com.robertx22.mine_and_slash.vanilla_mc.items.gearitems.weapons.StaffWeapon;
-import com.robertx22.library_of_exile.registry.ExileRegistryType;
-import com.robertx22.library_of_exile.registry.IAutoGson;
-import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -23,7 +23,7 @@ public class GearSlot implements JsonExileRegistry<GearSlot>, IAutoGson<GearSlot
 
     public static GearSlot SERIALIZER = new GearSlot("", "", SlotFamily.NONE, new GearSlot.WeaponData(0, 0, 0), -1, 0);
     private static HashMap<String, HashMap<Item, Boolean>> CACHED_GEAR_SLOTS = new HashMap<>();
-    static HashMap<Item, GearSlot> CACHED = new HashMap<>();
+    public static HashMap<Item, GearSlot> CACHED = new HashMap<>();
 
     public String id;
     public int weight;
@@ -64,11 +64,9 @@ public class GearSlot implements JsonExileRegistry<GearSlot>, IAutoGson<GearSlot
     }
 
     public static GearSlot getSlotOf(Item item) {
-
         if (CACHED.containsKey(item)) {
             return CACHED.get(item);
         }
-
         if (ServerContainer.get().getCompatMap().containsKey(item)) {
             CACHED.put(item, ServerContainer.get().getCompatMap().get(item));
             return CACHED.get(item);

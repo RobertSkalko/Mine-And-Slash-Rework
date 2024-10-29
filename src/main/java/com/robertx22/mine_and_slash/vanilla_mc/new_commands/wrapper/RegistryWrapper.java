@@ -17,6 +17,10 @@ public class RegistryWrapper<T extends ExileRegistry> extends StringWrapper {
         this.type = type;
     }
 
+    public T getFromRegistry(CommandContext c) {
+        return (T) Database.getRegistry(type).get(get(c));
+    }
+
     @Override
     public String getter(CommandContext ctx) {
         var id = super.getter(ctx);

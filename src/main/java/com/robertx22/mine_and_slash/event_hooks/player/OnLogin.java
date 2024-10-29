@@ -5,9 +5,11 @@ import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.library_of_exile.utils.Watch;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.mmorpg.MMORPG;
+import com.robertx22.mine_and_slash.mmorpg.UNICODE;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
+import com.robertx22.mine_and_slash.uncommon.testing.TestManager;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
@@ -100,21 +102,26 @@ public class OnLogin {
 
             if (!JsonExileRegistry.INVALID_JSONS_MAP.isEmpty() || !JsonExileRegistry.NOT_LOADED_JSONS_MAP.isEmpty()) {
 
-                player.sendSystemMessage(Component.literal("Check the log file for more info. Note, this is still an experimental error checking feature.")
+                player.sendSystemMessage(Component.literal("Check the log file for more info.")
                         .withStyle(ChatFormatting.YELLOW));
                 player.sendSystemMessage(Component.literal("THIS MEANS YOUR MINE AND SLASH DATAPACKS ARE LIKELY BROKEN AND MIGHT BUG IN-GAME UNLESS FIXED")
                         .withStyle(ChatFormatting.LIGHT_PURPLE));
 
+                player.sendSystemMessage(Component.literal(UNICODE.STAR + " " + "If you're playing a Modpack, updating mine and slash yourself will result in these errors. wait for the modpack to update.")
+                        .withStyle(ChatFormatting.AQUA));
+                player.sendSystemMessage(Component.literal(UNICODE.STAR + " " + "If you made the datapacks yourself, use the Info from the log file to help you fix the jsons.")
+                        .withStyle(ChatFormatting.AQUA));
+
+
             }
 
-            data.sync.setDirty();
+            data.setAllDirtyOnLoginEtc();
 
+            if (MMORPG.RUN_DEV_TOOLS) {
+                TestManager.RunAllTests(player);
+            }
 
-            Load.player(player).playerDataSync.setDirty();
-
-
-        } catch (
-                Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

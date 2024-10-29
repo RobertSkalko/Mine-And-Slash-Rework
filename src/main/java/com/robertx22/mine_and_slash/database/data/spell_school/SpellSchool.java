@@ -1,14 +1,16 @@
 package com.robertx22.mine_and_slash.database.data.spell_school;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.registry.IAutoGson;
+import com.robertx22.library_of_exile.registry.JsonExileRegistry;
+import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanceConfig;
+import com.robertx22.mine_and_slash.database.data.game_balance_config.PlayerPointsType;
 import com.robertx22.mine_and_slash.database.data.perks.Perk;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.saveclasses.PointData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
-import com.robertx22.library_of_exile.registry.ExileRegistryType;
-import com.robertx22.library_of_exile.registry.IAutoGson;
-import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 
@@ -28,7 +30,7 @@ public class SpellSchool implements JsonExileRegistry<SpellSchool>, IAutoGson<Sp
     public HashMap<String, PointData> perks = new HashMap<>();
 
     public List<Integer> lvl_reqs = Arrays.asList(1, 5, 10, 15, 20, 25, 30);
- 
+
     public int getLevelNeededToAllocate(PointData point) {
 
         int req = lvl_reqs.get(point.y);
@@ -38,6 +40,16 @@ public class SpellSchool implements JsonExileRegistry<SpellSchool>, IAutoGson<Sp
 
     public boolean isLevelEnoughFor(LivingEntity en, Perk perk) {
         return Load.Unit(en).getLevel() >= getLevelNeededToAllocate(perks.get(perk.GUID()));
+    }
+
+    public boolean isLevelEnoughForSpellLevelUp(LivingEntity en, Perk perk, int currentlvl) {
+        int baselvl = getLevelNeededToAllocate(perks.get(perk.GUID()));
+
+        int bonusLvlsNeeded = (int) ((currentlvl - 1) * GameBalanceConfig.get().player_points.get(PlayerPointsType.SPELLS).points_per_lvl);
+
+        int needed = baselvl + bonusLvlsNeeded;
+
+        return Load.Unit(en).getLevel() >= needed;
     }
 
 

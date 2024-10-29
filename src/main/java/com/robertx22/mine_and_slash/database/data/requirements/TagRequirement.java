@@ -4,6 +4,7 @@ import com.robertx22.mine_and_slash.database.data.requirements.bases.BaseRequire
 import com.robertx22.mine_and_slash.database.data.requirements.bases.GearRequestedFor;
 import com.robertx22.mine_and_slash.tags.TagList;
 import com.robertx22.mine_and_slash.tags.TagType;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
 import java.util.ArrayList;
@@ -31,6 +32,10 @@ public class TagRequirement extends BaseRequirement<TagRequirement> {
     private TagRequirement() {
     }
 
+    public boolean isEmpty() {
+        return included.isEmpty() && excluded.isEmpty();
+    }
+
     @Override
     public boolean meetsRequierment(GearRequestedFor requested) {
         TagList list = requested.forSlot.getTags();
@@ -50,6 +55,16 @@ public class TagRequirement extends BaseRequirement<TagRequirement> {
 
     @Override
     public List<MutableComponent> GetTooltipString() {
-        return new ArrayList<>();
+
+        List<MutableComponent> all = new ArrayList<>();
+
+        all.add(Component.literal("Tag Requirements"));
+        if (!included.isEmpty()) {
+            all.add(Component.literal("For:").append(String.join(", ", this.included)));
+        }
+        if (!excluded.isEmpty()) {
+            all.add(Component.literal("Not For:").append(String.join(", ", this.excluded)));
+        }
+        return all;
     }
 }

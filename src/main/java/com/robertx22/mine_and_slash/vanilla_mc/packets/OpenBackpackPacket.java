@@ -1,11 +1,11 @@
 package com.robertx22.mine_and_slash.vanilla_mc.packets;
 
+import com.robertx22.library_of_exile.main.MyPacket;
+import com.robertx22.library_of_exile.packets.ExilePacketContext;
 import com.robertx22.mine_and_slash.capability.player.BackpackItem;
 import com.robertx22.mine_and_slash.capability.player.data.Backpacks;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
-import com.robertx22.library_of_exile.main.MyPacket;
-import com.robertx22.library_of_exile.packets.ExilePacketContext;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
@@ -36,13 +36,11 @@ public class OpenBackpackPacket extends MyPacket<OpenBackpackPacket> {
 
     @Override
     public void onReceived(ExilePacketContext ctx) {
-
         int rows = 0;
         if (ctx.getPlayer().getMainHandItem().getItem() instanceof BackpackItem i) {
             rows = i.getSlots() / 9;
+            Load.backpacks(ctx.getPlayer()).getBackpacks().openBackpack(type, ctx.getPlayer(), rows);
         }
-        Load.backpacks(ctx.getPlayer()).getBackpacks().openBackpack(type, ctx.getPlayer(), rows);
-
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.robertx22.mine_and_slash.database.data.affixes.Affix;
 import com.robertx22.mine_and_slash.database.data.requirements.Requirements;
 import com.robertx22.mine_and_slash.database.data.requirements.TagRequirement;
 import com.robertx22.mine_and_slash.database.data.stats.Stat;
+import com.robertx22.mine_and_slash.database.data.stats.types.JewelEffect;
 import com.robertx22.mine_and_slash.tags.TagType;
 import com.robertx22.mine_and_slash.tags.imp.SlotTag;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
@@ -21,9 +22,10 @@ public class AffixBuilder {
     String langName = "";
     boolean allowDupli = false;
     int weight = 1000;
-    public Affix.Type type;
+    public Affix.AffixSlot type;
 
     public String auraReq = "";
+    public String oneofakind = "";
 
     TagRequirement tagRequirement = new TagRequirement(TagType.GearSlot, new ArrayList<>(), new ArrayList<>());
 
@@ -35,6 +37,14 @@ public class AffixBuilder {
         return new AffixBuilder(id);
     }
 
+    public static AffixBuilder Paragon(String id, String name) {
+        return AffixBuilder.Normal("paragon_" + id)
+                .Named("Of Paragon's " + name)
+                .Weight(50)
+                .stats(JewelEffect.getInstance().mod(1, 5))
+                .Suffix();
+    }
+
     public AffixBuilder Named(String name) {
         langName = name;
         return this;
@@ -44,6 +54,12 @@ public class AffixBuilder {
         auraReq = aura;
         return this;
     }
+
+    public AffixBuilder OneOfAKind(String one) {
+        oneofakind = one;
+        return this;
+    }
+
 
     public AffixBuilder includesTags(SlotTag... tags) {
         this.tagRequirement.included.addAll(Arrays.stream(tags)
@@ -97,42 +113,52 @@ public class AffixBuilder {
     }
 
     public AffixBuilder WatchersEye() {
-        type = Affix.Type.watcher_eye;
+        type = Affix.AffixSlot.watcher_eye;
         return this;
     }
 
     public AffixBuilder JewelCorruption() {
-        type = Affix.Type.jewel_corruption;
+        type = Affix.AffixSlot.jewel_corruption;
         return this;
     }
 
     public AffixBuilder GearCorrupt() {
-        type = Affix.Type.chaos_stat;
+        type = Affix.AffixSlot.chaos_stat;
         return this;
     }
 
     public AffixBuilder Prefix() {
-        type = Affix.Type.prefix;
+        type = Affix.AffixSlot.prefix;
         return this;
     }
 
     public AffixBuilder Tool() {
-        type = Affix.Type.tool;
+        type = Affix.AffixSlot.tool;
         return this;
     }
 
     public AffixBuilder Suffix() {
-        type = Affix.Type.suffix;
+        type = Affix.AffixSlot.suffix;
+        return this;
+    }
+
+    public AffixBuilder Jewel() {
+        type = Affix.AffixSlot.jewel;
+        return this;
+    }
+
+    public AffixBuilder craftedUniqueJewel() {
+        type = Affix.AffixSlot.crafted_jewel_unique;
         return this;
     }
 
     public AffixBuilder Enchant() {
-        type = Affix.Type.enchant;
+        type = Affix.AffixSlot.enchant;
         return this;
     }
 
     public AffixBuilder Implicit() {
-        type = Affix.Type.implicit;
+        type = Affix.AffixSlot.implicit;
         return this;
     }
 
@@ -140,6 +166,8 @@ public class AffixBuilder {
 
         Affix affix = new Affix();
         affix.guid = guid;
+
+        affix.one_of_a_kind = oneofakind;
 
         affix.requirements = new Requirements(this.tagRequirement);
 

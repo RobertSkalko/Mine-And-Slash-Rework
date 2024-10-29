@@ -20,6 +20,7 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
@@ -30,8 +31,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class RecipeGenerator {
+
+    // the id is really just used to make sure this list isnt infinitely added upon with game reloads or something
+    static HashMap<ResourceLocation, Supplier<ShapedRecipeBuilder>> map = new HashMap<>();
+
+    public static void addRecipe(ResourceLocation id, Supplier<ShapedRecipeBuilder> sup) {
+        map.put(id, sup);
+    }
 
     public static final Gson GSON = (new GsonBuilder()).setPrettyPrinting()
             .create();
@@ -52,10 +61,7 @@ public class RecipeGenerator {
     }
 
     private Path resolve(Path path, String id) {
-
-        return path.resolve(
-                "data/" + SlashRef.MODID + "/recipes/" + id
-                        + ".json");
+        return path.resolve("data/" + SlashRef.MODID + "/recipes/" + id + ".json");
     }
 
 
@@ -77,26 +83,10 @@ public class RecipeGenerator {
 
     private void generate(Consumer<FinishedRecipe> consumer) {
 
-        ExileDB.CurrencyItems().getList().forEach(item -> {
-            if (item instanceof IShapedRecipe) {
-                IShapedRecipe ir = (IShapedRecipe) item;
-                ShapedRecipeBuilder rec = ir.getRecipe();
-                if (rec != null) {
-                    rec.save(consumer);
-                }
-            }
-            if (item instanceof IShapelessRecipe) {
-                IShapelessRecipe sr = (IShapelessRecipe) item;
-                ShapelessRecipeBuilder srec = sr.getRecipe();
-                if (srec != null) {
-                    try {
-                        srec.save(consumer);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
+        for (Supplier<ShapedRecipeBuilder> rec : map.values()) {
+            rec.get().save(consumer);
+        }
+
 
         for (Item item : ForgeRegistries.ITEMS) {
             if (item instanceof IShapedRecipe) {

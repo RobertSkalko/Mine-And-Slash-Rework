@@ -1,5 +1,7 @@
 package com.robertx22.mine_and_slash.aoe_data.database.spells.impl;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
+import com.robertx22.mine_and_slash.a_libraries.player_animations.SpellAnimations;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.PartBuilder;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.SpellCalcs;
@@ -8,7 +10,6 @@ import com.robertx22.mine_and_slash.database.data.spells.spell_classes.CastingWe
 import com.robertx22.mine_and_slash.tags.all.SpellTags;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.PlayStyle;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 
@@ -23,6 +24,7 @@ public class DexSpells implements ExileRegistryInit {
         SpellBuilder.of(EXECUTE, PlayStyle.DEX, SpellConfiguration.Builder.instant(10, 20 * 60)
                                 .setSwingArm(), "Execute",
                         Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.weapon_skill, SpellTags.PHYSICAL))
+                .singleAnimation(SpellAnimations.SINGLE_MELEE_SLASH)
                 .manualDesc(
                         "Slash enemies in front of you for " + SpellCalcs.EXECUTE.getLocDmgTooltip()
                                 + " " + Elements.Physical.getIconNameDmg()

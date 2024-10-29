@@ -17,7 +17,7 @@ public class JewelProphecy extends ProphecyStart {
 
     @Override
     public boolean acceptsModifier(ProphecyModifierType type) {
-        return true;
+        return type == ProphecyModifierType.JEWEL_RARITY;
     }
 
     @Override

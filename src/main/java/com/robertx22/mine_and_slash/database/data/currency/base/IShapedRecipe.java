@@ -20,6 +20,12 @@ public interface IShapedRecipe {
     default CriterionTriggerInstance trigger() {
         return EnchantedItemTrigger.TriggerInstance.enchantedItem();
     }
+
+    static ShapedRecipeBuilder of(ItemLike item, int count) {
+        return ShapedRecipeBuilder.shaped(RecipeCategory.MISC, item, count)
+                .unlockedBy("player_level", EnchantedItemTrigger.TriggerInstance.enchantedItem());
+
+    }
 }
 
 

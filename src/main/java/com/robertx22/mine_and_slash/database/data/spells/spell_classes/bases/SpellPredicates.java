@@ -1,8 +1,8 @@
 package com.robertx22.mine_and_slash.database.data.spells.spell_classes.bases;
 
-import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
+import com.robertx22.mine_and_slash.mmorpg.ModErrors;
 import com.robertx22.mine_and_slash.tags.all.SlotTags;
-import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
+import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.LivingEntity;
@@ -12,35 +12,30 @@ import java.util.function.Predicate;
 public class SpellPredicates {
     private static Predicate<LivingEntity> SHOOTABLE_PRED = x -> {
         try {
-
-            GearItemData data = StackSaving.GEARS.loadFrom(x.getMainHandItem());
-            return data != null && data.GetBaseGearType()
-                    .getTags()
-                    .contains(SlotTags.ranged_weapon);
+            var wep = Load.Unit(x).equipmentCache.getWeapon();
+            return wep != null && wep.gear != null && wep.gear.GetBaseGearType().getTags().contains(SlotTags.ranged_weapon);
         } catch (Exception e) {
+            ModErrors.print(e);
             return false;
         }
-
     };
 
     private static Predicate<LivingEntity> MELEE_PRED = x -> {
         try {
-            GearItemData data = StackSaving.GEARS.loadFrom(x.getMainHandItem());
-            return data != null && data.GetBaseGearType()
-                    .getTags()
-                    .contains(SlotTags.melee_weapon);
+            var wep = Load.Unit(x).equipmentCache.getWeapon();
+            return wep != null && wep.gear != null && wep.gear.GetBaseGearType().getTags().contains(SlotTags.melee_weapon);
         } catch (Exception e) {
+            ModErrors.print(e);
             return false;
         }
     };
 
     private static Predicate<LivingEntity> MAGE_PRED = x -> {
         try {
-            GearItemData data = StackSaving.GEARS.loadFrom(x.getMainHandItem());
-            return data != null && data.GetBaseGearType()
-                    .getTags()
-                    .contains(SlotTags.mage_weapon);
+            var wep = Load.Unit(x).equipmentCache.getWeapon();
+            return wep != null && wep.gear != null && wep.gear.GetBaseGearType().getTags().contains(SlotTags.mage_weapon);
         } catch (Exception e) {
+            ModErrors.print(e);
             return false;
         }
     };

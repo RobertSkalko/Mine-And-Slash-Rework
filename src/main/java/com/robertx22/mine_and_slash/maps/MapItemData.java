@@ -15,6 +15,7 @@ import com.robertx22.mine_and_slash.gui.inv_gui.actions.auto_salvage.ToggleAutoS
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
 import com.robertx22.mine_and_slash.gui.texts.IgnoreNullList;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.*;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.ModRange;
@@ -138,7 +139,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
         return affixes.stream().filter(x -> x.getAffix() != null && x.getAffix().affected == aff).collect(Collectors.toList());
     }
 
-    public List<Component> getTooltip() {
+    public List<Component> getTooltip(ExileStack stack) {
         MapItemData thisMapItemData = this;
         StatRangeInfo tooltipInfo = new StatRangeInfo(ModRange.of(getRarity().stat_percents));
         var tip = new ExileTooltips()
@@ -209,7 +210,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                 .accept(WorksOnBlock.possibleDrops(ExileDB.GearRarities().getFilterWrapped(
                         x -> this.tier >= ExileDB.GearRarities().get(x.min_map_rarity_to_drop).map_tiers.min
                 ).list))
-                .accept(new SalvageBlock(this));
+                .accept(new SalvageBlock(this, stack));
         if (this.isUber()) {
             tip.accept(new AdditionalBlock(Collections.singletonList(Words.AreaContains.locName().withStyle(ChatFormatting.RED))));
         }
@@ -224,7 +225,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
     public void BuildTooltip(TooltipContext ctx) {
         if (ctx.data != null) {
             ctx.tooltip.clear();
-            ctx.tooltip.addAll(getTooltip());
+            ctx.tooltip.addAll(getTooltip(ExileStack.of(ctx.stack)));
 
         }
     }
@@ -281,7 +282,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
     }
 
     @Override
-    public List<ItemStack> getSalvageResult(ItemStack stack) {
+    public List<ItemStack> getSalvageResult(ExileStack stack) {
         int amount = 1;
         return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.getOrDefault(getRarity().GUID(), RarityItems.RARITY_STONE.get(IRarity.COMMON_ID)).get(), amount));
     }

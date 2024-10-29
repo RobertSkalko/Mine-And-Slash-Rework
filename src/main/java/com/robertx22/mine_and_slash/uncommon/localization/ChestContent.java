@@ -5,7 +5,7 @@ import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
 
 public class ChestContent {
     public enum chestTypeEnum implements IAutoLocName {
-        aura("Aura"),
+        aura("Augment"),
         currency("Currency"),
         gear("Gear"),
         gem("Gem"),
@@ -21,9 +21,11 @@ public class ChestContent {
         chestTypeEnum(String localization) {
             this.localization = localization;
         }
+
         public String getName() {
             return this.name();
         }
+
         public String getValue() {
             return localization;
         }

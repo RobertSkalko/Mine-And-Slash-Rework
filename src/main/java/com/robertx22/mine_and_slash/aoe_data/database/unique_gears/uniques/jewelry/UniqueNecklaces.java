@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.aoe_data.database.unique_gears.uniques.jewelry;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import com.robertx22.mine_and_slash.aoe_data.database.ailments.Ailments;
 import com.robertx22.mine_and_slash.aoe_data.database.base_gear_types.BaseGearTypes;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.OffenseStats;
@@ -19,7 +20,6 @@ import com.robertx22.mine_and_slash.database.data.stats.types.spirit.AuraCapacit
 import com.robertx22.mine_and_slash.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
 import java.util.Arrays;
 
@@ -27,10 +27,8 @@ public class UniqueNecklaces implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
-        UniqueGearBuilder.of(
-                        "heavenly_tear",
-                        "Heavenly Tear",
-                        BaseGearTypes.NECKLACE)
+        
+        UniqueGearBuilder.of("heavenly_tear", "Heavenly Tear", BaseGearTypes.NECKLACE)
                 .setReplacesName()
                 .stats(Arrays.asList(
                         new StatMod(10, 25, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Nature)),

@@ -1,5 +1,7 @@
 package com.robertx22.mine_and_slash.aoe_data.database.spells.schools;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
+import com.robertx22.mine_and_slash.a_libraries.player_animations.SpellAnimations;
 import com.robertx22.mine_and_slash.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.PartBuilder;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.SpellBuilder;
@@ -13,7 +15,6 @@ import com.robertx22.mine_and_slash.mmorpg.registers.common.SlashEntities;
 import com.robertx22.mine_and_slash.tags.all.SpellTags;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.PlayStyle;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.Blocks;
@@ -33,13 +34,14 @@ public class FireSpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        SpellBuilder.of(MAGMA_FLOWER, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 20 * 30)
+        SpellBuilder.of(MAGMA_FLOWER, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(15, 20 * 30, 20)
                                 .setSwingArm(), "Magma Totem",
                         Arrays.asList(SpellTags.damage, SpellTags.area, SpellTags.totem, SpellTags.FIRE))
                 .manualDesc("Summon a flaming totem that deals "
                         + SpellCalcs.MAGMA_FLOWER.getLocDmgTooltip() + " "
                         + Elements.Fire.getIconNameDmg() + " in an area every second.")
 
+                .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.STAFF_CAST_FINISH)
                 .onCast(PartBuilder.playSound(SoundEvents.GRASS_PLACE, 1D, 1D))
 
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 0D)))
@@ -60,6 +62,7 @@ public class FireSpells implements ExileRegistryInit {
         SpellBuilder.of(FLAME_STRIKE_ID, PlayStyle.STR, SpellConfiguration.Builder.instant(8, 15)
                                 .setSwingArm(), "Flame Strike",
                         Arrays.asList(SpellTags.weapon_skill, SpellTags.area, SpellTags.damage, SpellTags.FIRE))
+                .singleAnimation(SpellAnimations.MELEE_SLASH)
                 .manualDesc("Strike enemies in front for " +
                         SpellCalcs.FLAME_STRIKE.getLocDmgTooltip(Elements.Fire))
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
@@ -88,9 +91,12 @@ public class FireSpells implements ExileRegistryInit {
                 .build();
 
 
-        SpellBuilder.of(METEOR, PlayStyle.INT, SpellConfiguration.Builder.instant(18, 20).setChargesAndRegen(METEOR, 3, 20 * 20), "Meteor",
+        SpellBuilder.of(METEOR, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(18, 0, 20)
+                                .setChargesAndRegen(METEOR, 3, 20 * 20), "Meteor",
                         Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.FIRE)
                 )
+                .animations(SpellAnimations.HAND_UP_CAST, SpellAnimations.CAST_FINISH)
+
                 .manualDesc("Summon a meteor that falls from the sky, dealing " +
                         SpellCalcs.METEOR.getLocDmgTooltip(Elements.Fire) + " in an area.")
 
@@ -116,7 +122,7 @@ public class FireSpells implements ExileRegistryInit {
                 .manualDesc(
                         "Engulf the area in flames, dealing " + SpellCalcs.FIRE_NOVA.getLocDmgTooltip()
                                 + " " + Elements.Fire.getIconNameDmg() + " to nearby enemies.")
-
+                .singleAnimation(SpellAnimations.TOUCH_GROUND)
                 .onCast(PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
 
                 .onCast(PartBuilder.nova(ParticleTypes.FLAME, 200D, 5D, 0.05D))

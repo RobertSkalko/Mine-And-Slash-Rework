@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.database.registrators;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import com.robertx22.mine_and_slash.aoe_data.database.ailments.Ailment;
 import com.robertx22.mine_and_slash.aoe_data.database.ailments.AilmentSpeed;
 import com.robertx22.mine_and_slash.aoe_data.database.exile_effects.adders.ModEffects;
@@ -49,7 +50,6 @@ import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.tags.all.SpellTags;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IGenerated;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,6 +119,7 @@ public class StatsRegister implements ExileRegistryInit {
                     add(AuraCapacity.getInstance());
                     add(AuraEffect.getInstance());
 
+                    add(JewelEffect.getInstance());
 
                     add(WeaponDamage.getInstance());
 

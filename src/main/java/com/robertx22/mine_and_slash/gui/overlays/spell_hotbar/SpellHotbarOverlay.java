@@ -1,299 +1,86 @@
 package com.robertx22.mine_and_slash.gui.overlays.spell_hotbar;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.robertx22.library_of_exile.utils.CLOC;
-import com.robertx22.library_of_exile.utils.GuiUtils;
-import com.robertx22.mine_and_slash.capability.entity.CooldownsData;
 import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
-import com.robertx22.mine_and_slash.database.data.spells.components.Spell;
-import com.robertx22.mine_and_slash.gui.overlays.EffectsOverlay;
-import com.robertx22.mine_and_slash.gui.overlays.GuiPosition;
-import com.robertx22.mine_and_slash.gui.screens.character_screen.MainHubScreen;
+import com.robertx22.mine_and_slash.config.forge.overlay.OverlayConfig;
+import com.robertx22.mine_and_slash.config.forge.overlay.OverlayType;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
-import com.robertx22.mine_and_slash.mmorpg.registers.client.KeybindsRegister;
 import com.robertx22.mine_and_slash.mmorpg.registers.client.SpellKeybind;
+import com.robertx22.mine_and_slash.saveclasses.PointData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.ChatUtils;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import net.minecraftforge.client.settings.KeyModifier;
-
-import java.util.Locale;
 
 public class SpellHotbarOverlay {
-    private static final ResourceLocation SWAP_BUTTON = new ResourceLocation(SlashRef.MODID,
-            "textures/gui/spells/swap_button.png"
-    );
-    private static final ResourceLocation HOTBAR_TEX = new ResourceLocation(SlashRef.MODID,
-            "textures/gui/spells/hotbar.png"
-    );
-    private static final ResourceLocation HOTBAR_SWAP_TEX = new ResourceLocation(SlashRef.MODID,
-            "textures/gui/spells/swap_hotbar.png"
-    );
-    private static final ResourceLocation COOLDOWN_TEX = new ResourceLocation(SlashRef.MODID,
-            "textures/gui/spells/cooldown.png"
-    );
-    private static final ResourceLocation SPELL_READY_TEX = new ResourceLocation(SlashRef.MODID,
-            "textures/gui/spells/spell_ready.png"
-    );
 
 
-    private static final ResourceLocation SPELL_ON_COOLDOWN = new ResourceLocation(SlashRef.MODID,
-            "textures/gui/spells/on_cooldown.png"
-    );
+    public static ResourceLocation getHotbarTex(OverlayType type) {
+        return hotbarTex(type == OverlayType.SPELL_HOTBAR_HORIZONTAL, ClientConfigs.getConfig().HOTBAR_SWAPPING.get(), SpellKeybind.IS_ON_SECONd_HOTBAR ? 2 : 1);
+    }
 
-    private static final ResourceLocation CHARGE = new ResourceLocation(SlashRef.MODID,
-            "textures/gui/spells/charge_icon.png"
-    );
-    private static final ResourceLocation KEY_BG = new ResourceLocation(SlashRef.MODID,
-            "textures/gui/spells/keybind_bg.png"
-    );
-    private static final ResourceLocation MOD_BG = new ResourceLocation(SlashRef.MODID,
-            "textures/gui/spells/modbg.png"
-    );
-
-    int CHARGE_SIZE = 9;
-
+    static ResourceLocation hotbarTex(Boolean horizontal, Boolean swap, Integer swapnum) {
+        String swaptex = swap ? "_swap" + swapnum : "";
+        String horizontaltex = horizontal ? "_horizontal" : "";
+        return new ResourceLocation(SlashRef.MODID, "textures/gui/spells/hotbar/" + "hotbar" + swaptex + horizontaltex + ".png");
+    }
 
     Minecraft mc = Minecraft.getInstance();
 
 
-    public void onHudRender(GuiGraphics gui) {
+    public void onHudRender(GuiGraphics gui, OverlayConfig config, OverlayType type) {
 
         try {
+
             if (mc.options.renderDebug) {
                 return;
             }
             if (mc.player.isSpectator()) {
                 return;
             }
-            if (ChatUtils.isChatOpen()) {
+            if (ChatUtils.isChatOpen() && type == OverlayType.SPELL_HOTBAR_VERTICAL) {
                 return;
             }
             if (Load.player(mc.player) == null) {
                 return;
             }
 
-            int WIDTH = 22;
-            int HEIGHT = 162;
-
-            if (ClientConfigs.getConfig().HOTBAR_SWAPPING.get()) {
-                HEIGHT = 82;
-            }
-
-
             RenderSystem.enableBlend(); // enables transparency
 
-            int x = 0;
-            int y = mc.getWindow()
-                    .getGuiScaledHeight() / 2 - HEIGHT / 2;
+            int x = config.getPos().x;
+            int y = config.getPos().y;
 
-            renderHotbar(gui, x, y);
-            //renderSpellsOnHotbar(matrix, x, y);
 
-            int spells = ClientConfigs.getConfig().HOTBAR_SWAPPING.get() ? 4 : 8;
+            renderHotbarBackground(type, type.getSize(), gui, x, y);
+
+            int spells = 8;
 
 
             for (int i = 0; i < spells; i++) {
 
                 int place = i;
+                int xp = x + 3;
+                int yp = y + 3;
 
-                if (ClientConfigs.getConfig().HOTBAR_SWAPPING.get() && SpellKeybind.IS_ON_SECONd_HOTBAR) {
-                    place += 4;
-                }
-
-                renderCurrentSpell(place, i, gui);
-
+                var spellRen = new SpellOnHotbarRender(type == OverlayType.SPELL_HOTBAR_HORIZONTAL, place, gui, xp, yp);
+                spellRen.render();
             }
 
             RenderSystem.disableBlend(); // enables transparency
 
-            if (ClientConfigs.getConfig().GUI_POSITION.get() != GuiPosition.TOP_LEFT) {
-
-                int offset = 0;
-                if (!ClientConfigs.getConfig().HOTBAR_SWAPPING.get()) {
-                    offset = 80;
-                }
-
-                EffectsOverlay.render(3, y + 85 + offset, mc.player, gui, false);
-            }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    private void renderCurrentSpell(int place, int num, GuiGraphics gui) {
-        int WIDTH = 22;
-        int HEIGHT = 162;
 
-        if (ClientConfigs.getConfig().HOTBAR_SWAPPING.get()) {
-            HEIGHT = 82;
-        }
-
+    private void renderHotbarBackground(OverlayType type, PointData size, GuiGraphics gui, int x, int y) {
         gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+        var hotbar = getHotbarTex(type);
+        gui.blit(hotbar, x, y, 0, 0, size.x, size.y);
 
-        boolean render = true;
-
-        Spell spell = null;
-        try {
-            spell = Load.player(mc.player).getSkillGemInventory().getHotbarGem(place).getSpell();
-
-            if (spell == null) {
-                return;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            render = false;
-        }
-
-        if (!render) {
-            return;
-        }
-
-        int x = 3;
-        int y = mc.getWindow().getGuiScaledHeight() / 2 - HEIGHT / 2 + 3;
-
-        y += num * 20;
-
-        try {
-            int xs = (int) (x);
-            int ys = (int) (y);
-
-            var tex = new ResourceLocation("");
-            if (Load.Unit(mc.player)
-                    .getCooldowns()
-                    .getCooldownTicks(spell.GUID()) > 1) {
-                tex = SPELL_ON_COOLDOWN;
-            } else {
-                tex = SPELL_READY_TEX;
-            }
-
-            gui.blit(tex, xs, ys, 0, 0, 16, 16, 16, 16);
-
-            if (spell != null) {
-                gui.blit(spell.getIconLoc(), xs, ys, 0, 0, 16, 16, 16, 16);
-
-                if (spell.config.charges > 0) {
-                    int charges = Load.player(mc.player)
-                            .spellCastingData.charges.getCharges(spell.config.charge_name);
-
-                    if (charges == 0) {
-                        float needed = (float) spell.config.charge_regen;
-                        float currentticks = (float) Load.player(mc.player)
-                                .spellCastingData.charges.getCurrentTicksChargingOf(spell.config.charge_name);
-
-                        float ticksleft = needed - currentticks;
-
-                        float percent = ticksleft / needed;
-                        percent = Mth.clamp(percent, 0, 1F);
-                        drawCooldown(gui, percent, xs, ys);
-
-                    }
-
-                    int chargex = x + 21;
-
-                    for (int i = 0; i < charges; i++) {
-                        gui.blit(CHARGE, chargex, y + 5, 0, 0, CHARGE_SIZE, CHARGE_SIZE, CHARGE_SIZE, CHARGE_SIZE);
-                        chargex += CHARGE_SIZE + 1;
-                    }
-
-                } else {
-
-                    CooldownsData cds = Load.Unit(mc.player).getCooldowns();
-
-                    float percent = (float) cds.getCooldownTicks(spell.GUID()) / (float) cds.getNeededTicks(spell.GUID());
-                    if (cds.getCooldownTicks(spell.GUID()) > 1) {
-                        percent = Mth.clamp(percent, 0, 1F);
-                        drawCooldown(gui, percent, xs, ys);
-                    }
-
-                    int cdsec = cds.getCooldownTicks(spell.GUID()) / 20;
-                    if (cdsec > 1) {
-                        String stext = cdsec + "s";
-                        GuiUtils.renderScaledText(gui, xs + 27, ys + 10, 0.75F, stext, ChatFormatting.YELLOW);
-                    }
-                }
-
-
-                int xkey = xs + 15;
-                int ykey = y + 14;
-                int bgsize = 10;
-
-
-                RenderSystem.enableBlend(); // enables transparency
-
-                float alpha = 0.75f;
-                gui.setColor(alpha, alpha, alpha, alpha);
-                gui.blit(KEY_BG, xkey - 6, ykey - 6, 0, 0, bgsize, bgsize, bgsize, bgsize);
-                gui.setColor(1.0F, 1.0F, 1.0F, 1);
-
-
-                String txt = CLOC.translate(KeybindsRegister.getSpellHotbar(place).key.getKey().getDisplayName()).toUpperCase(Locale.ROOT);
-                txt = txt.substring(0, 1);
-                if (KeybindsRegister.getSpellHotbar(place).key.isUnbound()) {
-                    txt = "UNBOUND KEY";
-                }
-                GuiUtils.renderScaledText(gui, xkey - 1, ykey, 1, txt, ChatFormatting.GREEN);
-
-                var key = KeybindsRegister.getSpellHotbar(place);
-                if (key.key.getKeyModifier() != KeyModifier.NONE) {
-
-                    RenderSystem.enableBlend(); // enables transparency
-                    gui.setColor(alpha, alpha, alpha, alpha);
-                    gui.blit(MOD_BG, xkey - 18, ykey - 6, 0, 0, 13, bgsize, 13, bgsize);
-                    gui.setColor(1.0F, 1.0F, 1.0F, 1F);
-
-                    String modtext = KeybindsRegister.getSpellHotbar(place).key.getKeyModifier().toString().substring(0, 3);
-                    GuiUtils.renderScaledText(gui, xkey - 11, ykey, 0.6F, modtext, ChatFormatting.YELLOW);
-                }
-
-
-                RenderSystem.disableBlend(); // enables transparency
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private void drawCooldown(GuiGraphics gui, float percent, int x, int y) {
-
-        gui.blit(COOLDOWN_TEX, x, y, 0, 0, 16, (int) (16 * percent), 16, 16);
-    }
-
-    private void renderHotbar(GuiGraphics gui, int x, int y) {
-        int WIDTH = 22;
-        int HEIGHT = 162;
-
-        if (ClientConfigs.getConfig().HOTBAR_SWAPPING.get()) {
-            HEIGHT = 82;
-        }
-
-        gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-        if (ClientConfigs.getConfig().HOTBAR_SWAPPING.get()) {
-            gui.blit(HOTBAR_SWAP_TEX, x, y, 0, 0, WIDTH, HEIGHT);
-
-            gui.blit(SWAP_BUTTON, x, y - 11, 0, 0, 22, 11, 22, 11);
-
-            String txt = "Swap";
-
-            if (mc.screen instanceof MainHubScreen) {
-                txt += ":  " + CLOC.translate(KeybindsRegister.HOTBAR_SWAP.getKey().getDisplayName()).toUpperCase(Locale.ROOT);
-            }
-
-            //CLOC.translate(KeybindsRegister.HOTBAR_SWAP.getKey().getDisplayName()).toUpperCase(Locale.ROOT).substring(0, 5);
-            GuiUtils.renderScaledText(gui, (int) (x + 5 + mc.font.width(txt) / 2F * 0.6F), y - 5, 0.6F, txt, ChatFormatting.RED);
-
-        } else {
-            gui.blit(HOTBAR_TEX, x, y, 0, 0, WIDTH, HEIGHT);
-        }
     }
 
 }

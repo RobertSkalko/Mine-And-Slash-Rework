@@ -1,5 +1,8 @@
 package com.robertx22.mine_and_slash.database.data.runewords;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.registry.IAutoGson;
+import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.mine_and_slash.database.data.StatMod;
 import com.robertx22.mine_and_slash.database.data.gear_slots.GearSlot;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
@@ -8,9 +11,6 @@ import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
 import com.robertx22.mine_and_slash.vanilla_mc.items.gemrunes.RuneItem;
-import com.robertx22.library_of_exile.registry.ExileRegistryType;
-import com.robertx22.library_of_exile.registry.IAutoGson;
-import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -67,11 +67,15 @@ public class RuneWord implements IAutoGson<RuneWord>, JsonExileRegistry<RuneWord
 
         var list = gear.sockets.getSocketed().stream().map(x -> x.g).collect(Collectors.toList());
 
-        String reqString = join(runes.listIterator(), "");
+        String reqString = getRunesString();
         String testString = join(list.listIterator(), "");
 
         return testString.contains(reqString);
 
+    }
+
+    public String getRunesString() {
+        return join(runes.listIterator(), "");
     }
 
 
@@ -81,15 +85,13 @@ public class RuneWord implements IAutoGson<RuneWord>, JsonExileRegistry<RuneWord
 
     public boolean canApplyOnItem(ItemStack stack) {
 
-        if (slots.stream()
-                .noneMatch(e -> {
-                    return GearSlot.isItemOfThisSlot(ExileDB.GearSlots()
-                            .get(e), stack.getItem());
-                })) {
-            return false;
+        if (slots.stream().anyMatch(e -> {
+            return GearSlot.isItemOfThisSlot(ExileDB.GearSlots().get(e), stack.getItem());
+        })) {
+            return true;
         }
 
-        return true;
+        return false;
     }
 
 

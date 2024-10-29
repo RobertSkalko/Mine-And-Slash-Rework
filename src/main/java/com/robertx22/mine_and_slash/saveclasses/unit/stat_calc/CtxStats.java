@@ -1,6 +1,8 @@
 package com.robertx22.mine_and_slash.saveclasses.unit.stat_calc;
 
+import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.saveclasses.unit.InCalcStatContainer;
+import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.StatContext;
 
 import java.util.ArrayList;
@@ -21,6 +23,12 @@ public class CtxStats {
         });
     }
 
+    public static StatContext addStatCtxModifierStats(List<StatContext> list) {
+        CtxStats c = new CtxStats(list);
+
+        return c.addCtxModifierStats();
+    }
+
     public CtxStats() {
     }
 
@@ -33,7 +41,8 @@ public class CtxStats {
                 }));
     }
 
-    public void applyCtxModifierStats() {
+    public StatContext addCtxModifierStats() {
+        List<ExactStatData> list = new ArrayList<>();
         // apply ctx modifier stats
         map.forEach((key, value) -> value
                 .forEach(v -> {
@@ -42,10 +51,14 @@ public class CtxStats {
                             //ExileLog.get().log(s.getStatId());
                         } else {
                             if (s.getStat().statContextModifier != null) {
-                                map.get(s.getStat().statContextModifier.getCtxTypeNeeded()).forEach(c -> s.getStat().statContextModifier.modify(s, c));
+                                map.get(s.getStat().statContextModifier.getCtxTypeNeeded()).forEach(c -> {
+                                    list.addAll(s.getStat().statContextModifier.modify(s, c));
+                                });
                             }
                         }
                     });
                 }));
+
+        return new SimpleStatCtx(StatContext.StatCtxType.STAT_CTX_MODIFIER_BONUS, list);
     }
 }

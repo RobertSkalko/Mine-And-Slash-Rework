@@ -1,6 +1,7 @@
 package com.robertx22.mine_and_slash.saveclasses.spells;
 
 import com.robertx22.library_of_exile.main.Packets;
+import com.robertx22.mine_and_slash.a_libraries.player_animations.PlayerAnimations;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.database.data.exile_effects.ExileEffect;
 import com.robertx22.mine_and_slash.database.data.exile_effects.ExileEffectInstanceData;
@@ -19,10 +20,10 @@ import com.robertx22.mine_and_slash.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.mine_and_slash.saveclasses.unit.Unit;
 import com.robertx22.mine_and_slash.uncommon.MathHelper;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
-import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.SpendResourceEvent;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.NoManaPacket;
+import com.robertx22.mine_and_slash.vanilla_mc.packets.spells.TellClientEntityCastingSpell;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -229,6 +230,10 @@ public class SpellCastingData {
                 spellTotalCastTicks = 0;
                 castTicksDone = 0;
                 this.casting = false;
+
+                if (entity instanceof ServerPlayer p) {
+                    TellClientEntityCastingSpell.sendUpdates(PlayerAnimations.CastEnum.CAST_FINISH, p, spell);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -275,6 +280,11 @@ public class SpellCastingData {
                         }
                     }
 
+                    if (ctx.caster instanceof ServerPlayer p) {
+                        Load.Unit(ctx.caster).sync.setDirty();
+                        TellClientEntityCastingSpell.sendUpdates(PlayerAnimations.CastEnum.CAST_FINISH, p, ctx.spell);
+                    }
+
                     this.calcSpell = null;
                 }
             } else {
@@ -302,6 +312,10 @@ public class SpellCastingData {
         this.spellTotalCastTicks = this.castTickLeft;
         this.castTicksDone = 0;
         this.casting = true;
+
+        if (ctx.caster instanceof ServerPlayer p) {
+            TellClientEntityCastingSpell.sendUpdates(PlayerAnimations.CastEnum.CAST_START, p, ctx.spell);
+        }
     }
 
     public void tryCast(SpellCastContext ctx) {
@@ -316,7 +330,7 @@ public class SpellCastingData {
                     spell.cast(ctx);
                 }
 
-                onSpellCast(ctx);
+                onSpellCastFinished(ctx);
                 this.calcSpell = null;
 
             }
@@ -388,7 +402,8 @@ public class SpellCastingData {
 
             if (data.getResources().hasEnough(mana) && data.getResources().hasEnough(energy)) {
 
-                GearItemData wep = StackSaving.GEARS.loadFrom(ctx.caster.getMainHandItem());
+                var opt = Load.Unit(player).equipmentCache.getWeaponOpt();
+                GearItemData wep = opt.map(x -> x.gear).orElse(null);
 
                 if (wep == null) {
                     return ExplainedResult.failure(Chats.NOT_MNS_WEAPON.locName());
@@ -437,15 +452,19 @@ public class SpellCastingData {
 
     }
 
-    public void onSpellCast(SpellCastContext ctx) {
+    public void onSpellCastFinished(SpellCastContext ctx) {
 
         setCooldownOnCasted(ctx);
 
         this.casting = false;
 
-        if (ctx.caster instanceof ServerPlayer) {
+        /*
+        if (ctx.caster instanceof ServerPlayer p) {
             Load.Unit(ctx.caster).sync.setDirty();
+            Packets.sendToClient(p, new TellClientEntityCastingSpell(PlayerAnimations.CastEnum.CAST_FINISH, p, ctx.spell));
         }
+
+         */
     }
 
 }

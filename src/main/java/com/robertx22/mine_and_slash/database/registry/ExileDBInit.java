@@ -14,7 +14,6 @@ import com.robertx22.mine_and_slash.aoe_data.database.spell_schools.SpellSchools
 import com.robertx22.mine_and_slash.aoe_data.database.spells.impl.IntSpells;
 import com.robertx22.mine_and_slash.aoe_data.database.unique_gears.UniqueGearReg;
 import com.robertx22.mine_and_slash.database.data.aura.AuraGems;
-import com.robertx22.mine_and_slash.database.data.currency.gear.OrbAffixUpgrade;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.mine_and_slash.database.data.league.HarvestLeague;
 import com.robertx22.mine_and_slash.database.data.loot_chest.GearLootChest;
@@ -43,8 +42,6 @@ public class ExileDBInit {
     private static void registerAllNonDatapackEntries() {
         Ailments.init(); // todo will this cause problems. I need to really figure a good way to know when each registry should register
         new StatsRegister().registerAll();
-
-
     }
 
     public static String UNKNOWN_ID = "unknown";
@@ -55,8 +52,8 @@ public class ExileDBInit {
 
         // todo make sure all have valid empties!!!
 
-        Database.addRegistry(new RarityRegistryContainer<>(ExileRegistryTypes.GEAR_RARITY, IRarity.COMMON_ID).setIsDatapack());
-        Database.addRegistry(new RarityRegistryContainer<>(ExileRegistryTypes.WEAPON_TYPE, WeaponTypes.sword.GUID()).setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.GEAR_RARITY, IRarity.COMMON_ID).setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.WEAPON_TYPE, WeaponTypes.sword.GUID()).setIsDatapack());
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.GEAR_SLOT, GearSlots.SWORD).setIsDatapack());
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.GEAR_TYPE, BaseGearTypes.SWORD.GUID()).setIsDatapack());
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.RUNEWORDS, Runewords.EMPTY).setIsDatapack());
@@ -82,7 +79,6 @@ public class ExileDBInit {
 
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.STAT, EmptyStat.getInstance().GUID()));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.AILMENT, ""));
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.CURRENCY_ITEMS, new OrbAffixUpgrade().GUID()));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.SUPPORT_GEM, SupportGems.PROJ_COUNT));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.AURA, AuraGems.health_reg.id));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.MAP_AFFIX, MapAffixes.crit));
@@ -103,6 +99,10 @@ public class ExileDBInit {
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.STAT_LAYER, ""));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.UBER_BOSS, ""));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.SPAWNED_MOBS, UNKNOWN_ID));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.OMEN, ""));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.ITEM_MOD, ""));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.ITEM_REQ, ""));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.CURRENCY, "socket_adder"));
 
     }
 }

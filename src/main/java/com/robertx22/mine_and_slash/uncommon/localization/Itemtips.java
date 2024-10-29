@@ -31,7 +31,6 @@ public enum Itemtips implements IAutoLocName {
     SOUL_MODIFIER_TIP("Soul modifier can be applied to gear soul, which then generate \nonly the corresponding gear type when use."),
     DRAG_AND_DROP_TO_USE("[Drag and Drop on item to Use]"),
     DRAG_AND_DROP_TO_USE_DESC("- Hold the item in inventory, drag it towards the item you want to use it on, and click."),
-    PROF_TOOL_LEVEL_CAP("Capped Drops to LVL %1$s"),
     PROF_TOOL_STATS_TIP("Tool Stats: "),
     PROF_TOOL_EXP_TIP("Exp: %1$s/%2$s"),
     SOUL_TIER_TIP("Soul tier determine the level range of generated gear"),
@@ -58,6 +57,7 @@ public enum Itemtips implements IAutoLocName {
 
     CHEST_CONTAINS("Contains: %1$s"),
     NEED_KEY("Needs %1$s "),
+    OMEN_SET_PIECES("%1$s Piece:"),
     EMPTY_SOCKET("[Socket]"),
 
     AURA_RESERVATION("Aura Reservation: "),
@@ -81,7 +81,7 @@ public enum Itemtips implements IAutoLocName {
     SOUL_CLEANER_USAGE_AND_WARNING("Click on items to remove their soul.\nThe item remains but the stats will be deleted."),
     SOCKET_EXTRACTOR_USAGE("Extracts a Gem from the Item"),
     INFUSED("Infused(%1$s/10): "),
-    OUTCOME_TIP("%1$s, Chance: %2$s", "for currency tooltips"),
+    OUTCOME_TIP("%1$s - %2$s", "for currency tooltips"),
     Exp("Bonus Exp: %1$s%%"),
     Loot("Bonus Loot: %1$s%%"),
     PREFIX_STATS("Prefix Stats: "),

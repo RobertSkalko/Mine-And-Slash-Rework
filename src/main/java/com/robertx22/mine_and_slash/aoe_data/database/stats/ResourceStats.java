@@ -30,7 +30,7 @@ public class ResourceStats {
             .addEffect(e -> StatEffects.LEECH_RESTORE_RESOURCE_BASED_ON_STAT_DATA.get(e.resource)) // todo maybe make this not capped by leech
             .setLocName(x ->
                     Stat.format(
-                            "Gain " + Stat.VAL1 + " " + x.resource.locname + " on " + x.actionName
+                            "Leech " + Stat.VAL1 + " " + x.resource.locname + " on " + x.actionName
                     )
             )
             .setLocDesc(x -> "")
@@ -50,7 +50,7 @@ public class ResourceStats {
             .setPriority(StatPriority.Damage.AFTER_DAMAGE_BONUSES)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)
-            .addEffect(e -> StatEffects.LEECH_RESTORE_RESOURCE_BASED_ON_STAT_DATA.get(e.resourceType))
+            .addEffect(e -> StatEffects.LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.get(e.resourceType))
             .setLocName(x ->
                     Stat.format(
                             "Leech " + Stat.VAL1 + "% of your " + x.element.getIconNameFormat() + " Damage as " + x.resourceType.locname
@@ -193,6 +193,7 @@ public class ResourceStats {
                 x.group = Stat.StatGroup.RESTORATION;
             })
             .build();
+
     public static DataPackStatAccessor<EmptyAccessor> REJUV_HEAL_SELF = DatapackStatBuilder
             .ofSingle("rejuv_eff_on_self", Elements.ALL)
             .worksWithEvent(RestoreResourceEvent.ID)

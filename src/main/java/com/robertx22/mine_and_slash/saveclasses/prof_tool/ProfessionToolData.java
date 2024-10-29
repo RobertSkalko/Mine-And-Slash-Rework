@@ -44,7 +44,6 @@ public class ProfessionToolData implements ITooltip {
 
     public int lvl = 1;
     public int xp = 0;
-    public int force_lvl = -1;
 
 
     public List<ExactStatData> GetAllStats() {
@@ -116,7 +115,7 @@ public class ProfessionToolData implements ITooltip {
         ToolAffix data = new ToolAffix();
         data.rar = rar.GUID();
         data.p = rar.stat_percents.random();
-        data.id = ExileDB.Affixes().getFilterWrapped(x -> x.type == Affix.Type.tool && x.getAllTagReq().contains(getProfession().tool_tag) && x.getAllTagReq().contains(SlotTags.tool.GUID())).random().GUID();
+        data.id = ExileDB.Affixes().getFilterWrapped(x -> x.type == Affix.AffixSlot.tool && x.getAllTagReq().contains(getProfession().tool_tag) && x.getAllTagReq().contains(SlotTags.tool.GUID())).random().GUID();
 
         this.affixes.add(data);
     }
@@ -159,11 +158,9 @@ public class ProfessionToolData implements ITooltip {
                         .accept(Itemtips.PROF_TOOL_STATS_TIP.locName(), this.GetAllStats()))
                 .accept(new OperationTipBlock().setCtrl().setAlt());
 
-        if (this.force_lvl > -1) {
-            exileTooltips.accept(new AdditionalBlock(Itemtips.PROF_TOOL_LEVEL_CAP.locName(this.force_lvl).withStyle(ChatFormatting.RED)));
-        }
+
         List<Component> tooltip = ctx.tooltip;
-        tooltip.clear();
+        //tooltip.clear();
         tooltip.addAll(exileTooltips.release());
 
 

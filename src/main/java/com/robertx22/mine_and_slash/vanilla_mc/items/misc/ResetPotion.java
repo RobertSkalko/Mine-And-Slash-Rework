@@ -55,20 +55,22 @@ public class ResetPotion extends AutoItem implements IShapedRecipe {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity player) {
 
-        stack.shrink(1);
+        if (!world.isClientSide) {
+            stack.shrink(1);
 
-        if (player instanceof Player) {
-            Player p = (Player) player;
-            if (reset == ResetType.FULL_RESET) {
-                this.pointsType.fullReset(p);
-            } else {
-                this.pointsType.addResetPoints(p, 10);
+            if (player instanceof Player) {
+                Player p = (Player) player;
+                if (reset == ResetType.FULL_RESET) {
+                    this.pointsType.fullReset(p);
+                } else {
+                    this.pointsType.addResetPoints(p, 10);
+                }
+
+                Load.player(p).playerDataSync.setDirty();
+                Load.Unit(p).sync.setDirty();
+
+                p.addItem(new ItemStack(Items.GLASS_BOTTLE));
             }
-
-            Load.player(p).playerDataSync.setDirty();
-            Load.Unit(p).sync.setDirty();
-
-            p.addItem(new ItemStack(Items.GLASS_BOTTLE));
         }
 
         return stack;
@@ -103,8 +105,8 @@ public class ResetPotion extends AutoItem implements IShapedRecipe {
     @Override
     public ShapedRecipeBuilder getRecipe() {
         return shaped(this)
-                .define('t', reset.mat.get())
-                .define('v', pointsType.matItem())
+                .define('v', reset.mat.get())
+                .define('t', pointsType.matItem())
                 .define('b', Items.GLASS_BOTTLE)
                 .pattern("vvv")
                 .pattern("vtv")

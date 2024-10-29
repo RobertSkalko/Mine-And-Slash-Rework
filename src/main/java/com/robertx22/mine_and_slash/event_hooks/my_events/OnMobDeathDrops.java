@@ -115,9 +115,7 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
 
             }
 
-        } catch (
-
-                Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

@@ -1,8 +1,8 @@
 package com.robertx22.mine_and_slash.gui.texts.textblocks;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryContainer;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
-import com.robertx22.mine_and_slash.database.registry.RarityRegistryContainer;
 import com.robertx22.mine_and_slash.mmorpg.UNICODE;
 import com.robertx22.mine_and_slash.uncommon.localization.Gui;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
@@ -29,8 +29,8 @@ public class RarityListData {
         tip.add(Component.literal(UNICODE.STAR + " ").append(Words.RARITIES.locName()).withStyle(ChatFormatting.GREEN));
 
 
-        RarityRegistryContainer<GearRarity> gearRarityRarityRegistryContainer = ExileDB.GearRarities();
-        List<GearRarity> allRarities = gearRarityRarityRegistryContainer.getList();
+        ExileRegistryContainer<GearRarity> container = ExileDB.GearRarities();
+        List<GearRarity> allRarities = container.getList();
 
         allRarities.sort(Comparator.comparingInt(x -> x.item_tier));
         if (!Screen.hasShiftDown()) {

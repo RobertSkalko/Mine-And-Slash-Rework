@@ -1,17 +1,19 @@
 package com.robertx22.mine_and_slash.gui.screens.character_screen;
 
+import com.robertx22.library_of_exile.utils.GuiUtils;
+import com.robertx22.library_of_exile.utils.RenderUtils;
+import com.robertx22.library_of_exile.utils.TextUTIL;
 import com.robertx22.mine_and_slash.gui.buttons.CharacterStatsButtons;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.saveclasses.unit.StatData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
-import com.robertx22.library_of_exile.utils.GuiUtils;
-import com.robertx22.library_of_exile.utils.RenderUtils;
-import com.robertx22.library_of_exile.utils.TextUTIL;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Tooltip;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
+import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
@@ -39,6 +41,11 @@ public class HubStatButton extends ImageButton {
     }
 
     @Override
+    protected ClientTooltipPositioner createTooltipPositioner() {
+        return DefaultTooltipPositioner.INSTANCE;
+    }
+
+    @Override
     public void render(GuiGraphics gui, int x, int y, float ticks) {
         super.render(gui, x, y, ticks);
 
@@ -54,7 +61,7 @@ public class HubStatButton extends ImageButton {
             this.setTooltip(Tooltip.create(TextUTIL.mergeList(tooltip)));
 
         }
-      
+
 
         int iconX = 0;
         int iconY = 0;

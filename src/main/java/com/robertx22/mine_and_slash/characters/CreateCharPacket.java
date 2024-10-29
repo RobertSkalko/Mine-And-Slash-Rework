@@ -1,9 +1,9 @@
 package com.robertx22.mine_and_slash.characters;
 
-import com.robertx22.mine_and_slash.mmorpg.SlashRef;
-import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;
+import com.robertx22.mine_and_slash.mmorpg.SlashRef;
+import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
@@ -34,16 +34,12 @@ public class CreateCharPacket extends MyPacket<CreateCharPacket> {
     public void onReceived(ExilePacketContext ctx) {
         var chars = Load.player(ctx.getPlayer()).characters;
 
-        chars.tryAddNewCharacter(ctx.getPlayer(), name);
+        var slot = chars.tryAddNewCharacter(ctx.getPlayer(), name);
 
-        var opt = chars.getByName(name);
-
-        if (opt.isPresent()) {
-            var slot = chars.getSlotOf(opt.get());
-            if (slot > -1) {
-                chars.load(slot, ctx.getPlayer());
-            }
+        if (slot > -1) {
+            chars.load(slot, ctx.getPlayer());
         }
+        Load.player(ctx.getPlayer()).playerDataSync.setDirty();
     }
 
     @Override

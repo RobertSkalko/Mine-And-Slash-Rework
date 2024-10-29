@@ -55,8 +55,8 @@ public class SupportGems {
 
         new SupportGem("archmage", "Archmage", PlayStyle.INT, 1.25F,
                 Arrays.asList(
-                        OffenseStats.ARCHMAGE_BONUS_MANA_DAMAGE.get().mod(3, 15),
-                        OffenseStats.ARCHMAGE_BONUS_MANA_COST.get().mod(1, 5)
+                        OffenseStats.ARCHMAGE_BONUS_MANA_DAMAGE.get().mod(3, 10),
+                        OffenseStats.ARCHMAGE_BONUS_MANA_COST.get().mod(3, 10)
                 ))
                 .levelReq(10).addToSerializables();
 

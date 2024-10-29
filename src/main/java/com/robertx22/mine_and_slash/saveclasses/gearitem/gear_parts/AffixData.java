@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts;
 
+import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.library_of_exile.registry.FilterListWrap;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.mine_and_slash.database.Weighted;
@@ -7,6 +8,8 @@ import com.robertx22.mine_and_slash.database.data.MinMax;
 import com.robertx22.mine_and_slash.database.data.affixes.Affix;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IRerollable;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IStatsContainer;
@@ -32,7 +35,7 @@ public class AffixData implements IRerollable, IStatsContainer {
     public String id;
     // tier
     public String rar = IRarity.COMMON_ID;
-    public Affix.Type ty;
+    public Affix.AffixSlot ty;
 
 
     public GearRarity getRarity() {
@@ -79,7 +82,7 @@ public class AffixData implements IRerollable, IStatsContainer {
         return getRarity().stat_percents;
     }
 
-    public AffixData(Affix.Type type) {
+    public AffixData(Affix.AffixSlot type) {
         this.ty = type;
     }
 
@@ -91,7 +94,7 @@ public class AffixData implements IRerollable, IStatsContainer {
         return p < 0;
     }
 
-    public Affix.Type getAffixType() {
+    public Affix.AffixSlot getAffixType() {
         return ty;
     }
 
@@ -108,7 +111,11 @@ public class AffixData implements IRerollable, IStatsContainer {
     }
 
     public void RerollNumbers() {
-        p = getMinMax().random();
+
+        var minmax = getMinMax();
+
+        p = minmax.random();
+
     }
 
     public final Affix BaseAffix() {
@@ -142,8 +149,8 @@ public class AffixData implements IRerollable, IStatsContainer {
     }
 
     @Override
-    public List<ExactStatData> GetAllStats(GearItemData gear) {
-
+    public List<ExactStatData> GetAllStats(ExileStack stack) {
+        var gear = stack.get(StackKeys.GEAR).get();
         return GetAllStats(gear.getLevel());
 
     }
@@ -178,7 +185,7 @@ public class AffixData implements IRerollable, IStatsContainer {
                     .getFilterWrapped(x -> x.type == getAffixType() && gear.canGetAffix(x));
 
             if (list.list.isEmpty()) {
-                System.out.print("Gear Type: " + gear.gtype + " affixtype: " + this.ty.name());
+                ExileLog.get().warn("Gear Type: " + gear.gtype + " affixtype: " + this.ty.name());
             }
 
             affix = list.random();
@@ -186,7 +193,7 @@ public class AffixData implements IRerollable, IStatsContainer {
             this.randomizeTier(gear.getRarity());
 
         } catch (Exception e) {
-            System.out.print("Gear Type: " + gear.gtype + " affixtype: " + this.ty.name());
+            ExileLog.get().warn("Gear Type: " + gear.gtype + " affixtype: " + this.ty.name());
             e.printStackTrace();
         }
 

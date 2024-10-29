@@ -5,6 +5,7 @@ import com.robertx22.mine_and_slash.database.data.perks.Perk;
 import com.robertx22.mine_and_slash.database.data.talent_tree.TalentTree;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.uncommon.testing.CommandTest;
+import com.robertx22.mine_and_slash.uncommon.testing.TestResult;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.*;
@@ -12,10 +13,10 @@ import java.util.*;
 public class CountTalentTreeAttributes extends CommandTest {
 
     @Override
-    public void run(ServerPlayer player) {
+    public TestResult runINTERNAL(ServerPlayer player) {
 
         TalentTree tree = ExileDB.TalentTrees()
-            .get("talents");
+                .get("talents");
 
         List<OptScaleExactStat> stats = new ArrayList<>();
 
@@ -28,7 +29,7 @@ public class CountTalentTreeAttributes extends CommandTest {
 
         for (String x1 : tree.calcData.perks.values()) {
             Perk perk = ExileDB.Perks()
-                .get(x1);
+                    .get(x1);
 
             if (perk != null) {
                 perk.stats.forEach(s -> {
@@ -70,6 +71,13 @@ public class CountTalentTreeAttributes extends CommandTest {
             System.out.print(x.getDebugString() + "\n");
 
         }
+
+        return TestResult.SUCCESS;
+    }
+
+    @Override
+    public boolean shouldRunEveryLogin() {
+        return false;
     }
 
     @Override

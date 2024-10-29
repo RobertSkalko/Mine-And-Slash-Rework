@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.database.data.stats.datapacks.stats;
 
+import com.robertx22.library_of_exile.wrappers.ExileText;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.database.OptScaleExactStat;
@@ -10,11 +11,9 @@ import com.robertx22.mine_and_slash.database.data.stats.name_regex.StatNameRegex
 import com.robertx22.mine_and_slash.database.data.stats.types.core_stats.base.ICoreStat;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.saveclasses.unit.InCalcStatContainer;
-import com.robertx22.mine_and_slash.saveclasses.unit.InCalcStatData;
 import com.robertx22.mine_and_slash.saveclasses.unit.StatData;
 import com.robertx22.mine_and_slash.uncommon.localization.Gui;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.TooltipStatsAligner;
-import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 
@@ -67,7 +66,7 @@ public class CoreStat extends BaseDatapackStat implements ICoreStat {
 
     public List<Component> getCoreStatTooltip(EntityData unitdata, StatData data) {
 
-     
+
         int val = (int) getValue(data);
 
         List<Component> list = new ArrayList<>();
@@ -110,9 +109,9 @@ public class CoreStat extends BaseDatapackStat implements ICoreStat {
     }
 
     @Override
-    public void addToOtherStats(EntityData endata, InCalcStatContainer unitdata, InCalcStatData data) {
+    public void affectStats(EntityData endata, StatData data, InCalcStatContainer incalc) {
         for (ExactStatData x : getMods((int) data.getValue())) {
-            x.applyToStatInCalc(unitdata);
+            x.applyToStatInCalc(incalc);
         }
     }
 

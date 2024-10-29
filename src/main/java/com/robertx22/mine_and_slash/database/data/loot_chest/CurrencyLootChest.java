@@ -1,7 +1,7 @@
 package com.robertx22.mine_and_slash.database.data.loot_chest;
 
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
-import com.robertx22.mine_and_slash.database.data.currency.base.Currency;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.ExileCurrency;
 import com.robertx22.mine_and_slash.database.data.league.LeagueMechanics;
 import com.robertx22.mine_and_slash.database.data.loot_chest.base.LootChest;
 import com.robertx22.mine_and_slash.database.data.loot_chest.base.LootChestData;
@@ -17,12 +17,12 @@ public class CurrencyLootChest extends LootChest {
     public ItemStack generateOne(LootChestData data) {
 
 
-        Currency currency = ExileDB.CurrencyItems()
-                .getFilterWrapped(x -> x.getDropReq().canDropInLeague(LeagueMechanics.NONE, data.lvl))
+        ExileCurrency currency = ExileDB.Currency()
+                .getFilterWrapped(x -> x.drop_req.canDropInLeague(LeagueMechanics.NONE, data.lvl))
                 .random();
 
 
-        return new ItemStack(currency.getCurrencyItem(), 1 + data.getRarity().item_tier);
+        return new ItemStack(currency.getItem(), 1 + data.getRarity().item_tier);
     }
 
     @Override

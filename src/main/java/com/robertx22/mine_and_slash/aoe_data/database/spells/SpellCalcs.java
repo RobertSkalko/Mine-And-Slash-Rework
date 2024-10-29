@@ -163,7 +163,7 @@ public class SpellCalcs {
             .spellScaling(1.0F, 2F)
             .build();
     public static ValueCalculation SHOOTING_STAR = ValueCalcBuilder.of("shooting_star")
-            .spellScaling(0.5F, 1.25F)
+            .spellScaling(0.5F, 1.5F)
             .build();
     public static ValueCalculation TIDAL_STRIKE = ValueCalcBuilder.of("tidal_strike")
             .attackScaling(0.4F, 0.75F)
@@ -256,13 +256,13 @@ public class SpellCalcs {
             .attackScaling(0.3F, 0.6F)
             .build();
     public static ValueCalculation TOTEM_HEAL = ValueCalcBuilder.of("totem_heal")
-            .spellScaling(0.2F, 0.5F)
+            .spellScaling(0.25F, 0.6F)
             .build();
     public static ValueCalculation TOTEM_GUARD = ValueCalcBuilder.of("totem_guard")
             .spellScaling(0.2F, 0.5F)
             .build();
     public static ValueCalculation TOTEM_MANA = ValueCalcBuilder.of("totem_mana")
-            .spellScaling(0.2F, 0.5F)
+            .spellScaling(0.25F, 0.6F)
             .build();
 
     public static ValueCalculation CURSE = ValueCalcBuilder.of("curse")

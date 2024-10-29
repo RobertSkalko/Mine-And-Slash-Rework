@@ -1,5 +1,7 @@
 package com.robertx22.mine_and_slash.aoe_data.database.spells.impl;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
+import com.robertx22.mine_and_slash.a_libraries.player_animations.SpellAnimations;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.PartBuilder;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.SpellCalcs;
@@ -15,7 +17,6 @@ import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.PlayStyle;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.EntityFinder;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 
@@ -28,9 +29,12 @@ public class IntSpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        SpellBuilder.of(BLACK_HOLE, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 60)
-                                .setSwingArm(), "   Black Hole",
+        SpellBuilder.of(BLACK_HOLE, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(30, 20 * 60, 40)
+                                .setSwingArm(), "Black Hole",
                         Arrays.asList(SpellTags.damage, SpellTags.area, SpellTags.CHAOS))
+
+                .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.STAFF_CAST_FINISH)
+
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
 
                 .manualDesc("Summon a dark sphere that attracts nearby enemies to it, dealing "
@@ -40,7 +44,7 @@ public class IntSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.playSound(SoundEvents.END_PORTAL_SPAWN, 1D, 1D))
 
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 0D)))
-                .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(SlashBlocks.BLACK_HOLE.get(), 20D * 5)
+                .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(SlashBlocks.BLACK_HOLE.get(), 20D * 3)
                         .put(MapField.ENTITY_NAME, "block")
                         .put(MapField.BLOCK_FALL_SPEED, 0D)
                         .put(MapField.FIND_NEAREST_SURFACE, true)

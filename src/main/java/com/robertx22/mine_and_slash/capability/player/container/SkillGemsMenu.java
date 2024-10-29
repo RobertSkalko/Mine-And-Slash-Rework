@@ -98,7 +98,7 @@ public class SkillGemsMenu extends AbstractContainerMenu {
 
         @Override
         public void setByPlayer(ItemStack pStack) {
-            Load.Unit(p).gear.setDirty();
+            Load.Unit(p).setEquipsChanged();
             super.setByPlayer(pStack);
         }
 

@@ -22,6 +22,13 @@ public class ProphecyModifiers implements ExileRegistryInit {
         ///   of(IRarity.UNIQUE_ID, 10, ProphecyModifierType.GEAR_RARITY, IRarity.UNIQUE_ID, 3).levelReq(25).tierReq(25).forceLeagueUniques(LeagueMechanics.PROPHECY);
 
 
+        // jewels
+        of(IRarity.RARE_ID + "_jewel", 500, ProphecyModifierType.JEWEL_RARITY, IRarity.RARE_ID, 1.5F);
+        of(IRarity.EPIC_ID + "_jewel", 1000, ProphecyModifierType.JEWEL_RARITY, IRarity.EPIC_ID, 2F).levelReq(25).tierReq(20);
+        of(IRarity.LEGENDARY_ID + "_jewel", 500, ProphecyModifierType.JEWEL_RARITY, IRarity.LEGENDARY_ID, 3).levelReq(40).tierReq(25);
+        of(IRarity.MYTHIC_ID + "_jewel", 100, ProphecyModifierType.JEWEL_RARITY, IRarity.MYTHIC_ID, 4).levelReq(50).tierReq(50);
+
+
         BaseGearTypes.init();
 
         for (DataGenKey<BaseGearType> e : BaseGearTypes.ALL) {

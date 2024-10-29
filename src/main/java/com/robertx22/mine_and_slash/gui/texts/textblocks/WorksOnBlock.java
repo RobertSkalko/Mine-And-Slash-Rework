@@ -1,8 +1,10 @@
 package com.robertx22.mine_and_slash.gui.texts.textblocks;
 
+import com.robertx22.mine_and_slash.database.data.gear_slots.GearSlot;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
 import com.robertx22.mine_and_slash.mmorpg.UNICODE;
+import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.localization.Gui;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
@@ -12,10 +14,12 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 
 
 // todo rework currencies to have localized requirements on tooltip so like: works on gear: - must be lvl 5 - must be common rarity .. etc
@@ -28,6 +32,10 @@ public class WorksOnBlock extends AbstractTextBlock {
     List<ItemType> items = new ArrayList<>();
 
     public static WorksOnBlock usableOn(ItemType type) {
+        return new WorksOnBlock(Type.USABLE_ON).itemTypes(Arrays.asList(type));
+    }
+
+    public static WorksOnBlock usableOn(List<ItemType> type) {
         return new WorksOnBlock(Type.USABLE_ON).itemTypes(type);
     }
 
@@ -57,8 +65,8 @@ public class WorksOnBlock extends AbstractTextBlock {
         return this;
     }
 
-    private WorksOnBlock itemTypes(ItemType... item) {
-        items.addAll(Arrays.asList(item));
+    private WorksOnBlock itemTypes(List<ItemType> item) {
+        items.addAll(item);
         return this;
     }
 
@@ -126,18 +134,22 @@ public class WorksOnBlock extends AbstractTextBlock {
 
 
     public enum ItemType {
-        GEAR(Words.Gear, Words.Gear_DESC),
-        TOOLS(Words.TOOL, Words.TOOL_DESC),
-        JEWEL(Words.Jewel, Words.Jewel_DESC),
-        MAP(Words.Map, Words.MapDESC),
-        SOUL(Words.Soul, Words.Gear_DESC),
-        SOULLESS_GEAR(Words.SOULLESS_Gear, Words.SOULLESS_Gear_DESC);
+        GEAR(Words.Gear, Words.Gear_DESC, x -> StackSaving.GEARS.has(x)),
+        TOOL(Words.TOOL, Words.TOOL_DESC, x -> StackSaving.TOOL.has(x)),
+        JEWEL(Words.Jewel, Words.Jewel_DESC, x -> StackSaving.JEWEL.has(x)),
+        MAP(Words.Map, Words.MapDESC, x -> StackSaving.MAP.has(x)),
+        SOUL(Words.Soul, Words.Gear_DESC, x -> StackSaving.STAT_SOULS.has(x)),
+        SOULLESS_GEAR(Words.SOULLESS_Gear, Words.SOULLESS_Gear_DESC, x -> !StackSaving.GEARS.has(x) && GearSlot.getSlotOf(x.getItem()) != null);
+
         public Words name;
         public Words desc;
 
-        ItemType(Words name, Words desc) {
+        public Function<ItemStack, Boolean> worksOn;
+
+        ItemType(Words name, Words desc, Function<ItemStack, Boolean> worksOn) {
             this.name = name;
             this.desc = desc;
+            this.worksOn = worksOn;
         }
     }
 }

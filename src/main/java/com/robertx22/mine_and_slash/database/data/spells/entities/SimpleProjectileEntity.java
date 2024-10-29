@@ -39,6 +39,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -47,6 +48,7 @@ import net.minecraftforge.network.NetworkHooks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAsItem, IDatapackSpellEntity {
@@ -125,6 +127,25 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
         this.zTile = -1;
 
         this.setSoundEvent(SoundEvents.EMPTY);
+    }
+
+    protected void moveToImpactPosition(HitResult result) {
+
+        if (result instanceof EntityHitResult enres) {
+            // the result just contains entity position, so we must clip against the AABB ourselves
+            AABB aabb = enres.getEntity().getBoundingBox().inflate(0.3D);
+            Vec3 traceEnd = this.position().add(this.getDeltaMovement());
+            Optional<Vec3> clipped = aabb.clip(this.position(), traceEnd);
+
+            if (clipped.isPresent()) {
+                // move to where we hit the entity
+                this.setPos(clipped.get());
+            }
+        } else {
+            // move all the way to where we impacted
+            this.setPos(result.getLocation());
+        }
+
     }
 
     public Entity getEntityHit(HitResult result, double radius) {
@@ -328,6 +349,8 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
 
     protected void onImpact(HitResult result) {
 
+        this.moveToImpactPosition(result);
+
         Entity entityHit = getEntityHit(result, 0.3D);
 
         if (entityHit != null) {
@@ -354,9 +377,6 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
             if (en == null) {
                 return;
             }
-
-            // dirty fix to solve spell projectiles not hitting the entity they hit...
-            this.setPos(en.getEyePosition());
 
             if (caster != null) {
                 if (!Load.Unit(caster)

@@ -4,6 +4,7 @@ import com.robertx22.mine_and_slash.database.data.prophecy.starts.GearProphecy;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.loot.blueprints.GearBlueprint;
 import com.robertx22.mine_and_slash.loot.blueprints.ItemBlueprint;
+import com.robertx22.mine_and_slash.loot.blueprints.JewelBlueprint;
 import com.robertx22.mine_and_slash.loot.blueprints.RarityItemBlueprint;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.MutableComponent;
@@ -33,6 +34,31 @@ public enum ProphecyModifierType {
             return start instanceof GearProphecy;
         }
     },
+    JEWEL_RARITY() {
+        @Override
+        public MutableComponent getTooltip(String data) {
+            var rar = ExileDB.GearRarities().get(data);
+            return rar.locName().withStyle(rar.textFormatting());
+        }
+
+        @Override
+        public float chanceToSpawn() {
+            return 75;
+        }
+
+        @Override
+        public void set(ItemBlueprint b, String data) {
+            if (b instanceof JewelBlueprint gb) {
+                gb.rarity.set(ExileDB.GearRarities().get(data));
+            }
+        }
+
+        @Override
+        public boolean canApplyTo(ProphecyStart start, ItemBlueprint b) {
+            return b instanceof JewelBlueprint;
+        }
+    },
+
     GEAR_RARITY() {
         @Override
         public MutableComponent getTooltip(String data) {

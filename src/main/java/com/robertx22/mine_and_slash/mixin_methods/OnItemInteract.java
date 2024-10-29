@@ -3,19 +3,27 @@ package com.robertx22.mine_and_slash.mixin_methods;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.mine_and_slash.database.data.auto_item.AutoItem;
 import com.robertx22.mine_and_slash.database.data.currency.IItemAsCurrency;
+import com.robertx22.mine_and_slash.database.data.currency.base.ModifyResult;
 import com.robertx22.mine_and_slash.database.data.currency.loc_reqs.LocReqContext;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.ExileCurrency;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModification;
 import com.robertx22.mine_and_slash.database.data.profession.items.CraftedSoulItem;
 import com.robertx22.mine_and_slash.database.data.runewords.RuneWord;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
+import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.mmorpg.ForgeEvents;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
+import com.robertx22.mine_and_slash.saveclasses.stat_soul.SavedGearSoul;
 import com.robertx22.mine_and_slash.saveclasses.stat_soul.StatSoulData;
 import com.robertx22.mine_and_slash.saveclasses.stat_soul.StatSoulItem;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
+import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.mine_and_slash.vanilla_mc.items.SoulExtractorItem;
 import com.robertx22.mine_and_slash.vanilla_mc.items.TagForceSoulItem;
 import com.robertx22.mine_and_slash.vanilla_mc.items.misc.RarityStoneItem;
+import net.minecraft.ChatFormatting;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
@@ -53,6 +61,49 @@ public class OnItemInteract {
 
 
     public static void register() {
+
+        // new datapack currencies
+        CLICKS.add(new ClickFeature() {
+            @Override
+            public Result tryApply(Player player, ItemStack craftedStack, ItemStack currency, Slot slot) {
+                var opt = ExileCurrency.get(currency);
+
+                if (opt.isPresent()) {
+                    LocReqContext ctx = new LocReqContext(player, craftedStack, currency);
+
+                    var cur = opt.get();
+                    if (!craftedStack.isEmpty()) {
+                        var can = cur.canItemBeModified(ctx);
+
+                        if (can.can) {
+                            var result = cur.modifyItem(ctx);
+
+                            if (result.resultEnum != ModifyResult.SUCCESS) {
+                                player.sendSystemMessage(result.result.answer);
+                                return new Result(false);
+                            }
+
+                            craftedStack.shrink(1); // seems the currency creates a copy of a new item, so we delete the old one
+                            currency.shrink(1);
+                            // PlayerUtils.giveItem(result, player);
+                            slot.set(result.stack.getStack().copy());
+
+                            if (result.outcome == ItemModification.OutcomeType.BAD) {
+                                SoundUtils.playSound(player.level(), player.blockPosition(), SoundEvents.GLASS_BREAK, 1, 1);
+                                return new Result(true);
+                            } else {
+                                return new Result(true).ding();
+                            }
+                        } else {
+                            SoundUtils.playSound(player.level(), player.blockPosition(), SoundEvents.VILLAGER_NO, 1, 1);
+                            player.sendSystemMessage(can.answer);
+                        }
+                    }
+
+                }
+                return new Result(false);
+            }
+        });
 
         CLICKS.add(new ClickFeature() {
             @Override
@@ -119,6 +170,7 @@ public class OnItemInteract {
                 if (craftedStack.isDamaged() && currency.getItem() instanceof RarityStoneItem) {
 
                     if (!StackSaving.GEARS.has(craftedStack)) {
+                        player.sendSystemMessage(Chats.NOT_GEAR_OR_LACKS_SOUL.locName().withStyle(ChatFormatting.RED));
                         return new Result(false);
                     }
                     RarityStoneItem essence = (RarityStoneItem) currency.getItem();
@@ -145,11 +197,19 @@ public class OnItemInteract {
                         data = cs.getSoul(currency);
                     }
                     if (data != null) {
-                        if (data.canInsertIntoStack(craftedStack)) {
+                        var res = data.canInsertIntoStack(craftedStack);
+
+                        if (res.can) {
                             if (craftedStack.getCount() == 1) {
-                                data.insertAsUnidentifiedOn(craftedStack, player);
+                                ItemStack result = data.insertAsUnidentifiedOn(craftedStack, player);
+                                craftedStack.shrink(1);
+                                slot.set(result);
                                 currency.shrink(1);
                                 return new Result(true).ding();
+                            }
+                        } else {
+                            if (res.answer != null) {
+                                player.sendSystemMessage(res.answer);
                             }
                         }
                     }
@@ -160,7 +220,6 @@ public class OnItemInteract {
         });
 
 
-        // TODO TEST THIS!!!!!!!
         CLICKS.add(new ClickFeature() {
             @Override
             public Result tryApply(Player player, ItemStack craftedStack, ItemStack currency, Slot slot) {
@@ -170,7 +229,7 @@ public class OnItemInteract {
                     if (!craftedStack.isEmpty()) {
                         var can = ctx.effect.canItemBeModified(ctx);
                         if (can.can) {
-                            ItemStack result = ctx.effect.modifyItem(ctx).stack;
+                            ItemStack result = ctx.effect.modifyItem(ctx).stack.getStack().copy();
                             craftedStack.shrink(1); // seems the currency creates a copy of a new item, so we delete the old one
                             currency.shrink(1);
                             // PlayerUtils.giveItem(result, player);
@@ -185,6 +244,7 @@ public class OnItemInteract {
             }
         });
 
+
         CLICKS.add(new ClickFeature() {
             @Override
             public Result tryApply(Player player, ItemStack craftedStack, ItemStack currency, Slot slot) {
@@ -196,8 +256,6 @@ public class OnItemInteract {
                     if (gear != null) {
                         if (gear.sockets != null && gear.sockets.getSocketed().size() > 0) {
                             try {
-
-
                                 int index = gear.sockets.lastFilledSocketIndex();
 
                                 if (index > -1) {
@@ -249,7 +307,9 @@ public class OnItemInteract {
                             if (se.canExtract(gear.getRarity())) {
                                 StatSoulData soul = new StatSoulData();
                                 soul.slot = gear.GetBaseGearType().getGearSlot().GUID();
-                                soul.gear = gear;
+                                var ex = ExileStack.of(craftedStack);
+
+                                soul.gear = new SavedGearSoul(ex.get(StackKeys.GEAR).get(), ex.get(StackKeys.POTENTIAL).getOrCreate(), ex.get(StackKeys.CUSTOM).getOrCreate());
 
                                 ItemStack soulstack = soul.toStack();
 
@@ -326,10 +386,12 @@ public class OnItemInteract {
             ItemStack stack = x.getItem().getItem();
             if (!StackSaving.GEARS.has(stack)) {
                 if (!stack.hasTag() || (stack.hasTag() && !stack.getTag().getBoolean("free_souled"))) {
-                    var auto = AutoItem.get(stack.getItem());
+                    var auto = AutoItem.getRandom(stack.getItem());
                     if (auto != null) {
                         stack.getOrCreateTag().putBoolean("free_souled", true);
-                        StackSaving.GEARS.saveTo(stack, auto.create(x.getEntity()));
+
+                        var data = auto.create(x.getEntity());
+                        data.apply(ExileStack.of(stack));
                     }
                 }
             }

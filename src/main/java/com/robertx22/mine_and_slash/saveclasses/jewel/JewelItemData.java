@@ -11,6 +11,8 @@ import com.robertx22.mine_and_slash.gui.inv_gui.actions.auto_salvage.ToggleAutoS
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.*;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.affixdatablocks.SimpleItemStatBlock;
+import com.robertx22.mine_and_slash.itemstack.CommonTooltips;
+import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
@@ -67,9 +69,9 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
 
             for (int i = 0; i < num; i++) {
                 Affix affix = ExileDB.Affixes().getFilterWrapped(x -> {
-                    return x.type == Affix.Type.jewel_corruption;
+                    return x.type == Affix.AffixSlot.jewel_corruption;
                 }).random();
-                var data = new AffixData(Affix.Type.jewel_corruption);
+                var data = new AffixData(Affix.AffixSlot.jewel_corruption);
                 data.randomizeTier(getRarity());
                 data.p = data.getMinMax().random();
                 data.id = affix.guid;
@@ -86,10 +88,10 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
 
         for (int i = 0; i < num; i++) {
             Affix affix = ExileDB.Affixes().getFilterWrapped(x -> {
-                return x.getAllTagReq().contains(SlotTags.any_jewel.GUID()) || x.getAllTagReq().contains(getStyle().getJewelAffixTag().GUID());
+                return x.type == Affix.AffixSlot.jewel && x.getAllTagReq().contains(SlotTags.any_jewel.GUID()) || x.getAllTagReq().contains(getStyle().getJewelAffixTag().GUID());
             }).random();
 
-            var data = new AffixData(Affix.Type.jewel);
+            var data = new AffixData(Affix.AffixSlot.jewel);
             data.randomizeTier(getRarity());
             data.p = data.getMinMax().random();
             data.id = affix.guid;
@@ -103,6 +105,8 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
     @Override
     public void BuildTooltip(TooltipContext ctx) {
 
+
+        ExileStack ex = ExileStack.of(ctx.stack);
 
         ctx.tooltip.clear();
 
@@ -148,7 +152,7 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
             });
         }
         tip.accept(new RequirementBlock(this.lvl))
-                .accept(new SalvageBlock(this))
+                .accept(new SalvageBlock(this, ex))
                 .accept(new AdditionalBlock(() -> {
                     var up = uniq.getCraftedTier().upgradeStack.get();
                     return ImmutableList.of(
@@ -159,6 +163,8 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
                 }).showWhen(() -> this.auraStats.isEmpty() && uniq.isUnique() && uniq.isCraftableUnique() && uniq.getCraftedTier().canUpgradeMore()))
 
                 .accept(new OperationTipBlock().setShift().setAlt());
+
+        tip.accept(CommonTooltips.potentialCorruptionAndQuality(ex));
 
         tip.accept(new ClickToOpenGuiBlock());
 
@@ -215,7 +221,7 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
     }
 
     @Override
-    public List<ItemStack> getSalvageResult(ItemStack stack) {
+    public List<ItemStack> getSalvageResult(ExileStack stack) {
         int amount = 1;
 
         if (RarityItems.RARITY_STONE.containsKey(getRarity().GUID())) {

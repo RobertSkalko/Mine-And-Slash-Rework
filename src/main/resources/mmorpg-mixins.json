@@ -5,6 +5,7 @@
   "package": "com.robertx22.mine_and_slash.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "PlayerAnimMixin",
     "ArrowShootMixin",
     "FallingBlockEntityMixin",
     "DisableMobSpawnsInDungeon",

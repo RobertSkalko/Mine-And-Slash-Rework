@@ -72,7 +72,6 @@ public class SlashDeferred {
         SlashContainers.init();
 
         //items
-        CurrencyItems.init();
         RarityItems.init();
         SkillGemsItems.init();
         SlashItems.init();

@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public class MyCurioUtils {
 
-    public static List<String> SLOTS = Arrays.asList("ring", "necklace", "backpack");
+    public static List<String> SLOTS = Arrays.asList("ring", "necklace", "omen", "backpack");
 
     public static List<ICurioStacksHandler> getHandlers(Player player) {
         return getHandlers(SLOTS, player);

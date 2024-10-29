@@ -58,18 +58,22 @@ public class CraftedSoulItem extends AutoItem implements ICreativeTabTiered, IRa
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> list, TooltipFlag pIsAdvanced) {
-        var soul = getSoul(pStack);
+        try {
+            var soul = getSoul(pStack);
 
-        if (soul != null) {
-            list.clear();
-            if (Screen.hasShiftDown() && soul.gear != null) {
-                soul.gear.BuildTooltip(new TooltipContext(pStack, list, Load.Unit(ClientOnly.getPlayer())));
-            } else {
-                ExileTooltips tooltip = soul.getTooltip(pStack, false);
-                tooltip.accept(new NameBlock(Collections.singletonList(pStack.getHoverName())));
-                tooltip.accept(new ProfessionDropSourceBlock(Professions.GEAR_CRAFTING));
-                list.addAll(tooltip.release());
+            if (soul != null) {
+                list.clear();
+                if (Screen.hasShiftDown() && soul.gear != null) {
+                    soul.gear.gear.BuildTooltip(new TooltipContext(pStack, list, Load.Unit(ClientOnly.getPlayer())));
+                } else {
+                    ExileTooltips tooltip = soul.getTooltip(pStack, false);
+                    tooltip.accept(new NameBlock(Collections.singletonList(pStack.getHoverName())));
+                    tooltip.accept(new ProfessionDropSourceBlock(Professions.GEAR_CRAFTING));
+                    list.addAll(tooltip.release());
+                }
             }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

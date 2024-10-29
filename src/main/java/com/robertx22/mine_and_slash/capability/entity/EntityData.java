@@ -22,6 +22,7 @@ import com.robertx22.mine_and_slash.database.data.stats.types.resources.energy.E
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.health.Health;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.event_hooks.damage_hooks.util.AttackInformation;
+import com.robertx22.mine_and_slash.event_hooks.my_events.CachedEntityStats;
 import com.robertx22.mine_and_slash.event_hooks.ontick.UnequipGear;
 import com.robertx22.mine_and_slash.event_hooks.player.OnLogin;
 import com.robertx22.mine_and_slash.loot.LootModifiersList;
@@ -82,7 +83,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 
 public class EntityData implements ICap, INeededForClient {
@@ -108,10 +108,12 @@ public class EntityData implements ICap, INeededForClient {
 
     }
 
-
     public EntityData(LivingEntity entity) {
         this.entity = entity;
+        this.equipmentCache = new CachedEntityStats(entity);
     }
+
+    public CachedEntityStats equipmentCache;
 
 
     private static final String RARITY = "rarity";
@@ -137,8 +139,30 @@ public class EntityData implements ICap, INeededForClient {
     private static final String MAP_MOB = "map_mob";
 
 
-    public DirtySync sync = new DirtySync("endata sync", x -> syncData());
-    public DirtySync gear = new DirtySync("gear_recalc", x -> recalcStats());
+    private transient int dontSyncTicks = 0;
+
+    public DirtySync sync = new DirtySync("endata sync", x -> syncData()) {
+        @Override
+        public void onSynced(Entity p) {
+            super.onSynced(p);
+            if (entity instanceof Player == false) {
+                dontSyncTicks = 20; // let's not sync mob data too often
+            }
+        }
+
+        @Override
+        public void onTickTrySync(Entity p) {
+            if (dontSyncTicks-- > 0) {
+                return;
+            }
+            super.onTickTrySync(p);
+        }
+
+    };
+    // public DirtySync gear = new DirtySync("gear_recalc", x -> recalcStats());
+
+
+    public int immuneTicks = 0;
 
     public UnsavedMaxEffectStacksData maxCharges = new UnsavedMaxEffectStacksData();
 
@@ -173,7 +197,6 @@ public class EntityData implements ICap, INeededForClient {
 
     private BossData boss = null;
 
-
     public BossData getBossData() {
         return boss;
     }
@@ -207,48 +230,58 @@ public class EntityData implements ICap, INeededForClient {
     @Override
     public void addClientNBT(CompoundTag nbt) {
 
-        nbt.putInt(LEVEL, level);
-        nbt.putString(RARITY, rarity);
-        nbt.putInt(HP, (int) getUnit().getCalculatedStat(Health.getInstance()).getValue());
-        nbt.putString(ENTITY_TYPE, this.type.toString());
+        try {
+            nbt.putInt(LEVEL, level);
+            nbt.putString(RARITY, rarity);
+            nbt.putInt(HP, (int) getUnit().getCalculatedStat(Health.getInstance()).getValue());
+            nbt.putString(ENTITY_TYPE, this.type.toString());
 
-        if (affixes != null) {
-            LoadSave.Save(affixes, nbt, AFFIXES);
-        }
-        LoadSave.Save(statusEffects, nbt, STATUSES);
+            if (affixes != null) {
+                LoadSave.Save(affixes, nbt, AFFIXES);
+            }
+            LoadSave.Save(statusEffects, nbt, STATUSES);
 
-        if (unit != null) {
-            UnitNbt.Save(nbt, unit);
+            if (unit != null && entity instanceof Player) {
+                UnitNbt.Save(nbt, unit);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     @Override
     public void loadFromClientNBT(CompoundTag nbt) {
 
-        this.rarity = nbt.getString(RARITY);
-        this.level = nbt.getInt(LEVEL);
-        if (level < 1) {
-            level = 1;
-        }
-        this.maxHealth = nbt.getInt(HP);
-
         try {
-            String typestring = nbt.getString(ENTITY_TYPE);
-            this.type = EntityTypeUtils.EntityClassification.valueOf(typestring);
+            this.rarity = nbt.getString(RARITY);
+            this.level = nbt.getInt(LEVEL);
+            if (level < 1) {
+                level = 1;
+            }
+            this.maxHealth = nbt.getInt(HP);
+
+            try {
+                String typestring = nbt.getString(ENTITY_TYPE);
+                this.type = EntityTypeUtils.EntityClassification.valueOf(typestring);
+            } catch (Exception e) {
+                this.type = EntityTypeUtils.EntityClassification.OTHER;
+            }
+
+            this.affixes = LoadSave.Load(MobData.class, new MobData(), nbt, AFFIXES);
+            if (affixes == null) {
+                affixes = new MobData();
+            }
+
+            this.statusEffects = loadOrBlank(EntityStatusEffectsData.class, new EntityStatusEffectsData(), nbt, STATUSES, new EntityStatusEffectsData());
+
+            if (entity instanceof Player) {
+                this.unit = UnitNbt.Load(nbt);
+            }
+            if (this.unit == null) {
+                this.unit = new Unit();
+            }
         } catch (Exception e) {
-            this.type = EntityTypeUtils.EntityClassification.OTHER;
-        }
-
-        this.affixes = LoadSave.Load(MobData.class, new MobData(), nbt, AFFIXES);
-        if (affixes == null) {
-            affixes = new MobData();
-        }
-
-        this.statusEffects = loadOrBlank(EntityStatusEffectsData.class, new EntityStatusEffectsData(), nbt, STATUSES, new EntityStatusEffectsData());
-
-        this.unit = UnitNbt.Load(nbt);
-        if (this.unit == null) {
-            this.unit = new Unit();
+            e.printStackTrace();
         }
     }
 
@@ -258,35 +291,39 @@ public class EntityData implements ICap, INeededForClient {
 
         addClientNBT(nbt);
 
-        nbt.putInt(EXP, exp);
-        nbt.putInt(EXP_DEBT, expDebt);
-        nbt.putString(UUID, uuid);
-        nbt.putString(MAP_ID, this.mapUUID);
-        nbt.putBoolean(SET_MOB_STATS, setMobStats);
-        nbt.putBoolean(NEWBIE_STATUS, this.isNewbie);
-        nbt.putBoolean(MAP_MOB, this.isCorrectlySpawnedMapMob);
+        try {
+            nbt.putInt(EXP, exp);
+            nbt.putInt(EXP_DEBT, expDebt);
+            nbt.putString(UUID, uuid);
+            nbt.putString(MAP_ID, this.mapUUID);
+            nbt.putBoolean(SET_MOB_STATS, setMobStats);
+            nbt.putBoolean(NEWBIE_STATUS, this.isNewbie);
+            nbt.putBoolean(MAP_MOB, this.isCorrectlySpawnedMapMob);
 
-        LoadSave.Save(cooldowns, nbt, COOLDOWNS);
-        LoadSave.Save(ailments, nbt, AILMENTS);
-        LoadSave.Save(summonedPetData, nbt, PET);
-        LoadSave.Save(leech, nbt, LEECH);
-        LoadSave.Save(customExactStats, nbt, CUSTOM_STATS);
+            LoadSave.Save(cooldowns, nbt, COOLDOWNS);
+            LoadSave.Save(ailments, nbt, AILMENTS);
+            LoadSave.Save(summonedPetData, nbt, PET);
+            LoadSave.Save(leech, nbt, LEECH);
+            LoadSave.Save(customExactStats, nbt, CUSTOM_STATS);
 
 
-        if (customExactStats != null) {
-            CustomExactStats.Save(nbt, customExactStats);
-        }
+            if (customExactStats != null) {
+                CustomExactStats.Save(nbt, customExactStats);
+            }
 
-        if (resources != null) {
-            LoadSave.Save(resources, nbt, RESOURCES_LOC);
-        }
+            if (resources != null) {
+                LoadSave.Save(resources, nbt, RESOURCES_LOC);
+            }
 
-        if (threat != null) {
-            LoadSave.Save(threat, nbt, THREAT);
-        }
+            if (threat != null) {
+                LoadSave.Save(threat, nbt, THREAT);
+            }
 
-        if (boss != null) {
-            LoadSave.Save(boss, nbt, BOSS);
+            if (boss != null) {
+                LoadSave.Save(boss, nbt, BOSS);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
 
@@ -311,18 +348,22 @@ public class EntityData implements ICap, INeededForClient {
     @Override
     public void deserializeNBT(CompoundTag nbt) {
 
-        loadFromClientNBT(nbt);
+        try {
+            loadFromClientNBT(nbt);
 
-        this.exp = nbt.getInt(EXP);
-        this.expDebt = nbt.getInt(EXP_DEBT);
-        this.uuid = nbt.getString(UUID);
-        this.mapUUID = nbt.getString(MAP_ID);
-        this.setMobStats = nbt.getBoolean(SET_MOB_STATS);
+            this.exp = nbt.getInt(EXP);
+            this.expDebt = nbt.getInt(EXP_DEBT);
+            this.uuid = nbt.getString(UUID);
+            this.mapUUID = nbt.getString(MAP_ID);
+            this.setMobStats = nbt.getBoolean(SET_MOB_STATS);
 
-        if (nbt.contains(NEWBIE_STATUS)) {
-            this.isNewbie = nbt.getBoolean(NEWBIE_STATUS);
+            if (nbt.contains(NEWBIE_STATUS)) {
+                this.isNewbie = nbt.getBoolean(NEWBIE_STATUS);
+            }
+            this.isCorrectlySpawnedMapMob = nbt.getBoolean(MAP_MOB);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        this.isCorrectlySpawnedMapMob = nbt.getBoolean(MAP_MOB);
 
         try {
             this.summonedPetData = loadOrBlank(SummonedPetData.class, new SummonedPetData(), nbt, PET, new SummonedPetData());
@@ -343,8 +384,20 @@ public class EntityData implements ICap, INeededForClient {
 
     }
 
+    public void setAllDirtyOnLoginEtc() {
+        setEquipsChanged();
+        sync.setDirty();
+        didStatCalcThisTickForPlayer = true; // temp fix, somehow the stat calc is being called before everything is set to dirty even on login?
+        if (entity instanceof Player p) {
+            Load.player(p).cachedStats.setAllDirty();
+            Load.player(p).playerDataSync.setDirty();
+        }
+
+        //this.recalcStats_DONT_CALL();
+    }
+
     public void setEquipsChanged() {
-        this.gear.setDirty();
+        this.equipmentCache.setAllDirty();
     }
 
     public CooldownsData getCooldowns() {
@@ -428,8 +481,7 @@ public class EntityData implements ICap, INeededForClient {
         if (data.getAttackerEntity() instanceof Player p && PlayerUTIL.isFake(p)) {
             // this is a bit jank but it solves 2 things: fake players not having energy to attack, and fake players not having stats because they dont tick
             // and stats are calc on tick..
-            Load.Unit(p).gear.setDirty();
-            Load.Unit(p).recalcStats();
+            Load.Unit(p).equipmentCache.setAllDirty();
         } else {
             if (event.data.getNumber() > resources.getEnergy()) {
                 data.setCanceled(true);
@@ -467,7 +519,7 @@ public class EntityData implements ICap, INeededForClient {
     public void setRarity(String rarity) {
         this.rarity = rarity;
         this.sync.setDirty();
-        this.gear.setDirty();
+        this.equipmentCache.setAllDirty();
     }
 
     @Override
@@ -481,13 +533,11 @@ public class EntityData implements ICap, INeededForClient {
             return;
         }
         if (entity instanceof Player p) {
-
             Packets.sendToClient(p, new EntityUnitPacket(p));
         } else {
-            if (!Unit.shouldSendUpdatePackets(entity)) {
-                return;
+            if (Unit.shouldSendUpdatePackets(entity)) {
+                Packets.sendToTracking(Unit.getUpdatePacketFor(entity, this), entity);
             }
-            Packets.sendToTracking(Unit.getUpdatePacketFor(entity, this), entity);
         }
     }
 
@@ -549,11 +599,12 @@ public class EntityData implements ICap, INeededForClient {
         }
     }
 
-    private void recalcStats() {
+    public void recalcStats_DONT_CALL() {
 
         if (this.entity.level().isClientSide()) {
             return;
         }
+
 
         if (unit == null) {
             unit = new Unit();
@@ -566,21 +617,24 @@ public class EntityData implements ICap, INeededForClient {
             return;
         }
 
+        int oldhp = this.maxHealth;
 
         //Watch watch = new Watch();
         this.unit = new Unit();
 
-        var stats = StatCalculation.getStatsWithoutSuppGems(entity, this, null);
+        var stats = StatCalculation.getStatsWithoutSuppGems(entity, this);
 
-        StatCalculation.calc(unit, stats, entity, -1, null);
+
+        StatCalculation.calc(unit, stats, entity, null, -1);
 
         if (entity instanceof Player p) {
             this.didStatCalcThisTickForPlayer = true;
 
-
             var data = Load.player(p);
-            var spells = data.spellCastingData.getAllHotbarSpells().stream().map(x -> x.getSpell()).collect(Collectors.toList());
-            data.calcSpellUnits(spells, stats);
+
+            data.cachedStats.allStatsWithoutSuppGems = stats;
+
+            data.setSpellUnitsDirty();
 
             Load.player(p).spellCastingData.calcSpellLevels(unit);
             Load.player(p).getSkillGemInventory().removeAurasIfCantWear(p);
@@ -591,12 +645,16 @@ public class EntityData implements ICap, INeededForClient {
             data.getJewels().checkRemoveJewels(p);
 
             this.maxCharges.calc(this.unit.getStats());
+
+            this.sync.setDirty();
+
+        } else {
+            if (true || oldhp != maxHealth) {
+                this.sync.setDirty();
+            }
         }
 
-
-        this.sync.setDirty();
         //watch.print("stat calc for " + (entity instanceof PlayerEntity ? "player " : "mob "));
-
 
     }
 
@@ -672,8 +730,8 @@ public class EntityData implements ICap, INeededForClient {
             if (data.getAttackerEntity() instanceof Player p && PlayerUTIL.isFake(p)) {
                 // this is a bit jank but it solves 2 things: fake players not having energy to attack, and fake players not having stats because they dont tick
                 // and stats are calc on tick..
-                Load.Unit(p).gear.setDirty();
-                Load.Unit(p).recalcStats();
+                Load.Unit(p).equipmentCache.setAllDirty();
+                Load.Unit(p).recalcStats_DONT_CALL();
             } else {
                 if (event.data.getNumber() > resources.getEnergy()) {
                     data.setCanceled(true);
@@ -892,7 +950,7 @@ public class EntityData implements ICap, INeededForClient {
             p.awardStat(Stats.CUSTOM.get(PlayerStats.LEVELS_GAINED), lvl);
         }
 
-        this.gear.setDirty();
+        this.equipmentCache.setAllDirty();
         this.sync.setDirty();
     }
 

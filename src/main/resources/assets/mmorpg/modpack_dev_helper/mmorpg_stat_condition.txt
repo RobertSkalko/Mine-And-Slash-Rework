@@ -109,8 +109,6 @@ spell_has_tag_has_pet_ability
 spell_has_tag_has_pet_ability_is_false
 spell_has_tag_heal
 spell_has_tag_heal_is_false
-spell_has_tag_holy
-spell_has_tag_holy_is_false
 spell_has_tag_lightning
 spell_has_tag_lightning_is_false
 spell_has_tag_magic
@@ -139,8 +137,6 @@ spell_has_tag_shout
 spell_has_tag_shout_is_false
 spell_has_tag_song
 spell_has_tag_song_is_false
-spell_has_tag_staff_spell
-spell_has_tag_staff_spell_is_false
 spell_has_tag_summon
 spell_has_tag_summon_is_false
 spell_has_tag_thorns

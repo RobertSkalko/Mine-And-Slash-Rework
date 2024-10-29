@@ -9,7 +9,6 @@ import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.vanilla_mc.commands.suggestions.CommandSuggestions;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
@@ -34,8 +33,7 @@ public class ListStatSourcesCommand {
                 literal(CommandRefs.ID)
                         .then(literal("list_stat_sources").requires(e -> e.hasPermission(0))
                                 .then(argument("type", StringArgumentType.word()).suggests(new Sugg())
-                                        .then(argument("target", EntityArgument.player())
-                                                .executes(ctx -> run(EntityArgument.getPlayer(ctx, "target"), StringArgumentType.getString(ctx, "type")))))));
+                                        .executes(ctx -> run(ctx.getSource().getPlayer(), StringArgumentType.getString(ctx, "type"))))));
     }
 
     private static int run(Player en, String id) {

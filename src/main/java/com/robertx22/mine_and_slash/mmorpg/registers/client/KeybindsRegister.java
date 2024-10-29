@@ -26,7 +26,7 @@ public class KeybindsRegister {
     public static SpellKeybind SPELL_HOTBAR_8 = new SpellKeybind(8, GLFW.GLFW_KEY_G, KeyModifier.SHIFT, false);
 
     public static SpellKeybind getSpellHotbar(int num) {
-        return SpellKeybind.ALL.stream().filter(x -> x.getIndex() == num).findAny().get();
+        return SpellKeybind.ALL.stream().filter(x -> x.getIndex() == num).findAny().orElseThrow(() -> new RuntimeException(num + " isn't a valid hotbar number"));
     }
 
     public static void register(RegisterKeyMappingsEvent x) {

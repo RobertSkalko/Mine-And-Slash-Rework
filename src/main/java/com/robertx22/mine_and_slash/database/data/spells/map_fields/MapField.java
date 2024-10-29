@@ -1,7 +1,7 @@
 package com.robertx22.mine_and_slash.database.data.spells.map_fields;
 
-import com.robertx22.mine_and_slash.database.data.value_calc.ValueCalculation;
 import com.robertx22.library_of_exile.registry.IGUID;
+import com.robertx22.mine_and_slash.database.data.value_calc.ValueCalculation;
 
 import java.util.HashMap;
 import java.util.List;
@@ -98,13 +98,13 @@ public class MapField<T> implements IGUID {
         this.id = id;
     }
 
-    private static <T> MapField<T> make(String f) {
+    public static <T> MapField<T> make(String f) {
         MapField<T> field = new MapField<T>(f);
         MAP.put(field.GUID(), field);
         return field;
     }
 
-    private static <T> MapField<T> make(MapField<T> field) {
+    public static <T> MapField<T> make(MapField<T> field) {
         MAP.put(field.GUID(), field);
         return field;
     }
@@ -115,6 +115,5 @@ public class MapField<T> implements IGUID {
     }
 
     public static void init() {
-
     }
 }

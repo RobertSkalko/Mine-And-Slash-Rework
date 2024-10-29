@@ -1,7 +1,6 @@
 package com.robertx22.mine_and_slash.uncommon.testing;
 
-import com.robertx22.mine_and_slash.uncommon.testing.tests.GivePlayerCapNbt;
-import com.robertx22.mine_and_slash.uncommon.testing.tests.PlayerLevelTest;
+import com.robertx22.mine_and_slash.uncommon.testing.tests.*;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.HashMap;
@@ -15,8 +14,7 @@ public class CommandTests {
 
             System.out.print("Starting test: " + "id" + "\n");
 
-            tests.get(id)
-                    .run(p);
+            tests.get(id).runINTERNAL(p);
 
             System.out.print("Test ended: " + id + "\n");
 
@@ -30,10 +28,14 @@ public class CommandTests {
     public static HashMap<String, CommandTest> tests = new HashMap<>();
 
     static {
-        // reg(new CountTalentTreeAttributes());
+        reg(new CountTalentTreeAttributes());
         reg(new PlayerLevelTest());
-        //reg(new FindUnusedPerksTest());
+        reg(new FindUnusedPerksTest());
         reg(new GivePlayerCapNbt());
+        reg(new CheckRunewordConflictTest());
+        reg(new GenerateGearTest());
+
+
     }
 
     static void reg(CommandTest t) {

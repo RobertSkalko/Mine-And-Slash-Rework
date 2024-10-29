@@ -1,6 +1,5 @@
 package com.robertx22.mine_and_slash.gui.bases;
 
-import com.robertx22.mine_and_slash.characters.gui.CharacterSelectScreen;
 import com.robertx22.mine_and_slash.event_hooks.player.OnKeyPress;
 import com.robertx22.mine_and_slash.gui.screens.skill_tree.SkillTreeScreen;
 import com.robertx22.mine_and_slash.gui.screens.stat_gui.StatScreen;
@@ -36,7 +35,7 @@ public class BaseScreen extends Screen {
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
 
         // todo make this less wack
-        if (KeybindsRegister.HUB_SCREEN_KEY.matches(keyCode, scanCode) && !StatScreen.SEARCH.isFocused() && !SkillTreeScreen.SEARCH.isFocused() && !CharacterSelectScreen.SEARCH.isFocused()) {
+        if (KeybindsRegister.HUB_SCREEN_KEY.matches(keyCode, scanCode) && !StatScreen.SEARCH.isFocused() && !SkillTreeScreen.SEARCH.isFocused()) {
             Minecraft.getInstance().setScreen(null);
             OnKeyPress.cooldown = 5;
             return false;

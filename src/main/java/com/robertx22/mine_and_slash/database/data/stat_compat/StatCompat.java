@@ -1,5 +1,8 @@
 package com.robertx22.mine_and_slash.database.data.stat_compat;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.registry.IAutoGson;
+import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.mine_and_slash.database.data.stats.StatScaling;
 import com.robertx22.mine_and_slash.database.data.stats.datapacks.stats.AttributeStat;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
@@ -9,12 +12,10 @@ import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.uncommon.MathHelper;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
-import com.robertx22.library_of_exile.registry.ExileRegistryType;
-import com.robertx22.library_of_exile.registry.IAutoGson;
-import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -105,13 +106,13 @@ public class StatCompat implements JsonExileRegistry<StatCompat>, IAutoGson<Stat
         return null;
     }
 
-    public static void onTick(LivingEntity en) {
+    public static void onTick(Player en) {
 
         IDirty check = (IDirty) en.getAttributes();
 
         if (check.isAttribDirty()) {
             check.setAttribDirty(false);
-            Load.Unit(en).gear.setDirty();
+            Load.player(en).cachedStats.STAT_COMPAT.setDirty();
         }
     }
 
