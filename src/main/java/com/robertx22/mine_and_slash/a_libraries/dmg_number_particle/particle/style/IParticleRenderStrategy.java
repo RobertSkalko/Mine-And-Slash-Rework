@@ -6,9 +6,12 @@ import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.Exi
 import net.minecraft.client.Camera;
 
 public interface IParticleRenderStrategy {
-    
 
-    void setupStyle(ExileInteractionResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack);
+    void setupStyle(ExileInteractionResultParticle particle);
+
+    void tick(ExileInteractionResultParticle particle);
+
+    void setupParticle(ExileInteractionResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack);
 
     void renderDamage(ExileInteractionResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack, String text, int color);
 

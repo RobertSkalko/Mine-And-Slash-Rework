@@ -2,8 +2,8 @@ package com.robertx22.mine_and_slash.uncommon.effectdatas;
 
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.SoundUtils;
-import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.DamageNullifiedParticle;
-import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.ElementDamageParticle;
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.impl.DamageNullifiedParticle;
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.impl.ElementDamageParticle;
 import com.robertx22.mine_and_slash.aoe_data.database.ailments.Ailment;
 import com.robertx22.mine_and_slash.capability.entity.CooldownsData;
 import com.robertx22.mine_and_slash.capability.player.data.PlayerConfigData;

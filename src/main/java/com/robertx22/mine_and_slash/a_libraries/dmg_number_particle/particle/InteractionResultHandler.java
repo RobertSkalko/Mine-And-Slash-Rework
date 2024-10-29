@@ -1,8 +1,11 @@
 package com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle;
 
 import com.google.common.collect.ImmutableMap;
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.impl.DamageNullifiedParticle;
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.impl.ElementDamageParticle;
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.impl.HealParticle;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.style.Original;
-import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.style.Wynn;
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.style.Row;
 import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
@@ -15,6 +18,7 @@ import net.minecraft.world.entity.Entity;
 
 import java.util.Comparator;
 import java.util.Map;
+import java.util.Random;
 import java.util.function.BiConsumer;
 
 public class InteractionResultHandler {
@@ -67,7 +71,8 @@ public class InteractionResultHandler {
                     Minecraft.getInstance().particleEngine.add(new HealParticle(Minecraft.getInstance().level, x, y, z, new Original(), mat.number()));
                 }),
 
-        WYNN((info, entity) -> {
+
+        ROW((info, entity) -> {
             var mat = (ElementDamageParticle.DamageInformation) info;
             ImmutableMap<Elements, Float> dmgMap = mat.getDmgMap();
 
@@ -75,13 +80,14 @@ public class InteractionResultHandler {
             StringBuilder stringBuilder = new StringBuilder();
             dmgMap.entrySet().stream().sorted(Comparator.comparingInt(entry -> entry.getKey().ordinal())).forEachOrdered(x -> {
                 Elements key = x.getKey();
-                stringBuilder.append(key.format).append("- ").append(NumberUtils.format(x.getValue()));
+                stringBuilder.append(key.format).append("-").append(NumberUtils.format(x.getValue()));
             });
             String string = stringBuilder.toString();
-            double x = entity.getX();
-            double y = entity.getEyeY();
+            Random random = new Random();
+            double x = entity.getX() + random.nextDouble(-1d, 1d);
+            double y = entity.getEyeY() + random.nextDouble(-0.5d, 0.8d);
             double z = entity.getZ();
-            Minecraft.getInstance().particleEngine.add(new ElementDamageParticle(Minecraft.getInstance().level, x, y, z, new Wynn(), ChatFormatting.WHITE.getColor(), crit ? string + "!" : string));
+            Minecraft.getInstance().particleEngine.add(new ElementDamageParticle(Minecraft.getInstance().level, x, y, z, new Row(), ChatFormatting.WHITE.getColor(), crit ? string + "!" : string));
 
         },
                 (type, entity) -> {
@@ -89,14 +95,14 @@ public class InteractionResultHandler {
                     double x = entity.getX();
                     double y = entity.getEyeY();
                     double z = entity.getZ();
-            Minecraft.getInstance().particleEngine.add(new DamageNullifiedParticle(Minecraft.getInstance().level, x, y, z, new Wynn(), mat));
+            Minecraft.getInstance().particleEngine.add(new DamageNullifiedParticle(Minecraft.getInstance().level, x, y, z, new Row(), mat));
         },
                 (type, entity) -> {
                     var mat = (HealParticle.HealNumber) type;
                     double x = entity.getX();
                     double y = entity.getEyeY();
                     double z = entity.getZ();
-                    Minecraft.getInstance().particleEngine.add(new HealParticle(Minecraft.getInstance().level, x, y, z, new Wynn(), mat.number()));
+                    Minecraft.getInstance().particleEngine.add(new HealParticle(Minecraft.getInstance().level, x, y, z, new Row(), mat.number()));
                 });
 
         public final BiConsumer<IParticleSpawnNotifier, Entity> damageStrategy;

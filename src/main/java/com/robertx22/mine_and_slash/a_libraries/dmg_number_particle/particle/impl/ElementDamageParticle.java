@@ -1,8 +1,10 @@
-package com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle;
+package com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.impl;
 
 import com.google.common.collect.ImmutableMap;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.ExileInteractionResultParticle;
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.InteractionResultHandler;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.style.IParticleRenderStrategy;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.DamageEvent;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
@@ -37,13 +39,18 @@ public class ElementDamageParticle extends ExileInteractionResultParticle {
         PoseStack posestack = new PoseStack();
         posestack.pushPose();
         //System.out.println("rendering damage particle!");
-        super.getStrategy().setupStyle(this, vertexConsumer, camera, partialTick, posestack);
+        super.getStrategy().setupParticle(this, vertexConsumer, camera, partialTick, posestack);
         super.getStrategy().renderDamage(this, vertexConsumer, camera, partialTick, posestack, damageString, getColor());
         super.getStrategy().changeScale(this, getAge(), getLiftTime(), partialTick);
 
         posestack.popPose();
     }
 
+    @Override
+    public void tick() {
+        super.tick();
+        super.getStrategy().tick(this);
+    }
 
     public record DamageInformation(byte[] elements, FloatList damage,
                                     boolean isCrit) implements IParticleSpawnNotifier {

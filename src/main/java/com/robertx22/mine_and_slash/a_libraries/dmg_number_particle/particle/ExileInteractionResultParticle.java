@@ -18,10 +18,8 @@ public abstract class ExileInteractionResultParticle extends Particle{
 
     protected ExileInteractionResultParticle(ClientLevel clientLevel, double x, double y, double z, IParticleRenderStrategy strategy) {
         super(clientLevel, x, y, z);
-        this.lifetime = 15 + clientLevel.random.nextInt(5);
-        this.yd = 0.2F + Math.random() * 0.2F;
-        this.gravity = 0.8F;
         this.strategy = strategy;
+        this.strategy.setupStyle(this);
     }
 
     @Override
@@ -46,6 +44,14 @@ public abstract class ExileInteractionResultParticle extends Particle{
 
     protected int getLiftTime(){
         return  lifetime;
+    }
+
+    public void setLiftTime(int life){
+        this.lifetime = life;
+    }
+
+    public void setGravity(float gravity){
+        this.gravity = gravity;
     }
 
     @Override

@@ -6,13 +6,13 @@ import com.google.common.eventbus.EventBus;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class MASEvent extends AsyncEventBus {
-
-    public static final MASEvent INSTANCE = new MASEvent();
+public class MASEvent extends EventBus {
 
     private final static ExecutorService thread = Executors.newFixedThreadPool(1);
 
+    public static final MASEvent INSTANCE = new MASEvent();
+
     public MASEvent() {
-        super("mine_and_slash", thread);
+        super("mine_and_slash");
     }
 }
