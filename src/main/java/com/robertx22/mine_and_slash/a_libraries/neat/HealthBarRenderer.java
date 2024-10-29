@@ -3,11 +3,11 @@ package com.robertx22.mine_and_slash.a_libraries.neat;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import com.robertx22.library_of_exile.utils.CLOC;
 import com.robertx22.mine_and_slash.database.data.mob_affixes.MobAffix;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.HealthUtils;
+import com.robertx22.library_of_exile.utils.CLOC;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -45,10 +45,6 @@ import java.util.stream.Collectors;
 public class HealthBarRenderer {
 
     private static final DecimalFormat HEALTH_FORMAT = new DecimalFormat("#.##");
-    private static final TagKey<EntityType<?>> FORGE_BOSS_TAG =
-            TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("forge", "bosses"));
-    private static final TagKey<EntityType<?>> FABRIC_BOSS_TAG =
-            TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("c", "bosses"));
 
     private static Entity getEntityLookedAt(Entity e) {
         Entity foundEntity = null;
@@ -139,6 +135,12 @@ public class HealthBarRenderer {
         }
     }
 
+    private static final TagKey<EntityType<?>> FORGE_BOSS_TAG =
+            TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("forge", "bosses"));
+
+    private static final TagKey<EntityType<?>> FABRIC_BOSS_TAG =
+            TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("c", "bosses"));
+
     private static boolean isBoss(Entity entity) {
         return entity.getType().is(FORGE_BOSS_TAG) || entity.getType().is(FABRIC_BOSS_TAG);
     }
@@ -218,7 +220,6 @@ public class HealthBarRenderer {
         if (!shouldShowPlate(living, mc.gameRenderer.getMainCamera().getEntity())) {
             return;
         }
-
 
         // Constants
         final int light = 0xF000F0;
@@ -370,7 +371,6 @@ public class HealthBarRenderer {
         }
 
         poseStack.popPose();
-
     }
 
     private static void renderIcon(Level level, ItemStack icon, PoseStack poseStack,
