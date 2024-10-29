@@ -1,14 +1,19 @@
 package com.robertx22.mine_and_slash.vanilla_mc.packets;
 
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.DamageParticleAdder;
 import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;
+import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SlashItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
 
 public class DmgNumPacket extends MyPacket<DmgNumPacket> {
 
@@ -29,7 +34,7 @@ public class DmgNumPacket extends MyPacket<DmgNumPacket> {
         this.format = format;
 
 
-       /* // todo this is horrible but i'll need to wait for damage indicator mods to be ported
+        // todo this is horrible but i'll need to wait for damage indicator mods to be ported
 
         ItemEntity en = new ItemEntity(entity.level(), entity.getX(), entity.getEyeY(), entity.getZ(), new ItemStack(SlashItems.INVISIBLE_ICON.get(), 1));
         en.setNeverPickUp();
@@ -38,7 +43,7 @@ public class DmgNumPacket extends MyPacket<DmgNumPacket> {
         en.setCustomNameVisible(true);
         en.lifespan = 20;
 
-        entity.level().addFreshEntity(en);*/
+        entity.level().addFreshEntity(en);
     }
 
     @Override
@@ -67,11 +72,7 @@ public class DmgNumPacket extends MyPacket<DmgNumPacket> {
     @Override
     public void onReceived(ExilePacketContext ctx) {
         if (ClientConfigs.getConfig().ENABLE_FLOATING_DMG.get()) {
-            Entity entity = ctx.getPlayer().level().getEntity(id);
-            double x = entity.getRandomX(1.0D);
-            double y = entity.getEyeY();
-            double z = entity.getRandomZ(1.0D);
-            //DamageParticleAdder.displayParticle(ctx.getPlayer().level().getEntity(id), this);
+            DamageParticleAdder.displayParticle(ctx.getPlayer().level().getEntity(id), this);
         }
     }
 
