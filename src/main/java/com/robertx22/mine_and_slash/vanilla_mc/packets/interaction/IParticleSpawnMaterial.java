@@ -4,16 +4,20 @@ import com.google.common.collect.ImmutableMap;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.InteractionResultHandler;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.impl.DamageNullifiedParticle;
 import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
+import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.DamageEvent;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
+import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
 import it.unimi.dsi.fastutil.floats.FloatArrayList;
 import it.unimi.dsi.fastutil.floats.FloatList;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public interface IParticleSpawnMaterial {
@@ -25,7 +29,7 @@ public interface IParticleSpawnMaterial {
     InteractionResultHandler.ParticleSpawnType getSpawnType();
     void spawnOnClient(Entity entity);
 
-    enum Type implements IParticleSpawnMaterial {
+    enum Type implements IParticleSpawnMaterial, IAutoLocName {
         DODGE("dodge", SoundEvents.SHIELD_BLOCK),
         RESIST("resist", SoundEvents.SHIELD_BLOCK);
 
@@ -55,6 +59,27 @@ public interface IParticleSpawnMaterial {
         @Override
         public void spawnOnClient(Entity entity) {
             ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().nullifiedDamageStrategy.accept(this, entity);
+        }
+
+        @Override
+        public AutoLocGroup locNameGroup() {
+            return AutoLocGroup.Misc;
+        }
+
+        @Override
+        public String locNameLangFileGUID() {
+            return SlashRef.MODID + ".particle." + this.text;
+        }
+
+        @Override
+        public String locNameForLangFile() {
+            //capitalize it.
+            return this.text.substring(0, 1).toUpperCase() + this.text.substring(1);
+        }
+
+        @Override
+        public String GUID() {
+            return "particle_" + this.text;
         }
     }
 

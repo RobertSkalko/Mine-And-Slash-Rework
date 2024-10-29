@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.ExileInteractionResultParticle;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.GLUtils;
+import com.robertx22.mine_and_slash.vanilla_mc.packets.interaction.IParticleSpawnMaterial;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -59,8 +60,9 @@ public class Default implements IParticleRenderStrategy {
     @Override
     public void renderNullifiedDamage(ExileInteractionResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack, String text, int color) {
         MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-        float f = (float) (-Minecraft.getInstance().font.width(text) / 2);
-        GLUtils.renderAlwaysSeenText(() ->         Minecraft.getInstance().font.drawInBatch(text, f, 0.0F, color, false, posestack.last().pose(), multibuffersource$buffersource, Font.DisplayMode.SEE_THROUGH, 0, 15728880));
+        String newText = IParticleSpawnMaterial.Type.valueOf(text).locName().getString();
+        float f = (float) (-Minecraft.getInstance().font.width(newText) / 2);
+        GLUtils.renderAlwaysSeenText(() -> Minecraft.getInstance().font.drawInBatch(newText, f, 0.0F, color, false, posestack.last().pose(), multibuffersource$buffersource, Font.DisplayMode.SEE_THROUGH, 0, 15728880));
         multibuffersource$buffersource.endBatch();
     }
 
@@ -68,7 +70,7 @@ public class Default implements IParticleRenderStrategy {
     public void renderHeal(ExileInteractionResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack, String text, int color) {
         MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
         float f = (float) (-Minecraft.getInstance().font.width(text) / 2);
-        GLUtils.renderAlwaysSeenText(() ->         Minecraft.getInstance().font.drawInBatch(text, f, 0.0F, color, false, posestack.last().pose(), multibuffersource$buffersource, Font.DisplayMode.SEE_THROUGH, 0, 15728880));
+        GLUtils.renderAlwaysSeenText(() -> Minecraft.getInstance().font.drawInBatch(text, f, 0.0F, color, false, posestack.last().pose(), multibuffersource$buffersource, Font.DisplayMode.SEE_THROUGH, 0, 15728880));
 
         multibuffersource$buffersource.endBatch();
     }
