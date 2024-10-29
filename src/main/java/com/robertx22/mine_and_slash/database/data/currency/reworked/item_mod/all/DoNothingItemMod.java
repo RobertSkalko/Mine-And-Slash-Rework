@@ -1,6 +1,7 @@
 package com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.all;
 
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModification;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationResult;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationSers;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import net.minecraft.network.chat.MutableComponent;
@@ -19,7 +20,7 @@ public class DoNothingItemMod extends ItemModification {
 
 
     @Override
-    public void applyINTERNAL(ExileStack stack) {
+    public void applyINTERNAL(ExileStack stack, ItemModificationResult r) {
 
     }
 

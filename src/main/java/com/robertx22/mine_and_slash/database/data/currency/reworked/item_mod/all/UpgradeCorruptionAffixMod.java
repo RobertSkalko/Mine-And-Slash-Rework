@@ -1,6 +1,7 @@
 package com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.all;
 
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModification;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationResult;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationSers;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.gear.UpgradeAffixItemMod;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
@@ -23,7 +24,7 @@ public class UpgradeCorruptionAffixMod extends ItemModification {
     }
 
     @Override
-    public void applyINTERNAL(ExileStack stack) {
+    public void applyINTERNAL(ExileStack stack, ItemModificationResult r) {
 
         stack.get(StackKeys.GEAR).editIfHas(gear -> {
             data.finder().getAffix(gear.affixes.cor, data).ifPresent(affix -> {

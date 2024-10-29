@@ -48,11 +48,11 @@ public abstract class ItemModification implements JsonExileRegistry<ItemModifica
 
     public abstract OutcomeType getOutcomeType();
 
-    public abstract void applyINTERNAL(ExileStack stack);
+    public abstract void applyINTERNAL(ExileStack stack, ItemModificationResult r);
 
 
-    public void applyMod(ExileStack stack) {
-        applyINTERNAL(stack);
+    public void applyMod(ExileStack stack, ItemModificationResult r) {
+        applyINTERNAL(stack, r);
     }
 
     public abstract MutableComponent getDescWithParams();

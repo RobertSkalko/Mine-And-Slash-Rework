@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.database.data.currency.reworked.item_req;
 
+import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.gear.ExtractSocketItemMod;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.custom.HasCorruptAffixes;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.custom.IsAnyReq;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.custom.MaximumUsesReq;
@@ -51,6 +52,8 @@ public class ItemReqs extends ExileKeyHolder<ItemRequirement> {
     public ExileKey<ItemRequirement, KeyInfo> UNDER_20_QUALITY = ExileKey.ofId(this, "is_under_20_quality", x -> new IsUnderQualityReq(x.GUID(), IsUnderQualityReq.UNDER_20));
     public ExileKey<ItemRequirement, KeyInfo> UNDER_21_QUALITY = ExileKey.ofId(this, "is_under_21_quality", x -> new IsUnderQualityReq(x.GUID(), IsUnderQualityReq.UNDER_21));
     public ExileKey<ItemRequirement, KeyInfo> NOT_CRAFTED = ExileKey.ofId(this, "not_crafted_gear", x -> new IsGearNotCraftedReq(x.GUID()));
+    public ExileKey<ItemRequirement, KeyInfo> HAS_GEM_SOCKETED = ExileKey.ofId(this, "has_socketed_gem", x -> new HasSocketedReq(x.GUID(), ExtractSocketItemMod.SocketedType.GEM));
+    public ExileKey<ItemRequirement, KeyInfo> HAS_RUNE_SOCKETED = ExileKey.ofId(this, "has_socketed_rune", x -> new HasSocketedReq(x.GUID(), ExtractSocketItemMod.SocketedType.RUNE));
 
 
     // maps

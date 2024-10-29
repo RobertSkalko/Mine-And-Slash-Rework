@@ -12,7 +12,7 @@ public abstract class JewelModification extends ItemModification {
     public abstract void modifyJewel(ExileStack data);
 
     @Override
-    public void applyINTERNAL(ExileStack stack) {
+    public void applyINTERNAL(ExileStack stack, ItemModificationResult r) {
         var data = stack.get(StackKeys.JEWEL).get();
 
         if (data != null) {

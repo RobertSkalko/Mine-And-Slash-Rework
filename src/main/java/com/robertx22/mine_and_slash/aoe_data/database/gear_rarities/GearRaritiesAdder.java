@@ -208,6 +208,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.vanilla_rar_enum = VanillaRarities.RUNED.name();
 
             x.max_runes = 10;
+            x.max_gems = 0;
 
             x.map_resist_req = 50;
             x.type = GearRarityType.RUNED;

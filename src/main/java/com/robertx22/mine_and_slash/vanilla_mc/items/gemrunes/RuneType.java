@@ -29,15 +29,15 @@ import java.util.function.Supplier;
 // todo add unused runes if datapacks want to "use" them
 public enum RuneType {
     YUN(100, "yun", "Yun", 4, 0.5F, () -> StatPerType.of()
-            .addArmor(AuraEffect.getInstance().mod(1, 5))
-            .addJewerly(SpecialStats.BETTER_FOOD_BUFFS.mod(2, 10))
-            .addWeapon(SpellChangeStats.COOLDOWN_REDUCTION.get().mod(3, 10))
+            .addArmor(AuraEffect.getInstance().mod(1, 4))
+            .addJewerly(SpecialStats.BETTER_FOOD_BUFFS.mod(2, 8))
+            .addWeapon(SpellChangeStats.COOLDOWN_REDUCTION.get().mod(2, 6))
 
     ),
     VEN(100, "ven", "Ven", 4, 0.5F, () -> StatPerType.of()
             .addArmor(EffectStats.EFFECT_DURATION_YOU_CAST.get().mod(1, 5))
             .addJewerly(AuraCapacity.getInstance().mod(1, 5))
-            .addWeapon(OffenseStats.SUMMON_DAMAGE.get().mod(5, 25))
+            .addWeapon(OffenseStats.SUMMON_DAMAGE.get().mod(5, 20))
     ),
     NOS(1000, "nos", "Nos", 0, 0F, () -> StatPerType.of()
             .addArmor(Health.getInstance().mod(1, 5).percent())
@@ -57,7 +57,7 @@ public enum RuneType {
     CEN(1000, "cen", "Cen", 1, 0.1F, () -> StatPerType.of()
             .addArmor(Armor.getInstance().mod(1, 5).percent())
             .addJewerly(Armor.getInstance().mod(1, 5).percent())
-            .addWeapon(ArmorPenetration.getInstance().mod(5, 15).percent())
+            .addWeapon(ArmorPenetration.getInstance().mod(3, 10).percent())
     ),
     FEY(1000, "fey", "Fey", 1, 0.2F, () -> StatPerType.of()
             .addArmor(EnergyRegen.getInstance().mod(1, 5).percent())
@@ -67,7 +67,7 @@ public enum RuneType {
     DOS(1000, "dos", "Dos", 1, 0.1F, () -> StatPerType.of()
             .addArmor(DodgeRating.getInstance().mod(1, 5).percent())
             .addJewerly(SpellChangeStats.PROJECTILE_SPEED.get().mod(2, 8))
-            .addWeapon(OffenseStats.PROJECTILE_DAMAGE.get().mod(5, 15))
+            .addWeapon(OffenseStats.PROJECTILE_DAMAGE.get().mod(3, 10))
     ),
     ANO(1000, "ano", "Ano", 2, 0.2F, () -> StatPerType.of()
             .addArmor(HealthRegen.getInstance().mod(0.1F, 0.75F))
@@ -76,8 +76,8 @@ public enum RuneType {
     ),
     TOQ(1000, "toq", "Toq", 2, 0.3F, () -> StatPerType.of()
             .addArmor(OffenseStats.NON_CRIT_DAMAGE.get().mod(1, 5))
-            .addJewerly(OffenseStats.CRIT_CHANCE.get().mod(1, 5))
-            .addWeapon(OffenseStats.CRIT_CHANCE.get().mod(5, 10))
+            .addJewerly(OffenseStats.CRIT_CHANCE.get().mod(1, 5).percent())
+            .addWeapon(OffenseStats.CRIT_CHANCE.get().mod(5, 10).percent())
     ),
     ORU(500, "oru", "Oru", 4, 0.4F, () -> StatPerType.of()
             .addArmor(OffenseStats.CRIT_DAMAGE.get().mod(1, 5))
@@ -85,9 +85,9 @@ public enum RuneType {
             .addWeapon(OffenseStats.CRIT_DAMAGE.get().mod(5, 15))
     ),
     WIR(200, "wir", "Wir", 4, 0.4F, () -> StatPerType.of()
-            .addArmor(OffenseStats.TOTAL_DAMAGE.get().mod(5, 10))
-            .addJewerly(OffenseStats.TOTAL_DAMAGE.get().mod(5, 10))
-            .addWeapon(OffenseStats.TOTAL_DAMAGE.get().mod(5, 10))
+            .addArmor(OffenseStats.TOTAL_DAMAGE.get().mod(3, 10))
+            .addJewerly(OffenseStats.TOTAL_DAMAGE.get().mod(3, 10))
+            .addWeapon(OffenseStats.TOTAL_DAMAGE.get().mod(3, 10))
     ),
     ENO(1000, "eno", "Eno", 3, 0.3F, () -> StatPerType.of()
             .addArmor(SpellChangeStats.MANA_COST.get().mod(-2, -5))
@@ -97,12 +97,12 @@ public enum RuneType {
     HAR(1000, "har", "Har", 3, 0.3f, () -> StatPerType.of()
             .addArmor(ResourceStats.HEAL_STRENGTH.get().mod(3, 10))
             .addJewerly(ResourceStats.HEAL_STRENGTH.get().mod(5, 12))
-            .addWeapon(ResourceStats.HEAL_STRENGTH.get().mod(6, 20))
+            .addWeapon(ResourceStats.HEAL_STRENGTH.get().mod(3, 15))
     ),
     XER(1000, "xer", "Xer", 3, 0.4f, () -> StatPerType.of()
-            .addArmor(OffenseStats.SUMMON_DAMAGE.get().mod(3, 8))
-            .addJewerly(OffenseStats.SUMMON_DAMAGE.get().mod(4, 12))
-            .addWeapon(OffenseStats.SUMMON_DAMAGE.get().mod(5, 15))
+            .addArmor(OffenseStats.SUMMON_DAMAGE.get().mod(1, 6))
+            .addJewerly(OffenseStats.SUMMON_DAMAGE.get().mod(1, 6))
+            .addWeapon(OffenseStats.SUMMON_DAMAGE.get().mod(2, 10))
     ),
 
     //RARER RUNES

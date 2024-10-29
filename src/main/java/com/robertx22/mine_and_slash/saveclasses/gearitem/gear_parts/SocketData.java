@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts;
 
+import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.gear.ExtractSocketItemMod;
 import com.robertx22.mine_and_slash.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.mine_and_slash.database.data.gems.Gem;
 import com.robertx22.mine_and_slash.database.data.runes.Rune;
@@ -35,6 +36,10 @@ public class SocketData implements IStatsContainer {
 
     public boolean isGem() {
         return getGem() != null;
+    }
+
+    public boolean is(ExtractSocketItemMod.SocketedType type) {
+        return type.is(this);
     }
 
     public boolean isRune() {

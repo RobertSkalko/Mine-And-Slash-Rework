@@ -12,6 +12,8 @@ has_affix_unique
 has_affixes
 has_corrupt_affixes
 has_infusion
+has_socketed_gem
+has_socketed_rune
 is_common
 is_common_or_uncommon
 is_epic

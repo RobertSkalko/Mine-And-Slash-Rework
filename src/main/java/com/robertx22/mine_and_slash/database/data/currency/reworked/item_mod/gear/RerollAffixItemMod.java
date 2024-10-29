@@ -1,6 +1,7 @@
 package com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.gear;
 
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.GearModification;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationResult;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationSers;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
@@ -29,7 +30,7 @@ public class RerollAffixItemMod extends GearModification {
     }
 
     @Override
-    public void modifyGear(ExileStack stack) {
+    public void modifyGear(ExileStack stack, ItemModificationResult r) {
         stack.get(StackKeys.GEAR).edit(gear -> {
             var opt = data.finder_data.finder().getAffix(gear.affixes.getPrefixesAndSuffixes(), data.finder_data);
 

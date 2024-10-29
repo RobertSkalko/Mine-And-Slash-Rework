@@ -79,7 +79,6 @@ public enum Itemtips implements IAutoLocName {
     STONE_REPAIRE_DURABILITY("Repairs %1$s durability."),
     NOT_A_RANDOM_MNS_DROP_CHECK_MODPACK("No normal Drop-rate, this item might be obtainable in other ways. Check your Modpack's guide."),
     SOUL_CLEANER_USAGE_AND_WARNING("Click on items to remove their soul.\nThe item remains but the stats will be deleted."),
-    SOCKET_EXTRACTOR_USAGE("Extracts a Gem from the Item"),
     INFUSED("Infused(%1$s/10): "),
     OUTCOME_TIP("%1$s - %2$s", "for currency tooltips"),
     Exp("Bonus Exp: %1$s%%"),

@@ -8,7 +8,6 @@ import com.robertx22.mine_and_slash.database.data.currency.loc_reqs.LocReqContex
 import com.robertx22.mine_and_slash.database.data.currency.reworked.ExileCurrency;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModification;
 import com.robertx22.mine_and_slash.database.data.profession.items.CraftedSoulItem;
-import com.robertx22.mine_and_slash.database.data.runewords.RuneWord;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.mmorpg.ForgeEvents;
@@ -245,55 +244,6 @@ public class OnItemInteract {
         });
 
 
-        CLICKS.add(new ClickFeature() {
-            @Override
-            public Result tryApply(Player player, ItemStack craftedStack, ItemStack currency, Slot slot) {
-
-                if (currency.getItem() == SlashItems.SOCKET_EXTRACTOR.get()) {
-
-                    GearItemData gear = StackSaving.GEARS.loadFrom(craftedStack);
-
-                    if (gear != null) {
-                        if (gear.sockets != null && gear.sockets.getSocketed().size() > 0) {
-                            try {
-                                int index = gear.sockets.lastFilledSocketIndex();
-
-                                if (index > -1) {
-                                    RuneWord runeword = null;
-                                    if (gear.sockets.hasRuneWord()) {
-                                        runeword = gear.sockets.getRuneWord();
-                                    }
-                                    var s = gear.sockets.getSocketed().get(index);
-
-                                    ItemStack gem = s.getOriginalItemStack();
-
-                                    gear.sockets.getSocketed().remove(index);
-
-                                    if (gear.sockets.hasRuneWord()) {
-
-                                        if (!runeword.hasMatchingRunesToCreate(gear)) {
-                                            gear.sockets.removeRuneword();
-                                        }
-                                    }
-
-                                    StackSaving.GEARS.saveTo(craftedStack, gear);
-
-                                    PlayerUtils.giveItem(gem, player);
-                                    currency.shrink(1);
-                                    return new Result(true).ding();
-
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-
-                    }
-                }
-                return new Result(false);
-            }
-        });
         CLICKS.add(new ClickFeature() {
             @Override
             public Result tryApply(Player player, ItemStack craftedStack, ItemStack currency, Slot slot) {

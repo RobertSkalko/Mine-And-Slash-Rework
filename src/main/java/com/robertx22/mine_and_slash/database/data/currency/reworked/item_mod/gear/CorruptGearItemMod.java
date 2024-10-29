@@ -1,6 +1,7 @@
 package com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.gear;
 
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.GearModification;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationResult;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationSers;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.itemstack.CustomItemData;
@@ -20,7 +21,7 @@ public class CorruptGearItemMod extends GearModification {
     }
 
     @Override
-    public void modifyGear(ExileStack stack) {
+    public void modifyGear(ExileStack stack, ItemModificationResult r) {
         stack.get(StackKeys.GEAR).edit(gear -> {
             if (data.adds_affixes) {
                 // todo will this work

@@ -10,6 +10,8 @@ entangled_affix_upgrade
 entangled_potential
 entangled_quality
 entangled_unique_reroll
+extract_gem
+extract_rune
 harvest_essence_0
 harvest_essence_1
 harvest_essence_2

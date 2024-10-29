@@ -9,14 +9,14 @@ public abstract class GearModification extends ItemModification {
         super(serializer, id);
     }
 
-    public abstract void modifyGear(ExileStack stack);
+    public abstract void modifyGear(ExileStack stack, ItemModificationResult r);
 
     @Override
-    public void applyINTERNAL(ExileStack stack) {
+    public void applyINTERNAL(ExileStack stack, ItemModificationResult r) {
         var gear = stack.get(StackKeys.GEAR).get();
 
         if (gear != null) {
-            modifyGear(stack);
+            modifyGear(stack, r);
         }
     }
 

@@ -12,7 +12,7 @@ public abstract class ProfessionModification extends ItemModification {
     public abstract void modifyProfessionItem(ExileStack data);
 
     @Override
-    public void applyINTERNAL(ExileStack stack) {
+    public void applyINTERNAL(ExileStack stack, ItemModificationResult r) {
         var data = stack.get(StackKeys.TOOL).get();
 
         if (data != null) {

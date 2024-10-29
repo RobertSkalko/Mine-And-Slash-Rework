@@ -6,6 +6,7 @@ import com.robertx22.mine_and_slash.capability.player.PlayerData;
 import com.robertx22.mine_and_slash.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.ExileCurrency;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModification;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationResult;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.PlayerPointsType;
 import com.robertx22.mine_and_slash.database.data.profession.Profession;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
@@ -42,10 +43,15 @@ public class PlayerCommands {
             x.addArg(MOD);
 
             x.action(e -> {
+
+                var res = new ItemModificationResult();
+
                 var p = PLAYER.get(e);
                 var mod = MOD.getFromRegistry(e);
                 ItemStack stack = p.getMainHandItem();
-                mod.applyMod(ExileStack.of(stack));
+                mod.applyMod(ExileStack.of(stack), res);
+
+                res.onFinish(p);
 
                 p.setItemSlot(EquipmentSlot.MAINHAND, stack);
 

@@ -1,6 +1,7 @@
 package com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.gear;
 
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.GearModification;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationResult;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationSers;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
@@ -21,7 +22,7 @@ public class AddGearLevelItemMod extends GearModification {
     }
 
     @Override
-    public void modifyGear(ExileStack stack) {
+    public void modifyGear(ExileStack stack, ItemModificationResult r) {
         stack.get(StackKeys.GEAR).edit(gear -> {
             gear.lvl += data.add_levels;
 

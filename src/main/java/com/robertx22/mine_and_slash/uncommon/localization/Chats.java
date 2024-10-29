@@ -23,6 +23,7 @@ public enum Chats implements IAutoLocName {
 
     CREATE_ERROR_NAME("Not a valid character name"),
     CREATE_ERROR_CHAR_LIMIT("You already have a Maximum amount of Characters allowed."),
+    CAN_ONLY_UNSOCKET_GEMS_NOT_RUNES("Only Gems can be unsocketed, runes can not."),
 
     CANT_DEL_CURRENT_CHAT("You can't Delete a Character you're currently playing."),
     CANT_CHANGE_CHAR_IN_MAP("You can't do that while inside an Adventure Map"),
@@ -101,7 +102,8 @@ public enum Chats implements IAutoLocName {
     NOT_JEWEL("This is not a jewel item."),
     NOT_TOOL("This is not a tool item, or the tool has no stats yet."),
     NEED_EMPTY_SOCKET("Requires an empty socket"),
-    CANT_HAVE_MORE_GEMS_THAN_RUNES_IN_RUNEWORD("Runeword Items Can not have more Gems than Runes socketed"),
+    RARITY_CANT_HAVE_MORE_THAN_X_GEMS(" %1$s Items can't have more than  %2$s Gems."),
+    RARITY_CANT_HAVE_ANY_GEMS(" %1$s Items can't be socketed with Gems!"),
     MAX_RUNES_PER_RARITY("Can't have more than %1$s Runes in %2$s Rarity Item"),
     ALREADY_MAX_SOCKETS("Item already has maximum possible sockets."),
     ALREADY_MAX_LINKS("Item already has maximum possible links."),

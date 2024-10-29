@@ -61,6 +61,8 @@ public class ItemMods extends ExileKeyHolder<ItemModification> {
     public ExileKey<ItemModification, KeyInfo> ADD_25_POTENTIAL = ExileKey.ofId(this, "add_potential", x -> new AddPotentialItemMod(x.GUID(), new AddPotentialItemMod.Data(25)));
     public ExileKey<ItemModification, KeyInfo> JEWEL_CORRUPTION = ExileKey.ofId(this, "jewel_corrupt", x -> new CorruptJewelItemMod(x.GUID()));
     public ExileKey<ItemModification, KeyInfo> REROLL_AFFIX_NUMBERS = ExileKey.ofId(this, "affix_number_reroll", x -> new RerollAffixNumbersItemMod(x.GUID()));
+    public ExileKey<ItemModification, KeyInfo> EXTRACT_GEM = ExileKey.ofId(this, "extract_gem", x -> new ExtractSocketItemMod(x.GUID(), ExtractSocketItemMod.SocketedType.GEM));
+    public ExileKey<ItemModification, KeyInfo> EXTRACT_RUNE = ExileKey.ofId(this, "extract_rune", x -> new ExtractSocketItemMod(x.GUID(), ExtractSocketItemMod.SocketedType.RUNE));
 
     // jewels
     public ExileKey<ItemModification, KeyInfo> UPGRADE_JEWEL_AFFIX_RARITY = ExileKey.ofId(this, "upgrade_jewel_affix_rarity", x -> new UpgradeJewelAffixRarityMod(x.GUID(), UpgradeAffixItemMod.AffixFinder.RANDOM_AFFIX.get()));

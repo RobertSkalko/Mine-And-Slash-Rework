@@ -1,6 +1,7 @@
 package com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.all;
 
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModification;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationResult;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationSers;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import net.minecraft.network.chat.MutableComponent;
@@ -20,7 +21,7 @@ public class DestroyItemMod extends ItemModification {
 
 
     @Override
-    public void applyINTERNAL(ExileStack stack) {
+    public void applyINTERNAL(ExileStack stack, ItemModificationResult r) {
 
     }
 
@@ -29,8 +30,9 @@ public class DestroyItemMod extends ItemModification {
         return OutcomeType.BAD;
     }
 
-    public void applyMod(ExileStack stack) {
+    public ItemModificationResult applyMod(ExileStack stack) {
         stack.setStack(Items.COAL.getDefaultInstance());
+        return null;
     }
 
     @Override

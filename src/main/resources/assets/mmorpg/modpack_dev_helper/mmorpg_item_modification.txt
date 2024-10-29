@@ -13,6 +13,8 @@ corrupt_gear_no_affix
 destroy_item
 do_nothing
 downgrade_random_affix
+extract_gem
+extract_rune
 increment_uses_level_up
 increment_uses_random_mythic_affix
 increment_uses_sharpening_stone

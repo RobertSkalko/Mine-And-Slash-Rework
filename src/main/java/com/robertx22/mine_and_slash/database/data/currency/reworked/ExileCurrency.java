@@ -10,6 +10,7 @@ import com.robertx22.mine_and_slash.database.data.currency.base.ModifyResult;
 import com.robertx22.mine_and_slash.database.data.currency.base.ResultItem;
 import com.robertx22.mine_and_slash.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModification;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationResult;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemMods;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.ItemReqs;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.ItemRequirement;
@@ -155,17 +156,21 @@ public class ExileCurrency implements IAutoLocName, IAutoGson<ExileCurrency>, Js
                 stack.get(StackKeys.POTENTIAL).edit(x -> x.spend(potential.potential_cost));
             }
 
+            var res = new ItemModificationResult();
+
             for (ItemModData mod : this.always_do_item_mods) {
-                mod.get().applyMod(stack);
-            }
-            var picked = RandomUtils.weightedRandom(this.pick_one_item_mod);
-
-            picked.get().applyMod(stack);
-
-            if (picked.get().getOutcomeType() == ItemModification.OutcomeType.BAD) {
-                bad = true;
+                mod.get().applyMod(stack, res);
             }
 
+            if (!pick_one_item_mod.isEmpty()) {
+                var picked = RandomUtils.weightedRandom(this.pick_one_item_mod);
+                picked.get().applyMod(stack, res);
+                if (picked.get().getOutcomeType() == ItemModification.OutcomeType.BAD) {
+                    bad = true;
+                }
+            }
+
+            res.onFinish(ctx.player);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -200,7 +205,7 @@ public class ExileCurrency implements IAutoLocName, IAutoGson<ExileCurrency>, Js
 
                 for (ItemModData data : this.pick_one_item_mod) {
                     var color = data.get().getOutcomeType().color;
-                    all.add(getChanceTooltip(data, totalWeight).withStyle(color));
+                    all.add(getChanceTooltip(data, totalWeight, true).withStyle(color));
                 }
             }
 
@@ -209,7 +214,7 @@ public class ExileCurrency implements IAutoLocName, IAutoGson<ExileCurrency>, Js
                 all.add(Words.ALWAYS_DOES.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
                 for (ItemModData data : this.always_do_item_mods) {
                     var color = data.get().getOutcomeType().color;
-                    all.add(getChanceTooltip(data, data.weight).withStyle(color));
+                    all.add(getChanceTooltip(data, data.weight, false).withStyle(color));
                 }
             }
             all.add(Component.empty());
@@ -236,9 +241,12 @@ public class ExileCurrency implements IAutoLocName, IAutoGson<ExileCurrency>, Js
         return tip.release();
     }
 
-    private MutableComponent getChanceTooltip(ItemModData mod, int totalweight) {
-        int chance = (int) (((float) mod.weight / (float) totalweight) * 100F);
+    private MutableComponent getChanceTooltip(ItemModData mod, int totalweight, boolean addchance) {
+        if (!addchance) {
+            return Component.literal(UNICODE.STAR + " ").append(mod.get().getDescWithParams()).withStyle(ChatFormatting.YELLOW);
+        }
 
+        int chance = (int) (((float) mod.weight / (float) totalweight) * 100F);
         return Component.literal(UNICODE.STAR + " ").append(Itemtips.OUTCOME_TIP.locName(mod.get().getDescWithParams(), Component.literal(chance + "%").withStyle(ChatFormatting.YELLOW)));
     }
 
@@ -338,6 +346,11 @@ public class ExileCurrency implements IAutoLocName, IAutoGson<ExileCurrency>, Js
             return this;
         }
 
+        public Builder addAlwaysUseModification(ExileKey<ItemModification, ?> modification) {
+            this.useAllMods.add(new ItemModData(modification.GUID(), 1));
+            return this;
+        }
+
         public Builder addRequirement(ExileKey<ItemRequirement, ?> requirement) {
             this.req.add(requirement.GUID());
             return this;
@@ -358,6 +371,7 @@ public class ExileCurrency implements IAutoLocName, IAutoGson<ExileCurrency>, Js
             this.addRequirement(ItemReqs.INSTANCE.MAXIMUM_USES.get(key));
             return this;
         }
+
 
         public Builder weight(int w) {
             this.weight = w;

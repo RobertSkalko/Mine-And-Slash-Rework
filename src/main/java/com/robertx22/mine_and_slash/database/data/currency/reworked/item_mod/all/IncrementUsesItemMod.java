@@ -1,6 +1,7 @@
 package com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.all;
 
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModification;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationResult;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationSers;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_req.custom.MaximumUsesReq;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
@@ -18,7 +19,7 @@ public class IncrementUsesItemMod extends ItemModification {
     }
 
     @Override
-    public void applyINTERNAL(ExileStack stack) {
+    public void applyINTERNAL(ExileStack stack, ItemModificationResult r) {
         stack.get(StackKeys.CUSTOM).edit(gear -> {
             var key = new DataKey.IntKey(use_key);
             int uses = gear.data.get(key) + 1;

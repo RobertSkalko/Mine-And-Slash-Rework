@@ -2,6 +2,7 @@ package com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts;
 
 import com.robertx22.mine_and_slash.database.data.MinMax;
 import com.robertx22.mine_and_slash.database.data.StatMod;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.gear.ExtractSocketItemMod;
 import com.robertx22.mine_and_slash.database.data.profession.ExplainedResult;
 import com.robertx22.mine_and_slash.database.data.runewords.RuneWord;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
@@ -65,12 +66,10 @@ public class GearSocketsData implements IStatsContainer, IGearPartTooltip {
         return -1;
     }
 
-    public int lastFilledSocketIndex() {
-
+    public int lastFilledSocketGemIndex(ExtractSocketItemMod.SocketedType type) {
         for (int i = so.size() - 1; i > -1; i--) {
             var socket = so.get(i);
-
-            if (socket.isGem() || socket.isRune()) {
+            if (socket.is(type)) {
                 return i;
             }
         }

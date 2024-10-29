@@ -12,7 +12,7 @@ public abstract class MapModification extends ItemModification {
     public abstract void modifyMap(ExileStack map);
 
     @Override
-    public void applyINTERNAL(ExileStack stack) {
+    public void applyINTERNAL(ExileStack stack, ItemModificationResult r) {
         var map = stack.get(StackKeys.MAP).get();
 
         if (map != null) {

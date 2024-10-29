@@ -239,7 +239,6 @@
 	"mmorpg.item_tips.restores": "Restores: %1$s %2$s",
 	"mmorpg.item_tips.rune_item_usage": "Use on Gear with sockets to Insert\nIf same rune is already socketed, rerolls it\n\nAll Runewords are shown in the Wiki.\nUse to view craftable Runewords.",
 	"mmorpg.item_tips.shift_tip": "[Shift]: Detail",
-	"mmorpg.item_tips.socket_extractor_usage": "Extracts a Gem from the Item",
 	"mmorpg.item_tips.soul_cleaner_usage_and_warning": "Click on items to remove their soul.\nThe item remains but the stats will be deleted.",
 	"mmorpg.item_tips.soul_extractor_tip": "Click on items to extract their soul.\nDeletes the Item in the process.",
 	"mmorpg.item_tips.soul_generate_gear_level_range": "Generated Gear Level: %1$s - %2$s",
@@ -410,7 +409,6 @@
 	"item.mmorpg.runes.wir": "Wir Rune",
 	"item.mmorpg.runes.xer": "Xer Rune",
 	"item.mmorpg.runes.yun": "Yun Rune",
-	"item.mmorpg.socket_extractor": "Socket Extractor Tool",
 	"item.mmorpg.soul_cleaner": "Gear Soul Cleaner",
 	"item.mmorpg.soul_extractor.common": "Common Gear Soul Extractor",
 	"item.mmorpg.soul_extractor.epic": "Epic Gear Soul Extractor",
@@ -620,6 +618,8 @@
 	"mmorpg.currency.entangled_potential": "Entangled Orb of Potential",
 	"mmorpg.currency.entangled_quality": "Entangled Orb of Quality",
 	"mmorpg.currency.entangled_unique_reroll": "Entangled Orb of Imperfection",
+	"mmorpg.currency.extract_gem": "Gem Extractor",
+	"mmorpg.currency.extract_rune": "Rune Extractor",
 	"mmorpg.currency.harvest_essence_0": "Harvested Spiritual Essence",
 	"mmorpg.currency.harvest_essence_1": "Harvested Celestial Essence",
 	"mmorpg.currency.harvest_essence_2": "Harvested Empyrean Essence",
@@ -651,6 +651,8 @@
 	"item.mmorpg.currency.entangled_potential": "Entangled Orb of Potential",
 	"item.mmorpg.currency.entangled_quality": "Entangled Orb of Quality",
 	"item.mmorpg.currency.entangled_unique_reroll": "Entangled Orb of Imperfection",
+	"item.mmorpg.currency.extract_gem": "Gem Extractor",
+	"item.mmorpg.currency.extract_rune": "Rune Extractor",
 	"item.mmorpg.currency.harvest_essence_0": "Harvested Spiritual Essence",
 	"item.mmorpg.currency.harvest_essence_1": "Harvested Celestial Essence",
 	"item.mmorpg.currency.harvest_essence_2": "Harvested Empyrean Essence",
@@ -1785,6 +1787,46 @@
 "_comment": " [CATEGORY]: FORMATTER - NAMES",
 
 
+"_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
+
+	"mmorpg.gear_type.bow": "Bow",
+	"mmorpg.gear_type.cloth_boots": "Cloth Boots",
+	"mmorpg.gear_type.cloth_chest": "Cloth Chest",
+	"mmorpg.gear_type.cloth_helmet": "Cloth Helmet",
+	"mmorpg.gear_type.cloth_pants": "Cloth Pants",
+	"mmorpg.gear_type.crossbow": "Crossbow",
+	"mmorpg.gear_type.leather_boots": "Leather Boots",
+	"mmorpg.gear_type.leather_chest": "Leather Chest",
+	"mmorpg.gear_type.leather_helmet": "Leather Helmet",
+	"mmorpg.gear_type.leather_pants": "Leather Pants",
+	"mmorpg.gear_type.necklace": "Necklace",
+	"mmorpg.gear_type.plate_boots": "Plate Boots",
+	"mmorpg.gear_type.plate_chest": "Plate Chest",
+	"mmorpg.gear_type.plate_helmet": "Plate Helmet",
+	"mmorpg.gear_type.plate_pants": "Plate Pants",
+	"mmorpg.gear_type.ring": "Ring",
+	"mmorpg.gear_type.shield": "Tower Shield",
+	"mmorpg.gear_type.staff": "Staff",
+	"mmorpg.gear_type.sword": "Sword",
+	"mmorpg.gear_type.tome": "Tome",
+	"mmorpg.gear_type.totem": "Totem",
+	"mmorpg.gearslot.boots": "Boots",
+	"mmorpg.gearslot.bow": "Bow",
+	"mmorpg.gearslot.chest": "Chest",
+	"mmorpg.gearslot.crossbow": "Crossbow",
+	"mmorpg.gearslot.helmet": "Helmet",
+	"mmorpg.gearslot.necklace": "Necklace",
+	"mmorpg.gearslot.pants": "Pants",
+	"mmorpg.gearslot.ring": "Ring",
+	"mmorpg.gearslot.shield": "Shield",
+	"mmorpg.gearslot.staff": "Staff",
+	"mmorpg.gearslot.sword": "Sword",
+	"mmorpg.gearslot.tome": "Tome",
+	"mmorpg.gearslot.totem": "Totem",
+
+"_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
+
+
 "_comment": " [CATEGORY]: UNIQUE ITEMS - NAMES",
 
 	"mmorpg.unique_gear.air_disaster.name": "Aria of Disaster",
@@ -1842,44 +1884,19 @@
 "_comment": " [CATEGORY]: UNIQUE ITEMS - NAMES",
 
 
-"_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
+"_comment": " [CATEGORY]: STATPRIORITY - NAMES",
 
-	"mmorpg.gear_type.bow": "Bow",
-	"mmorpg.gear_type.cloth_boots": "Cloth Boots",
-	"mmorpg.gear_type.cloth_chest": "Cloth Chest",
-	"mmorpg.gear_type.cloth_helmet": "Cloth Helmet",
-	"mmorpg.gear_type.cloth_pants": "Cloth Pants",
-	"mmorpg.gear_type.crossbow": "Crossbow",
-	"mmorpg.gear_type.leather_boots": "Leather Boots",
-	"mmorpg.gear_type.leather_chest": "Leather Chest",
-	"mmorpg.gear_type.leather_helmet": "Leather Helmet",
-	"mmorpg.gear_type.leather_pants": "Leather Pants",
-	"mmorpg.gear_type.necklace": "Necklace",
-	"mmorpg.gear_type.plate_boots": "Plate Boots",
-	"mmorpg.gear_type.plate_chest": "Plate Chest",
-	"mmorpg.gear_type.plate_helmet": "Plate Helmet",
-	"mmorpg.gear_type.plate_pants": "Plate Pants",
-	"mmorpg.gear_type.ring": "Ring",
-	"mmorpg.gear_type.shield": "Tower Shield",
-	"mmorpg.gear_type.staff": "Staff",
-	"mmorpg.gear_type.sword": "Sword",
-	"mmorpg.gear_type.tome": "Tome",
-	"mmorpg.gear_type.totem": "Totem",
-	"mmorpg.gearslot.boots": "Boots",
-	"mmorpg.gearslot.bow": "Bow",
-	"mmorpg.gearslot.chest": "Chest",
-	"mmorpg.gearslot.crossbow": "Crossbow",
-	"mmorpg.gearslot.helmet": "Helmet",
-	"mmorpg.gearslot.necklace": "Necklace",
-	"mmorpg.gearslot.pants": "Pants",
-	"mmorpg.gearslot.ring": "Ring",
-	"mmorpg.gearslot.shield": "Shield",
-	"mmorpg.gearslot.staff": "Staff",
-	"mmorpg.gearslot.sword": "Sword",
-	"mmorpg.gearslot.tome": "Tome",
-	"mmorpg.gearslot.totem": "Totem",
+	"mmorpg.stat_priority.after_damage_bonuses": "AFTER_DAMAGE_BONUSES",
+	"mmorpg.stat_priority.before_damage_layers": "BEFORE_DAMAGE_LAYERS",
+	"mmorpg.stat_priority.before_hit_prevention": "BEFORE_HIT_PREVENTION",
+	"mmorpg.stat_priority.calc_damage_layers": "CALC_DAMAGE_LAYERS",
+	"mmorpg.stat_priority.damage_layers": "DAMAGE_LAYERS",
+	"mmorpg.stat_priority.data_modification": "DATA_MODIFICATION",
+	"mmorpg.stat_priority.final_damage": "FINAL_DAMAGE",
+	"mmorpg.stat_priority.first": "FIRST",
+	"mmorpg.stat_priority.hit_prevention": "HIT_PREVENTION",
 
-"_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
+"_comment": " [CATEGORY]: STATPRIORITY - NAMES",
 
 
 "_comment": " [CATEGORY]: GEAR ITEMS - NAMES",
@@ -1896,21 +1913,6 @@
 	"item.mmorpg.weapon.staff.wood": "Staff",
 
 "_comment": " [CATEGORY]: GEAR ITEMS - NAMES",
-
-
-"_comment": " [CATEGORY]: STATPRIORITY - NAMES",
-
-	"mmorpg.stat_priority.after_damage_bonuses": "AFTER_DAMAGE_BONUSES",
-	"mmorpg.stat_priority.before_damage_layers": "BEFORE_DAMAGE_LAYERS",
-	"mmorpg.stat_priority.before_hit_prevention": "BEFORE_HIT_PREVENTION",
-	"mmorpg.stat_priority.calc_damage_layers": "CALC_DAMAGE_LAYERS",
-	"mmorpg.stat_priority.damage_layers": "DAMAGE_LAYERS",
-	"mmorpg.stat_priority.data_modification": "DATA_MODIFICATION",
-	"mmorpg.stat_priority.final_damage": "FINAL_DAMAGE",
-	"mmorpg.stat_priority.first": "FIRST",
-	"mmorpg.stat_priority.hit_prevention": "HIT_PREVENTION",
-
-"_comment": " [CATEGORY]: STATPRIORITY - NAMES",
 
 
 "_comment": " [CATEGORY]: STAT LAYER - NAMES",
@@ -1940,13 +1942,13 @@
 	"mmorpg.chat.awarded_points": "You have been rewarded %1$s %2$s Points.",
 	"mmorpg.chat.be_unique": "The item must be of unique rarity.",
 	"mmorpg.chat.can_not_go_over_maximum_level": "Can not go over maximum level",
+	"mmorpg.chat.can_only_unsocket_gems_not_runes": "Only Gems can be unsocketed, runes can not.",
 	"mmorpg.chat.cant_change_char_in_combat": "You can't do that while in-Combat",
 	"mmorpg.chat.cant_change_char_in_map": "You can't do that while inside an Adventure Map",
 	"mmorpg.chat.cant_del_current_chat": "You can't Delete a Character you're currently playing.",
 	"mmorpg.chat.cant_equip_that_many_supports": "You can't equip that many Support Gems! You can increase the number of slots by leveling the skill and by increasing your player level!.",
 	"mmorpg.chat.cant_go_above": "Can't upgrade past %1$s",
 	"mmorpg.chat.cant_go_above_max_level": "You can't upgrade an item past maximum level: %1$s",
-	"mmorpg.chat.cant_have_more_gems_than_runes_in_runeword": "Runeword Items Can not have more Gems than Runes socketed",
 	"mmorpg.chat.cant_load_current_chat": "You're already Playing this character.",
 	"mmorpg.chat.cant_rune_this_unique": "Can't insert Runes into this Unique",
 	"mmorpg.chat.cant_same_buff": "You already have a buff of that type.",
@@ -2039,6 +2041,8 @@
 	"mmorpg.chat.prophecies_guide": "1) Kill Monsters while Cursed to gain Prophecy Coins\n\n2) You can Buy Rewards in this GUI\n\n3) The More curses you accept, the more coins you will earn.\n\nCoins earned in Low-level maps won't work in High level maps.",
 	"mmorpg.chat.prophecy_altar_msg": "The altar reacted to your touch! Pick a Curse of your liking. (You can open the Prophecy Gui from Hub if you failed to pick)",
 	"mmorpg.chat.prophecy_please_spend": "You already have a choice. (Open your prophecy gui from the main hub and pick an affix)",
+	"mmorpg.chat.rarity_cant_have_any_gems": " %1$s Items can't be socketed with Gems!",
+	"mmorpg.chat.rarity_cant_have_more_than_x_gems": " %1$s Items can't have more than  %2$s Gems.",
 	"mmorpg.chat.req_lvl": "Required Level: %1$s",
 	"mmorpg.chat.require_mage": "Requires Mage Weapon to use.",
 	"mmorpg.chat.require_melee": "Requires Melee weapon to use.",
@@ -2944,6 +2948,8 @@
 	"mmorpg.item_mods.destroy_item": "DESTROYS the Item!",
 	"mmorpg.item_mods.do_nothing": "Does Nothing",
 	"mmorpg.item_mods.downgrade_random_affix": "Downgrades Rarity and re-rolls Numbers of %1$s",
+	"mmorpg.item_mods.extract_gem": "Extracts %1$s from a Socket",
+	"mmorpg.item_mods.extract_rune": "Extracts %1$s from a Socket",
 	"mmorpg.item_mods.increment_uses_level_up": "Increments Uses",
 	"mmorpg.item_mods.increment_uses_random_mythic_affix": "Increments Uses",
 	"mmorpg.item_mods.increment_uses_sharpening_stone": "Increments Uses",
@@ -2993,6 +2999,8 @@
 	"mmorpg.item_req.has_affixes": "Must have affixes",
 	"mmorpg.item_req.has_corrupt_affixes": "Must have Corruption affixes",
 	"mmorpg.item_req.has_infusion": "Must have Infusion",
+	"mmorpg.item_req.has_socketed_gem": "Must have a Socketed %1$s",
+	"mmorpg.item_req.has_socketed_rune": "Must have a Socketed %1$s",
 	"mmorpg.item_req.is_common": "Must be %1$s Rarity",
 	"mmorpg.item_req.is_common_or_uncommon": "Must be Common Or Uncommon",
 	"mmorpg.item_req.is_epic": "Must be %1$s Rarity",
@@ -3486,6 +3494,13 @@
 "_comment": " [CATEGORY]: SPELLS - DESCRIPTIONS",
 
 
+"_comment": " [CATEGORY]: UBER MAP - DESCRIPTIONS",
+
+	"mmorpg.uber_map.desc.uber1": "A living mortal, in MY Realm?",
+
+"_comment": " [CATEGORY]: UBER MAP - DESCRIPTIONS",
+
+
 "_comment": " [CATEGORY]: STATUSEFFECTS - DESCRIPTIONS",
 
 	"mmorpg.ailment.desc.bleed": "Deals 120% of the damage as \u00A76\u2600 Physical\u00A77\u00A79 Damage for 5s.",
@@ -3495,14 +3510,7 @@
 	"mmorpg.ailment.desc.poison": "Deals 150% of the damage as \u00A75\u2600 Chaos\u00A77\u00A79 Damage for 10s.",
 	"mmorpg.effect.desc.thorn": "Attacking an enemy with Thorns consumes the thorns to deal [calc:thorn_bush] \u00A76\u2600 Physical\u00A77 Damage",
 
-"_comment": " [CATEGORY]: STATUSEFFECTS - DESCRIPTIONS",
-
-
-"_comment": " [CATEGORY]: UBER MAP - DESCRIPTIONS",
-
-	"mmorpg.uber_map.desc.uber1": "A living mortal, in MY Realm?",
-
-"_comment": " [CATEGORY]: UBER MAP - DESCRIPTIONS"
+"_comment": " [CATEGORY]: STATUSEFFECTS - DESCRIPTIONS"
 
 
 }

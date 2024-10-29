@@ -33,7 +33,7 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
                 return ExileCurrency.Builder.of(id, info.tier.word + " Sharpening Stone", WorksOnBlock.ItemType.GEAR)
                         .rarity(info.tier.rar)
                         .addRequirement(ItemReqs.INSTANCE.IS_NOT_CORRUPTED)
-                        .addModification(ItemMods.INSTANCE.SHARPEN_STONE_QUALITY.get(info), 100)
+                        .addAlwaysUseModification(ItemMods.INSTANCE.SHARPEN_STONE_QUALITY.get(info))
                         .maxUses(new MaxUsesKey(ItemReqs.Datas.MAX_SHARPENING_STONE_USES))
                         .potentialCost(0)
                         .weight(0)
@@ -84,7 +84,7 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
             .addRequirement(ItemReqs.INSTANCE.IS_NOT_CORRUPTED)
             .rarity(IRarity.RARE_ID)
             .addRequirement(ItemReqs.INSTANCE.HAS_AFFIXES)
-            .addModification(ItemMods.INSTANCE.REROLL_RANDOM_AFFIX, 100)
+            .addAlwaysUseModification(ItemMods.INSTANCE.REROLL_RANDOM_AFFIX)
             .potentialCost(10)
             .weight(CodeCurrency.Weights.COMMON)
             .build(this);
@@ -95,7 +95,7 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
             .addRequirement(ItemReqs.INSTANCE.HAS_AFFIXES)
             .addRequirement(ItemReqs.INSTANCE.NOT_CRAFTED)
             .addRequirement(ItemReqs.INSTANCE.IS_RARITY.get(new RarityKeyInfo(IRarity.MYTHIC_ID)))
-            .addModification(ItemMods.INSTANCE.REROLL_RANDOM_AFFIX_INTO_MYTHIC, 100)
+            .addAlwaysUseModification(ItemMods.INSTANCE.REROLL_RANDOM_AFFIX_INTO_MYTHIC)
             .maxUses(new MaxUsesKey(ItemReqs.Datas.RANDOM_MYTHIC_AFFIX))
             .potentialCost(25)
             .weight(CodeCurrency.Weights.MEGA_UBER)
@@ -115,7 +115,7 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
             .addRequirement(ItemReqs.INSTANCE.IS_NOT_CORRUPTED)
             .addRequirement(ItemReqs.INSTANCE.UNDER_20_QUALITY)
             .rarity(IRarity.UNCOMMON)
-            .addModification(ItemMods.INSTANCE.ADD_GEAR_QUALITY, 100)
+            .addAlwaysUseModification(ItemMods.INSTANCE.ADD_GEAR_QUALITY)
             .potentialCost(0)
             .weight(CodeCurrency.Weights.COMMON)
             .build(this);
@@ -124,7 +124,7 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
             .addRequirement(ItemReqs.INSTANCE.IS_NOT_CORRUPTED)
             .addRequirement(ItemReqs.INSTANCE.HAS_INFUSION)
             .rarity(IRarity.UNCOMMON)
-            .addModification(ItemMods.INSTANCE.REROLL_INFUSION, 100)
+            .addAlwaysUseModification(ItemMods.INSTANCE.REROLL_INFUSION)
             .potentialCost(1)
             .weight(CodeCurrency.Weights.RARE)
             .build(this);
@@ -134,7 +134,7 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
             .addRequirement(ItemReqs.INSTANCE.IS_NOT_CORRUPTED)
             .addRequirement(ItemReqs.INSTANCE.MAP_HAS_HIGHER_RARITY)
             .rarity(IRarity.EPIC_ID)
-            .addModification(ItemMods.INSTANCE.UPGRADE_MAP_RARITY, 100)
+            .addAlwaysUseModification(ItemMods.INSTANCE.UPGRADE_MAP_RARITY)
             .potentialCost(0)
             .weight(CodeCurrency.Weights.COMMON)
             .build(this);
@@ -144,7 +144,7 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
             .rarity(IRarity.RARE_ID)
             .addRequirement(ItemReqs.INSTANCE.IS_NOT_CORRUPTED)
             .addRequirement(ItemReqs.INSTANCE.HAS_AFFIX_OF_RARITY.get(new RarityKeyInfo(IRarity.COMMON_ID)))
-            .addModification(ItemMods.INSTANCE.UPGRADE_SPECIFIC_AFFIX_RARITY.get(new RarityKeyInfo(IRarity.COMMON_ID)), 100)
+            .addAlwaysUseModification(ItemMods.INSTANCE.UPGRADE_SPECIFIC_AFFIX_RARITY.get(new RarityKeyInfo(IRarity.COMMON_ID)))
             .potentialCost(3)
             .weight(CodeCurrency.Weights.COMMON)
             .build(this);
@@ -153,7 +153,7 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
             .rarity(IRarity.RARE_ID)
             .addRequirement(ItemReqs.INSTANCE.IS_NOT_CORRUPTED)
             .addRequirement(ItemReqs.INSTANCE.HAS_AFFIXES)
-            .addModification(ItemMods.INSTANCE.REROLL_AFFIX_NUMBERS, 100)
+            .addAlwaysUseModification(ItemMods.INSTANCE.REROLL_AFFIX_NUMBERS)
             .potentialCost(5)
             .weight(CodeCurrency.Weights.COMMON)
             .build(this);
@@ -168,6 +168,23 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
             .weight(CodeCurrency.Weights.COMMON)
             .build(this);
 
+    public ExileKey<ExileCurrency, IdKey> EXTRACT_GEM = ExileCurrency.Builder.of("extract_gem", "Gem Extractor",
+                    WorksOnBlock.ItemType.GEAR)
+            .rarity(IRarity.UNCOMMON)
+            .addRequirement(ItemReqs.INSTANCE.HAS_GEM_SOCKETED)
+            .addAlwaysUseModification(ItemMods.INSTANCE.EXTRACT_GEM)
+            .potentialCost(0)
+            .weight(CodeCurrency.Weights.COMMON)
+            .build(this);
+
+    public ExileKey<ExileCurrency, IdKey> EXTRACT_RUNE = ExileCurrency.Builder.of("extract_rune", "Rune Extractor",
+                    WorksOnBlock.ItemType.GEAR)
+            .rarity(IRarity.UNCOMMON)
+            .addRequirement(ItemReqs.INSTANCE.HAS_RUNE_SOCKETED)
+            .addAlwaysUseModification(ItemMods.INSTANCE.EXTRACT_RUNE)
+            .potentialCost(1)
+            .weight(CodeCurrency.Weights.COMMON)
+            .build(this);
 
     @Override
     public void loadClass() {
@@ -179,6 +196,24 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
                     .pattern("YYY")
                     .pattern("YXY")
                     .pattern("YYY");
+        });
+
+        EXTRACT_GEM.addRecipe(ExileRegistryTypes.CURRENCY, x -> {
+            return IShapedRecipe.of(x.getItem(), 3)
+                    .define('X', Items.GOLD_INGOT)
+                    .define('Y', Items.STICK)
+                    .pattern("XXX")
+                    .pattern("XXX")
+                    .pattern(" Y ");
+        });
+
+        EXTRACT_RUNE.addRecipe(ExileRegistryTypes.CURRENCY, x -> {
+            return IShapedRecipe.of(x.getItem(), 3)
+                    .define('X', Items.DIAMOND)
+                    .define('Y', Items.STICK)
+                    .pattern("XXX")
+                    .pattern("XXX")
+                    .pattern(" Y ");
         });
 
     }

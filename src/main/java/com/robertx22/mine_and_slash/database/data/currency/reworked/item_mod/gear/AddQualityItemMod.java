@@ -2,6 +2,7 @@ package com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ge
 
 import com.robertx22.mine_and_slash.database.data.MinMax;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.GearModification;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationResult;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModificationSers;
 import com.robertx22.mine_and_slash.itemstack.CustomItemData;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
@@ -21,7 +22,7 @@ public class AddQualityItemMod extends GearModification {
     }
 
     @Override
-    public void modifyGear(ExileStack stack) {
+    public void modifyGear(ExileStack stack, ItemModificationResult r) {
         stack.get(StackKeys.CUSTOM).edit(gear -> {
             gear.data.set(CustomItemData.KEYS.QUALITY, gear.data.get(CustomItemData.KEYS.QUALITY) + data.add_quality.random());
         });

@@ -126,7 +126,7 @@ public class SlashItems {
     public static RegObj<Item> NEWBIE_GEAR_BAG = Def.item(() -> new ItemNewbieGearBag(), "newbie_gear_bag");
     public static RegObj<Item> DESTROY_OUTPUT = Def.item(() -> new DestroyOutputMegaExpItem("Disassembler's Learning Method"), "destroy_output_exp");
     //   public static RegObj<Item> SALVAGE_HAMMER = Def.item(() -> new SalvageHammerItem(), "salvage_hammer");
-    public static RegObj<Item> SOCKET_EXTRACTOR = Def.item(() -> new SocketExtractorItem(), "socket_extractor");
+    //  public static RegObj<Item> SOCKET_EXTRACTOR = Def.item(() -> new GemExtractorItem(), "socket_extractor");
     public static RegObj<Item> SOUL_CLEANER = Def.item(() -> new SoulCleanerItem(), "soul_cleaner");
 
 
