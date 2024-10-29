@@ -9,7 +9,6 @@ misc
 mossy_brick
 nature
 nether
-pyramid
 sandstone
 sewer2
 sewers

@@ -8,3 +8,4 @@ v.5.8.4
 - fixes barrage gem making projectiles merge when looking up/down
 - updated Japanase translation
 - attempt to fix uber maps being killable first tick they spawn
+- should fix phys conversion going over 100%

@@ -668,7 +668,6 @@ summon_damage
 summon_dmg_aura_cost
 summon_duration
 summon_health
-summon_health_per_perc_of_health
 summon_spell_dmg
 summon_spell_dmg_taken
 sword_damage

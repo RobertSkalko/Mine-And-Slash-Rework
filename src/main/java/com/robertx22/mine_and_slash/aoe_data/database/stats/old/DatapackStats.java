@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.aoe_data.database.stats.old;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import com.robertx22.mine_and_slash.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.DefenseStats;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.OffenseStats;
@@ -26,11 +27,9 @@ import com.robertx22.mine_and_slash.database.data.stats.types.resources.magic_sh
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.magic_shield.MagicShieldRegen;
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.mana.ManaRegen;
-import com.robertx22.mine_and_slash.database.data.stats.types.summon.SummonHealth;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.PlayStyle;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
@@ -113,8 +112,7 @@ public class DatapackStats implements ExileRegistryInit {
     // bonus per percent of other
     public static Stat HEAL_TO_SKILL_DMG = new AddPerPercentOfOther(ResourceStats.HEAL_STRENGTH.get(), SkillDamage.getInstance());
     public static Stat PHYS_DMG_PER_MANA = new AddPerPercentOfOther(Mana.getInstance(), new BonusAttackDamage(Elements.Physical));
-    public static Stat SUMMON_HP_PER_HP = new AddPerPercentOfOther(Health.getInstance(), SummonHealth.getInstance());
-
+  
     // more x per y
     public static Stat BLOOD_PER_10STR = new MoreXPerYOf(DatapackStats.STR, Blood.getInstance(), 10);
     public static Stat HEALTH_PER_10_INT = new MoreXPerYOf(DatapackStats.INT, Health.getInstance(), 10);

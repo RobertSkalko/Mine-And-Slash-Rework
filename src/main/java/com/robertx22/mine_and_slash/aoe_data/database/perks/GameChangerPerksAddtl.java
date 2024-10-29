@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.aoe_data.database.perks;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import com.robertx22.mine_and_slash.aoe_data.database.ailments.Ailments;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.*;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.old.DatapackStats;
@@ -26,7 +27,6 @@ import com.robertx22.mine_and_slash.tags.all.EffectTags;
 import com.robertx22.mine_and_slash.tags.all.SpellTags;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
 public class GameChangerPerksAddtl implements ExileRegistryInit {
 
@@ -169,8 +169,8 @@ public class GameChangerPerksAddtl implements ExileRegistryInit {
         );
 
         PerkBuilder.gameChanger("necromantic_defenses", "Necromantic Defenses",
-                new OptScaleExactStat(100, DatapackStats.SUMMON_HP_PER_HP, ModType.FLAT),
-                new OptScaleExactStat(-25, Health.getInstance(), ModType.MORE)
+                new OptScaleExactStat(100, SummonHealth.getInstance(), ModType.FLAT),
+                new OptScaleExactStat(-20, Health.getInstance(), ModType.MORE)
         );
 
         PerkBuilder.gameChanger("generosity", "Generosity",

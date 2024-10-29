@@ -71,6 +71,8 @@ public class DamageEvent extends EffectEvent {
         return ID;
     }
 
+    public float unconvertedDamagePercent = 0;
+
     protected DamageEvent(AttackInformation attackInfo, LivingEntity source, LivingEntity target, float dmg) {
         super(dmg, source, target);
         this.attackInfo = attackInfo;
