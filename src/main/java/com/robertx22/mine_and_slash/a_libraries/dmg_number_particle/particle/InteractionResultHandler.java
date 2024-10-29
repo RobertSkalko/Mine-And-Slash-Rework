@@ -6,7 +6,6 @@ import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.imp
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.impl.HealParticle;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.style.Default;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.style.Row;
-import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.NumberUtils;
@@ -20,34 +19,16 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.Random;
 import java.util.function.BiConsumer;
-import java.util.function.Supplier;
 
 public class InteractionResultHandler {
 
 
 
     public enum ParticleSpawnType {
-        DAMAGE(new IParticleSpawnMaterial.DamageInformation(null, null, false)) {
-            @Override
-            public Supplier<BiConsumer<IParticleSpawnMaterial, Entity>> getStrategy() {
-                return () -> ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().damageStrategy;
-            }
-        },
-        NULLIFIED_DAMAGE(IParticleSpawnMaterial.Type.DODGE) {
-            @Override
-            public Supplier<BiConsumer<IParticleSpawnMaterial, Entity>> getStrategy() {
-                return () -> ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().nullifiedDamageStrategy;
-            }
-        },
-        HEAL(new IParticleSpawnMaterial.HealNumber(0.0f)) {
-            @Override
-            public Supplier<BiConsumer<IParticleSpawnMaterial, Entity>> getStrategy() {
-                return () -> ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().healStrategy;
-            }
-        };
+        DAMAGE(new IParticleSpawnMaterial.DamageInformation(null, null, false)) ,
+        NULLIFIED_DAMAGE(IParticleSpawnMaterial.Type.DODGE) ,
+        HEAL(new IParticleSpawnMaterial.HealNumber(0.0f)) ;
         public final IParticleSpawnMaterial target;
-
-        public abstract Supplier<BiConsumer<IParticleSpawnMaterial, Entity>> getStrategy();
 
         ParticleSpawnType(IParticleSpawnMaterial target) {
             this.target = target;
@@ -90,7 +71,7 @@ public class InteractionResultHandler {
                 }),
 
 
-        ROW((info, entity) -> {
+        IN_A_ROW((info, entity) -> {
             var mat = (IParticleSpawnMaterial.DamageInformation) info;
             ImmutableMap<Elements, Float> dmgMap = mat.getDmgMap();
 

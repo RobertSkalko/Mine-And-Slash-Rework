@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.vanilla_mc.packets.interaction;
 import com.google.common.collect.ImmutableMap;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.InteractionResultHandler;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.impl.DamageNullifiedParticle;
+import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.DamageEvent;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import it.unimi.dsi.fastutil.floats.FloatArrayList;
@@ -10,6 +11,7 @@ import it.unimi.dsi.fastutil.floats.FloatList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.Entity;
 
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -21,6 +23,7 @@ public interface IParticleSpawnMaterial {
     IParticleSpawnMaterial loadFromData(FriendlyByteBuf friendlyByteBuf);
 
     InteractionResultHandler.ParticleSpawnType getSpawnType();
+    void spawnOnClient(Entity entity);
 
     enum Type implements IParticleSpawnMaterial {
         DODGE("dodge", SoundEvents.SHIELD_BLOCK),
@@ -47,6 +50,11 @@ public interface IParticleSpawnMaterial {
         @Override
         public InteractionResultHandler.ParticleSpawnType getSpawnType() {
             return InteractionResultHandler.ParticleSpawnType.NULLIFIED_DAMAGE;
+        }
+
+        @Override
+        public void spawnOnClient(Entity entity) {
+            ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().nullifiedDamageStrategy.accept(this, entity);
         }
     }
 
@@ -93,6 +101,11 @@ public interface IParticleSpawnMaterial {
             return InteractionResultHandler.ParticleSpawnType.DAMAGE;
         }
 
+        @Override
+        public void spawnOnClient(Entity entity) {
+            ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().damageStrategy.accept(this, entity);
+        }
+
 
     }
 
@@ -109,7 +122,12 @@ public interface IParticleSpawnMaterial {
 
         @Override
         public InteractionResultHandler.ParticleSpawnType getSpawnType() {
-            return null;
+            return InteractionResultHandler.ParticleSpawnType.HEAL;
+        }
+
+        @Override
+        public void spawnOnClient(Entity entity) {
+            ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().healStrategy.accept(this, entity);
         }
     }
 }
