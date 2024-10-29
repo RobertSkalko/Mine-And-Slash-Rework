@@ -2,9 +2,6 @@ package com.robertx22.mine_and_slash.uncommon.effectdatas;
 
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.SoundUtils;
-import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.InteractionNotifier;
-import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.impl.DamageNullifiedParticle;
-import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.impl.ElementDamageParticle;
 import com.robertx22.mine_and_slash.aoe_data.database.ailments.Ailment;
 import com.robertx22.mine_and_slash.capability.entity.CooldownsData;
 import com.robertx22.mine_and_slash.capability.player.data.PlayerConfigData;
@@ -65,18 +62,14 @@ public class DamageEvent extends EffectEvent {
     public static ResourceKey<DamageType> DAMAGE_TYPE = ResourceKey.create(Registries.DAMAGE_TYPE, SlashRef.id("mod"));
 
     public static String ID = "on_damage";
-    public static String dmgSourceName = SlashRef.MODID + ".custom_damage";
-    static AttributeModifier NO_KNOCKBACK = new AttributeModifier(
-            UUID.fromString("e926df30-c376-11ea-87d0-0242ac131053"),
-            Attributes.KNOCKBACK_RESISTANCE.getDescriptionId(),
-            100,
-            AttributeModifier.Operation.ADDITION
-    );
+
     public LivingEntity petEntity;
-    public float wepdmgMulti = 1;
-    public boolean absorbedCompletely = false;
-    AttackInformation attackInfo;
-    private HashMap<Elements, Integer> bonusElementDamageMap = new HashMap();
+
+
+    @Override
+    public String GUID() {
+        return ID;
+    }
 
     protected DamageEvent(AttackInformation attackInfo, LivingEntity source, LivingEntity target, float dmg) {
         super(dmg, source, target);
@@ -88,11 +81,6 @@ public class DamageEvent extends EffectEvent {
         if (this.targetData.immuneTicks > 0) {
             this.cancelDamage();
         }
-    }
-
-    @Override
-    public String GUID() {
-        return ID;
     }
 
     public void addMobDamageMultipliers() {
@@ -158,6 +146,7 @@ public class DamageEvent extends EffectEvent {
         }
     }
 
+
     public Component getDamageName() {
 
         try {
@@ -181,16 +170,17 @@ public class DamageEvent extends EffectEvent {
         return Component.literal("[Error, dmg isn't a basic attack, spell or ailment]");
     }
 
+    public static String dmgSourceName = SlashRef.MODID + ".custom_damage";
+
+    AttackInformation attackInfo;
+    private HashMap<Elements, Integer> bonusElementDamageMap = new HashMap();
+
     public AttackType getAttackType() {
         return data.getAttackType();
     }
 
     public Elements getElement() {
         return data.getElement();
-    }
-
-    public void setElement(Elements ele) {
-        this.data.setElement(ele);
     }
 
     public void addBonusEleDmg(Elements element, float dmg) {
@@ -353,10 +343,19 @@ public class DamageEvent extends EffectEvent {
         return false;
     }
 
+    static AttributeModifier NO_KNOCKBACK = new AttributeModifier(
+            UUID.fromString("e926df30-c376-11ea-87d0-0242ac131053"),
+            Attributes.KNOCKBACK_RESISTANCE.getDescriptionId(),
+            100,
+            AttributeModifier.Operation.ADDITION
+    );
+
     @Override
     public String getName() {
         return "Damage Event";
     }
+
+    public float wepdmgMulti = 1;
 
     @Override
     public void initBeforeActivating() {
@@ -386,8 +385,7 @@ public class DamageEvent extends EffectEvent {
         }
     }
 
-
-    // wait, bonus archmage dmg is applied to any bonus ele dmg??
+    public boolean absorbedCompletely = false;
 
     // todo this is using total ele dmg and saying only 1 ele, fuck
     public MutableComponent getDamageMessage(DmgByElement info) {
@@ -402,6 +400,9 @@ public class DamageEvent extends EffectEvent {
                 .withStyle(Style.EMPTY.applyFormat(ChatFormatting.RED).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, getInfoHoverMessage(info, true))));
 
     }
+
+
+    // wait, bonus archmage dmg is applied to any bonus ele dmg??
 
     public MutableComponent getInfoHoverMessage(DmgByElement info, boolean doBonusDmg) {
         // int main = info.dmgmap.getOrDefault(getElement(), 0F).intValue();
@@ -495,11 +496,8 @@ public class DamageEvent extends EffectEvent {
                 attackInfo.setCanceled(true);
             }
             cancelDamage();
-            InteractionNotifier.notifyClient(getAttackType().isAttack() ? DamageNullifiedParticle.Type.DODGE : DamageNullifiedParticle.Type.RESIST, (ServerPlayer) source, target);
-            //sendDamageParticle(info);
-
-            //move this sound to InteractionResultHandler.
-            //SoundUtils.playSound(target, SoundEvents.SHIELD_BLOCK, 1, 1.5F);
+            sendDamageParticle(info);
+            SoundUtils.playSound(target, SoundEvents.SHIELD_BLOCK, 1, 1.5F);
             return;
         }
 
@@ -645,8 +643,8 @@ public class DamageEvent extends EffectEvent {
                     threatEvent.Activate();
                 }
             }
-            InteractionNotifier.notifyClient(ElementDamageParticle.DamageInformation.fromDmgByElement(info, data.isCrit()), (ServerPlayer) source, target);
-            //sendDamageParticle(info);
+
+            sendDamageParticle(info);
 
             // target.invulnerableTime = 20;
 
@@ -686,6 +684,38 @@ public class DamageEvent extends EffectEvent {
             }
 
         }
+    }
+
+
+    public static class DmgByElement {
+
+        private HashMap<Elements, Float> dmgmap = new HashMap<>();
+        private HashMap<Elements, DamageEvent> eventMap = new HashMap<>();
+
+
+        public float totalDmg = 0;
+
+        public boolean isMixedDamage() {
+            int bonusdmg = (int) dmgmap.entrySet().stream().filter(x -> true).count();
+            return bonusdmg > 1;
+        }
+
+        public void addDmg(DamageEvent event, float dmg, Elements element) {
+
+            Elements ele = element;
+
+            if (ele == null) {
+                ele = Elements.Physical;
+            }
+
+            float total = (dmgmap.getOrDefault(element, 0F) + dmg);
+
+            dmgmap.put(ele, total);
+            eventMap.put(ele, event);
+
+            totalDmg += dmg;
+        }
+
     }
 
     // this calculates all the bonus elemental damages, uses the specific numbers for particles only, and the totalvalue for actually dealing dmg, ONCE
@@ -736,49 +766,20 @@ public class DamageEvent extends EffectEvent {
         return getElement();
     }
 
-    public void setisAilmentDamage(Ailment al) {
-        this.data.setString(EventData.AILMENT, al.GUID());
+    public void setElement(Elements ele) {
+        this.data.setElement(ele);
     }
 
-    public float getPenetration() {
-        return this.data.getNumber(EventData.PENETRATION).number;
+    public void setisAilmentDamage(Ailment al) {
+        this.data.setString(EventData.AILMENT, al.GUID());
     }
 
     public void setPenetration(float val) {
         this.data.getNumber(EventData.PENETRATION).number = val;
     }
 
-    public static class DmgByElement {
-
-        public float totalDmg = 0;
-        private HashMap<Elements, Float> dmgmap = new HashMap<>();
-        private HashMap<Elements, DamageEvent> eventMap = new HashMap<>();
-
-        public boolean isMixedDamage() {
-            int bonusdmg = (int) dmgmap.entrySet().stream().filter(x -> true).count();
-            return bonusdmg > 1;
-        }
-
-        public HashMap<Elements, Float> getDmgmap() {
-            return dmgmap;
-        }
-
-        public void addDmg(DamageEvent event, float dmg, Elements element) {
-
-            Elements ele = element;
-
-            if (ele == null) {
-                ele = Elements.Physical;
-            }
-
-            float total = (dmgmap.getOrDefault(element, 0F) + dmg);
-
-            dmgmap.put(ele, total);
-            eventMap.put(ele, event);
-
-            totalDmg += dmg;
-        }
-
+    public float getPenetration() {
+        return this.data.getNumber(EventData.PENETRATION).number;
     }
 
 }
