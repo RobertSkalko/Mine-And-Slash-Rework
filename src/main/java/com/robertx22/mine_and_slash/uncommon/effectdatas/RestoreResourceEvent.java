@@ -1,10 +1,9 @@
 package com.robertx22.mine_and_slash.uncommon.effectdatas;
 
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.InteractionNotifier;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.impl.HealParticle;
 import com.robertx22.mine_and_slash.capability.entity.CooldownsData;
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
-import com.robertx22.mine_and_slash.event.MASEvent;
-import com.robertx22.mine_and_slash.event.server.TriggerInteractionResultEvent;
 import com.robertx22.mine_and_slash.saveclasses.unit.ResourceType;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.rework.RestoreType;
@@ -54,7 +53,7 @@ public class RestoreResourceEvent extends EffectEvent {
                 if (source instanceof ServerPlayer p) {
 
                     if (source != target) {
-                        MASEvent.INSTANCE.post(new TriggerInteractionResultEvent(new HealParticle.HealNumber(num), p, target));
+                        InteractionNotifier.notifyClient(new HealParticle.HealNumber(num), p, target);
                         /*String text = NumberUtils.format(num);
                         DmgNumPacket packet = new DmgNumPacket(target, text, data.isCrit(), ChatFormatting.GREEN);
                         Packets.sendToClient((Player) source, packet);*/

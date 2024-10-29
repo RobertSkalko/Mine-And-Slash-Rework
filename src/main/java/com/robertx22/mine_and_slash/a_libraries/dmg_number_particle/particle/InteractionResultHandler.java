@@ -10,7 +10,7 @@ import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.NumberUtils;
-import com.robertx22.mine_and_slash.vanilla_mc.packets.interaction.IParticleSpawnNotifier;
+import com.robertx22.mine_and_slash.vanilla_mc.packets.interaction.IParticleSpawnMaterial;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.sounds.SoundSource;
@@ -23,14 +23,16 @@ import java.util.function.BiConsumer;
 
 public class InteractionResultHandler {
 
+
+
     public enum ParticleSpawnType {
         DAMAGE(ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().damageStrategy, new ElementDamageParticle.DamageInformation(null, null, false)),
         NULLIFIED_DAMAGE(ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().nullifiedDamageStrategy, DamageNullifiedParticle.Type.DODGE),
         HEAL(ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().healStrategy, new HealParticle.HealNumber(0.0f));
-        public final BiConsumer<IParticleSpawnNotifier, Entity> strategy;
-        public final IParticleSpawnNotifier target;
+        public final BiConsumer<IParticleSpawnMaterial, Entity> strategy;
+        public final IParticleSpawnMaterial target;
 
-        ParticleSpawnType(BiConsumer<IParticleSpawnNotifier, Entity> strategy, IParticleSpawnNotifier target) {
+        ParticleSpawnType(BiConsumer<IParticleSpawnMaterial, Entity> strategy, IParticleSpawnMaterial target) {
             this.strategy = strategy;
             this.target = target;
         }
@@ -105,11 +107,11 @@ public class InteractionResultHandler {
                     Minecraft.getInstance().particleEngine.add(new HealParticle(Minecraft.getInstance().level, x, y, z, new Row(), mat.number()));
                 });
 
-        public final BiConsumer<IParticleSpawnNotifier, Entity> damageStrategy;
-        public final BiConsumer<IParticleSpawnNotifier, Entity> nullifiedDamageStrategy;
-        public final BiConsumer<IParticleSpawnNotifier, Entity> healStrategy;
+        public final BiConsumer<IParticleSpawnMaterial, Entity> damageStrategy;
+        public final BiConsumer<IParticleSpawnMaterial, Entity> nullifiedDamageStrategy;
+        public final BiConsumer<IParticleSpawnMaterial, Entity> healStrategy;
 
-        ClientReactionStrategy(BiConsumer<IParticleSpawnNotifier, Entity> damageStrategy, BiConsumer<IParticleSpawnNotifier, Entity> nullifiedDamageStrategy, BiConsumer<IParticleSpawnNotifier, Entity> healStrategy) {
+        ClientReactionStrategy(BiConsumer<IParticleSpawnMaterial, Entity> damageStrategy, BiConsumer<IParticleSpawnMaterial, Entity> nullifiedDamageStrategy, BiConsumer<IParticleSpawnMaterial, Entity> healStrategy) {
             this.damageStrategy = damageStrategy;
             this.nullifiedDamageStrategy = nullifiedDamageStrategy;
             this.healStrategy = healStrategy;

@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.ExileInteractionResultParticle;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.InteractionResultHandler;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.style.IParticleRenderStrategy;
-import com.robertx22.mine_and_slash.vanilla_mc.packets.interaction.IParticleSpawnNotifier;
+import com.robertx22.mine_and_slash.vanilla_mc.packets.interaction.IParticleSpawnMaterial;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -42,14 +42,14 @@ public class HealParticle extends ExileInteractionResultParticle {
         super.getStrategy().tick(this);
     }
 
-    public record HealNumber(float number) implements IParticleSpawnNotifier {
+    public record HealNumber(float number) implements IParticleSpawnMaterial {
         @Override
         public void saveToBuf(FriendlyByteBuf friendlyByteBuf) {
             friendlyByteBuf.writeFloat(number);
         }
 
         @Override
-        public IParticleSpawnNotifier loadFromData(FriendlyByteBuf friendlyByteBuf) {
+        public IParticleSpawnMaterial loadFromData(FriendlyByteBuf friendlyByteBuf) {
             return new HealNumber(friendlyByteBuf.readFloat());
         }
 

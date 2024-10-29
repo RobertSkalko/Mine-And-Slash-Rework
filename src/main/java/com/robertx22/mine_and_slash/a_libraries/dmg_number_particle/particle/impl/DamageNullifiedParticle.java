@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.ExileInteractionResultParticle;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.InteractionResultHandler;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.style.IParticleRenderStrategy;
-import com.robertx22.mine_and_slash.vanilla_mc.packets.interaction.IParticleSpawnNotifier;
+import com.robertx22.mine_and_slash.vanilla_mc.packets.interaction.IParticleSpawnMaterial;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -44,7 +44,7 @@ public class DamageNullifiedParticle extends ExileInteractionResultParticle {
         super.getStrategy().tick(this);
     }
 
-    public enum Type implements IParticleSpawnNotifier {
+    public enum Type implements IParticleSpawnMaterial {
         DODGE("dodge", SoundEvents.SHIELD_BLOCK),
         RESIST("resist", SoundEvents.SHIELD_BLOCK);
 
@@ -62,7 +62,7 @@ public class DamageNullifiedParticle extends ExileInteractionResultParticle {
         }
 
         @Override
-        public IParticleSpawnNotifier loadFromData(FriendlyByteBuf friendlyByteBuf) {
+        public IParticleSpawnMaterial loadFromData(FriendlyByteBuf friendlyByteBuf) {
             return friendlyByteBuf.readEnum(DamageNullifiedParticle.Type.class);
         }
 

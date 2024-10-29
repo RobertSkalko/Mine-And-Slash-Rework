@@ -8,7 +8,7 @@ import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.Int
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.style.IParticleRenderStrategy;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.DamageEvent;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
-import com.robertx22.mine_and_slash.vanilla_mc.packets.interaction.IParticleSpawnNotifier;
+import com.robertx22.mine_and_slash.vanilla_mc.packets.interaction.IParticleSpawnMaterial;
 import it.unimi.dsi.fastutil.floats.FloatArrayList;
 import it.unimi.dsi.fastutil.floats.FloatList;
 import net.minecraft.client.Camera;
@@ -53,7 +53,7 @@ public class ElementDamageParticle extends ExileInteractionResultParticle {
     }
 
     public record DamageInformation(byte[] elements, FloatList damage,
-                                    boolean isCrit) implements IParticleSpawnNotifier {
+                                    boolean isCrit) implements IParticleSpawnMaterial {
         public static DamageInformation fromDmgByElement(DamageEvent.DmgByElement mat, boolean isCrit){
             HashMap<Elements, Float> dmgmap = mat.getDmgmap();
             System.out.println("the DmgByElement map is " + dmgmap);

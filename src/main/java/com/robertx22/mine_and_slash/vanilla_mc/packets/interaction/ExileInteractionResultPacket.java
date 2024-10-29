@@ -13,10 +13,10 @@ public class ExileInteractionResultPacket extends MyPacket<ExileInteractionResul
 
     public int id;
     private InteractionResultHandler.ParticleSpawnType type;
-    private IParticleSpawnNotifier notifier;
+    private IParticleSpawnMaterial notifier;
 
 
-    public ExileInteractionResultPacket(int id, IParticleSpawnNotifier notifier) {
+    public ExileInteractionResultPacket(int id, IParticleSpawnMaterial notifier) {
         this.id = id;
         this.notifier = notifier;
         this.type = notifier.getSpawnType();
