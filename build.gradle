@@ -128,8 +128,6 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-1.20.1-common-api:${project.jei_version}") //API for compile
     compileOnly fg.deobf("mezz.jei:jei-1.20.1-forge-api:${project.jei_version}") //API for compile
     runtimeOnly fg.deobf("mezz.jei:jei-1.20.1-forge:${project.jei_version}") //Full for runtime
-    runtimeOnly fg.deobf("curse.maven:mmmmmmmmmmmm-225738:5713883")
-    runtimeOnly fg.deobf("curse.maven:selene-499980:5726772")
 
 
     //  compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
