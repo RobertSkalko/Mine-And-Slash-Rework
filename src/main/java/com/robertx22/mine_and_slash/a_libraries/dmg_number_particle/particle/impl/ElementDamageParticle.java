@@ -38,7 +38,6 @@ public class ElementDamageParticle extends ExileInteractionResultParticle {
     public void render(VertexConsumer vertexConsumer, Camera camera, float partialTick) {
         PoseStack posestack = new PoseStack();
         posestack.pushPose();
-        //System.out.println("rendering damage particle!");
         super.getStrategy().setupParticle(this, vertexConsumer, camera, partialTick, posestack);
         super.getStrategy().renderDamage(this, vertexConsumer, camera, partialTick, posestack, damageString, getColor());
         super.getStrategy().changeScale(this, getAge(), getLiftTime(), partialTick);
@@ -56,7 +55,6 @@ public class ElementDamageParticle extends ExileInteractionResultParticle {
                                     boolean isCrit) implements IParticleSpawnMaterial {
         public static DamageInformation fromDmgByElement(DamageEvent.DmgByElement mat, boolean isCrit){
             HashMap<Elements, Float> dmgmap = mat.getDmgmap();
-            System.out.println("the DmgByElement map is " + dmgmap);
             int size = dmgmap.size();
             byte[] bytes = new byte[size];
             AtomicInteger i = new AtomicInteger(0);
@@ -66,16 +64,11 @@ public class ElementDamageParticle extends ExileInteractionResultParticle {
                 bytes[i.getAndIncrement()] = ((byte) key.ordinal());
                 floats.add(value);
             });
-            //System.out.println(Arrays.toString(bytes));
-            //System.out.println(floats);
             return new DamageInformation(bytes, floats, isCrit);
         }
         public ImmutableMap<Elements, Float> getDmgMap() {
-            System.out.println("start getDmgMap()");
             ImmutableMap.Builder<Elements, Float> builder = ImmutableMap.builder();
             for (int i = 0; i < elements.length; i++) {
-                System.out.println("elements[i] is " + elements[i]);
-                System.out.println("the enum is " + Elements.values()[elements[i]]);
                 builder.put(Elements.values()[elements[i]], damage.getFloat(i));
             }
             return builder.build();
@@ -83,7 +76,6 @@ public class ElementDamageParticle extends ExileInteractionResultParticle {
 
         @Override
         public void saveToBuf(FriendlyByteBuf friendlyByteBuf) {
-            System.out.println("the elements is " + Arrays.toString(elements));
             friendlyByteBuf.writeByteArray(elements);
             friendlyByteBuf.writeCollection(damage, (FriendlyByteBuf::writeFloat));
             friendlyByteBuf.writeBoolean(isCrit);
@@ -93,7 +85,6 @@ public class ElementDamageParticle extends ExileInteractionResultParticle {
         @Override
         public DamageInformation loadFromData(FriendlyByteBuf friendlyByteBuf) {
             byte[] bytes = friendlyByteBuf.readByteArray();
-            System.out.println("the byte array is " + Arrays.toString(bytes));
             return new DamageInformation(bytes, friendlyByteBuf.readCollection(FloatArrayList::new, FriendlyByteBuf::readFloat), friendlyByteBuf.readBoolean());
 
         }
