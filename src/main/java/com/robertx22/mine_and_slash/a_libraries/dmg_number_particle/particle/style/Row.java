@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.ExileInteractionResultParticle;
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.GLUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -86,11 +87,14 @@ public class Row implements IParticleRenderStrategy {
 
             ChatFormatting byCode = ChatFormatting.getByCode(code.charAt(1));
             MutableComponent mutableComponent = MutableComponent.create(new LiteralContents(damage)).withStyle(byCode);
-            if (isCrit){
+            if (isCrit) {
                 mutableComponent.withStyle(ChatFormatting.BOLD);
             }
             int thisWidth = Minecraft.getInstance().font.width(mutableComponent);
-            Minecraft.getInstance().font.drawInBatch(mutableComponent, startFrom + usedWidth, 0.0F, Optional.ofNullable(byCode.getColor()).orElseGet(ChatFormatting.GRAY::getColor), false, posestack.last().pose(), multibuffersource$buffersource, Font.DisplayMode.SEE_THROUGH, 0, 15728880);
+            float finalStartFrom = startFrom;
+            float finalUsedWidth = usedWidth;
+            GLUtils.renderAlwaysSeenText(() -> Minecraft.getInstance().font.drawInBatch(mutableComponent, finalStartFrom + finalUsedWidth, 0.0F, Optional.ofNullable(byCode.getColor()).orElseGet(ChatFormatting.GRAY::getColor), false, posestack.last().pose(), multibuffersource$buffersource, Font.DisplayMode.SEE_THROUGH, 0, 15728880));
+
             usedWidth += thisWidth;
             multibuffersource$buffersource.endBatch();
 
