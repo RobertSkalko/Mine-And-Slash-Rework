@@ -24,18 +24,18 @@ public class InteractionResultHandler {
 
 
 
-    public enum ParticleSpawnType {
+    public enum ExileParticleType {
         DAMAGE(new IParticleSpawnMaterial.DamageInformation(null, null, false)) ,
         NULLIFIED_DAMAGE(IParticleSpawnMaterial.Type.DODGE) ,
         HEAL(new IParticleSpawnMaterial.HealNumber(0.0f)) ;
         public final IParticleSpawnMaterial target;
 
-        ParticleSpawnType(IParticleSpawnMaterial target) {
+        ExileParticleType(IParticleSpawnMaterial target) {
             this.target = target;
         }
     }
 
-    public enum ClientReactionStrategy {
+    public enum ClientSpawnStrategy {
         DEFAULT((info, entity) -> {
             var mat = (IParticleSpawnMaterial.DamageInformation) info;
             ImmutableMap<Elements, Float> dmgMap = mat.getDmgMap();
@@ -108,7 +108,7 @@ public class InteractionResultHandler {
         public final BiConsumer<IParticleSpawnMaterial, Entity> nullifiedDamageStrategy;
         public final BiConsumer<IParticleSpawnMaterial, Entity> healStrategy;
 
-        ClientReactionStrategy(BiConsumer<IParticleSpawnMaterial, Entity> damageStrategy, BiConsumer<IParticleSpawnMaterial, Entity> nullifiedDamageStrategy, BiConsumer<IParticleSpawnMaterial, Entity> healStrategy) {
+        ClientSpawnStrategy(BiConsumer<IParticleSpawnMaterial, Entity> damageStrategy, BiConsumer<IParticleSpawnMaterial, Entity> nullifiedDamageStrategy, BiConsumer<IParticleSpawnMaterial, Entity> healStrategy) {
             this.damageStrategy = damageStrategy;
             this.nullifiedDamageStrategy = nullifiedDamageStrategy;
             this.healStrategy = healStrategy;

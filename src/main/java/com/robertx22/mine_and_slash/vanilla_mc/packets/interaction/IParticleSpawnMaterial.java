@@ -2,12 +2,12 @@ package com.robertx22.mine_and_slash.vanilla_mc.packets.interaction;
 
 import com.google.common.collect.ImmutableMap;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.InteractionResultHandler;
-import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.impl.DamageNullifiedParticle;
 import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.DamageEvent;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
+import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import it.unimi.dsi.fastutil.floats.FloatArrayList;
 import it.unimi.dsi.fastutil.floats.FloatList;
 import net.minecraft.network.FriendlyByteBuf;
@@ -17,7 +17,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public interface IParticleSpawnMaterial {
@@ -26,17 +25,17 @@ public interface IParticleSpawnMaterial {
 
     IParticleSpawnMaterial loadFromData(FriendlyByteBuf friendlyByteBuf);
 
-    InteractionResultHandler.ParticleSpawnType getSpawnType();
+    InteractionResultHandler.ExileParticleType getSpawnType();
     void spawnOnClient(Entity entity);
 
-    enum Type implements IParticleSpawnMaterial, IAutoLocName {
-        DODGE("dodge", SoundEvents.SHIELD_BLOCK),
-        RESIST("resist", SoundEvents.SHIELD_BLOCK);
+    enum Type implements IParticleSpawnMaterial {
+        DODGE(Words.DODGE.locName(), SoundEvents.SHIELD_BLOCK),
+        RESIST(Words.RESIST.locName(), SoundEvents.SHIELD_BLOCK);
 
-        public final String text;
+        public final MutableComponent text;
         public final SoundEvent sound;
 
-        Type(String text, SoundEvent sound) {
+        Type(MutableComponent text, SoundEvent sound) {
             this.text = text;
             this.sound = sound;
         }
@@ -52,34 +51,13 @@ public interface IParticleSpawnMaterial {
         }
 
         @Override
-        public InteractionResultHandler.ParticleSpawnType getSpawnType() {
-            return InteractionResultHandler.ParticleSpawnType.NULLIFIED_DAMAGE;
+        public InteractionResultHandler.ExileParticleType getSpawnType() {
+            return InteractionResultHandler.ExileParticleType.NULLIFIED_DAMAGE;
         }
 
         @Override
         public void spawnOnClient(Entity entity) {
             ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().nullifiedDamageStrategy.accept(this, entity);
-        }
-
-        @Override
-        public AutoLocGroup locNameGroup() {
-            return AutoLocGroup.Misc;
-        }
-
-        @Override
-        public String locNameLangFileGUID() {
-            return SlashRef.MODID + ".particle." + this.text;
-        }
-
-        @Override
-        public String locNameForLangFile() {
-            //capitalize it.
-            return this.text.substring(0, 1).toUpperCase() + this.text.substring(1);
-        }
-
-        @Override
-        public String GUID() {
-            return "particle_" + this.text;
         }
     }
 
@@ -122,8 +100,8 @@ public interface IParticleSpawnMaterial {
         }
 
         @Override
-        public InteractionResultHandler.ParticleSpawnType getSpawnType() {
-            return InteractionResultHandler.ParticleSpawnType.DAMAGE;
+        public InteractionResultHandler.ExileParticleType getSpawnType() {
+            return InteractionResultHandler.ExileParticleType.DAMAGE;
         }
 
         @Override
@@ -146,8 +124,8 @@ public interface IParticleSpawnMaterial {
         }
 
         @Override
-        public InteractionResultHandler.ParticleSpawnType getSpawnType() {
-            return InteractionResultHandler.ParticleSpawnType.HEAL;
+        public InteractionResultHandler.ExileParticleType getSpawnType() {
+            return InteractionResultHandler.ExileParticleType.HEAL;
         }
 
         @Override

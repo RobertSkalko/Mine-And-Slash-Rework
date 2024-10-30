@@ -60,9 +60,8 @@ public class Default implements IParticleRenderStrategy {
     @Override
     public void renderNullifiedDamage(ExileInteractionResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack, String text, int color) {
         MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-        String newText = IParticleSpawnMaterial.Type.valueOf(text).locName().getString();
-        float f = (float) (-Minecraft.getInstance().font.width(newText) / 2);
-        GLUtils.renderAlwaysSeenText(() -> Minecraft.getInstance().font.drawInBatch(newText, f, 0.0F, color, false, posestack.last().pose(), multibuffersource$buffersource, Font.DisplayMode.SEE_THROUGH, 0, 15728880));
+        float f = (float) (-Minecraft.getInstance().font.width(text) / 2);
+        GLUtils.renderAlwaysSeenText(() -> Minecraft.getInstance().font.drawInBatch(text, f, 0.0F, color, false, posestack.last().pose(), multibuffersource$buffersource, Font.DisplayMode.SEE_THROUGH, 0, 15728880));
         multibuffersource$buffersource.endBatch();
     }
 

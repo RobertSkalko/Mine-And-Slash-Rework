@@ -28,7 +28,7 @@ public class DamageNullifiedParticle extends ExileInteractionResultParticle {
         posestack.pushPose();
 
         super.getStrategy().setupParticle(this, vertexConsumer, camera, partialTick, posestack);
-        super.getStrategy().renderNullifiedDamage(this, vertexConsumer, camera, partialTick, posestack, type.text, getColor());
+        super.getStrategy().renderNullifiedDamage(this, vertexConsumer, camera, partialTick, posestack, type.text.getString(), getColor());
         super.getStrategy().changeScale(this, getAge(), getLiftTime(), partialTick);
 
         posestack.popPose();

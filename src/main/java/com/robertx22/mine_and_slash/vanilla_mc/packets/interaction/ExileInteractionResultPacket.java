@@ -13,7 +13,7 @@ public class ExileInteractionResultPacket extends MyPacket<ExileInteractionResul
 
 
     public int id;
-    private InteractionResultHandler.ParticleSpawnType type;
+    private InteractionResultHandler.ExileParticleType type;
     private IParticleSpawnMaterial notifier;
 
 
@@ -34,7 +34,7 @@ public class ExileInteractionResultPacket extends MyPacket<ExileInteractionResul
     @Override
     public void loadFromData(FriendlyByteBuf friendlyByteBuf) {
         this.id = friendlyByteBuf.readInt();
-        this.type = friendlyByteBuf.readEnum(InteractionResultHandler.ParticleSpawnType.class);
+        this.type = friendlyByteBuf.readEnum(InteractionResultHandler.ExileParticleType.class);
         this.notifier = this.type.target.loadFromData(friendlyByteBuf);
     }
 

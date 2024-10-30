@@ -191,8 +191,6 @@ public class CreateLangFile {
         list.addAll(Arrays.asList(PlayerBuffData.Type.values()));
         list.addAll(Arrays.asList(ChestContent.chestTypeEnum.values()));
         list.addAll(Arrays.asList(LootModifierEnum.values()));
-        list.addAll(Arrays.asList(IParticleSpawnMaterial.Type.values()));
-
 
         HashMap<IAutoLocName.AutoLocGroup, List<IAutoLocName>> map = new HashMap<>();
 
