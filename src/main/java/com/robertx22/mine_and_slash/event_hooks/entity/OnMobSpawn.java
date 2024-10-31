@@ -37,6 +37,7 @@ public class OnMobSpawn {
                         int count = EntityFinder.start(entity, LivingEntity.class, entity.position()).radius(100).searchFor(AllyOrEnemy.all).build().size();
                         if (ServerContainer.get().DONT_MAKE_MAP_MOBS_PERSISTENT_IF_MOB_COUNT_IS_ABOVE.get() > count) {
                             mob.setPersistenceRequired();
+                            
                         }
                     }
                 }

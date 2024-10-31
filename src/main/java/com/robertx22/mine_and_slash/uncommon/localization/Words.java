@@ -312,6 +312,7 @@ public enum Words implements IAutoLocName {
     MULTIPLICATIVE_DAMAGE_MORE("More"),
     MULTIPLICATIVE_DAMAGE_LESS("Less"),
     INCREASE_PERCENT_STAT("Extra ", "use for stat like \"(Extra) (attack speed)\", this is different with multiply stat prefix."),
+    REDUCE_PERCENT_STAT("Lower "),
     EMPTY_BOX("Box"),
     LEVEL_UP_TYPE_PLAYER("Player");
 

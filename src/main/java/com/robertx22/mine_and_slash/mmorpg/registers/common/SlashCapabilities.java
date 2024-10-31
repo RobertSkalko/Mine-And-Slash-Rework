@@ -1,12 +1,12 @@
 package com.robertx22.mine_and_slash.mmorpg.registers.common;
 
-import com.robertx22.mine_and_slash.capability.chunk.ChunkData;
+import com.robertx22.library_of_exile.components.PlayerCapabilities;
+import com.robertx22.mine_and_slash.capability.chunk.ChunkCap;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.capability.player.PlayerBackpackData;
 import com.robertx22.mine_and_slash.capability.player.PlayerData;
 import com.robertx22.mine_and_slash.capability.world.WorldData;
 import com.robertx22.mine_and_slash.mmorpg.ForgeEvents;
-import com.robertx22.library_of_exile.components.PlayerCapabilities;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -28,7 +28,7 @@ public class SlashCapabilities {
             x.register(WorldData.class);
             x.register(PlayerData.class);
             x.register(PlayerBackpackData.class);
-            x.register(ChunkData.class);
+            x.register(ChunkCap.class);
         });
 
         MinecraftForge.EVENT_BUS.addGenericListener(Level.class, (Consumer<AttachCapabilitiesEvent<Level>>) x -> {
@@ -37,7 +37,7 @@ public class SlashCapabilities {
 
 
         MinecraftForge.EVENT_BUS.addGenericListener(LevelChunk.class, (Consumer<AttachCapabilitiesEvent<LevelChunk>>) x -> {
-            x.addCapability(ChunkData.RESOURCE, new ChunkData(x.getObject()));
+            x.addCapability(ChunkCap.RESOURCE, new ChunkCap(x.getObject()));
         });
 
         MinecraftForge.EVENT_BUS.addGenericListener(Entity.class, (Consumer<AttachCapabilitiesEvent<Entity>>) x -> {

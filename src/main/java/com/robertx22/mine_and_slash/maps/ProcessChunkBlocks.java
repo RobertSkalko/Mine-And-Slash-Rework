@@ -134,7 +134,6 @@ public class ProcessChunkBlocks {
                                 return;
                             }
                         }
-
                     }
                 }
 
@@ -159,9 +158,9 @@ public class ProcessChunkBlocks {
 
                             map.leagues.processedChunks++;
 
-
                         }
 
+                        MobUnloading.loadBackMobs(level, cpos);
                     }
 
 

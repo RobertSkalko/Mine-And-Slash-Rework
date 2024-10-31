@@ -58,6 +58,7 @@ public class OnServerTick {
 
                     var map = Load.mapAt(player.level(), player.blockPosition());
 
+
                     if (map == null || map.map == null) {
                         playerData.emptyMapTicks++;
 
@@ -175,7 +176,7 @@ public class OnServerTick {
 
 
             if (age % 20 == 0) {
-                
+
                 playerData.buff.onTick(player, 20);
 
 

@@ -55,10 +55,10 @@ public class UniqueRings implements ExileRegistryInit {
                         BaseGearTypes.RING)
                 .setReplacesName()
                 .stats(Arrays.asList(
-                        new StatMod(-75, 25, OffenseStats.CRIT_DAMAGE.get()),
-                        new StatMod(-50, 15, new ElementalResist(Elements.Cold), ModType.FLAT),
-                        new StatMod(-50, 15, new ElementalResist(Elements.Fire), ModType.FLAT),
-                        new StatMod(-50, 15, new ElementalResist(Elements.Shadow), ModType.FLAT)
+                        new StatMod(-100, 75, OffenseStats.CRIT_CHANCE.get()).percent(), // todo
+                        new StatMod(-50, 25, new ElementalResist(Elements.Cold), ModType.FLAT),
+                        new StatMod(-50, 25, new ElementalResist(Elements.Fire), ModType.FLAT),
+                        new StatMod(-50, 25, new ElementalResist(Elements.Shadow), ModType.FLAT)
                 ))
                 .devComment("global crit + res, high RNG")
                 .build();

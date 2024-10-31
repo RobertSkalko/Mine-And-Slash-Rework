@@ -7,6 +7,8 @@ import java.util.Locale;
 
 public enum Formatter implements IAutoLocName {
 
+    //BASIC_STAT_FORMAT("%1$s %2$s %3$s"), todo the stat code is too messy to edit currently
+
     UNIQUE_NAME_FORMAT("%1$s %2$s"),
     GEM_ITEM_NAME("%1$s %2$s", "Use to control the order and space of gem item name, like \"(cracked) (ruby)\""),
     BUFF_CONSUMPTIONS_NAME("%1$s %2$s %3$s", "control the order and space of buff consumption."),
@@ -28,6 +30,7 @@ public enum Formatter implements IAutoLocName {
         this.localization = str;
 
     }
+
     Formatter(String str, String localeContext) {
         this.localization = str;
         this.localeContext = localeContext;
@@ -56,7 +59,7 @@ public enum Formatter implements IAutoLocName {
     }
 
     @Override
-    public String additionLocInformation(){
+    public String additionLocInformation() {
         return localeContext;
     }
 

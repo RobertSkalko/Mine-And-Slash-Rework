@@ -15,13 +15,20 @@ public class BasicStatRegex extends StatNameRegex {
             return NAME;
         }
 
+
         if (type.isFlat()) {
-
-
             return VALUE + NAME;
-
         }
+
         if (type.isPercent()) {
+            if (stat.IsPercent() && type != ModType.MORE) {
+                if (v1 > 0) {
+                    return VALUE + Words.INCREASE_PERCENT_STAT.locName().getString() + NAME;
+                } else {
+                    return VALUE + Words.REDUCE_PERCENT_STAT.locName().getString() + NAME;
+                }
+            }
+
             String s = v1 > 0 && (stat.IsPercent() && type != ModType.MORE) ? Words.INCREASE_PERCENT_STAT.locName().getString() : "";
             return VALUE + s + NAME;
         }
@@ -33,9 +40,7 @@ public class BasicStatRegex extends StatNameRegex {
 
             }
         }
-     
 
         return null;
-
     }
 }

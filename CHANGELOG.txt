@@ -12,3 +12,4 @@ v.5.8.4
 - gems can no longer be socketed on runed items
 - rune stats have been slightly nerfed
 - rune and gem extractors are now datapack currencies and were slightly reworked
+- added experimental mob persistence to maps. they will now save and load back if unloaded, so dying/coming back to maps shouldnt mean mobs are gone

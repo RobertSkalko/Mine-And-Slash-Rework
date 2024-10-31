@@ -1,6 +1,6 @@
 package com.robertx22.mine_and_slash.uncommon.datasaving;
 
-import com.robertx22.mine_and_slash.capability.chunk.ChunkData;
+import com.robertx22.mine_and_slash.capability.chunk.ChunkCap;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.capability.player.PlayerBackpackData;
 import com.robertx22.mine_and_slash.capability.player.PlayerData;
@@ -45,8 +45,8 @@ public class Load {
         return null;
     }
 
-    public static ChunkData chunkData(LevelChunk c) {
-        return c.getCapability(ChunkData.INSTANCE).orElseGet(null);
+    public static ChunkCap chunkData(LevelChunk c) {
+        return c.getCapability(ChunkCap.INSTANCE).orElseGet(null);
     }
 
 }

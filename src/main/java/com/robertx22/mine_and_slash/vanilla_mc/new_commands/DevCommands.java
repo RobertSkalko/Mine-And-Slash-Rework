@@ -81,7 +81,41 @@ public class DevCommands {
 
             }, "Generates a wiki section for all commands using the new CommandBuilder wrapper, their args and descriptions.");
 
+            /*
+            CommandBuilder.of(dis, x -> {
+                PlayerWrapper enarg = new PlayerWrapper();
 
+                x.addLiteral("dev", PermWrapper.OP);
+                x.addLiteral("despawn_mobs", PermWrapper.OP);
+
+                x.addArg(enarg);
+
+                x.action(e -> {
+                    Player p = enarg.get(e);
+                    for (LivingEntity en : p.level().getEntitiesOfClass(LivingEntity.class, p.getBoundingBox().inflate(30))) {
+                        en.setRemoved(Entity.RemovalReason.UNLOADED_TO_CHUNK);
+                    }
+                });
+
+            }, "");
+
+            CommandBuilder.of(dis, x -> {
+                PlayerWrapper enarg = new PlayerWrapper();
+
+                x.addLiteral("dev", PermWrapper.OP);
+                x.addLiteral("load_back_mobs", PermWrapper.OP);
+
+                x.addArg(enarg);
+
+                x.action(e -> {
+                    Player p = enarg.get(e);
+                    Load.chunkData((LevelChunk) p.level().getChunk(p.blockPosition())).tryLoadMobs(p.level());
+                });
+
+            }, " todo this doesnt work ??");
+
+
+             */
         }
     }
 }
