@@ -52,7 +52,7 @@ public class InteractionResultHandler {
                     double y = entity.getEyeY();
                     double z = entity.getRandomZ(0.5D);
                     String damageString = NumberUtils.format(damage);
-                    Minecraft.getInstance().particleEngine.add(new ElementDamageParticle(Minecraft.getInstance().level, x, y, z, new Default(), new IParticleRenderMaterial.singleElement(Pair.of(entry.getKey(), damage + ""), crit)));
+                    Minecraft.getInstance().particleEngine.add(new ElementDamageParticle(Minecraft.getInstance().level, x, y, z, new Default(), new IParticleRenderMaterial.singleElement(Pair.of(entry.getKey(), damageString), crit)));
                 }
             }
         },
