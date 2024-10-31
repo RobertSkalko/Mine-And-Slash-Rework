@@ -4,7 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.ExileInteractionResultParticle;
-import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.GLUtils;
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.RenderUtils;
+import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -16,11 +17,9 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Row implements IParticleRenderStrategy {
 
@@ -53,64 +52,52 @@ public class Row implements IParticleRenderStrategy {
     }
 
     @Override
-    public void renderDamage(ExileInteractionResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack, String text, int color) {
+    public void renderDamage(ExileInteractionResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack, IParticleRenderMaterial mat) {
+        IParticleRenderMaterial.multipleElements material = (IParticleRenderMaterial.multipleElements)mat;
+
+        List<Pair<Elements, String>> mat1 = material.getMat();
+        boolean crit = material.isCrit();
         MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-        boolean isCrit = text.contains("!");
-        if (isCrit) {
-            text = text.replace("!", "");
-        }
+
         float startFrom = 0.0f;
-        String[] split = text.split("(?=§)");
-        ArrayList<Pair<String, String>> colorAndNumber = new ArrayList<>();
-        Function<String, String> damageFormat = (number) -> number + " ";
-        for (String string : split) {
-            Pattern compile = Pattern.compile("(§.)(.+)");
-            Matcher matcher = compile.matcher(string);
 
-            if (matcher.find()) {
-                String colorCode = matcher.group(1);
-                String number = matcher.group(2);
-                colorAndNumber.add(Pair.of(colorCode, number));
-                int i = -Minecraft.getInstance().font.width(damageFormat.apply(number));
-                startFrom += i;
-
-            }
-
+        Function<String, String> damageFormat = (number) -> "-" + number + " ";
+        for (Pair<Elements, String> elementsStringPair : mat1) {
+            int i = -Minecraft.getInstance().font.width(damageFormat.apply(elementsStringPair.getValue()));
+            startFrom += i;
         }
+
         startFrom = startFrom / 2;
+
         float usedWidth = 0;
-        for (Pair<String, String> stringStringPair : colorAndNumber) {
-            String code = stringStringPair.getLeft();
-            String number = stringStringPair.getRight();
+        for (Pair<Elements, String> pair : mat1) {
+            Elements element = pair.getLeft();
+            String number = pair.getRight();
             String damage = damageFormat.apply(number);
 
-
-            ChatFormatting byCode = ChatFormatting.getByCode(code.charAt(1));
-            MutableComponent mutableComponent = MutableComponent.create(new LiteralContents(damage)).withStyle(byCode);
-            if (isCrit) {
+            ChatFormatting format = element.format;
+            MutableComponent mutableComponent = MutableComponent.create(new LiteralContents(damage)).withStyle(format);
+            if (crit) {
                 mutableComponent.withStyle(ChatFormatting.BOLD);
             }
+
             int thisWidth = Minecraft.getInstance().font.width(mutableComponent);
-            float finalStartFrom = startFrom;
-            float finalUsedWidth = usedWidth;
-            GLUtils.renderAlwaysSeenText(() -> Minecraft.getInstance().font.drawInBatch(mutableComponent, finalStartFrom + finalUsedWidth, 0.0F, Optional.ofNullable(byCode.getColor()).orElseGet(ChatFormatting.GRAY::getColor), false, posestack.last().pose(), multibuffersource$buffersource, Font.DisplayMode.SEE_THROUGH, 0, 15728880));
+            RenderUtils.renderComponent(posestack, mutableComponent, startFrom + usedWidth, format.getColor(), multibuffersource$buffersource);
 
             usedWidth += thisWidth;
-            multibuffersource$buffersource.endBatch();
-
         }
 
 
     }
 
     @Override
-    public void renderNullifiedDamage(ExileInteractionResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack, String text, int color) {
-        new Default().renderNullifiedDamage(particle, vertexConsumer, camera, partialTick, posestack, text, color);
+    public void renderNullifiedDamage(ExileInteractionResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack, IParticleRenderMaterial mat) {
+        new Default().renderNullifiedDamage(particle, vertexConsumer, camera, partialTick, posestack, mat);
     }
 
     @Override
-    public void renderHeal(ExileInteractionResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack, String text, int color) {
-        new Default().renderHeal(particle, vertexConsumer, camera, partialTick, posestack, text, color);
+    public void renderHeal(ExileInteractionResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack, IParticleRenderMaterial mat) {
+        new Default().renderHeal(particle, vertexConsumer, camera, partialTick, posestack, mat);
     }
 
     @Override

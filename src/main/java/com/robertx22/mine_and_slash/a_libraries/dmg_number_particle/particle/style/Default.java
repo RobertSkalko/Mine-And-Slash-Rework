@@ -4,14 +4,17 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.ExileInteractionResultParticle;
-import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.GLUtils;
-import com.robertx22.mine_and_slash.vanilla_mc.packets.interaction.IParticleSpawnMaterial;
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.RenderUtils;
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.impl.DamageNullifiedParticle;
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.impl.HealParticle;
+import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class Default implements IParticleRenderStrategy {
 
@@ -46,32 +49,35 @@ public class Default implements IParticleRenderStrategy {
     }
 
     @Override
-    public void renderDamage(ExileInteractionResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack, String text, int color) {
+    public void renderDamage(ExileInteractionResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack, IParticleRenderMaterial mat) {
+        IParticleRenderMaterial.singleElement material = (IParticleRenderMaterial.singleElement) mat;
+        boolean crit = material.isCrit();
+        Pair<Elements, String> mat1 = material.getMat();
+        String value = mat1.getValue();
+        ChatFormatting format = mat1.getKey().format;
         MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-        float f = (float) (-Minecraft.getInstance().font.width(text) / 2);
-        //have to use the Font.DisplayMode.SEE_THROUGH, otherwise it will be block by the health bar.
+        float f = (float) (-Minecraft.getInstance().font.width(value) / 2);
 
-        GLUtils.renderAlwaysSeenText(() -> Minecraft.getInstance().font.drawInBatch(text, f, 0.0F, color, false, posestack.last().pose(), multibuffersource$buffersource, Font.DisplayMode.SEE_THROUGH, 0, 15728880));
-
-        multibuffersource$buffersource.endBatch();
-    }
-
-
-    @Override
-    public void renderNullifiedDamage(ExileInteractionResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack, String text, int color) {
-        MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-        float f = (float) (-Minecraft.getInstance().font.width(text) / 2);
-        GLUtils.renderAlwaysSeenText(() -> Minecraft.getInstance().font.drawInBatch(text, f, 0.0F, color, false, posestack.last().pose(), multibuffersource$buffersource, Font.DisplayMode.SEE_THROUGH, 0, 15728880));
-        multibuffersource$buffersource.endBatch();
+        RenderUtils.renderText(posestack, crit ? value + "!" : value, f, format.getColor(), multibuffersource$buffersource);
     }
 
     @Override
-    public void renderHeal(ExileInteractionResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack, String text, int color) {
+    public void renderNullifiedDamage(ExileInteractionResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack, IParticleRenderMaterial mat) {
+        IParticleRenderMaterial.simpleText material = (IParticleRenderMaterial.simpleText) mat;
         MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-        float f = (float) (-Minecraft.getInstance().font.width(text) / 2);
-        GLUtils.renderAlwaysSeenText(() -> Minecraft.getInstance().font.drawInBatch(text, f, 0.0F, color, false, posestack.last().pose(), multibuffersource$buffersource, Font.DisplayMode.SEE_THROUGH, 0, 15728880));
+        float f = (float) (-Minecraft.getInstance().font.width(material.getMat()) / 2);
 
-        multibuffersource$buffersource.endBatch();
+        RenderUtils.renderText(posestack, material.getMat(),f, DamageNullifiedParticle.color, multibuffersource$buffersource);
+
+    }
+
+    @Override
+    public void renderHeal(ExileInteractionResultParticle particle, VertexConsumer vertexConsumer, Camera camera, float partialTick, PoseStack posestack, IParticleRenderMaterial mat) {
+        IParticleRenderMaterial.simpleText material = (IParticleRenderMaterial.simpleText) mat;
+        MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
+        float f = (float) (-Minecraft.getInstance().font.width(material.getMat()) / 2);
+
+        RenderUtils.renderText(posestack, material.getMat(),f, HealParticle.color, multibuffersource$buffersource);
     }
 
 

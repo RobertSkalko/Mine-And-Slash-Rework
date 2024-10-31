@@ -31,8 +31,6 @@ public abstract class ExileInteractionResultParticle extends Particle{
         return strategy;
     }
 
-    protected abstract int getColor();
-
 
     public Vec3 getOriginalPosition(){
         return new Vec3(this.xo, this.yo, this.z);

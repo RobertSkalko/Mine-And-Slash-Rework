@@ -1,10 +1,12 @@
 package com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.impl.DamageNullifiedParticle;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.impl.ElementDamageParticle;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.impl.HealParticle;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.style.Default;
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.style.IParticleRenderMaterial;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.style.Row;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
@@ -14,6 +16,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Comparator;
 import java.util.Map;
@@ -43,14 +46,13 @@ public class InteractionResultHandler {
             boolean crit = mat.isCrit();
             for (Map.Entry<Elements, Float> entry : dmgMap.entrySet()) {
                 Float damage = entry.getValue();
-                if (damage
-                        .intValue() > 0) {
+                if (damage.intValue() > 0) {
 
                     double x = entity.getRandomX(0.5D);
                     double y = entity.getEyeY();
                     double z = entity.getRandomZ(0.5D);
                     String damageString = NumberUtils.format(damage);
-                    Minecraft.getInstance().particleEngine.add(new ElementDamageParticle(Minecraft.getInstance().level, x, y, z, new Default(), entry.getKey().format.getColor(), crit ? damageString + "!" : damageString));
+                    Minecraft.getInstance().particleEngine.add(new ElementDamageParticle(Minecraft.getInstance().level, x, y, z, new Default(), new IParticleRenderMaterial.singleElement(Pair.of(entry.getKey(), damage + ""), crit)));
                 }
             }
         },
@@ -76,17 +78,18 @@ public class InteractionResultHandler {
             ImmutableMap<Elements, Float> dmgMap = mat.getDmgMap();
 
             boolean crit = mat.isCrit();
-            StringBuilder stringBuilder = new StringBuilder();
+            ImmutableList.Builder<Pair<Elements, String>> builder = ImmutableList.builder();
             dmgMap.entrySet().stream().sorted(Comparator.comparingInt(entry -> entry.getKey().ordinal())).forEachOrdered(x -> {
                 Elements key = x.getKey();
-                stringBuilder.append(key.format).append("-").append(NumberUtils.format(x.getValue()));
+                String value = NumberUtils.format(x.getValue());
+                builder.add(Pair.of(key, value));
             });
-            String string = stringBuilder.toString();
+
             Random random = new Random();
             double x = entity.getX() + random.nextDouble(-1d, 1d);
             double y = entity.getEyeY() + random.nextDouble(-0.5d, 0.8d);
             double z = entity.getZ();
-            Minecraft.getInstance().particleEngine.add(new ElementDamageParticle(Minecraft.getInstance().level, x, y, z, new Row(), ChatFormatting.WHITE.getColor(), crit ? string + "!" : string));
+            Minecraft.getInstance().particleEngine.add(new ElementDamageParticle(Minecraft.getInstance().level, x, y, z, new Row(), new IParticleRenderMaterial.multipleElements(builder.build(), crit)));
 
         },
                 (type, entity) -> {
