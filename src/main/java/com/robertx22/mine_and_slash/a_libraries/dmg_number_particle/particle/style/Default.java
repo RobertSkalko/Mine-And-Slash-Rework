@@ -16,14 +16,16 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.Random;
+
 public class Default implements IParticleRenderStrategy {
 
     private float scale = 1.0f;
-
     @Override
     public void setupStyle(ExileInteractionResultParticle particle) {
         particle.setGravity(0.8f);
-        particle.setParticleSpeed(0, 0.2F + Math.random() * 0.2F, 0);
+        Random random = new Random();
+        particle.setParticleSpeed(0 + random.nextDouble(-0.25, 0.25), 0.1 + random.nextDouble(0.2, 0.3), 0);
         particle.setLiftTime(15 + Minecraft.getInstance().player.level().random.nextInt(5));
     }
 
