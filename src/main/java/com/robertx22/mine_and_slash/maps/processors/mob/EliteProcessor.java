@@ -32,7 +32,7 @@ public class EliteProcessor extends DataProcessor {
 
         MobBuilder.of(type, x -> {
             x.amount = 1;
-            x.rarity = ExileDB.GearRarities().getFilterWrapped(e -> e.item_tier > 3).random();
+            x.rarity = ExileDB.MobRarities().getFilterWrapped(e -> e.is_elite).random();
         }).summonMobs(world, pos);
 
     }

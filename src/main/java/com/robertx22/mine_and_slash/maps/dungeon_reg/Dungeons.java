@@ -6,6 +6,7 @@ import com.robertx22.mine_and_slash.tags.all.DungeonTags;
 public class Dungeons {
 
     public static void init() {
+        Dungeon.Builder.of("test", "Test Dungeon", new TestRoomAdder()).weight(0).build();
 
         Dungeon.Builder.of("cement", "Cemetery", new CementeryAdder()).weight(2000).build();
 

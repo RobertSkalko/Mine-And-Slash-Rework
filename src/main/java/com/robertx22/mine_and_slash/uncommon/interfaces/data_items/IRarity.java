@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IRarity {
 
-    
+
     // public static int TOTAL_GEAR_RARITIES = 6;
 
     public String getRarityId();
@@ -29,6 +29,7 @@ public interface IRarity {
     String EPIC_ID = "epic";
     String LEGENDARY_ID = "legendary";
     String MYTHIC_ID = "mythic";
+    String BOSS = "boss";
     String UBER = "uber";
 
     public static List<String> NORMAL_GEAR_RARITIES = Arrays.asList(COMMON_ID, UNCOMMON, RARE_ID, EPIC_ID, LEGENDARY_ID, MYTHIC_ID);

@@ -159,7 +159,7 @@ public class HealthBarRenderer {
         if (NeatConfig.instance.blacklist().contains(id.toString())) {
             return false;
         }
-    
+
 
         float distance = living.distanceTo(cameraEntity);
         if (distance > NeatConfig.instance.maxDistance()

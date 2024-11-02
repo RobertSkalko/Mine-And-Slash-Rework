@@ -23,6 +23,7 @@ public class DataProcessors {
 
 
         if (all.isEmpty()) {
+            all.add(new MapBossProcessor());
             all.add(new BossProcessor());
             all.add(new EliteProcessor());
             all.add(MOB);

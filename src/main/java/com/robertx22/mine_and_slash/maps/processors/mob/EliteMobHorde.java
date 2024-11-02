@@ -1,12 +1,12 @@
 package com.robertx22.mine_and_slash.maps.processors.mob;
 
+import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.maps.generator.ChunkProcessData;
 import com.robertx22.mine_and_slash.maps.processors.DataProcessor;
 import com.robertx22.mine_and_slash.maps.processors.helpers.MobBuilder;
 import com.robertx22.mine_and_slash.maps.spawned_map_mobs.SpawnedMob;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -35,7 +35,7 @@ public class EliteMobHorde extends DataProcessor {
 
         MobBuilder.of(type, x -> {
             x.amount = amount;
-            x.rarity = ExileDB.GearRarities().getFilterWrapped(e -> e.item_tier > 3).random();
+            x.rarity = ExileDB.MobRarities().getFilterWrapped(e -> e.is_elite).random();
         }).summonMobs(world, pos);
 
     }

@@ -34,12 +34,10 @@ public class BossProcessor extends DataProcessor {
         EntityType<? extends Mob> type = SpawnedMob.random(map).getType();
 
         for (Mob en : MobBuilder.of(type, x -> {
-            x.rarity = ExileDB.GearRarities().get(IRarity.MYTHIC_ID);
+            x.rarity = ExileDB.MobRarities().get(IRarity.MYTHIC_ID);
         }).summonMobs(world, pos)) {
-            Load.Unit(en).setupRandomBoss(); // todo
+            // remove this later Load.Unit(en).setupRandomBoss(); // todo
         }
-
-
     }
 
 }

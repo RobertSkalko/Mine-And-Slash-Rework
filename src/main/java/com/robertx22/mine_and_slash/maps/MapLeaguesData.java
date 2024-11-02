@@ -1,10 +1,10 @@
 package com.robertx22.mine_and_slash.maps;
 
+import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.mine_and_slash.database.data.league.LeagueMechanic;
 import com.robertx22.mine_and_slash.database.data.league.LeagueMechanics;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.saveclasses.PointData;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
@@ -77,6 +77,11 @@ public class MapLeaguesData {
             LeagueMechanics.UBER.onMapStartSetup(data);
             this.map.put(LeagueMechanics.UBER_ID, data);
         }
+
+        var data = new LeagueData();
+        LeagueMechanics.MAP_BOSS.onMapStartSetupBase(map, data);
+        LeagueMechanics.MAP_BOSS.onMapStartSetup(data);
+        this.map.put(LeagueMechanics.MAP_BOSS_ID, data);
     }
 
     public LeagueData get(LeagueMechanic m) {

@@ -2,6 +2,7 @@ package com.robertx22.mine_and_slash.capability.chunk;
 
 import com.robertx22.library_of_exile.components.ICap;
 import com.robertx22.library_of_exile.main.ExileLog;
+import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -50,6 +51,7 @@ public class ChunkCap implements ICap {
         this.chunk = chunk;
     }
 
+    public boolean roomCreated = false;
 
     List<CompoundTag> savedMobs = new ArrayList<>();
 
@@ -61,7 +63,7 @@ public class ChunkCap implements ICap {
                     var en = EntityType.loadEntityRecursive(nbt, world, x -> {
                         return x;
                     });
-                    world.addFreshEntity(en);
+                    //  world.addFreshEntity(en); seems the above method actually spawns them too
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -77,8 +79,10 @@ public class ChunkCap implements ICap {
             return;
         }
 
-        if (savedMobs.size() > 40) {
-            ExileLog.get().warn("Saved too many mobs in 1 chunk, stopping just in case");
+        if (savedMobs.size() > 30) {
+            if (MMORPG.RUN_DEV_TOOLS) {
+                ExileLog.get().warn("Saved too many mobs in 1 chunk, stopping just in case");
+            }
             return;
         }
         if (mobIds.contains(en.getUUID())) {
@@ -107,6 +111,7 @@ public class ChunkCap implements ICap {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            ExileLog.get().warn("Mob Unloading/Loading Error");
         }
 
         return nbt;
@@ -122,12 +127,20 @@ public class ChunkCap implements ICap {
             int mobs = nbt.getInt("mobs");
 
             this.savedMobs = new ArrayList<>();
+            this.mobIds = new ArrayList<>();
 
             for (int i = 0; i < mobs; i++) {
-                savedMobs.add(nbt.getCompound(i + ""));
+                var mobnbt = nbt.getCompound(i + "");
+                var id = mobnbt.getUUID("UUID");
+                if (id != null) {
+                    savedMobs.add(mobnbt);
+                    mobIds.add(id);
+                }
+                // todo test if game still freezes
             }
         } catch (Exception e) {
             e.printStackTrace();
+            ExileLog.get().warn("Mob Unloading/Loading Error");
         }
 
     }

@@ -31,6 +31,7 @@ import com.robertx22.mine_and_slash.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.mine_and_slash.aoe_data.database.unique_gears.UniqueGearReg;
 import com.robertx22.mine_and_slash.content.ubers.UberBosses;
 import com.robertx22.mine_and_slash.database.data.aura.AuraGems;
+import com.robertx22.mine_and_slash.database.data.boss_arena.BossArenas;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.PlayerPointsConfig;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.PlayerPointsType;
@@ -53,7 +54,7 @@ public class GeneratedData {
     // If it errors without them, then that means i hardcoded something i shouldn't have
     public static void addAllObjectsToGenerate() {
 
-   
+
         AuraGems.initKeys();
 
         WeaponTypes.registerAll();
@@ -101,6 +102,7 @@ public class GeneratedData {
 
         SpawnedMobs.init();
         Dungeons.init();
+        BossArenas.init();
 
         Professions.init();
         ProfessionRecipes.init();

@@ -4,6 +4,7 @@ import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.mine_and_slash.maps.MapData;
 import com.robertx22.mine_and_slash.maps.generator.BuiltRoom;
 import com.robertx22.mine_and_slash.maps.generator.DungeonBuilder;
+import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 
 public class DungeonFeature {
@@ -90,13 +92,21 @@ public class DungeonFeature {
             mapData.leagues.totalGenDungeonChunks++;
         }
 
-      
+
         BlockPos position = cpos.getBlockAt(0, 50, 0);
 
         generatePiece(world, position, random, room.data.rotation, room.getStructure());
 
-        return true;
+        if (!room.room.isBarrier) {
 
+            var chunk = world.getChunk(position);
+            if (chunk instanceof LevelChunk lc) {
+                Load.chunkData(lc).roomCreated = true;
+            }
+    
+        }
+
+        return true;
 
     }
 

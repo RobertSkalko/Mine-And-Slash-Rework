@@ -89,8 +89,10 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
                             }
 
                             var map = Load.mapAt(mobKilled.level(), mobKilled.blockPosition());
-                            if (map != null) {
 
+                            if (map != null) {
+                                map.rooms.mobs.done++;
+                                
                                 // map.trySpawnMechanic(mobKilled.level(), mobKilled.blockPosition());
 
                                 var mech = LeagueStructure.getMechanicFromPosition((ServerLevel) player.level(), mobKilled.blockPosition());

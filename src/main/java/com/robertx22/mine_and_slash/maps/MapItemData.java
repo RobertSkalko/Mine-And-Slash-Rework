@@ -57,11 +57,17 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
     public List<MapAffixData> affixes = new ArrayList<MapAffixData>();
 
+    public String arena = "";
 
     public String uuid = UUID.randomUUID().toString();
 
     public MapItemData() {
 
+
+    }
+
+    public void randomizeArena() {
+        arena = ExileDB.BossArena().random().GUID();
     }
 
     public static MapItemData empty() {

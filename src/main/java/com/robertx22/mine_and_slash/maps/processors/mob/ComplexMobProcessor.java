@@ -1,7 +1,7 @@
 package com.robertx22.mine_and_slash.maps.processors.mob;
 
 import com.robertx22.library_of_exile.utils.RandomUtils;
-import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
+import com.robertx22.mine_and_slash.database.data.rarities.MobRarity;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.maps.generator.ChunkProcessData;
 import com.robertx22.mine_and_slash.maps.processors.DataProcessor;
@@ -46,7 +46,7 @@ public class ComplexMobProcessor extends DataProcessor {
 
             String[] parts = StringUTIL.split(key, ";");
 
-            GearRarity rarity = null;
+            MobRarity rarity = null;
             boolean isBoss = false;
             EntityType<? extends Mob> type = null;
 
@@ -67,8 +67,8 @@ public class ComplexMobProcessor extends DataProcessor {
 
 
             for (String x : parts) {
-                if (ExileDB.GearRarities().isRegistered(x)) {
-                    rarity = ExileDB.GearRarities().get(x);
+                if (ExileDB.MobRarities().isRegistered(x)) {
+                    rarity = ExileDB.MobRarities().get(x);
                 }
 
             }
@@ -79,7 +79,7 @@ public class ComplexMobProcessor extends DataProcessor {
                 }
             }
             if (rarity == null) {
-                rarity = ExileDB.GearRarities().random();
+                rarity = ExileDB.MobRarities().random();
             }
 
             for (String x : parts) {
@@ -113,7 +113,7 @@ public class ComplexMobProcessor extends DataProcessor {
 
             // temps
             int finalAmount = amount;
-            GearRarity finalRarity = rarity;
+            MobRarity finalRarity = rarity;
             for (Mob mob : MobBuilder.of(type, x -> {
                 x.amount = finalAmount;
                 if (finalRarity != null) {

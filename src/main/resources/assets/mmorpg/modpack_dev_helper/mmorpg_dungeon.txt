@@ -16,5 +16,6 @@ spruce_mansion
 steampunk
 stone_brick
 tent
+test
 warped
 wn

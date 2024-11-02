@@ -14,6 +14,7 @@ import com.robertx22.mine_and_slash.database.data.affixes.Affix;
 import com.robertx22.mine_and_slash.database.data.aura.AuraGem;
 import com.robertx22.mine_and_slash.database.data.auto_item.AutoItem;
 import com.robertx22.mine_and_slash.database.data.base_stats.BaseStatsConfig;
+import com.robertx22.mine_and_slash.database.data.boss_arena.BossArena;
 import com.robertx22.mine_and_slash.database.data.chaos_stats.ChaosStat;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.ExileCurrency;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModification;
@@ -291,6 +292,10 @@ public class ExileDB {
 
     public static ExileRegistryContainer<ProfessionRecipe> Recipes() {
         return Database.getRegistry(ExileRegistryTypes.RECIPE);
+    }
+
+    public static ExileRegistryContainer<BossArena> BossArena() {
+        return Database.getRegistry(ExileRegistryTypes.BOSS_ARENA);
     }
 
     public static ExileRegistryContainer<WeaponTypes> WeaponTypes() {

@@ -25,9 +25,11 @@ import java.util.stream.Collectors;
 
 public class MapData {
 
+
     public MapItemData map = new MapItemData();
 
-
+    public MapRoomsData rooms = new MapRoomsData();
+    
     public MapLeaguesData leagues = new MapLeaguesData();
 
     private HashMap<String, Integer> lives = new HashMap<>();

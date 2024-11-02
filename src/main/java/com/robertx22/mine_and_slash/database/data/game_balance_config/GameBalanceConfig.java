@@ -48,7 +48,7 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     public double MIN_SPELL_COOLDOWN_MULTI = 0.2;
 
     public double CRAFTED_GEAR_POTENTIAL_MULTI = 0.5;
-  
+
 
     public int MAX_BONUS_SPELL_LEVELS = 5;
 

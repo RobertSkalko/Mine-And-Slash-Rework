@@ -1,13 +1,13 @@
 package com.robertx22.mine_and_slash.event_hooks.my_events;
 
 import com.google.common.collect.Lists;
+import com.robertx22.library_of_exile.events.base.EventConsumer;
+import com.robertx22.library_of_exile.events.base.ExileEvents;
 import com.robertx22.mine_and_slash.capability.player.data.PlayerConfigData;
 import com.robertx22.mine_and_slash.loot.LootInfo;
 import com.robertx22.mine_and_slash.loot.MasterLootGen;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
-import com.robertx22.library_of_exile.events.base.EventConsumer;
-import com.robertx22.library_of_exile.events.base.ExileEvents;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -40,6 +40,10 @@ public class OnLootChestEvent extends EventConsumer<ExileEvents.OnChestLooted> {
                 int emptyslot = list1.get(i);
                 event.inventory.setItem(emptyslot, items.get(i));
             }
+        }
+
+        if (WorldUtils.isMapWorldClass(player.level())) {
+            Load.mapAt(player.level(), event.pos).rooms.chests.done++;
         }
 
         if (Load.player(player).config.isConfigEnabled(PlayerConfigData.Config.DROP_MAP_CHEST_CONTENTS_ON_GROUND) && WorldUtils.isMapWorldClass(player.level())) {

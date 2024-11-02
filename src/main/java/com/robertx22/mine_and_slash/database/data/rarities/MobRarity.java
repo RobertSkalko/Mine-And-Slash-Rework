@@ -1,11 +1,11 @@
 package com.robertx22.mine_and_slash.database.data.rarities;
 
-import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
-import com.robertx22.mine_and_slash.mmorpg.SlashRef;
-import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
+import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
+import com.robertx22.mine_and_slash.mmorpg.SlashRef;
+import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
 import net.minecraft.ChatFormatting;
 
 public final class MobRarity implements JsonExileRegistry<MobRarity>, IAutoGson<MobRarity>, IAutoLocName {
@@ -49,6 +49,7 @@ public final class MobRarity implements JsonExileRegistry<MobRarity>, IAutoGson<
         return this;
     }
 
+
     public String text_format;
 
     String name = "";
@@ -68,6 +69,22 @@ public final class MobRarity implements JsonExileRegistry<MobRarity>, IAutoGson<
     public float exp_multi;
     public int affixes = 0;
 
+    public boolean is_elite = false;
+
+
+    // todo is it needed, i added elite field
+    public boolean is_special = false;
+
+
+    public MobRarity setSpecial() {
+        is_special = true;
+        return this;
+    }
+
+    public MobRarity setElite() {
+        is_elite = true;
+        return this;
+    }
 
     public boolean forcesCustomHp() {
         return force_custom_hp > 0;

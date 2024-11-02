@@ -10,6 +10,7 @@ import com.robertx22.mine_and_slash.database.data.affixes.Affix;
 import com.robertx22.mine_and_slash.database.data.aura.AuraGem;
 import com.robertx22.mine_and_slash.database.data.auto_item.AutoItem;
 import com.robertx22.mine_and_slash.database.data.base_stats.BaseStatsConfig;
+import com.robertx22.mine_and_slash.database.data.boss_arena.BossArena;
 import com.robertx22.mine_and_slash.database.data.chaos_stats.ChaosStat;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.ExileCurrency;
 import com.robertx22.mine_and_slash.database.data.currency.reworked.item_mod.ItemModification;
@@ -121,6 +122,7 @@ public class ExileRegistryTypes {
     public static ExileRegistryType ITEM_MOD = ExileRegistryType.register(SlashRef.MODID, "item_modification", 48, ItemModification.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType ITEM_REQ = ExileRegistryType.register(SlashRef.MODID, "item_requirement", 49, ItemRequirement.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType CURRENCY = ExileRegistryType.register(SlashRef.MODID, "currency", 50, ExileCurrency.SERIALIZER, SyncTime.ON_LOGIN);
+    public static ExileRegistryType BOSS_ARENA = ExileRegistryType.register(SlashRef.MODID, "boss_arena", 51, BossArena.SERIALIZER, SyncTime.NEVER);
 
 
 }

@@ -103,6 +103,7 @@ public class ExileDBInit {
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.ITEM_MOD, ""));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.ITEM_REQ, ""));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.CURRENCY, "socket_adder"));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.BOSS_ARENA, "sandstone"));
 
     }
 }

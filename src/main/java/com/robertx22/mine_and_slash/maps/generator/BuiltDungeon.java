@@ -33,7 +33,7 @@ public class BuiltDungeon {
     int capacity;
     private int size;
     private boolean started = false;
-    int amount = 0;
+    public int amount = 0;
     int ends = 0;
     public int bossRooms = 0;
 

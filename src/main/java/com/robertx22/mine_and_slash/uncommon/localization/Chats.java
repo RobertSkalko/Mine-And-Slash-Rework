@@ -30,7 +30,7 @@ public enum Chats implements IAutoLocName {
     CANT_CHANGE_CHAR_IN_COMBAT("You can't do that while in-Combat"),
     CANT_LOAD_CURRENT_CHAT("You're already Playing this character."),
     NOT_MEET_MAP_REQ_FIRST_LINE("You haven't met the map requirement: "),
-    NOT_MEET_MAP_REQ("%1$s: %2$s/%3$s"),
+    NOT_MEET_MAP_REQ("You have  %2$s %1$s but the map requires you to have at least %3$s"),
     PROPHECIES_GUIDE("1) Kill Monsters while Cursed to gain Prophecy Coins\n\n2) You can Buy Rewards in this GUI\n\n3) The More curses you accept, the more coins you will earn.\n\nCoins earned in Low-level maps won't work in High level maps."),
 
     EMPTY_MAP_FORCED_TP("The Map you're currently inside was deleted. This can happen if you entered another player's map and they started a new one."),

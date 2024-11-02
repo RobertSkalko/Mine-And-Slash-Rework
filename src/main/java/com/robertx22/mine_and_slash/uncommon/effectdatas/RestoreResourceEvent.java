@@ -1,14 +1,13 @@
 package com.robertx22.mine_and_slash.uncommon.effectdatas;
 
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.InteractionNotifier;
 import com.robertx22.mine_and_slash.capability.entity.CooldownsData;
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.saveclasses.unit.ResourceType;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.rework.RestoreType;
-import com.robertx22.mine_and_slash.uncommon.utilityclasses.NumberUtils;
-import com.robertx22.mine_and_slash.vanilla_mc.packets.DmgNumPacket;
-import com.robertx22.library_of_exile.main.Packets;
-import net.minecraft.ChatFormatting;
+import com.robertx22.mine_and_slash.vanilla_mc.packets.interaction.IParticleSpawnMaterial;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
@@ -51,12 +50,13 @@ public class RestoreResourceEvent extends EffectEvent {
 
         if (this.data.getResourceType() == ResourceType.health) {
             if (data.getRestoreType() == RestoreType.heal) {
-                if (source instanceof Player) {
+                if (source instanceof ServerPlayer p) {
 
                     if (source != target) {
-                        String text = NumberUtils.format(num);
+                        InteractionNotifier.notifyClient(new IParticleSpawnMaterial.HealNumber(num), p, target);
+                        /*String text = NumberUtils.format(num);
                         DmgNumPacket packet = new DmgNumPacket(target, text, data.isCrit(), ChatFormatting.GREEN);
-                        Packets.sendToClient((Player) source, packet);
+                        Packets.sendToClient((Player) source, packet);*/
                     }
                 }
             }

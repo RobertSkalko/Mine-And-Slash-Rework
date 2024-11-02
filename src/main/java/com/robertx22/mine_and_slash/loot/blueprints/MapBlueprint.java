@@ -70,6 +70,10 @@ public class MapBlueprint extends RarityItemBlueprint {
         }
         genAffixes(data, rarity);
 
+
+        data.randomizeArena();
+        
+
         return data;
     }
 

@@ -73,6 +73,8 @@ public class ChestProcessor extends DataProcessor {
 
             chest.setLootTable(world, world.getRandom(), pos, table);
 
+            Load.mapAt(world, pos).rooms.chests.total++;
+
         } else {
             ExileLog.get().warn("Chest gen failed, tile not instanceof vanilla chest.");
         }

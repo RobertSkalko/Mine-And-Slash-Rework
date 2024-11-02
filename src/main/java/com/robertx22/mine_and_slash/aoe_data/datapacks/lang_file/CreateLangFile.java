@@ -16,6 +16,7 @@ import com.robertx22.mine_and_slash.uncommon.localization.Formatter;
 import com.robertx22.mine_and_slash.uncommon.localization.*;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.DirUtils;
 import com.robertx22.mine_and_slash.vanilla_mc.items.gemrunes.GemItem;
+import com.robertx22.mine_and_slash.vanilla_mc.packets.interaction.IParticleSpawnMaterial;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.io.File;
@@ -190,7 +191,6 @@ public class CreateLangFile {
         list.addAll(Arrays.asList(PlayerBuffData.Type.values()));
         list.addAll(Arrays.asList(ChestContent.chestTypeEnum.values()));
         list.addAll(Arrays.asList(LootModifierEnum.values()));
-
 
         HashMap<IAutoLocName.AutoLocGroup, List<IAutoLocName>> map = new HashMap<>();
 
