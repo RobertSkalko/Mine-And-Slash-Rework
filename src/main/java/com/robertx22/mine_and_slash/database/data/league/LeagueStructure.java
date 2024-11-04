@@ -18,18 +18,14 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
+import org.codehaus.plexus.util.StringUtils;
 
 import java.util.Arrays;
-import java.util.Random;
 
 public abstract class LeagueStructure {
 
     public static LeagueStructure EMPTY = new LeagueStructure(LeagueMechanics.NONE) {
 
-        @Override
-        public BlockPos getTeleportPos(BlockPos pos) {
-            return pos;
-        }
 
         @Override
         public LeaguePiecesList getPieces(MapItemData map) {
@@ -43,11 +39,7 @@ public abstract class LeagueStructure {
 
         @Override
         public boolean isInsideLeague(ServerLevel level, BlockPos pos) {
-            var md = Load.mapAt(level, pos);
-            var map = md.map;
-
-            // if it's not inside any other league mechanic, its in the normal map
-            return ExileDB.LeagueMechanics().getList().stream().filter(x -> !x.getStructure(map).getPieces(map).list.isEmpty()).allMatch(x -> !x.getStructure(map).isInsideLeague(level, pos));
+            return false;
         }
     };
 
@@ -65,13 +57,14 @@ public abstract class LeagueStructure {
         var list = ExileDB.LeagueMechanics().getFilterWrapped(x -> x.getStructure(map) != null && x.getStructure(map).isInsideLeague(sw, pos)).list;
 
         if (!list.isEmpty()) {
+            if (list.size() > 1) {
+                throw new RuntimeException("Can't have more than 1 league structure in same position! " + StringUtils.join(list.iterator(), ","));
+            }
             return list.get(0);
         }
 
         return LeagueMechanics.NONE;
     }
-
-    public abstract BlockPos getTeleportPos(BlockPos pos);
 
 
     public abstract LeaguePiecesList getPieces(MapItemData map);
@@ -79,11 +72,15 @@ public abstract class LeagueStructure {
 
     public abstract int startY();
 
+    public int getYSize() {
+        return 30;
+    }
 
-    public abstract boolean isInsideLeague(ServerLevel level, BlockPos pos);
+    public boolean isInsideLeague(ServerLevel level, BlockPos pos) {
+        return pos.getY() >= startY() && pos.getY() <= (startY() + getYSize());
+    }
 
-
-    public final void tryGenerate(ServerLevel level, ChunkPos pos, Random ran) {
+    public final void tryGenerate(ServerLevel level, ChunkPos pos) {
         try {
             var md = Load.mapAt(level, pos.getBlockAt(0, 0, 0));
 

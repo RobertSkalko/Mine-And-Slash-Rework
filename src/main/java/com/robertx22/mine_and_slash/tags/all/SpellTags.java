@@ -5,6 +5,7 @@ import com.robertx22.mine_and_slash.tags.imp.SpellTag;
 public class SpellTags {
 
     public static SpellTag projectile = SpellTag.of("projectile");
+    public static SpellTag not_affected_by_cast_speed = SpellTag.of("not_affected_by_cast_speed");
     public static SpellTag melee = SpellTag.of("melee");
     public static SpellTag magic = SpellTag.of("magic");
     public static SpellTag weapon_skill = SpellTag.of("weapon_skill");

@@ -30,6 +30,7 @@ public class S2CPacketRegister {
         Packets.registerServerToClient(MMORPG.NETWORK, new SendStatCalcInfoToClientPacket(new StatCalcInfoData()), i++);
         Packets.registerServerToClient(MMORPG.NETWORK, new ExileInteractionResultPacket(), i++);
         Packets.registerServerToClient(MMORPG.NETWORK, new TellClientResetCaches(), i++);
+        Packets.registerServerToClient(MMORPG.NETWORK, new MapCompletePacket(), i++);
 
 
     }

@@ -139,7 +139,7 @@ public class WorksOnBlock extends AbstractTextBlock {
         JEWEL(Words.Jewel, Words.Jewel_DESC, x -> StackSaving.JEWEL.has(x)),
         MAP(Words.Map, Words.MapDESC, x -> StackSaving.MAP.has(x)),
         SOUL(Words.Soul, Words.Gear_DESC, x -> StackSaving.STAT_SOULS.has(x)),
-        SOULLESS_GEAR(Words.SOULLESS_Gear, Words.SOULLESS_Gear_DESC, x -> !StackSaving.GEARS.has(x) && GearSlot.getSlotOf(x.getItem()) != null);
+        SOULLESS_GEAR(Words.SOULLESS_Gear, Words.SOULLESS_Gear_DESC, x -> !StackSaving.GEARS.has(x) && GearSlot.getSlotOf(x) != null);
 
         public Words name;
         public Words desc;

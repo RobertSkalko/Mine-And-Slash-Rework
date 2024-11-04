@@ -10,18 +10,15 @@ import java.util.function.Function;
 
 public class ChunkProcessData {
 
-    public ChunkProcessData(ChunkAccess chunk, BuiltRoom room) {
+    public ChunkProcessData(ChunkAccess chunk) {
         this.chunk = chunk;
-        this.room = room;
     }
 
     public ChunkAccess chunk;
-    private BuiltRoom room;
     public boolean chanceChest = false;
 
-    public BuiltRoom getRoom() {
-        return room;
-    }
+    public int map_reward_chests = 0;
+
 
     public void iterateBlocks(Function<BlockPos, BlockPos> function) {
 

@@ -28,22 +28,29 @@ public class LeagueTeleportBlock extends Block {
 
 
         if (!level.isClientSide) {
-
-            if (WorldUtils.isDungeonWorld(level)) {
-
-                var mech = LeagueStructure.getMechanicFromPosition((ServerLevel) level, pPos);
-
-                var map = Load.mapAt(level, pPos).map;
-
-                if (mech.GUID().equals(league)) {
-                    mech.getStructure(map).teleportBackToDungeon(p);
-                } else {
-                    ExileDB.LeagueMechanics().get(league).getStructure(map).teleportToStartOfLeague(p);
-                }
-
-            }
+            teleportToLeague(p, pPos, league);
         }
 
         return InteractionResult.SUCCESS;
+    }
+
+    // todo item with tp
+    public static void teleportToLeague(Player p, BlockPos pos, String league) {
+        var level = p.level();
+
+        if (WorldUtils.isDungeonWorld(level)) {
+
+            var mech = LeagueStructure.getMechanicFromPosition((ServerLevel) level, pos);
+
+            var map = Load.mapAt(level, pos).map;
+
+            if (mech.GUID().equals(league)) {
+                mech.getStructure(map).teleportBackToDungeon(p);
+            } else {
+                ExileDB.LeagueMechanics().get(league).getStructure(map).teleportToStartOfLeague(p);
+            }
+
+        }
+
     }
 }

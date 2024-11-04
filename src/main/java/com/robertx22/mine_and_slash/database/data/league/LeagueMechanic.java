@@ -1,5 +1,8 @@
 package com.robertx22.mine_and_slash.database.data.league;
 
+import com.robertx22.library_of_exile.registry.ExileRegistry;
+import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.mine_and_slash.database.data.spells.map_fields.MapField;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
 import com.robertx22.mine_and_slash.loot.LootInfo;
@@ -10,16 +13,13 @@ import com.robertx22.mine_and_slash.mechanics.base.LeagueBlockData;
 import com.robertx22.mine_and_slash.mechanics.base.LeagueControlBlockEntity;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
-import com.robertx22.library_of_exile.registry.ExileRegistry;
-import com.robertx22.library_of_exile.registry.ExileRegistryType;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Block;
 
 public abstract class LeagueMechanic implements ExileRegistry<LeagueMechanic>, IAutoLocName {
-  
+
     public abstract LeagueStructure getStructure(MapItemData map);
 
     public float getBaseSpawnChance() {
@@ -39,6 +39,11 @@ public abstract class LeagueMechanic implements ExileRegistry<LeagueMechanic>, I
         if (!getStructure(map).getPieces(map).list.isEmpty()) {
             data.map.put(getStructureId(), RandomUtils.weightedRandom(getStructure(map).getPieces(map).list).folder);
         }
+    }
+
+
+    public boolean gensRightAway(MapData map) {
+        return true;
     }
 
     public abstract void onMapStartSetup(LeagueData data);

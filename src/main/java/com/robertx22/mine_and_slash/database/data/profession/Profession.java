@@ -65,7 +65,7 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
 
     public List<ItemStack> getAllDrops(Player p, int lvl, int recipelvl, float dropChanceMulti) {
 
-     
+
         List<ItemStack> list = new ArrayList<>();
 
         ProfessionRecipe.RecipeDifficulty diff = ProfessionRecipe.RecipeDifficulty.get(lvl, recipelvl);

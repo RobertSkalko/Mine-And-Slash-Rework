@@ -78,10 +78,15 @@ public class MapLeaguesData {
             this.map.put(LeagueMechanics.UBER_ID, data);
         }
 
-        var data = new LeagueData();
-        LeagueMechanics.MAP_BOSS.onMapStartSetupBase(map, data);
-        LeagueMechanics.MAP_BOSS.onMapStartSetup(data);
-        this.map.put(LeagueMechanics.MAP_BOSS_ID, data);
+        var mapBoss = new LeagueData();
+        LeagueMechanics.MAP_BOSS.onMapStartSetupBase(map, mapBoss);
+        LeagueMechanics.MAP_BOSS.onMapStartSetup(mapBoss);
+        this.map.put(LeagueMechanics.MAP_BOSS_ID, mapBoss);
+
+        var mapReward = new LeagueData();
+        LeagueMechanics.MAP_REWARD.onMapStartSetupBase(map, mapReward);
+        LeagueMechanics.MAP_REWARD.onMapStartSetup(mapReward);
+        this.map.put(LeagueMechanics.MAP_REWARD_ID, mapReward);
     }
 
     public LeagueData get(LeagueMechanic m) {

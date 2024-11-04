@@ -9,10 +9,12 @@ import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
+import com.robertx22.mine_and_slash.mmorpg.registers.common.SlashItemTags;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
 import com.robertx22.mine_and_slash.vanilla_mc.items.gearitems.bases.DodgeOffhandItem;
 import com.robertx22.mine_and_slash.vanilla_mc.items.gearitems.bases.TomeItem;
 import com.robertx22.mine_and_slash.vanilla_mc.items.gearitems.weapons.StaffWeapon;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -33,6 +35,10 @@ public class GearSlot implements JsonExileRegistry<GearSlot>, IAutoGson<GearSlot
     public int model_num = -1;
     public transient String locname = "";
     public SlotFamily fam = SlotFamily.Armor;
+
+    public TagKey<Item> getItemTag() {
+        return SlashItemTags.tagOf(GUID());
+    }
 
     public static class WeaponData {
 
@@ -63,7 +69,8 @@ public class GearSlot implements JsonExileRegistry<GearSlot>, IAutoGson<GearSlot
         return this.weapon_data.damage_multiplier;
     }
 
-    public static GearSlot getSlotOf(Item item) {
+    public static GearSlot getSlotOf(ItemStack stack) {
+        Item item = stack.getItem();
         if (CACHED.containsKey(item)) {
             return CACHED.get(item);
         }
@@ -73,7 +80,7 @@ public class GearSlot implements JsonExileRegistry<GearSlot>, IAutoGson<GearSlot
         }
 
         for (GearSlot slot : ExileDB.GearSlots().getList()) {
-            if (isItemOfThisSlot(slot, item)) {
+            if (isItemOfThisSlot(slot, stack)) {
                 CACHED.put(item, slot);
                 return slot;
             }
@@ -85,11 +92,11 @@ public class GearSlot implements JsonExileRegistry<GearSlot>, IAutoGson<GearSlot
     }
 
     // has to use ugly stuff like this cus datapacks.
-    public static boolean isItemOfThisSlot(GearSlot slot, Item item) {
+    public static boolean isItemOfThisSlot(GearSlot slot, ItemStack stack) {
+        Item item = stack.getItem();
         if (item == Items.AIR) {
             return false;
         }
-
         if (slot == null) {
             return false;
         }
@@ -102,10 +109,8 @@ public class GearSlot implements JsonExileRegistry<GearSlot>, IAutoGson<GearSlot
         if (!CACHED_GEAR_SLOTS.containsKey(id)) {
             CACHED_GEAR_SLOTS.put(id, new HashMap<>());
         }
-        if (CACHED_GEAR_SLOTS.get(id)
-                .containsKey(item)) {
-            return CACHED_GEAR_SLOTS.get(id)
-                    .get(item);
+        if (CACHED_GEAR_SLOTS.get(id).containsKey(item)) {
+            return CACHED_GEAR_SLOTS.get(id).get(item);
         }
 
         boolean bool = false;
@@ -123,6 +128,10 @@ public class GearSlot implements JsonExileRegistry<GearSlot>, IAutoGson<GearSlot
                     bool = true;
                 }
             } else {
+
+                if (stack.is(slot.getItemTag())) {
+                    return true;
+                }
 
                 if (item instanceof ArmorItem) {
                     EquipmentSlot eqslot = ((ArmorItem) item).getEquipmentSlot();
@@ -161,8 +170,7 @@ public class GearSlot implements JsonExileRegistry<GearSlot>, IAutoGson<GearSlot
                 }
             }
 
-            CACHED_GEAR_SLOTS.get(id)
-                    .put(item, bool);
+            CACHED_GEAR_SLOTS.get(id).put(item, bool);
 
             return bool;
 

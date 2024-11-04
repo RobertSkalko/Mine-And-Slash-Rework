@@ -72,7 +72,7 @@ public class MapBlueprint extends RarityItemBlueprint {
 
 
         data.randomizeArena();
-        
+
 
         return data;
     }

@@ -31,7 +31,7 @@ public class JewelLootGen extends BaseLootGen<MapBlueprint> {
         return this.info.level > 5;
     }
 
-  
+
     @Override
     public ItemStack generateOne() {
         JewelBlueprint b = new JewelBlueprint(info);

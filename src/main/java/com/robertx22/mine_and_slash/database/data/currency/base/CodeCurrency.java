@@ -65,7 +65,7 @@ public abstract class CodeCurrency implements IWeighted, IAutoLocName, IAutoLocD
     }
 
     public void addToTooltip(List<Component> tooltip) {
-      
+
     }
 
     public ResultItem modifyItem(LocReqContext context) {

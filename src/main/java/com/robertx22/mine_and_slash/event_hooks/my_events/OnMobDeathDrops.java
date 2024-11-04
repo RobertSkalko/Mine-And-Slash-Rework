@@ -6,6 +6,7 @@ import com.robertx22.library_of_exile.events.base.ExileEvents;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.database.data.EntityConfig;
+import com.robertx22.mine_and_slash.database.data.league.LeagueMechanics;
 import com.robertx22.mine_and_slash.database.data.league.LeagueStructure;
 import com.robertx22.mine_and_slash.database.data.stats.types.misc.BonusExp;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
@@ -13,6 +14,7 @@ import com.robertx22.mine_and_slash.loot.*;
 import com.robertx22.mine_and_slash.maps.MapData;
 import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
+import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.TeamUtils;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
@@ -34,6 +36,15 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
 
             if (mobKilled.level().isClientSide) {
                 return;
+            }
+
+
+            if (WorldUtils.isMapWorldClass(mobKilled.level())) {
+                if (Load.Unit(mobKilled).getRarity().equals(IRarity.BOSS)) {
+                    var sw = (ServerLevel) mobKilled.level();
+                    var map = Load.mapAt(sw, mobKilled.blockPosition());
+                    LeagueMechanics.MAP_REWARD.generateManually(map, sw, mobKilled.blockPosition());
+                }
             }
 
             if (!(mobKilled instanceof Player)) {
@@ -92,7 +103,7 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
 
                             if (map != null) {
                                 map.rooms.mobs.done++;
-                                
+
                                 // map.trySpawnMechanic(mobKilled.level(), mobKilled.blockPosition());
 
                                 var mech = LeagueStructure.getMechanicFromPosition((ServerLevel) player.level(), mobKilled.blockPosition());

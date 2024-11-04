@@ -69,6 +69,7 @@ public class ChunkCap implements ICap {
                 e.printStackTrace();
             }
             savedMobs.clear();
+            mobIds.clear();
         }
     }
 
@@ -79,7 +80,7 @@ public class ChunkCap implements ICap {
             return;
         }
 
-        if (savedMobs.size() > 30) {
+        if (savedMobs.size() > 20) {
             if (MMORPG.RUN_DEV_TOOLS) {
                 ExileLog.get().warn("Saved too many mobs in 1 chunk, stopping just in case");
             }

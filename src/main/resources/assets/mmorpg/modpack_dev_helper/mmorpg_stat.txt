@@ -524,6 +524,10 @@ movement_spell_dmg
 movement_spell_dmg_taken
 negative_eff_dur_u_cast
 non_crit_damage
+not_affected_by_cast_speed_cast_time
+not_affected_by_cast_speed_cdr
+not_affected_by_cast_speed_spell_dmg
+not_affected_by_cast_speed_spell_dmg_taken
 offensive_eff_dur_u_cast
 out_of_combat_regen
 phys_to_all
@@ -572,6 +576,7 @@ plus_lvl_melee_spells
 plus_lvl_minion_explode_spells
 plus_lvl_missile_spells
 plus_lvl_movement_spells
+plus_lvl_not_affected_by_cast_speed_spells
 plus_lvl_physical_spells
 plus_lvl_projectile_spells
 plus_lvl_ranged_spells

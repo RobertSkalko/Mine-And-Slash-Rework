@@ -70,6 +70,7 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
 
     public float map_xp_multi = 1;
 
+    public MapRarityRewardData map_reward = null;
 
     public int map_resist_req = 0;
 

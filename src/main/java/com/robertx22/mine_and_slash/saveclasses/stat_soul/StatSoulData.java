@@ -126,7 +126,7 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
             gearslot = ExileDB.GearSlots().get(slot);
         }
         if (stack != null) {
-            gearslot = GearSlot.getSlotOf(stack.getItem());
+            gearslot = GearSlot.getSlotOf(stack);
         }
         return gearslot;
     }
@@ -140,7 +140,7 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
     }
 
     public ExplainedResult canApplyTo(ItemStack stack) {
-        GearSlot slot = GearSlot.getSlotOf(stack.getItem());
+        GearSlot slot = GearSlot.getSlotOf(stack);
 
         if (slot == null) {
             return ExplainedResult.failure(Chats.NOT_GEAR_OR_NOT_COMPAT.locName());
@@ -213,7 +213,7 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
         }
 
         if (this.gear != null) {
-            if (GearSlot.isItemOfThisSlot(gear.gear.GetBaseGearType().getGearSlot(), stack.getItem())) {
+            if (GearSlot.isItemOfThisSlot(gear.gear.GetBaseGearType().getGearSlot(), stack)) {
                 return ExplainedResult.success();
             } else {
                 return ExplainedResult.failure(Chats.NOT_MATCHING_GEAR_SLOT.locName());

@@ -13,7 +13,27 @@ v.5.8.4
 - rune stats have been slightly nerfed
 - rune and gem extractors are now datapack currencies and were slightly reworked
 - added experimental mob persistence to maps. they will now save and load back if unloaded, so dying/coming back to maps shouldnt mean mobs are gone
+- serverconfig is no longer needed for item compat, now you use "mmorpg:gear_slot_id" item tags. 
+So just list all sword items in the "mmorpg:sword" item tag.
 
-Map Bosses!
+* Map Bosses!
+A lot of you said maps felt aimless and there was nothing to complete, finish etc.
+This update aims to change that in 2 ways.
+
+First, every map now has a boss fight at the end, in their own arena, and to access it, you need to clear 50% of the map at the very least.
+There was a lot of code needed to make this completition counter happen btw.. Like mob saving when they despawn.
+
+Now, if you manage to kill the boss, it will spawn a teleport to the reward room!
+The reward room will have a set amount of chests with added loot multipliers and better loot tables depending on your map completition %,
+that % will be represented in rarities up to mythic.
+
+
 - new datapack, boss arena
-- new fields to mob rarity datapacks 
+- new fields to mob rarity datapacks
+- new field to gear rar datapack
+- uber frags now only drop from map bosses but have higher dropchance
+
+
+todo:
+- dying loss %
+- show player their current map complete % and rarity

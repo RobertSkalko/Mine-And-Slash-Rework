@@ -1,8 +1,8 @@
 package com.robertx22.mine_and_slash.database.data.league;
 
+import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.mine_and_slash.maps.MapData;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
-import com.robertx22.library_of_exile.registry.IWeighted;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ChunkPos;
 
@@ -30,6 +30,7 @@ public class LeagueStructurePieces implements IWeighted {
         }
         return null;
     }
+    
 
     boolean isWithinBounds(int x, int z) {
         int ax = Math.abs(x);

@@ -18,6 +18,7 @@ public enum LootModifierEnum implements IAutoLocName {
     BREAK_SPAWNER("Break Spawner"),
     LEVEL_DISTANCE_PENALTY("Level Distance Penalty"),
     MOB_HEALTH("Mob Health"),
+    MAP_COMPLETITION_RARITY_REWARD("Map Completiton Rarity"),
     CONFIG("Config File"),
     MOB_DATAPACK("Mob Datapack"),
     MOB_BONUS_LOOT_STAT("Mob Bonus Loot Stat"),

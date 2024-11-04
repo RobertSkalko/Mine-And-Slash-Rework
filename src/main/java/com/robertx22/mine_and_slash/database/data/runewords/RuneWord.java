@@ -86,7 +86,7 @@ public class RuneWord implements IAutoGson<RuneWord>, JsonExileRegistry<RuneWord
     public boolean canApplyOnItem(ItemStack stack) {
 
         if (slots.stream().anyMatch(e -> {
-            return GearSlot.isItemOfThisSlot(ExileDB.GearSlots().get(e), stack.getItem());
+            return GearSlot.isItemOfThisSlot(ExileDB.GearSlots().get(e), stack);
         })) {
             return true;
         }

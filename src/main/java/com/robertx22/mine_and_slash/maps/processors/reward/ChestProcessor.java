@@ -1,7 +1,6 @@
 package com.robertx22.mine_and_slash.maps.processors.reward;
 
 import com.robertx22.library_of_exile.main.ExileLog;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.mine_and_slash.maps.generator.ChunkProcessData;
 import com.robertx22.mine_and_slash.maps.processors.DataProcessor;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
@@ -31,45 +30,41 @@ public class ChestProcessor extends DataProcessor {
 
         boolean isTrapped = this.detectIds.contains("trap");
 
-        boolean useVanilla = RandomUtils.roll(20);
+        ResourceLocation table = ModLootTables.TIER_1_DUNGEON_CHEST;
 
-        if (isTrapped) {
-            world.setBlock(pos, Blocks.TRAPPED_CHEST
-                    .defaultBlockState(), 2);
+        var map = Load.mapAt(world, pos);
 
+        if (map != null) {
+            float lvm = LevelUtils.getMaxLevelMultiplier(map.map.lvl);
+            if (lvm > 0.3F) {
+                table = ModLootTables.TIER_2_DUNGEON_CHEST;
+            }
+            if (lvm > 0.5F) {
+                table = ModLootTables.TIER_3_DUNGEON_CHEST;
+            }
+            if (lvm > 0.7F) {
+                table = ModLootTables.TIER_4_DUNGEON_CHEST;
+            }
+            if (lvm > 0.9F) {
+                table = ModLootTables.TIER_5_DUNGEON_CHEST;
+            }
+
+            createChest(world, pos, isTrapped, table);
+        }
+    }
+
+    public static void createChest(Level world, BlockPos pos, boolean trapped, ResourceLocation table) {
+
+        if (trapped) {
+            world.setBlock(pos, Blocks.TRAPPED_CHEST.defaultBlockState(), 2);
         } else {
-            world.setBlock(pos, Blocks.CHEST
-                    .defaultBlockState(), 2);
-
+            world.setBlock(pos, Blocks.CHEST.defaultBlockState(), 2);
         }
 
         BlockEntity tile = world.getBlockEntity(pos);
 
         if (tile instanceof ChestBlockEntity) {
             ChestBlockEntity chest = (ChestBlockEntity) tile;
-
-            ResourceLocation table = ModLootTables.TIER_1_DUNGEON_CHEST;
-
-            var map = Load.mapAt(world, pos);
-
-            if (map != null) {
-
-                float lvm = LevelUtils.getMaxLevelMultiplier(map.map.lvl);
-
-
-                if (lvm > 0.3F) {
-                    table = ModLootTables.TIER_2_DUNGEON_CHEST;
-                }
-                if (lvm > 0.5F) {
-                    table = ModLootTables.TIER_3_DUNGEON_CHEST;
-                }
-                if (lvm > 0.7F) {
-                    table = ModLootTables.TIER_4_DUNGEON_CHEST;
-                }
-                if (lvm > 0.9F) {
-                    table = ModLootTables.TIER_5_DUNGEON_CHEST;
-                }
-            }
 
             chest.setLootTable(world, world.getRandom(), pos, table);
 
@@ -78,7 +73,5 @@ public class ChestProcessor extends DataProcessor {
         } else {
             ExileLog.get().warn("Chest gen failed, tile not instanceof vanilla chest.");
         }
-
-
     }
 }

@@ -1,12 +1,12 @@
 package com.robertx22.mine_and_slash.loot.blueprints;
 
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import com.robertx22.mine_and_slash.database.data.loot_chest.base.LootChestData;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.loot.LootInfo;
 import com.robertx22.mine_and_slash.loot.blueprints.bases.LootChestPart;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
-import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.world.item.ItemStack;
 
 public class LootChestBlueprint extends RarityItemBlueprint implements ITypeBlueprint {

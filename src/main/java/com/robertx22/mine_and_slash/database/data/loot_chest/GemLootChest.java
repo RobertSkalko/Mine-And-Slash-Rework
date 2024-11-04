@@ -45,5 +45,4 @@ public class GemLootChest extends LootChest {
     }
 
 
-
 }

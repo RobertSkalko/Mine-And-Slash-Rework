@@ -7,6 +7,7 @@ import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.database.data.profession.StationPacket;
 import com.robertx22.mine_and_slash.database.data.profession.StationSyncData;
 import com.robertx22.mine_and_slash.database.data.profession.screen.CraftingStationMenu;
+import com.robertx22.mine_and_slash.database.data.rarities.MapRarityRewardData;
 import com.robertx22.mine_and_slash.database.data.stat_compat.StatCompat;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.maps.ProcessChunkBlocks;
@@ -72,6 +73,7 @@ public class OnServerTick {
                         playerData.emptyMapTicks = 0;
                     }
 
+
                     var pro = Load.player(player).prophecy;
 
                     if (!pro.mapid.equals(map.map.uuid)) {
@@ -79,6 +81,8 @@ public class OnServerTick {
                     }
 
                     if (player.tickCount % (20 * 5) == 0) {
+                        MapRarityRewardData.updateMapCompletionRarity(player, map);
+
                         //  var map = Load.mapAt(player.level(), player.blockPosition());
 
                         if (!map.dungeonid.isEmpty()) {

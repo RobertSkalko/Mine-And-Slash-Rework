@@ -64,13 +64,14 @@ public class SpellChangeStats {
                 x.minus_is_good = true;
             })
             .build();
-    
+
     public static DataPackStatAccessor<EmptyAccessor> CAST_SPEED = DatapackStatBuilder
             .ofSingle("cast_speed", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
             .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(SpellTags.magic))
+            .addCondition(x -> StatConditions.SPELL_NOT_HAVE_TAG.get(SpellTags.not_affected_by_cast_speed))
             .addEffect(StatEffects.DECREASE_CAST_TIME)
             .addCondition(DatapackStatBuilder.EffectPlace.SECOND, StatConditions.SPELL_HAS_TAG.get(SpellTags.CAST_TO_CD))
             .addEffect(DatapackStatBuilder.EffectPlace.SECOND, StatEffects.APPLY_CAST_SPEED_TO_CD)
@@ -91,6 +92,7 @@ public class SpellChangeStats {
             .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x))
+            .addCondition(x -> StatConditions.SPELL_NOT_HAVE_TAG.get(SpellTags.not_affected_by_cast_speed))
             .addEffect(StatEffects.DECREASE_CAST_TIME)
             .setLocName(x -> x.locNameForLangFile() + " Cast Time")
             .setLocDesc(x -> "Reduces cast time of spells with this tag")

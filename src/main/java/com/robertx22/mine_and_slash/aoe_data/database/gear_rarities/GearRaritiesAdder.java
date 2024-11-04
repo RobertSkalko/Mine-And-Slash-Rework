@@ -4,6 +4,8 @@ import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import com.robertx22.mine_and_slash.database.data.MinMax;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarityType;
+import com.robertx22.mine_and_slash.database.data.rarities.MapRarityRewardData;
+import com.robertx22.mine_and_slash.maps.processors.reward.ModLootTables;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.VanillaRarities;
 import net.minecraft.world.item.Rarity;
@@ -38,9 +40,15 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.stat_percents = new MinMax(0, 10);
             x.setCommonFields();
             x.addToSerializables();
+
+            x.map_reward = new MapRarityRewardData(0, ModLootTables.TIER_1_DUNGEON_CHEST, 1, 1);
         });
 
         GearRarity uncommon = new GearRarity().edit(x -> {
+
+            x.map_reward = new MapRarityRewardData(10, ModLootTables.TIER_1_DUNGEON_CHEST, 2, 1.1F);
+
+
             x.vanilla_rar_enum = VanillaRarities.UNCOMMON.name();
 
             x.map_resist_req = 10;
@@ -62,9 +70,12 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.stat_percents = new MinMax(10, 20);
             x.setUncommonFields();
             x.addToSerializables();
+
         });
 
         GearRarity rar = new GearRarity().edit(x -> {
+            x.map_reward = new MapRarityRewardData(25, ModLootTables.TIER_2_DUNGEON_CHEST, 3, 1.2F);
+
             x.vanilla_rar_enum = Rarity.RARE.name();
 
             x.map_resist_req = 20;
@@ -93,6 +104,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
         });
         GearRarity epic = new GearRarity().edit(x -> {
+            x.map_reward = new MapRarityRewardData(50, ModLootTables.TIER_3_DUNGEON_CHEST, 5, 1.2F);
+
             x.vanilla_rar_enum = Rarity.EPIC.name();
 
             x.map_resist_req = 30;
@@ -122,6 +135,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity legendary = new GearRarity().edit(x -> {
+            x.map_reward = new MapRarityRewardData(75, ModLootTables.TIER_4_DUNGEON_CHEST, 7, 1.5F);
+
             x.vanilla_rar_enum = VanillaRarities.LEGENDARY.name();
             x.map_resist_req = 40;
 
@@ -152,6 +167,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity mythic = new GearRarity().edit(x -> {
+            x.map_reward = new MapRarityRewardData(90, ModLootTables.TIER_5_DUNGEON_CHEST, 10, 2);
+
             x.vanilla_rar_enum = VanillaRarities.MYTHIC.name();
 
             x.map_resist_req = 50;

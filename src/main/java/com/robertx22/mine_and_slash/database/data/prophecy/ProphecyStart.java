@@ -1,11 +1,11 @@
 package com.robertx22.mine_and_slash.database.data.prophecy;
 
+import com.robertx22.library_of_exile.registry.ExileRegistry;
+import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
 import com.robertx22.mine_and_slash.loot.blueprints.ItemBlueprint;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
-import com.robertx22.library_of_exile.registry.ExileRegistry;
-import com.robertx22.library_of_exile.registry.ExileRegistryType;
 
 public abstract class ProphecyStart implements ExileRegistry<ProphecyStart>, IAutoLocName {
     public static ProphecyStart SERIALIZER = new ProphecyStart() {

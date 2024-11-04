@@ -106,7 +106,7 @@ public class TooltipMethod {
             }
 
             if (!hasdata) {
-                GearSlot slot = GearSlot.getSlotOf(stack.getItem());
+                GearSlot slot = GearSlot.getSlotOf(stack);
                 if (slot != null) {
                     tooltip.add(TooltipUtils.gearSlot(slot));
 

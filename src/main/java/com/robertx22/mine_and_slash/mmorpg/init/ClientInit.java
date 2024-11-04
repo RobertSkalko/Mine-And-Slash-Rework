@@ -63,10 +63,9 @@ public class ClientInit {
         var todisable = Arrays.asList(
                 VanillaGuiOverlay.ARMOR_LEVEL,
                 VanillaGuiOverlay.MOUNT_HEALTH,
-                VanillaGuiOverlay.PLAYER_HEALTH,
-                VanillaGuiOverlay.EXPERIENCE_BAR
+                VanillaGuiOverlay.PLAYER_HEALTH
         );
-        
+
         ForgeEvents.registerForgeEvent(RenderGuiOverlayEvent.class, x -> {
             if (ClientConfigs.getConfig().GUI_POSITION.get() == GuiPosition.OVER_VANILLA) {
                 if (todisable.stream().anyMatch(e -> e.id().equals(x.getOverlay().id()))) {

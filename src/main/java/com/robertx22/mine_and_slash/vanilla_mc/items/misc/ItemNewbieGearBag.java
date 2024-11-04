@@ -98,7 +98,7 @@ public class ItemNewbieGearBag extends Item {
 
                 data.saveToStack(stack);
 
-                
+
                 var exfi = ExileStack.of(stack);
 
                 ex.apply(exfi);

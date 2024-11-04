@@ -13,14 +13,15 @@ import com.robertx22.mine_and_slash.maps.generator.DungeonBuilder;
 import com.robertx22.mine_and_slash.maps.processors.DataProcessor;
 import com.robertx22.mine_and_slash.maps.processors.DataProcessors;
 import com.robertx22.mine_and_slash.maps.processors.league.LeagueSpawnPos;
-import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.tags.imp.DungeonTag;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
+import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -124,14 +125,14 @@ public class ProcessChunkBlocks {
 
                             DungeonFeature.place(opt.get(), level, level.getRandom(), cpos.getBlockAt(0, 0, 0));
 
-                            BuiltRoom room = builder.builtDungeon.getRoomForChunk(cpos);
-
-                            var ran = DungeonBuilder.createRandom(0l, cpos);
+                            //BuiltRoom room = builder.builtDungeon.getRoomForChunk(cpos);
 
                             for (LeagueMechanic mech : opt.get().leagues.getLeagueMechanics()) {
-                                mech.getStructure(map.map).tryGenerate(level, cpos, ran);
-                                // todo maybe this is genning mobs too soon outside the league content??
-                                leagueSpawn(level, chunk, room); // for league mechanics we instantly gen the data because we need to know the spawn pos, which is gained by processing the spawn block..
+                                if (mech.gensRightAway(map)) {
+                                    mech.getStructure(map.map).tryGenerate(level, cpos);
+                                    // todo maybe this is genning mobs too soon outside the league content??
+                                    leagueSpawn(level, chunk); // for league mechanics we instantly gen the data because we need to know the spawn pos, which is gained by processing the spawn block..
+                                }
                             }
                             gened++;
                             if (gened >= maxtogen) {
@@ -158,28 +159,34 @@ public class ProcessChunkBlocks {
                             BuiltRoom room = builder.builtDungeon.getRoomForChunk(cpos);
 
                             // this will gen both the league mechs and the dungeon if it runs after the league mechs gen
-                            generateData(level, chunk, room);
+                            generateData(level, chunk);
 
                             map.leagues.processedChunks++;
 
-                            map.rooms.rooms.done++;
+                            if (!room.room.isBarrier) {
+                                map.rooms.rooms.done++;
 
-                            if (MMORPG.RUN_DEV_TOOLS_REMOVE_WHEN_DONE) {
-                                for (Player p : level.players()) {
-                                    p.sendSystemMessage(Component.literal(map.rooms.rooms.done + " out of " + map.rooms.rooms.total + " Explored"));
+                                var color = ChatFormatting.LIGHT_PURPLE;
+                                var tc = ChatFormatting.YELLOW;
+
+                                for (ServerPlayer p : level.getPlayers(x -> {
+                                    return MapData.getStartChunk(new ChunkPos(x.blockPosition())).equals(MapData.getStartChunk(start));
+                                })) {
+
+                                    p.sendSystemMessage(Chats.EXPLORED_X_MAP_ROOMS.locName(
+                                            Component.literal(map.rooms.rooms.done + "").withStyle(tc),
+                                            Component.literal(map.rooms.rooms.total + "").withStyle(tc)
+                                    ).withStyle(color));
 
                                     if (map.rooms.isDoneGenerating()) {
-                                        p.sendSystemMessage(Component.literal("Map Fully Generated"));
-                                        p.sendSystemMessage(Component.literal("Rooms: " + map.rooms.rooms.total));
-                                        p.sendSystemMessage(Component.literal("Mobs: " + map.rooms.mobs.total));
-                                        p.sendSystemMessage(Component.literal("Chests: " + map.rooms.chests.total));
-
+                                        p.sendSystemMessage(Chats.MAP_FINISHED_SPAWNING.locName().withStyle(ChatFormatting.DARK_PURPLE));
+                                        p.sendSystemMessage(Chats.TOTAL_MOBS.locName(map.rooms.mobs.total).withStyle(color));
+                                        p.sendSystemMessage(Chats.TOTAL_CHESTS.locName(map.rooms.chests.total).withStyle(color));
                                     }
                                 }
+
                             }
-
                         }
-
                         MobUnloading.loadBackMobs(level, cpos);
                     }
 
@@ -191,10 +198,10 @@ public class ProcessChunkBlocks {
         }
     }
 
-    public static void generateData(ServerLevel level, LevelChunk chunk, BuiltRoom room) {
+    public static void generateData(ServerLevel level, LevelChunk chunk) {
 
 
-        ChunkProcessData data = new ChunkProcessData(chunk, room);
+        ChunkProcessData data = new ChunkProcessData(chunk);
 
 
         for (BlockPos tilePos : chunk.getBlockEntitiesPos()) {
@@ -236,10 +243,10 @@ public class ProcessChunkBlocks {
         }
     }
 
-    static void leagueSpawn(ServerLevel level, LevelChunk chunk, BuiltRoom room) {
+    public static void leagueSpawn(ServerLevel level, LevelChunk chunk) {
 
 
-        ChunkProcessData data = new ChunkProcessData(chunk, room);
+        ChunkProcessData data = new ChunkProcessData(chunk);
 
 
         for (BlockPos tilePos : chunk.getBlockEntitiesPos()) {

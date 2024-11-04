@@ -4,10 +4,12 @@ import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.utils.TeleportUtils;
 import com.robertx22.mine_and_slash.database.data.league.LeagueMechanics;
+import com.robertx22.mine_and_slash.database.data.league.LeagueStructure;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.maps.spawned_map_mobs.SpawnedMobList;
 import com.robertx22.mine_and_slash.uncommon.MathHelper;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
+import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -29,7 +31,7 @@ public class MapData {
     public MapItemData map = new MapItemData();
 
     public MapRoomsData rooms = new MapRoomsData();
-    
+
     public MapLeaguesData leagues = new MapLeaguesData();
 
     private HashMap<String, Integer> lives = new HashMap<>();
@@ -37,6 +39,10 @@ public class MapData {
     public String dungeonid = "";
 
     public String mobs = "";
+
+    public String completion_rarity = IRarity.COMMON_ID;
+
+    public boolean gave_boss_tp = false;
 
     public SpawnedMobList getMobSpawns() {
         return ExileDB.MapMobs().get(mobs);
@@ -82,16 +88,15 @@ public class MapData {
     }
 
     public void spawnRandomLeagueMechanic(Level level, BlockPos pos) {
-        if (LeagueMechanics.NONE.getStructure(map).isInsideLeague((ServerLevel) level, pos)) {
+        var league = LeagueStructure.getMechanicFromPosition((ServerLevel) level, pos);
 
+        if (league == LeagueMechanics.NONE) {
             var list = leagues.getLeagueMechanics().stream().filter(x -> leagues.get(x).remainingSpawns > 0).collect(Collectors.toList());
 
             if (list.size() > 0) {
-                var league = RandomUtils.randomFromList(list);
-
-                league.spawnMechanicInMap((ServerLevel) level, pos);
-
-                leagues.get(league).remainingSpawns--;
+                var randomLeague = RandomUtils.randomFromList(list);
+                randomLeague.spawnMechanicInMap((ServerLevel) level, pos);
+                leagues.get(randomLeague).remainingSpawns--;
             }
         }
     }

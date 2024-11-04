@@ -107,6 +107,7 @@ public class SlashItems {
     public static RegObj<Item> MAP_SETTER = Def.item(() -> new Item(new Item.Properties()), "set_map"); // todo add tooltips for this
     public static RegObj<Item> MAP_DEVICE = Def.item(() -> new BlockItem(SlashBlocks.MAP.get(), new Item.Properties()), "teleporter");
     public static RegObj<Item> TP_BACK = Def.item(() -> new TpBackItem(), "tp_back");
+    public static RegObj<Item> ARENA_TP = Def.item(() -> new BossTpItem(), "arena_teleport");
     public static RegObj<Item> INVISIBLE_ICON = Def.item(() -> new Item(new Item.Properties()), "invisible_item");
     public static RegObj<Item> TEST_GEN = Def.item(() -> new Item(new Item.Properties()), "test_gen");
     public static RegObj<Item> MASTER_BAG = Def.item(() -> new BackpackItem(), "master_bag");
@@ -118,7 +119,6 @@ public class SlashItems {
     public static RegObj<ProjectileItem> SLIMEBALL = Def.item(() -> new ProjectileItem("slimeball"), "projectile/" + "slimeball");
     public static RegObj<ProjectileItem> LIGHTNING = Def.item(() -> new ProjectileItem("lightning"), "projectile/" + "lightning");
     public static RegObj<ProjectileItem> BOOMERANG = Def.item(() -> new ProjectileItem("boomerang"), "projectile/" + "boomerang");
-    public static RegObj<ProjectileItem> HOLYBALL = Def.item(() -> new ProjectileItem("holy_ball"), "projectile/" + "holy_ball");
 
 
     public static RegObj<LootTableItem> LOOT_TABLE_ITEM = Def.item(() -> new LootTableItem(), "loot_table_chest");

@@ -32,6 +32,7 @@ public class SlashBlocks {
     public static RegObj<LeagueControlBlock> LEAGUE_CONTROL = Def.block("league", () -> new LeagueControlBlock());
     public static RegObj<LeagueTeleportBlock> HARVEST_TELEPORT = Def.block("harvest_teleport", () -> new LeagueTeleportBlock(LeagueMechanics.HARVEST_ID));
     public static RegObj<LeagueTeleportBlock> UBER_TELEPORT = Def.block("uber_teleport", () -> new LeagueTeleportBlock(LeagueMechanics.UBER.GUID()));
+    public static RegObj<LeagueTeleportBlock> REWARD_TELEPORT = Def.block("reward_teleport", () -> new LeagueTeleportBlock(LeagueMechanics.MAP_REWARD.GUID()));
     public static RegObj<ProphecyAltarBlock> PROPHECY_ALTAR = Def.block("prophecy_altar", () -> new ProphecyAltarBlock());
     public static RegObj<UberBossAltarBlock> UBER_BOSS_ALTAR = Def.block("uber_boss_altar", () -> new UberBossAltarBlock());
 

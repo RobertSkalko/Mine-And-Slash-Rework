@@ -21,11 +21,16 @@ import java.util.Random;
 public class Default implements IParticleRenderStrategy {
 
     private float scale = 1.0f;
+
+    protected static boolean DEFAULTParticleSpeedDirection = true;
     @Override
     public void setupStyle(ExileInteractionResultParticle particle) {
         particle.setGravity(0.8f);
         Random random = new Random();
-        particle.setParticleSpeed(0 + random.nextDouble(-0.25, 0.25), 0.1 + random.nextDouble(0.2, 0.3), 0);
+        double v = random.nextDouble(0, 0.15);
+        v = DEFAULTParticleSpeedDirection ? v : -v;
+        DEFAULTParticleSpeedDirection = !DEFAULTParticleSpeedDirection;
+        particle.setParticleSpeed(0 + v, 0.1 + random.nextDouble(0.2, 0.3), 0);
         particle.setLiftTime(15 + Minecraft.getInstance().player.level().random.nextInt(5));
     }
 
@@ -39,11 +44,12 @@ public class Default implements IParticleRenderStrategy {
         Vec3 cameraPos = camera.getPosition();
         Vec3 pos = particle.getPos();
         Vec3 original = particle.getOriginalPosition();
-        double x = (float) (Mth.lerp((double) partialTick, original.x, pos.x));
-        double y = (float) (Mth.lerp((double) partialTick, original.y, pos.y));
-        double z = (float) (Mth.lerp((double) partialTick, original.z, pos.z));
-        float scale = this.scale * 0.035F;
-        posestack.translate(x - cameraPos.x, y - cameraPos.y, z - cameraPos.z);
+        double x = (float) (Mth.lerp(partialTick, original.x, pos.x));
+        double y = (float) (Mth.lerp(partialTick, original.y, pos.y));
+        double z = (float) (Mth.lerp(partialTick, original.z, pos.z));
+        float scale = this.scale * 0.02F;
+        Vec3 vec3 = limitDistance(new Vec3(x - cameraPos.x, y - cameraPos.y, z - cameraPos.z));
+        posestack.translate(vec3.x(), vec3.y(), vec3.z());
         posestack.mulPose(camera.rotation());
         posestack.mulPose(Axis.ZP.rotationDegrees(180.0F));
         posestack.scale(scale, scale, scale);
@@ -85,10 +91,16 @@ public class Default implements IParticleRenderStrategy {
 
     @Override
     public float changeScale(ExileInteractionResultParticle particle, int age, int lifeTime, float partialTick) {
-        float ageScaled = age / (float) lifeTime;
-        float prevScale = scale;
-        this.scale = Math.max(0.7f, 1.0F - ageScaled);
-        return prevScale + (scale - prevScale) * partialTick;
+        return 0;
+    }
+
+    private static Vec3 limitDistance(Vec3 pos){
+        double maxDistance = 6.0d;
+        if (pos.length() >= maxDistance){
+            Vec3 normalize = pos.normalize();
+            return normalize.scale(maxDistance);
+        }
+        return pos;
     }
 
 }

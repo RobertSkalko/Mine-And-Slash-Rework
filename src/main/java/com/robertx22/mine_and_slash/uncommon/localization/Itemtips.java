@@ -72,6 +72,7 @@ public enum Itemtips implements IAutoLocName {
     SOUL_STONE_TIP("Right click to produce a common gear soul."),
     UNIQUE_JEWEL_USE("Right click to create"),
     TP_BACK_ITEM("Right click to return from the Map\nExits the Map Dimension."),
+    BOSS_TELEPORT_ITEM("Right click to enter Boss Arena\nKilling the Boss unlocks the reward room\nRewards are based on your map exploration percent.\n\nTo get More rewards, complete more of the map before entering the boss room."),
     UBER_BOSS_MAP_TIP("Right click to Generate Map Item\nLeads to a Boss Fight"),
     UBER_BOSS_FRAG_TIP("Combine with More Fragments in the Crafting Table\nCreates a Map That contains an Uber Boss"),
     RUNE_ITEM_USAGE("Use on Gear with sockets to Insert\nIf same rune is already socketed, rerolls it\n\nAll Runewords are shown in the Wiki.\nUse to view craftable Runewords."),

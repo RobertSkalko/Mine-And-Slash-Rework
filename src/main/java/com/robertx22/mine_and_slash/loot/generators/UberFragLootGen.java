@@ -8,6 +8,7 @@ import com.robertx22.mine_and_slash.loot.blueprints.ItemBlueprint;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.LootType;
+import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -32,6 +33,9 @@ public class UberFragLootGen extends BaseLootGen<ItemBlueprint> {
     public boolean condition() {
         var map = Load.mapAt(info.world, info.pos);
         if (map == null || map.map.isUber()) {
+            return false;
+        }
+        if (info.mobData == null || !info.mobData.getRarity().equals(IRarity.BOSS)) {
             return false;
         }
         return info.level >= UberBossTier.T1.frag_drop_lvl;

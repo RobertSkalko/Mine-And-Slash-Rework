@@ -44,7 +44,8 @@ public class Row implements IParticleRenderStrategy {
         double y = (float) (Mth.lerp((double) partialTick, original.y, pos.y));
         double z = (float) (Mth.lerp((double) partialTick, original.z, pos.z));
         float scale = 0.02f;
-        posestack.translate(x - cameraPos.x, y - cameraPos.y, z - cameraPos.z);
+        Vec3 vec3 = limitDistance(new Vec3(x - cameraPos.x, y - cameraPos.y, z - cameraPos.z));
+        posestack.translate(vec3.x(), vec3.y(), vec3.z());
         posestack.mulPose(camera.rotation());
         posestack.mulPose(Axis.ZP.rotationDegrees(180.0F));
         posestack.scale(scale, scale, scale);
@@ -105,5 +106,13 @@ public class Row implements IParticleRenderStrategy {
         return 0;
     }
 
+    private static Vec3 limitDistance(Vec3 pos){
+        double maxDistance = 6.0d;
+        if (pos.length() >= maxDistance){
+            Vec3 normalize = pos.normalize();
+            return normalize.scale(maxDistance);
+        }
+        return pos;
+    }
 
 }

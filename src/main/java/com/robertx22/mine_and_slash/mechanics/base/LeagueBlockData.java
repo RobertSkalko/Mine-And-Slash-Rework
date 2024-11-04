@@ -1,8 +1,7 @@
 package com.robertx22.mine_and_slash.mechanics.base;
 
 import com.robertx22.mine_and_slash.database.data.league.LeagueMechanic;
-import com.robertx22.mine_and_slash.database.registry.ExileDB;
-import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
+import com.robertx22.mine_and_slash.database.data.league.LeagueStructure;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 
@@ -16,10 +15,7 @@ public class LeagueBlockData {
     public boolean finished = false;
 
     public LeagueMechanic getMechanic(ServerLevel sw, BlockPos pos) {
-
-        var map = Load.mapAt(sw, pos).map;
-
-        return ExileDB.LeagueMechanics().getFilterWrapped(x -> x.getStructure(map).isInsideLeague(sw, pos)).list.get(0);
+        return LeagueStructure.getMechanicFromPosition(sw, pos);
     }
 
     public static class StructureRadius {

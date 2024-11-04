@@ -24,14 +24,6 @@ public class UberMechanic extends LeagueMechanic {
     public LeagueStructure getStructure(MapItemData map) {
         return new LeagueStructure(this) {
             @Override
-            public BlockPos getTeleportPos(BlockPos pos) {
-                BlockPos p = MapData.getStartChunk(pos).getBlockAt(0, 0, 0);
-                p = new BlockPos(p.getX() + 10, startY() + 5 + 3, p.getZ() + 22);
-                return p;
-            }
-
-
-            @Override
             public LeaguePiecesList getPieces(MapItemData map) {
                 if (!map.isUber()) {
                     return new LeaguePiecesList(Arrays.asList());
@@ -44,11 +36,6 @@ public class UberMechanic extends LeagueMechanic {
                 return 85 + 50;
             }
 
-
-            @Override
-            public boolean isInsideLeague(ServerLevel level, BlockPos pos) {
-                return pos.getY() >= startY() && pos.getY() <= (startY() + 30);
-            }
         };
     }
 

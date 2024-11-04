@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.database.data.league;
 
+import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.mine_and_slash.database.data.spells.map_fields.MapField;
 import com.robertx22.mine_and_slash.loot.LootInfo;
 import com.robertx22.mine_and_slash.maps.LeagueData;
@@ -12,7 +13,6 @@ import com.robertx22.mine_and_slash.mechanics.harvest.HarvestItems;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.OnScreenMessageUtils;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -58,13 +58,6 @@ public class HarvestLeague extends LeagueMechanic {
     @Override
     public LeagueStructure getStructure(MapItemData map) {
         return new LeagueStructure(this) {
-            @Override
-            public BlockPos getTeleportPos(BlockPos pos) {
-                BlockPos p = MapData.getStartChunk(pos).getBlockAt(0, 0, 0);
-                p = new BlockPos(p.getX() + 10, startY() + 5 + 3, p.getZ() + 22);
-                return p;
-            }
-
 
             @Override
             public LeaguePiecesList getPieces(MapItemData map) {
@@ -80,10 +73,6 @@ public class HarvestLeague extends LeagueMechanic {
             }
 
 
-            @Override
-            public boolean isInsideLeague(ServerLevel level, BlockPos pos) {
-                return pos.getY() >= startY() && pos.getY() <= (startY() + 30);
-            }
         };
     }
 

@@ -8,15 +8,15 @@ import net.minecraft.world.item.Item;
 
 public class SlashItemTags {
 
-    public static final TagKey<Item> CHIPPED_GEMS = get("chipped_gems");
-    public static final TagKey<Item> FLAWED_GEMS = get("flawed_gems");
-    public static final TagKey<Item> REGULAR_GEMS = get("regular_gems");
+    public static final TagKey<Item> CHIPPED_GEMS = tagOf("chipped_gems");
+    public static final TagKey<Item> FLAWED_GEMS = tagOf("flawed_gems");
+    public static final TagKey<Item> REGULAR_GEMS = tagOf("regular_gems");
 
     public static void init() {
 
     }
 
-    private static TagKey<Item> get(String id) {
+    public static TagKey<Item> tagOf(String id) {
         return ItemTags.create(new ResourceLocation(SlashRef.MODID + ":" + id));
     }
 }

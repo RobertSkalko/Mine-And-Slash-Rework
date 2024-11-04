@@ -200,6 +200,13 @@ public class LootInfo {
 
         this.gatheredLootMultis = true;
 
+        if (league != null && league == LeagueMechanics.MAP_REWARD) {
+            try {
+                lootMods.add(new LootModifier(LootModifierEnum.MAP_COMPLETITION_RARITY_REWARD, ExileDB.GearRarities().get(map.completion_rarity).map_reward.loot_multi));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         if (mobKilled != null && mobData != null) {
             if (this.playerEntityData != null) {

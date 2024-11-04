@@ -1,9 +1,9 @@
 package com.robertx22.mine_and_slash.loot.blueprints.bases;
 
+import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.mine_and_slash.loot.blueprints.ItemBlueprint;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.util.Mth;
 
 public class LevelPart extends BlueprintPart<Integer, ItemBlueprint> {

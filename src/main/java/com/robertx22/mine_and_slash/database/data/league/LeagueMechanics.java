@@ -19,6 +19,7 @@ public class LeagueMechanics {
     public static String HARVEST_ID = "harvest";
     public static String UBER_ID = "uber";
     public static String MAP_BOSS_ID = "map_boss";
+    public static String MAP_REWARD_ID = "map_reward";
 
     public static LeagueMechanic NONE = new LeagueMechanic() {
 
@@ -100,6 +101,7 @@ public class LeagueMechanics {
     public static LeagueMechanic PROPHECY = new ProphecyLeague();
     public static UberMechanic UBER = new UberMechanic();
     public static MapBossLeague MAP_BOSS = new MapBossLeague();
+    public static MapRewardLeague MAP_REWARD = new MapRewardLeague();
 
 
     public static void init() {
@@ -107,5 +109,6 @@ public class LeagueMechanics {
         HARVEST.registerToExileRegistry();
         PROPHECY.registerToExileRegistry();
         MAP_BOSS.registerToExileRegistry();
+        MAP_REWARD.registerToExileRegistry();
     }
 }

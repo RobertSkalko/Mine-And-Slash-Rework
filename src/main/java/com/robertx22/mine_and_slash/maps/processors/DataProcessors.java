@@ -5,10 +5,12 @@ import com.robertx22.mine_and_slash.maps.processors.boss.UberBossAltarProcessor;
 import com.robertx22.mine_and_slash.maps.processors.league.LeagueControlBlockProcessor;
 import com.robertx22.mine_and_slash.maps.processors.league.LeagueSpawnPos;
 import com.robertx22.mine_and_slash.maps.processors.league.LeagueTpBackProcessor;
+import com.robertx22.mine_and_slash.maps.processors.league.MapTeleporterProcessor;
 import com.robertx22.mine_and_slash.maps.processors.misc.RemoveAllBesidesOneProcessor;
 import com.robertx22.mine_and_slash.maps.processors.mob.*;
 import com.robertx22.mine_and_slash.maps.processors.reward.ChanceChestProcessor;
 import com.robertx22.mine_and_slash.maps.processors.reward.ChestProcessor;
+import com.robertx22.mine_and_slash.maps.processors.reward.MapRewardChestProcessor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,8 @@ public class DataProcessors {
 
 
         if (all.isEmpty()) {
+            all.add(new MapTeleporterProcessor());
+            all.add(new MapRewardChestProcessor());
             all.add(new MapBossProcessor());
             all.add(new BossProcessor());
             all.add(new EliteProcessor());

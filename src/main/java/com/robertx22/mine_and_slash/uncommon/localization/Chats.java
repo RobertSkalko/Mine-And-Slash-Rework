@@ -6,6 +6,12 @@ import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
 import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
+
+    EXPLORED_X_MAP_ROOMS("%1$s out of %2$s Map Rooms Scouted."),
+    MAP_FINISHED_SPAWNING("Map Scouting Complete!"),
+    TOTAL_MOBS("Total Mobs in Map: %1$s"),
+    TOTAL_CHESTS("Total Chests in Map: %1$s"),
+
     NOT_GEAR_OR_NOT_COMPAT("Not a Gear Item or not recognized as such."),
     NOT_MATCHING_GEAR_FAMILY("That Gear isn't of the correct Gear Family (Armors, Weapons, Jewelry, Offhands)"),
     NOT_MATCHING_GEAR_SLOT("Not the correct gear slot type."),
@@ -77,6 +83,8 @@ public enum Chats implements IAutoLocName {
     REQUIRE_RANGED("Requires Ranged Weapon to use."),
     INFUSES_STATS("Infuses stats into blank gear."),
     RIGHT_CLICK_TO_GEN_ITEM("You can also right-click to generate an item."),
+    MAP_COMPLETE_RARITY_UPGRADE("Your Map Exploration is now %1$s"),
+    GIVEN_BOSS_ARENA_ITEM("Your exploration of the map has yielded results. %1$s can now be used to teleport to the Boss Arena."),
 
     REQ_LVL("Required Level: %1$s"),
     ONLY_ONE_OF_TYPE("Can only have one Perk of this type:"),
@@ -158,6 +166,7 @@ public enum Chats implements IAutoLocName {
     HOW_TO_ENABLE_COMMAND_BLOCK("To enable go to your server.properties file and put enable-command-block as true."),
     WEAPON_REQ_NOT_MET("Weapon requirements not met"),
     ENEMY_TOO_CLOSE("Can't do that. There are enemies nearby."),
+    CANT_TP_TO_BOSS("You need to explore more of the map before you can enter the Boss Arena."),
     GEM_SOCKETED("Gem Socketed"),
     LEVEL_UP_MESSAGE_UP("Leveled Up!"),
     LEVEL_UP_MESSAGE_DOWN("%1$s Level: %2$s > %3$s!");
