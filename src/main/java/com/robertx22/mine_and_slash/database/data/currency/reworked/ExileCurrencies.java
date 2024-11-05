@@ -129,7 +129,7 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
             .weight(CodeCurrency.Weights.RARE)
             .build(this);
 
-
+/*
     public ExileKey<ExileCurrency, IdKey> MAP_RARITY_UPGRADE = ExileCurrency.Builder.of("map_rarity_upgrade", "Map Rarity Upgrade Orb", WorksOnBlock.ItemType.MAP)
             .addRequirement(ItemReqs.INSTANCE.IS_NOT_CORRUPTED)
             .addRequirement(ItemReqs.INSTANCE.MAP_HAS_HIGHER_RARITY)
@@ -138,6 +138,8 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
             .potentialCost(0)
             .weight(CodeCurrency.Weights.COMMON)
             .build(this);
+
+ */
 
 
     public ExileKey<ExileCurrency, IdKey> UPGRADE_COMMON_AFFIX = ExileCurrency.Builder.of("upgrade_common_affix", "Orb of Fledgling's Reprieve", WorksOnBlock.ItemType.GEAR)
@@ -189,6 +191,7 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
     @Override
     public void loadClass() {
 
+        /*
         MAP_RARITY_UPGRADE.addRecipe(ExileRegistryTypes.CURRENCY, x -> {
             return IShapedRecipe.of(x.getItem(), 3)
                     .define('X', Items.DIAMOND)
@@ -197,6 +200,8 @@ public class ExileCurrencies extends ExileKeyHolder<ExileCurrency> {
                     .pattern("YXY")
                     .pattern("YYY");
         });
+
+         */
 
         EXTRACT_GEM.addRecipe(ExileRegistryTypes.CURRENCY, x -> {
             return IShapedRecipe.of(x.getItem(), 3)

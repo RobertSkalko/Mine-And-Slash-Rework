@@ -16,9 +16,7 @@ import java.util.List;
 
 public class ProphecyCurseCard implements ICard {
 
-
     MapAffix affix;
-
 
     public ProphecyCurseCard(MapAffix affix) {
         this.affix = affix;

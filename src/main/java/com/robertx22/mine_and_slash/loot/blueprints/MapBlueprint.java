@@ -63,7 +63,7 @@ public class MapBlueprint extends RarityItemBlueprint {
 
         data.tier = rarity.getPossibleMapTiers().random();
 
-        data.lvl = level.get();
+        //  data.lvl = level.get();
 
         if (this.uberMap) {
             data.uber = this.uber.GUID();
@@ -81,7 +81,7 @@ public class MapBlueprint extends RarityItemBlueprint {
 
         map.affixes = new ArrayList<>();
 
-        int amount = rarity.getAffixAmount() + 2; // todo
+        int amount = rarity.getAffixAmount();
 
         List<String> affixes = new ArrayList<String>();
 

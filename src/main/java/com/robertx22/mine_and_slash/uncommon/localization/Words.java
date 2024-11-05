@@ -7,6 +7,16 @@ import java.util.Locale;
 
 // to use a "%" here, do %% or '%'
 public enum Words implements IAutoLocName {
+    OPTION_LOCKED("Option Locked Until Map Boss is Killed."),
+
+    UPGRADE_MAP("Upgrade Map Rarity"),
+    DOWNGRADE_MAP("Downgrade Map Rarity"),
+    REROLL_MAP("Reroll Map Rarity"),
+
+    UPGRADE_MAP_DESC("Your Map becomes more difficult but also more rewarding."),
+    DOWNGRADE_MAP_DESC("Map becomes easier and less rewarding."),
+    REROLL_MAP_DESC("Re-rolls the map affixes but keeps the rarity."),
+
     DODGE("Dodge"),
     RESIST("Resist"),
     CURRENT_POINTS("%1$s Points: %2$s"),

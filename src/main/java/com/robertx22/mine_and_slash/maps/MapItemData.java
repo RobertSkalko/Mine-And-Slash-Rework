@@ -16,7 +16,7 @@ import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
 import com.robertx22.mine_and_slash.gui.texts.IgnoreNullList;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.*;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
-import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RarityItems;
+import com.robertx22.mine_and_slash.loot.blueprints.MapBlueprint;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.ModRange;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.StatRangeInfo;
@@ -24,6 +24,7 @@ import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.StatRequirem
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.StatContext;
+import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
@@ -31,6 +32,7 @@ import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.ICommonDataIt
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.TooltipUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -47,7 +49,6 @@ import static com.robertx22.mine_and_slash.gui.texts.ExileTooltips.EMPTY_LINE;
 
 public class MapItemData implements ICommonDataItem<GearRarity> {
 
-    public static int MAX_TIER = 100;
     private static MapItemData empty;
     public String uber = "";
 
@@ -78,6 +79,18 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
     }
 
+
+    public void setRarityAndRerollNeeded(GearRarity rar) {
+        //int current = this.affixes.size();
+        //int needed = rar.min_affixes;
+
+        this.rar = rar.GUID();
+
+        // todo make it so only affixes that are added or removed are changed
+
+        MapBlueprint.genAffixes(this, rar);
+
+    }
 
     public boolean isUber() {
         return ExileDB.UberBoss().isRegistered(uber);
@@ -146,12 +159,15 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
     }
 
     public List<Component> getTooltip(ExileStack stack) {
+
+        int lvl = Load.Unit(ClientOnly.getPlayer()).getLevel();
+
         MapItemData thisMapItemData = this;
         StatRangeInfo tooltipInfo = new StatRangeInfo(ModRange.of(getRarity().stat_percents));
         var tip = new ExileTooltips()
                 .accept(new NameBlock(Collections.singletonList(Component.translatable("item.mmorpg.map"))))
                 .accept(new RequirementBlock()
-                        .setLevelRequirement(this.lvl)
+                        .setLevelRequirement(lvl)
                         .setStatRequirement(getStatReq()))
                 .accept(new RarityBlock(this.getRarity()))
                 .accept(new StatBlock() {
@@ -215,8 +231,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                 //handle possibleRarities
                 .accept(WorksOnBlock.possibleDrops(ExileDB.GearRarities().getFilterWrapped(
                         x -> this.tier >= ExileDB.GearRarities().get(x.min_map_rarity_to_drop).map_tiers.min
-                ).list))
-                .accept(new SalvageBlock(this, stack));
+                ).list));
         if (this.isUber()) {
             tip.accept(new AdditionalBlock(Collections.singletonList(Words.AreaContains.locName().withStyle(ChatFormatting.RED))));
         }
@@ -273,7 +288,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
 
     public int getLevel() {
-        return this.lvl;
+        return lvl;
     }
 
 
@@ -289,8 +304,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
     @Override
     public List<ItemStack> getSalvageResult(ExileStack stack) {
-        int amount = 1;
-        return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.getOrDefault(getRarity().GUID(), RarityItems.RARITY_STONE.get(IRarity.COMMON_ID)).get(), amount));
+        return Arrays.asList();
     }
 
     @Override

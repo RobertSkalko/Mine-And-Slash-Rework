@@ -1,7 +1,8 @@
 package com.robertx22.mine_and_slash.capability.player.data;
 
-import com.robertx22.mine_and_slash.maps.MapData;
 import com.robertx22.library_of_exile.utils.TeleportUtils;
+import com.robertx22.mine_and_slash.maps.MapData;
+import com.robertx22.mine_and_slash.maps.MapItemData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -17,6 +18,13 @@ public class PlayerMapData {
     public long tp_back_pos = 0;
     public long tp_back_from_league_pos = 0;
 
+    public boolean killed_boss = false;
+    public MapItemData map = null;
+
+    public void clearMapAfterUpgrading() {
+        map = null;
+        killed_boss = false;
+    }
 
     private BlockPos getTeleportBackPos() {
         return BlockPos.of(tp_back_pos);
@@ -33,7 +41,7 @@ public class PlayerMapData {
         }
 
         pos = pos.above();
-        
+
         TeleportUtils.teleport((ServerPlayer) p, pos);
     }
 

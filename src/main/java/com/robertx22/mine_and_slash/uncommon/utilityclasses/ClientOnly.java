@@ -2,6 +2,7 @@ package com.robertx22.mine_and_slash.uncommon.utilityclasses;
 
 import com.robertx22.mine_and_slash.prophecy.gui.ProphecyScreen;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvents;
@@ -53,6 +54,10 @@ public class ClientOnly {
 
     public static Player getPlayer() {
         return Minecraft.getInstance().player;
+    }
+
+    public static void setScreen(Screen s) {
+        Minecraft.getInstance().setScreen(s);
     }
 
     public static void closeScreen() {

@@ -44,6 +44,12 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
                     var sw = (ServerLevel) mobKilled.level();
                     var map = Load.mapAt(sw, mobKilled.blockPosition());
                     LeagueMechanics.MAP_REWARD.generateManually(map, sw, mobKilled.blockPosition());
+
+
+                    for (Player p : mobKilled.level().getEntitiesOfClass(Player.class, mobKilled.getBoundingBox().inflate(150))) {
+                        Load.player(p).map.killed_boss = true;
+                    }
+                
                 }
             }
 
@@ -128,7 +134,8 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
 
             }
 
-        } catch (Exception e) {
+        } catch (
+                Exception e) {
             e.printStackTrace();
         }
 

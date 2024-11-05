@@ -22,6 +22,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -34,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProcessChunkBlocks {
+
 
     private static void logRoomForPos(Level world, BlockPos pos) {
 
@@ -52,7 +54,7 @@ public class ProcessChunkBlocks {
 
     }
 
-    public static void process(ServerLevel level, BlockPos pos) {
+    public static void process(Player p, ServerLevel level, BlockPos pos) {
 
         try {
             if (level.isClientSide) {
@@ -169,25 +171,27 @@ public class ProcessChunkBlocks {
                                 var color = ChatFormatting.LIGHT_PURPLE;
                                 var tc = ChatFormatting.YELLOW;
 
-                                for (ServerPlayer p : level.getPlayers(x -> {
+                                for (ServerPlayer player : level.getPlayers(x -> {
                                     return MapData.getStartChunk(new ChunkPos(x.blockPosition())).equals(MapData.getStartChunk(start));
                                 })) {
-
-                                    p.sendSystemMessage(Chats.EXPLORED_X_MAP_ROOMS.locName(
+                                    player.sendSystemMessage(Chats.EXPLORED_X_MAP_ROOMS.locName(
                                             Component.literal(map.rooms.rooms.done + "").withStyle(tc),
                                             Component.literal(map.rooms.rooms.total + "").withStyle(tc)
                                     ).withStyle(color));
 
                                     if (map.rooms.isDoneGenerating()) {
-                                        p.sendSystemMessage(Chats.MAP_FINISHED_SPAWNING.locName().withStyle(ChatFormatting.DARK_PURPLE));
-                                        p.sendSystemMessage(Chats.TOTAL_MOBS.locName(map.rooms.mobs.total).withStyle(color));
-                                        p.sendSystemMessage(Chats.TOTAL_CHESTS.locName(map.rooms.chests.total).withStyle(color));
+                                        player.sendSystemMessage(Chats.MAP_FINISHED_SPAWNING.locName().withStyle(ChatFormatting.DARK_PURPLE));
+                                        player.sendSystemMessage(Chats.TOTAL_MOBS.locName(map.rooms.mobs.total).withStyle(color));
+                                        player.sendSystemMessage(Chats.TOTAL_CHESTS.locName(map.rooms.chests.total).withStyle(color));
                                     }
                                 }
 
                             }
                         }
-                        MobUnloading.loadBackMobs(level, cpos);
+
+                        if (p.tickCount % 100 == 0) {
+                            MobUnloading.loadBackMobs(level, cpos);
+                        }
                     }
 
 

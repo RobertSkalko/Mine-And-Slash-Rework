@@ -46,7 +46,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
         GearRarity uncommon = new GearRarity().edit(x -> {
 
-            x.map_reward = new MapRarityRewardData(10, ModLootTables.TIER_1_DUNGEON_CHEST, 2, 1.1F);
+            x.map_reward = new MapRarityRewardData(50, ModLootTables.TIER_1_DUNGEON_CHEST, 2, 1.1F);
 
 
             x.vanilla_rar_enum = VanillaRarities.UNCOMMON.name();
@@ -74,7 +74,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity rar = new GearRarity().edit(x -> {
-            x.map_reward = new MapRarityRewardData(25, ModLootTables.TIER_2_DUNGEON_CHEST, 3, 1.2F);
+            x.map_reward = new MapRarityRewardData(60, ModLootTables.TIER_2_DUNGEON_CHEST, 3, 1.2F);
 
             x.vanilla_rar_enum = Rarity.RARE.name();
 
@@ -104,7 +104,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
         });
         GearRarity epic = new GearRarity().edit(x -> {
-            x.map_reward = new MapRarityRewardData(50, ModLootTables.TIER_3_DUNGEON_CHEST, 5, 1.2F);
+            x.map_reward = new MapRarityRewardData(70, ModLootTables.TIER_3_DUNGEON_CHEST, 5, 1.2F);
 
             x.vanilla_rar_enum = Rarity.EPIC.name();
 
@@ -135,7 +135,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity legendary = new GearRarity().edit(x -> {
-            x.map_reward = new MapRarityRewardData(75, ModLootTables.TIER_4_DUNGEON_CHEST, 7, 1.5F);
+            x.map_reward = new MapRarityRewardData(80, ModLootTables.TIER_4_DUNGEON_CHEST, 7, 1.5F);
 
             x.vanilla_rar_enum = VanillaRarities.LEGENDARY.name();
             x.map_resist_req = 40;

@@ -5,6 +5,7 @@ import com.robertx22.mine_and_slash.maps.generator.ChunkProcessData;
 import com.robertx22.mine_and_slash.maps.processors.DataProcessor;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 
 public class MapRewardChestProcessor extends DataProcessor {
@@ -29,7 +30,7 @@ public class MapRewardChestProcessor extends DataProcessor {
             var rar = ExileDB.GearRarities().get(map.completion_rarity);
 
             if (data.map_reward_chests++ < rar.map_reward.reward_chests) {
-                ChestProcessor.createChest(world, pos, false, rar.map_reward.loot_table);
+                ChestProcessor.createChest(world, pos, false, new ResourceLocation(rar.map_reward.loot_table));
             } else {
                 world.removeBlockEntity((pos)); // dont drop chest loot. this is a big problem if u remove this line
                 world.removeBlock(pos, false);   // don't drop loot

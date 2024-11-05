@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.vanilla_mc.packets;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.proxies.OpenGuiWrapper;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -12,6 +13,7 @@ public class OpenGuiPacket extends MyPacket<OpenGuiPacket> {
 
     public enum GuiType {
         PICK_PROPHECY_CURSE,
+        PICK_MAP_UPGRADE,
         MAIN_HUB;
 
 
@@ -41,6 +43,9 @@ public class OpenGuiPacket extends MyPacket<OpenGuiPacket> {
     public void onReceived(ExilePacketContext ctx) {
         if (type == GuiType.MAIN_HUB) {
             OpenGuiWrapper.openMainHub();
+        }
+        if (type == GuiType.PICK_MAP_UPGRADE) {
+            ClientOnly.setScreen(OpenGuiWrapper.openMapUpgradePicker());
         }
         if (type == GuiType.PICK_PROPHECY_CURSE) {
             OpenGuiWrapper.openProphecyCards();

@@ -8,10 +8,7 @@ import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
-
-import java.util.List;
 
 public class OnPlayerDeath extends EventConsumer<ExileEvents.OnPlayerDeath> {
 
@@ -47,12 +44,17 @@ public class OnPlayerDeath extends EventConsumer<ExileEvents.OnPlayerDeath> {
 
                 if (map != null) {
                     map.reduceLives(player);
+
                     player.sendSystemMessage(Chats.MAP_DEATH_LIVES_LOSS.locName(map.getLives(player)).withStyle(ChatFormatting.RED));
+                    /*
+                    todo why was this code here??
                     List<Component> reqDifference = map.map.getStatReq().getReqDifference(map.map.lvl, Load.Unit(player));
                     if (!reqDifference.isEmpty()) {
                         player.sendSystemMessage(Chats.NOT_MEET_MAP_REQ_FIRST_LINE.locName());
                         reqDifference.forEach(player::sendSystemMessage);
                     }
+
+                     */
                 }
 
             }

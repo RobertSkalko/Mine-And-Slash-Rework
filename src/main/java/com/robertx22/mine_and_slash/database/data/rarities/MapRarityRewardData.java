@@ -18,13 +18,13 @@ import net.minecraft.world.entity.player.Player;
 public class MapRarityRewardData {
 
     public int perc_to_unlock = 0;
-    public ResourceLocation loot_table = new ResourceLocation("");
+    public String loot_table = "";
     public int reward_chests = 0;
     public float loot_multi = 1;
 
     public MapRarityRewardData(int perc_to_unlock, ResourceLocation loot_table, int reward_chests, float loot_multi) {
         this.perc_to_unlock = perc_to_unlock;
-        this.loot_table = loot_table;
+        this.loot_table = loot_table.toString();
         this.reward_chests = reward_chests;
         this.loot_multi = loot_multi;
     }
@@ -42,7 +42,7 @@ public class MapRarityRewardData {
     public static void updateMapCompletionRarity(ServerPlayer player, MapData map) {
 
         int perc = getMapCompletePercent(map);
-        
+
         if (!map.gave_boss_tp && BossTpItem.canTeleportToArena(player)) {
             map.gave_boss_tp = true;
 

@@ -76,11 +76,12 @@ public class ChunkCap implements ICap {
     public List<UUID> mobIds = new ArrayList<>();
 
     public void trySaveMob(LivingEntity en) {
+       
         if (en instanceof Player) {
             return;
         }
 
-        if (savedMobs.size() > 20) {
+        if (savedMobs.size() > 10) {
             if (MMORPG.RUN_DEV_TOOLS) {
                 ExileLog.get().warn("Saved too many mobs in 1 chunk, stopping just in case");
             }

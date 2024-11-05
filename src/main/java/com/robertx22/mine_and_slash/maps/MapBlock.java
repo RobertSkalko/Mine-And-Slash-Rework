@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.maps;
 
+import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.library_of_exile.utils.geometry.Circle2d;
 import com.robertx22.mine_and_slash.database.data.profession.ProfessionBlockEntity;
@@ -8,6 +9,7 @@ import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
+import com.robertx22.mine_and_slash.vanilla_mc.packets.OpenGuiPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -91,24 +93,14 @@ public class MapBlock extends BaseEntityBlock {
 
             MapItemData data = StackSaving.MAP.loadFrom(p.getItemInHand(pHand));
 
-
             if (WorldUtils.isDungeonWorld(level)) {
                 Load.player(p).map.teleportBack(p);
 
             } else {
 
                 if (data != null) {
-                    if (Load.Unit(p).getLevel() < (data.lvl - 5)) {
-                        p.sendSystemMessage(Chats.TOO_LOW_LEVEL.locName().withStyle(ChatFormatting.RED));
-                        return InteractionResult.FAIL;
-                    }
-                    if (!data.getStatReq().meetsReq(data.lvl, Load.Unit(p))) {
-                        p.sendSystemMessage(Chats.RESISTS_TOO_LOW_FOR_MAP.locName().withStyle(ChatFormatting.RED));
-                        List<Component> reqDifference = data.getStatReq().getReqDifference(data.lvl, Load.Unit(p));
-                        if (!reqDifference.isEmpty()) {
-                            p.sendSystemMessage(Chats.NOT_MEET_MAP_REQ_FIRST_LINE.locName().withStyle(ChatFormatting.RED));
-                            reqDifference.forEach(p::sendSystemMessage);
-                        }
+
+                    if (!canStartMap(p, data)) {
                         return InteractionResult.FAIL;
                     }
 
@@ -122,6 +114,8 @@ public class MapBlock extends BaseEntityBlock {
                     }
                     return InteractionResult.SUCCESS;
                 }
+
+
                 if (p.getItemInHand(pHand).is(SlashItems.MAP_SETTER.get())) {
                     MapBlockEntity be = (MapBlockEntity) level.getBlockEntity(pPos);
                     be.setMap(p.getStringUUID());
@@ -135,33 +129,20 @@ public class MapBlock extends BaseEntityBlock {
                 if (map.isPresent()) {
                     MapData mapData = map.get();
 
-                    if (mapData.getLives(p) < 1) {
-                        p.sendSystemMessage(Chats.NO_MORE_LIVES_REMAINING.locName().withStyle(ChatFormatting.RED));
-                        return InteractionResult.FAIL;
-                    }
-                    MapItemData map1 = mapData.map;
-                    if (!map1.getStatReq().meetsReq(map1.lvl, Load.Unit(p))) {
-                        p.sendSystemMessage(Chats.RESISTS_TOO_LOW_FOR_MAP.locName().withStyle(ChatFormatting.RED));
-                        List<Component> reqDifference = map1.getStatReq().getReqDifference(map1.lvl, Load.Unit(p));
-                        if (!reqDifference.isEmpty()) {
-                            p.sendSystemMessage(Chats.NOT_MEET_MAP_REQ_FIRST_LINE.locName().withStyle(ChatFormatting.RED));
-                            reqDifference.forEach(p::sendSystemMessage);
+                    if (Load.player(p).map.map != null) {
+                        // if the map is done or player ran out of lives, give options to proceed
+                        if (mapData.getLives(p) < 1 || Load.player(p).map.killed_boss) {
+                            Packets.sendToClient(p, new OpenGuiPacket(OpenGuiPacket.GuiType.PICK_MAP_UPGRADE));
+                            return InteractionResult.SUCCESS;
                         }
-                        return InteractionResult.FAIL;
-                    }
-                    if (Load.Unit(p).getLevel() < (map1.lvl - 5)) {
-                        p.sendSystemMessage(Chats.TOO_LOW_LEVEL.locName().withStyle(ChatFormatting.RED));
-                        return InteractionResult.FAIL;
-                    }
-                    if (p.getInventory().countItem(SlashItems.TP_BACK.get()) < 1) {
-                        p.sendSystemMessage(Chats.NEED_PEARL.locName(SlashItems.TP_BACK.get().getDefaultInstance().getHoverName()));
-                        return InteractionResult.SUCCESS;
                     }
 
+                    if (!canJoinMap(p, mapData)) {
+                        return InteractionResult.FAIL;
+                    }
                     mapData.teleportToMap(p);
 
                 } else {
-
                     return InteractionResult.FAIL;
                 }
 
@@ -170,5 +151,46 @@ public class MapBlock extends BaseEntityBlock {
         }
 
         return InteractionResult.SUCCESS;
+    }
+
+
+    static boolean canStartMap(Player p, MapItemData data) {
+
+        if (!data.getStatReq().meetsReq(Load.Unit(p).getLevel(), Load.Unit(p))) {
+            p.sendSystemMessage(Chats.RESISTS_TOO_LOW_FOR_MAP.locName().withStyle(ChatFormatting.RED));
+            List<Component> reqDifference = data.getStatReq().getReqDifference(data.lvl, Load.Unit(p));
+            if (!reqDifference.isEmpty()) {
+                p.sendSystemMessage(Chats.NOT_MEET_MAP_REQ_FIRST_LINE.locName().withStyle(ChatFormatting.RED));
+                reqDifference.forEach(p::sendSystemMessage);
+            }
+            return false;
+        }
+        return true;
+    }
+
+    static boolean canJoinMap(Player p, MapData mapData) {
+        if (mapData.getLives(p) < 1) {
+            p.sendSystemMessage(Chats.NO_MORE_LIVES_REMAINING.locName().withStyle(ChatFormatting.RED));
+            return false;
+        }
+        MapItemData map1 = mapData.map;
+        if (!map1.getStatReq().meetsReq(map1.lvl, Load.Unit(p))) {
+            p.sendSystemMessage(Chats.RESISTS_TOO_LOW_FOR_MAP.locName().withStyle(ChatFormatting.RED));
+            List<Component> reqDifference = map1.getStatReq().getReqDifference(map1.lvl, Load.Unit(p));
+            if (!reqDifference.isEmpty()) {
+                p.sendSystemMessage(Chats.NOT_MEET_MAP_REQ_FIRST_LINE.locName().withStyle(ChatFormatting.RED));
+                reqDifference.forEach(p::sendSystemMessage);
+            }
+            return false;
+        }
+        if (Load.Unit(p).getLevel() < (map1.lvl - 5)) {
+            p.sendSystemMessage(Chats.TOO_LOW_LEVEL.locName().withStyle(ChatFormatting.RED));
+            return false;
+        }
+        if (p.getInventory().countItem(SlashItems.TP_BACK.get()) < 1) {
+            p.sendSystemMessage(Chats.NEED_PEARL.locName(SlashItems.TP_BACK.get().getDefaultInstance().getHoverName()));
+            return false;
+        }
+        return true;
     }
 }

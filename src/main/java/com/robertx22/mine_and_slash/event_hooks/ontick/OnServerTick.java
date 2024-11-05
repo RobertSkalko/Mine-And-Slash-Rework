@@ -115,7 +115,7 @@ public class OnServerTick {
                     }
                 }
                 if (!unitdata.getCooldowns().isOnCooldown("stop_map_gen")) {
-                    ProcessChunkBlocks.process(sw, player.blockPosition());
+                    ProcessChunkBlocks.process(player, sw, player.blockPosition());
                 } else {
                     return;
                 }

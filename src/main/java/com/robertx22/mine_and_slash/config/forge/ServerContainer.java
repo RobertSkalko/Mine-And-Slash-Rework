@@ -41,7 +41,7 @@ public class ServerContainer {
         ENABLE_LOOT_ANNOUNCEMENTS = b.define("loot_announcements", true);
         REQUIRE_TEAM_FOR_TEAM_DUNGEONS = b.define("require_team_for_dungeons", true);
         DONT_SYNC_DATA_OF_AMBIENT_MOBS = b.define("dont_sync_ambient_mob_data", true);
-        MAPS_DONT_DROP_IN_MAPS = b.define("maps_dont_drop_in_maps", false);
+        MAPS_DONT_DROP_IN_MAPS = b.define("maps_dont_drop_in_maps", true);
         LOG_ERRORS = b.define("log_errors", true);
         STOP_ERROR_SPAM = b.define("stop_error_spam", true);
         STATION_SUCK_NEARBY_CHESTS = b.define("STATION_SUCK_NEARBY_CHESTS", false);

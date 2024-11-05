@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.maps;
 
+import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
@@ -38,6 +39,12 @@ public class MapsData {
     public MapData startNewMap(Player player, MapItemData data) {
         MapData m = MapData.newMap(player, data, this);
         this.maps.add(m);
+
+        data.lvl = Load.Unit(player).getLevel();
+
+        if (!data.isUber()) {
+            Load.player(player).map.map = data;
+        }
         return m;
     }
 

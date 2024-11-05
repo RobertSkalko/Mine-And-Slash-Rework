@@ -77,7 +77,7 @@ public class DamageEvent extends EffectEvent {
     AttackInformation attackInfo;
     private HashMap<Elements, Integer> bonusElementDamageMap = new HashMap();
 
-    public float unconvertedDamagePercent = 0;
+    public float unconvertedDamagePercent = 100;
 
     protected DamageEvent(AttackInformation attackInfo, LivingEntity source, LivingEntity target, float dmg) {
         super(dmg, source, target);
@@ -496,8 +496,9 @@ public class DamageEvent extends EffectEvent {
                 attackInfo.setCanceled(true);
             }
             cancelDamage();
-            InteractionNotifier.notifyClient(getAttackType().isAttack() ? IParticleSpawnMaterial.Type.DODGE : IParticleSpawnMaterial.Type.RESIST, (ServerPlayer) source, target);
-            //sendDamageParticle(info);
+            if (source instanceof ServerPlayer) {
+                InteractionNotifier.notifyClient(getAttackType().isAttack() ? IParticleSpawnMaterial.Type.DODGE : IParticleSpawnMaterial.Type.RESIST, (ServerPlayer) source, target);
+            }  //sendDamageParticle(info);
 
             //move this sound to InteractionResultHandler.
             //SoundUtils.playSound(target, SoundEvents.SHIELD_BLOCK, 1, 1.5F);
@@ -625,7 +626,6 @@ public class DamageEvent extends EffectEvent {
 
             if (source instanceof Player p) {
 
-
                 p.setLastHurtMob(target); // this allows summons to know who to attack
 
                 sourceData.getCooldowns().setOnCooldown(CooldownsData.IN_COMBAT, 20 * 10);
@@ -637,7 +637,10 @@ public class DamageEvent extends EffectEvent {
                         GenerateThreatEvent threatEvent = new GenerateThreatEvent((Player) source, (Mob) target, ThreatGenType.deal_dmg, dmg);
                         threatEvent.Activate();
                     }
+
                 }
+                InteractionNotifier.notifyClient(IParticleSpawnMaterial.DamageInformation.fromDmgByElement(info, data.isCrit()), (ServerPlayer) source, target);
+
             } else if (source instanceof Mob) {
                 if (target instanceof Player) {
                     targetData.getCooldowns().setOnCooldown(CooldownsData.IN_COMBAT, 20 * 10);
@@ -646,7 +649,6 @@ public class DamageEvent extends EffectEvent {
                     threatEvent.Activate();
                 }
             }
-            InteractionNotifier.notifyClient(IParticleSpawnMaterial.DamageInformation.fromDmgByElement(info, data.isCrit()), (ServerPlayer) source, target);
             //sendDamageParticle(info);
 
             // target.invulnerableTime = 20;
