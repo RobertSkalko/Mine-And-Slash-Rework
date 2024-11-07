@@ -17,7 +17,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 public class SpellSchoolsData implements IStatCtx {
@@ -38,11 +37,19 @@ public class SpellSchoolsData implements IStatCtx {
         return list;
     }
 
-
-    public List<Perk> getAllPerks() {
-        return allocated_lvls.keySet().stream().map(x -> ExileDB.Perks().get(x)).collect(Collectors.toList());
+    public void removeUnlearnedPerks() {
+        this.allocated_lvls.entrySet().removeIf(x -> x.getValue() < 1);
     }
 
+    public List<Perk> getAllPerks() {
+        List<Perk> all = new ArrayList<>();
+        allocated_lvls.entrySet().forEach(x -> {
+            if (x.getValue() > 0) {
+                all.add(ExileDB.Perks().get(x.getKey()));
+            }
+        });
+        return all;
+    }
 
     public void reset(PointType type) {
 
@@ -64,6 +71,8 @@ public class SpellSchoolsData implements IStatCtx {
                 this.allocated_lvls.remove(perk.GUID());
             }
         }
+
+        removeUnlearnedPerks();
 
     }
 
@@ -153,6 +162,8 @@ public class SpellSchoolsData implements IStatCtx {
             perk.getPointType().getGeneralType().reduceResetPoints(p, 1);
             allocated_lvls.put(perk.GUID(), current - 1);
         }
+
+        removeUnlearnedPerks();
     }
 
 
@@ -169,7 +180,7 @@ public class SpellSchoolsData implements IStatCtx {
                 }
             }
         }
-        return Arrays.asList(new SimpleStatCtx(StatContext.StatCtxType.ASCENDANCY, stats));
+        return Arrays.asList(new SimpleStatCtx(StatContext.StatCtxType.PASSIVES, stats));
     }
 
 }

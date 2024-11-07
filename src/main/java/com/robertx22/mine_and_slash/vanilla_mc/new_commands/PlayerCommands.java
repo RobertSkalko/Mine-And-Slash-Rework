@@ -108,22 +108,27 @@ public class PlayerCommands {
 
         CommandBuilder.of(dis, x -> {
             PlayerWrapper PLAYER = new PlayerWrapper();
-            IntWrapper NUMBER = new IntWrapper("level");
+            IntWrapper LEVEL = new IntWrapper("level");
+            IntWrapper NUMBER = new IntWrapper("amount");
 
             x.addLiteral("give", PermWrapper.OP);
             x.addLiteral("watcher_eye_jewel", PermWrapper.OP);
 
             x.addArg(PLAYER);
+            x.addArg(LEVEL);
             x.addArg(NUMBER);
 
             x.action(e -> {
                 var p = PLAYER.get(e);
-                var num = NUMBER.get(e);
+                var level = LEVEL.get(e);
+                var amount = NUMBER.get(e);
 
-                var info = LootInfo.ofLevel(num);
-                WatcherEyeBlueprint b = new WatcherEyeBlueprint(info);
-                ItemStack stack = b.createStack();
-                PlayerUtils.giveItem(stack, p);
+                for (int i = 0; i < amount; i++) {
+                    var info = LootInfo.ofLevel(level);
+                    WatcherEyeBlueprint b = new WatcherEyeBlueprint(info);
+                    ItemStack stack = b.createStack();
+                    PlayerUtils.giveItem(stack, p);
+                }
             });
 
         }, "Gives a random watcher eye jewel, affix count depends on level");

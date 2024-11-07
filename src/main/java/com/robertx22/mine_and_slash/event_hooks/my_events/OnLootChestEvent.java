@@ -3,7 +3,6 @@ package com.robertx22.mine_and_slash.event_hooks.my_events;
 import com.google.common.collect.Lists;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
-import com.robertx22.mine_and_slash.capability.player.data.PlayerConfigData;
 import com.robertx22.mine_and_slash.loot.LootInfo;
 import com.robertx22.mine_and_slash.loot.MasterLootGen;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
@@ -46,12 +45,15 @@ public class OnLootChestEvent extends EventConsumer<ExileEvents.OnChestLooted> {
             Load.mapAt(player.level(), event.pos).rooms.chests.done++;
         }
 
+        /*
         if (Load.player(player).config.isConfigEnabled(PlayerConfigData.Config.DROP_MAP_CHEST_CONTENTS_ON_GROUND) && WorldUtils.isMapWorldClass(player.level())) {
             for (int i = 0; i < event.inventory.getContainerSize(); i++) {
                 player.spawnAtLocation(event.inventory.getItem(i), 1F);
                 event.inventory.setItem(i, ItemStack.EMPTY);
             }
         }
+
+         */
     }
 
     private static List<Integer> mygetEmptySlotsRandomized(Container inventory, Random rand) {

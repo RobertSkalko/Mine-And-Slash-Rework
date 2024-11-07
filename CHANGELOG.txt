@@ -1,6 +1,6 @@
 Changelog of recent updates: https://github.com/RobertSkalko/Mine-And-Slash-Rework/blob/1.20-Forge/changelogs/v.5.9.txt
 
-v.5.9.2
+v.5.9.6
 
-- fix phys to ele conversions not working
-- fix commands using perm lvl 3 instead of 2
+- removed break chest in maps feature
+- melee cooldown no longer applies to spells

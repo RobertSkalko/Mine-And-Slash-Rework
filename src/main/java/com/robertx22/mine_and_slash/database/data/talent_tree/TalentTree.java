@@ -1,5 +1,8 @@
 package com.robertx22.mine_and_slash.database.data.talent_tree;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.registry.IAutoGson;
+import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.PlayerPointsType;
 import com.robertx22.mine_and_slash.database.data.perks.Perk;
 import com.robertx22.mine_and_slash.database.data.stats.types.UnknownStat;
@@ -8,9 +11,7 @@ import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
 import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.saveclasses.PointData;
-import com.robertx22.library_of_exile.registry.ExileRegistryType;
-import com.robertx22.library_of_exile.registry.IAutoGson;
-import com.robertx22.library_of_exile.registry.JsonExileRegistry;
+import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.StatContext;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -35,14 +36,26 @@ public class TalentTree implements JsonExileRegistry<TalentTree>, IAutoGson<Tale
             public PlayerPointsType getPointType() {
                 return PlayerPointsType.TALENTS;
             }
+
+            @Override
+            public StatContext.StatCtxType getCtxType() {
+                return StatContext.StatCtxType.TALENT;
+            }
         }, ASCENDANCY() {
             @Override
             public PlayerPointsType getPointType() {
                 return PlayerPointsType.ASCENDANCY;
             }
+
+            @Override
+            public StatContext.StatCtxType getCtxType() {
+                return StatContext.StatCtxType.ASCENDANCY;
+            }
         };
 
         public abstract PlayerPointsType getPointType();
+
+        public abstract StatContext.StatCtxType getCtxType();
     }
 
     public SchoolType getSchool_type() {

@@ -187,8 +187,7 @@ public class EventData {
     }
 
     public boolean isSpellEffect() {
-        return ExileDB.Spells()
-                .isRegistered(getString(SPELL));
+        return ExileDB.Spells().isRegistered(getString(SPELL));
     }
 
     public boolean isBasicAttack() {

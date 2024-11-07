@@ -161,6 +161,10 @@ public class ExpSources {
             if (proflvl > getLevelOfMastery()) {
                 int diff = Math.abs(proflvl - getLevelOfMastery());
                 lowRecipeLvlPenalty -= (diff * GameBalanceConfig.get().PROFESSION_EXP_PENALTY_PER_LOWER_LEVEL);
+
+                if (lowRecipeLvlPenalty < 0) {
+                    lowRecipeLvlPenalty = 0;
+                }
             }
 
 

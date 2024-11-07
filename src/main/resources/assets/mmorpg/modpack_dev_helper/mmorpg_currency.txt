@@ -21,7 +21,6 @@ jewel_corrupt
 jewel_sure_upgrade
 jewel_upgrade_affix
 level_up_orb
-map_rarity_upgrade
 orb_of_quality
 sharpening_stone_0
 sharpening_stone_1

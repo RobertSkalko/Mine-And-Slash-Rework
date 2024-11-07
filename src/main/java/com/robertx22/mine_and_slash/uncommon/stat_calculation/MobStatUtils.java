@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.uncommon.stat_calculation;
 
+import com.robertx22.library_of_exile.utils.EntityUtils;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.OffenseStats;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
@@ -22,7 +23,6 @@ import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
-import com.robertx22.library_of_exile.utils.EntityUtils;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
@@ -115,16 +115,14 @@ public class MobStatUtils {
         float dmg = (float) ((-1F + config.dmg_multi) * 100F);
         float stat = (float) ((-1F + config.stat_multi) * 100F);
 
-        float expo = 100f * (float) (GameBalanceConfig.get().MOB_HP_POWER_SCALING_BASE * (float) Math.pow(GameBalanceConfig.get().MOB_HP_POWER_SCALING, unitdata.getLevel()));
+        float expo = 100f * (float) (-1F + GameBalanceConfig.get().MOB_HP_POWER_SCALING_BASE * (float) Math.pow(GameBalanceConfig.get().MOB_HP_POWER_SCALING, unitdata.getLevel()));
         stats.add(ExactStatData.noScaling(hp, ModType.MORE, Health.getInstance().GUID()));
         stats.add(ExactStatData.noScaling(expo, ModType.MORE, Health.getInstance().GUID()));
         stats.add(ExactStatData.noScaling(dmg, ModType.FLAT, OffenseStats.TOTAL_DAMAGE.get()
                 .GUID()));
 
-        stats.add(ExactStatData.noScaling(stat, ModType.MORE, DodgeRating.getInstance()
-                .GUID()));
-        stats.add(ExactStatData.noScaling(stat, ModType.MORE, Armor.getInstance()
-                .GUID()));
+        stats.add(ExactStatData.noScaling(stat, ModType.MORE, DodgeRating.getInstance().GUID()));
+        stats.add(ExactStatData.noScaling(stat, ModType.MORE, Armor.getInstance().GUID()));
 
 
         for (Elements ele : Elements.getAllSingle()) {
@@ -132,10 +130,8 @@ public class MobStatUtils {
                 stats.add(ExactStatData.noScaling(stat, ModType.MORE, new ElementalResist(ele).GUID()));
             }
         }
-        stats.add(ExactStatData.noScaling(stat, ModType.MORE, new ElementalResist(Elements.Elemental)
-                .GUID()));
-        stats.add(ExactStatData.noScaling(stat, ModType.MORE, Health.getInstance()
-                .GUID()));
+        //stats.add(ExactStatData.noScaling(stat, ModType.MORE, new ElementalResist(Elements.Elemental).GUID()));
+        stats.add(ExactStatData.noScaling(stat, ModType.MORE, Health.getInstance().GUID()));
 
         list.add(new MiscStatCtx(stats));
 

@@ -357,8 +357,13 @@ public class SpellCastingData {
             return ExplainedResult.failure(Chats.ALREADY_CASTING.locName());
         }
 
+
         if (spell == null) {
             return ExplainedResult.failure(Component.literal("Trying to cast NULL Spell, this shouldn't happen"));
+        }
+
+        if (spell.getLevelOf(player) < 1) {
+            return ExplainedResult.failure(Component.literal("You did not learn this spell"));
         }
 
         if (Load.Unit(player).getCooldowns().isOnCooldown(spell.GUID())) {
@@ -368,6 +373,7 @@ public class SpellCastingData {
             }
             return ExplainedResult.silentlyFail();
         }
+
 
         if (player.isCreative()) {
             return ExplainedResult.success();

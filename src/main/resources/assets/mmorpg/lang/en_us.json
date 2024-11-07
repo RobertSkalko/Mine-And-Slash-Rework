@@ -608,6 +608,49 @@
 "_comment": " [CATEGORY]: DUNGEON - NAMES",
 
 
+"_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
+
+	"mmorpg.ailment.bleed": "Bleed",
+	"mmorpg.ailment.burn": "Burn",
+	"mmorpg.ailment.electrify": "Electrify",
+	"mmorpg.ailment.freeze": "Freeze",
+	"mmorpg.ailment.poison": "Poison",
+	"mmorpg.effect.agony": "Physical Agony",
+	"mmorpg.effect.blind": "Blind",
+	"mmorpg.effect.bone_chill": "Bone Chill",
+	"mmorpg.effect.charm": "Charm",
+	"mmorpg.effect.despair": "Despair of Chaos",
+	"mmorpg.effect.draconic_blood": "Dragon Blood",
+	"mmorpg.effect.endurance_charge": "Endurance Charge",
+	"mmorpg.effect.essence_of_frost": "Essence of Frost",
+	"mmorpg.effect.fire_golem_buff": "Fire Golem Buff",
+	"mmorpg.effect.frenzy_charge": "Frenzy Charge",
+	"mmorpg.effect.frost_lich": "Frost Lich",
+	"mmorpg.effect.gale_force": "Gale Force",
+	"mmorpg.effect.ground": "Grounding",
+	"mmorpg.effect.ice_golem_buff": "Ice Golem Buff",
+	"mmorpg.effect.inner_calm": "Inner Calm",
+	"mmorpg.effect.lightning_golem_buff": "Lightning Golem Buff",
+	"mmorpg.effect.mage_circle": "Mage Circle",
+	"mmorpg.effect.perseverance": "Perseverance",
+	"mmorpg.effect.petrify": "Petrify",
+	"mmorpg.effect.power_charge": "Power Charge",
+	"mmorpg.effect.rejuvenation": "Rejuvenation",
+	"mmorpg.effect.shred": "Shred",
+	"mmorpg.effect.slow": "Lethargy",
+	"mmorpg.effect.stun": "Stun",
+	"mmorpg.effect.taunt_stance": "Taunt Stance",
+	"mmorpg.effect.thorn": "Thorn",
+	"mmorpg.effect.undying_will": "Undying Will",
+	"mmorpg.effect.valor": "Valor",
+	"mmorpg.effect.vamp_blood": "Vamp Blood",
+	"mmorpg.effect.vigor": "Vigor",
+	"mmorpg.effect.weak": "Elemental Weakness",
+	"mmorpg.effect.wounds": "Wounds",
+
+"_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
+
+
 "_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
 
 	"mmorpg.currency.affix_common_reroll": "Orb of New Beginnings",
@@ -676,49 +719,6 @@
 	"item.mmorpg.currency.upgrade_common_affix": "Orb of Fledgling's Reprieve",
 
 "_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
-
-
-"_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
-
-	"mmorpg.ailment.bleed": "Bleed",
-	"mmorpg.ailment.burn": "Burn",
-	"mmorpg.ailment.electrify": "Electrify",
-	"mmorpg.ailment.freeze": "Freeze",
-	"mmorpg.ailment.poison": "Poison",
-	"mmorpg.effect.agony": "Physical Agony",
-	"mmorpg.effect.blind": "Blind",
-	"mmorpg.effect.bone_chill": "Bone Chill",
-	"mmorpg.effect.charm": "Charm",
-	"mmorpg.effect.despair": "Despair of Chaos",
-	"mmorpg.effect.draconic_blood": "Dragon Blood",
-	"mmorpg.effect.endurance_charge": "Endurance Charge",
-	"mmorpg.effect.essence_of_frost": "Essence of Frost",
-	"mmorpg.effect.fire_golem_buff": "Fire Golem Buff",
-	"mmorpg.effect.frenzy_charge": "Frenzy Charge",
-	"mmorpg.effect.frost_lich": "Frost Lich",
-	"mmorpg.effect.gale_force": "Gale Force",
-	"mmorpg.effect.ground": "Grounding",
-	"mmorpg.effect.ice_golem_buff": "Ice Golem Buff",
-	"mmorpg.effect.inner_calm": "Inner Calm",
-	"mmorpg.effect.lightning_golem_buff": "Lightning Golem Buff",
-	"mmorpg.effect.mage_circle": "Mage Circle",
-	"mmorpg.effect.perseverance": "Perseverance",
-	"mmorpg.effect.petrify": "Petrify",
-	"mmorpg.effect.power_charge": "Power Charge",
-	"mmorpg.effect.rejuvenation": "Rejuvenation",
-	"mmorpg.effect.shred": "Shred",
-	"mmorpg.effect.slow": "Lethargy",
-	"mmorpg.effect.stun": "Stun",
-	"mmorpg.effect.taunt_stance": "Taunt Stance",
-	"mmorpg.effect.thorn": "Thorn",
-	"mmorpg.effect.undying_will": "Undying Will",
-	"mmorpg.effect.valor": "Valor",
-	"mmorpg.effect.vamp_blood": "Vamp Blood",
-	"mmorpg.effect.vigor": "Vigor",
-	"mmorpg.effect.weak": "Elemental Weakness",
-	"mmorpg.effect.wounds": "Wounds",
-
-"_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
 
 
 "_comment": " [CATEGORY]: TALENTS - NAMES",
@@ -1973,6 +1973,7 @@
 	"mmorpg.chat.dev_tools_enabled_contact_the_author": "Devs tools enabled, if you see this please contact the author of Mine and Slash [robertx22], he forgot to disable them!",
 	"mmorpg.chat.empty_map_forced_tp": "The Map you're currently inside was deleted. This can happen if you entered another player's map and they started a new one.",
 	"mmorpg.chat.enchant_upgrade_rarity": "Infusions must be applied consecutively. A common Infusion has to come before an uncommon Infusion may be applied.",
+	"mmorpg.chat.enchant_upgrade_rarity_cant_same": "The Infusion on the item is already of this rarity. Use a higher rarity Infusion",
 	"mmorpg.chat.enemy_too_close": "Can't do that. There are enemies nearby.",
 	"mmorpg.chat.explored_x_map_rooms": "%1$s out of %2$s Map Rooms Scouted.",
 	"mmorpg.chat.failed_to_award_points": "Failed to give more %1$s points, you have reached the cap. The maximum allowed bonus %1$s points is %2$s. This is controlled by the Game balance datapack",
@@ -2068,6 +2069,7 @@
 	"mmorpg.chat.soulless_gear_more_info": "Souls Are Crafted with MNS Professions or Drop from Mobs",
 	"mmorpg.chat.spell_is_on_cd": "Spell is on cooldown",
 	"mmorpg.chat.stacks_dont_multiply_stats": "[Buff Stacks Don't multiply Stats]",
+	"mmorpg.chat.this_is_only_usable_inside_a_map": "Only usable inside the Map.",
 	"mmorpg.chat.this_item_cant_be_used_more_than_x_times": "This item has already reached maximum uses: (%1$s)",
 	"mmorpg.chat.too_low_level": "Your level is too low.",
 	"mmorpg.chat.too_many_buffs": "You can't have that many buffs.",
@@ -3524,13 +3526,6 @@
 "_comment": " [CATEGORY]: SPELLS - DESCRIPTIONS",
 
 
-"_comment": " [CATEGORY]: UBER MAP - DESCRIPTIONS",
-
-	"mmorpg.uber_map.desc.uber1": "A living mortal, in MY Realm?",
-
-"_comment": " [CATEGORY]: UBER MAP - DESCRIPTIONS",
-
-
 "_comment": " [CATEGORY]: STATUSEFFECTS - DESCRIPTIONS",
 
 	"mmorpg.ailment.desc.bleed": "Deals 120% of the damage as \u00A76\u2600 Physical\u00A77\u00A79 Damage for 5s.",
@@ -3540,7 +3535,14 @@
 	"mmorpg.ailment.desc.poison": "Deals 150% of the damage as \u00A75\u2600 Chaos\u00A77\u00A79 Damage for 10s.",
 	"mmorpg.effect.desc.thorn": "Attacking an enemy with Thorns consumes the thorns to deal [calc:thorn_bush] \u00A76\u2600 Physical\u00A77 Damage",
 
-"_comment": " [CATEGORY]: STATUSEFFECTS - DESCRIPTIONS"
+"_comment": " [CATEGORY]: STATUSEFFECTS - DESCRIPTIONS",
+
+
+"_comment": " [CATEGORY]: UBER MAP - DESCRIPTIONS",
+
+	"mmorpg.uber_map.desc.uber1": "A living mortal, in MY Realm?",
+
+"_comment": " [CATEGORY]: UBER MAP - DESCRIPTIONS"
 
 
 }

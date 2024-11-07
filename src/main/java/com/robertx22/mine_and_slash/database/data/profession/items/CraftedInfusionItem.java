@@ -171,11 +171,13 @@ public class CraftedInfusionItem extends AutoItem implements IRarityItem, IItemA
 
             // todo turn this into a result with chat messages why it doesnt work
             @Override
-            public ExplainedResult canBeModified(ExileStack stack) {
+            public ExplainedResult canBeModified(LocReqContext c) {
+
+                ExileStack stack = c.stack;
 
                 var data = stack.get(StackKeys.GEAR).get();
 
-                SkillItemTier tier = LeveledItem.getTier(stack.getStack());
+                SkillItemTier tier = LeveledItem.getTier(c.Currency);
 
                 if (!tier.levelRange.isLevelInRange(data.lvl)) {
                     return ExplainedResult.failure(Chats.NOT_CORRECT_TIER_LEVEL.locName());
@@ -190,7 +192,10 @@ public class CraftedInfusionItem extends AutoItem implements IRarityItem, IItemA
                         return ExplainedResult.failure(Chats.ENCHANT_UPGRADE_RARITY.locName());
                     }
                 } else {
-                    if (!data.ench.rar.equals(rar) && !data.ench.canUpgradeToRarity(rar)) {
+                    if (data.ench.rar.equals(rar)) {
+                        return ExplainedResult.failure(Chats.ENCHANT_UPGRADE_RARITY_CANT_SAME.locName());
+                    }
+                    if (!data.ench.canUpgradeToRarity(rar)) {
                         return ExplainedResult.failure(Chats.ENCHANT_UPGRADE_RARITY.locName());
                     }
                 }

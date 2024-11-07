@@ -156,6 +156,8 @@ public enum PlayerPointsType implements IGUID {
         if (c > data.max_bonus_points) {
             c = data.max_bonus_points;
         }
+
+
         return c;
     }
 
@@ -204,6 +206,8 @@ public enum PlayerPointsType implements IGUID {
         if (total > data.max_total_points) {
             total = data.max_total_points;
         }
+
+        total += Load.player(p).points.get(this).getBonusCheatPoints();
 
         int spent = getPointsInUse(p);
 

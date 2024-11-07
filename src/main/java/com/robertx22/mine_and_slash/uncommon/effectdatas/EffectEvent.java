@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.uncommon.effectdatas;
 
+import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.capability.player.data.PlayerConfigData;
 import com.robertx22.mine_and_slash.database.data.spells.components.Spell;
@@ -18,7 +19,6 @@ import com.robertx22.mine_and_slash.uncommon.effectdatas.base.EffectWithCtx;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.rework.EventData;
 import com.robertx22.mine_and_slash.uncommon.interfaces.EffectSides;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IStatEffect;
-import com.robertx22.library_of_exile.registry.IGUID;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.LivingEntity;

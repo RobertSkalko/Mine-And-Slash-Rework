@@ -4,6 +4,7 @@ import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.mine_and_slash.capability.player.container.BackpackMenu;
 import com.robertx22.mine_and_slash.capability.player.helper.BackpackInventory;
 import com.robertx22.mine_and_slash.database.data.currency.IItemAsCurrency;
+import com.robertx22.mine_and_slash.database.data.currency.reworked.ExileCurrency;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
@@ -47,6 +48,10 @@ public class Backpacks {
         CURRENCY("currency", Words.Currency) {
             @Override
             public boolean isValid(ItemStack stack) {
+                var cur = ExileCurrency.get(stack);
+                if (cur.isPresent()) {
+                    return true;
+                }
                 return stack.getItem() instanceof IItemAsCurrency || stack.getItem() instanceof RuneItem || stack.getItem() instanceof RarityStoneItem;
             }
         },

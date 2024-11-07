@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts;
 
+import com.robertx22.mine_and_slash.database.data.MinMax;
 import com.robertx22.mine_and_slash.database.data.StatMod;
 import com.robertx22.mine_and_slash.database.data.unique_items.UniqueGear;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
@@ -67,12 +68,18 @@ public class UniqueStatsData implements IGearPartTooltip, IRerollable, IStatsCon
         var gear = stack.get(StackKeys.GEAR).get();
         List<Component> list = new ArrayList<Component>();
         list.add(Itemtips.UNIQUE_STATS.locName().withStyle(ChatFormatting.YELLOW));
-        getAllStatsWithCtx(stack, new StatRangeInfo(ModRange.of(gear.getRarity().stat_percents))).forEach(x -> {
+        getAllStatsWithCtx(stack, new StatRangeInfo(ModRange.of(new MinMax(0, 100)))).forEach(x -> {
             list.addAll(x.GetTooltipString());
         });
 
         return list;
 
+    }
+
+    @Override
+    public MinMax getMinMax(GearItemData gear) {
+        //gear.getRarity().stat_percents)
+        return new MinMax(0, 100);
     }
 
     public UniqueGear getUnique(ExileStack stack) {

@@ -62,6 +62,24 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
     public String uuid = UUID.randomUUID().toString();
 
+
+    public void setRarityAndRerollNeeded(GearRarity rar) {
+        //int current = this.affixes.size();
+        //int needed = rar.min_affixes;
+
+        this.rar = rar.GUID();
+
+        // todo make it so only affixes that are added or removed are changed
+
+        MapBlueprint.genAffixes(this, rar);
+
+        tier = getRarity().map_tiers.random();
+        uuid = UUID.randomUUID().toString();
+
+        randomizeArena();
+    }
+
+
     public MapItemData() {
 
 
@@ -79,18 +97,6 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
     }
 
-
-    public void setRarityAndRerollNeeded(GearRarity rar) {
-        //int current = this.affixes.size();
-        //int needed = rar.min_affixes;
-
-        this.rar = rar.GUID();
-
-        // todo make it so only affixes that are added or removed are changed
-
-        MapBlueprint.genAffixes(this, rar);
-
-    }
 
     public boolean isUber() {
         return ExileDB.UberBoss().isRegistered(uber);

@@ -25,7 +25,6 @@ import com.robertx22.mine_and_slash.gui.texts.textblocks.WorksOnBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.DropChanceBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.DropLevelBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.usableitemblocks.UsageBlock;
-import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.loot.blueprints.bases.RunePart;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.SocketData;
@@ -151,7 +150,9 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
         }
 
         @Override
-        public ExplainedResult canBeModified(ExileStack stack) {
+        public ExplainedResult canBeModified(LocReqContext c) {
+            var stack = c.stack;
+
             var data = stack.get(StackKeys.GEAR).get();
             if (data.uniqueStats != null && data.isUnique() && !data.uniqueStats.getUnique(stack).runable) {
                 return ExplainedResult.failure(Chats.CANT_RUNE_THIS_UNIQUE.locName());

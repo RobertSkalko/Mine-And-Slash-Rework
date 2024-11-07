@@ -25,6 +25,7 @@ public class PlayerPointsData {
 
         public PlayerPointsType type = PlayerPointsType.TALENTS;
         private int bonus_points = 0;
+        private int cheat_points = 0;
 
         // todo start using this for reset points
         public int reset_points = 0;
@@ -33,8 +34,13 @@ public class PlayerPointsData {
             return bonus_points;
         }
 
+        public int getBonusCheatPoints() {
+            return cheat_points;
+        }
+
         public void resetBonusPoints() {
             bonus_points = 0;
+            cheat_points = 0;
         }
 
         public ExplainedResult giveBonusPoints(int num) {
@@ -47,7 +53,7 @@ public class PlayerPointsData {
         }
 
         public ExplainedResult giveCheatPoints(int num) {
-            bonus_points += num;
+            cheat_points += num;
             return ExplainedResult.success(Chats.AWARDED_POINTS.locName(num, type.word().locName()));
         }
     }

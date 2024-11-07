@@ -3,11 +3,12 @@ package com.robertx22.mine_and_slash.a_libraries.neat;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+import com.robertx22.library_of_exile.utils.CLOC;
 import com.robertx22.mine_and_slash.database.data.mob_affixes.MobAffix;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.HealthUtils;
-import com.robertx22.library_of_exile.utils.CLOC;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -330,11 +331,11 @@ public class HealthBarRenderer {
                 int h = NeatConfig.instance.hpTextHeight();
 
                 if (NeatConfig.instance.showCurrentHP()) {
-                    String hpStr = HEALTH_FORMAT.format(HealthUtils.getCurrentHealth(living));
+                    String hpStr = MMORPG.formatBigNumber(HealthUtils.getCurrentHealth(living));
                     mc.font.drawInBatch(hpStr, 2, h, white, false, poseStack.last().pose(), buffers, Font.DisplayMode.NORMAL, black, light);
                 }
                 if (NeatConfig.instance.showMaxHP()) {
-                    String maxHpStr = ChatFormatting.BOLD + HEALTH_FORMAT.format(HealthUtils.getMaxHealth(living));
+                    String maxHpStr = ChatFormatting.BOLD + MMORPG.formatBigNumber(HealthUtils.getMaxHealth(living));
                     mc.font.drawInBatch(maxHpStr, (int) (halfSize / healthValueTextScale * 2) - mc.font.width(maxHpStr) - 2, h, white, false, poseStack.last().pose(), buffers, Font.DisplayMode.NORMAL, black, light);
                 }
                 if (NeatConfig.instance.showPercentage()) {

@@ -25,7 +25,6 @@ import com.robertx22.mine_and_slash.database.data.stats.types.resources.energy.E
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.health.HealthRegen;
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
-import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.GemItems;
@@ -158,7 +157,8 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
             }
 
             @Override
-            public ExplainedResult canBeModified(ExileStack stack) {
+            public ExplainedResult canBeModified(LocReqContext c) {
+                var stack = c.stack;
                 var data = stack.get(StackKeys.GEAR).get();
 
                 if (data.getEmptySockets() < 1) {
@@ -168,12 +168,13 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
 
                 //int runes = (int) data.sockets.getSocketed().stream().filter(x -> x.isRune()).count();
                 int gems = (int) data.sockets.getSocketed().stream().filter(x -> x.isGem()).count();
-                if (gems > rar.max_gems) {
-                    if (rar.max_gems > 0) {
+
+                if (rar.max_gems > 0) {
+                    if (gems >= rar.max_gems) {
                         return ExplainedResult.failure(Chats.RARITY_CANT_HAVE_MORE_THAN_X_GEMS.locName(rar.coloredName(), rar.max_gems));
-                    } else {
-                        return ExplainedResult.failure(Chats.RARITY_CANT_HAVE_ANY_GEMS.locName(rar.coloredName()));
                     }
+                } else {
+                    return ExplainedResult.failure(Chats.RARITY_CANT_HAVE_ANY_GEMS.locName(rar.coloredName()));
                 }
 
 

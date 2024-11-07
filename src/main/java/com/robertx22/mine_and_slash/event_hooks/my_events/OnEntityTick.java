@@ -3,9 +3,13 @@ package com.robertx22.mine_and_slash.event_hooks.my_events;
 import com.robertx22.mine_and_slash.capability.bases.EntityGears;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.characters.PlayerStats;
+import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
+import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stats;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -32,6 +36,33 @@ public class OnEntityTick {
 
             if (data.isSummon()) {
                 data.summonedPetData.tick(entity);
+            }
+
+            if (entity instanceof Player == false) {
+                if (WorldUtils.isMapWorldClass(entity.level())) {
+                    if (!Load.Unit(entity).getRarity().equals(IRarity.BOSS)) {
+
+                        if (entity.tickCount > (20 * 12) && entity.tickCount % 40 == 0) {
+                            int distance = ServerContainer.get().MOB_DESPAWN_DISTANCE_IN_MAPS.get().intValue();
+
+
+                            Entity nearestPlayer = entity.level().getNearestPlayer(entity, -1.0D);
+
+                            if (nearestPlayer == null) {
+                                entity.setRemoved(Entity.RemovalReason.UNLOADED_TO_CHUNK);
+                                return;
+                            }
+
+                            double d0 = nearestPlayer.distanceToSqr(entity);
+                            int i = distance;
+                            int j = i * i;
+                            if (d0 > (double) j) {
+                                entity.setRemoved(Entity.RemovalReason.UNLOADED_TO_CHUNK);
+                                return;
+                            }
+                        }
+                    }
+                }
             }
 
             data.ailments.onTick(entity);

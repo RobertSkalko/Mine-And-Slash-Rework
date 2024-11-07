@@ -195,7 +195,7 @@ public class TalentsData implements IStatCtx {
                 value.stats.forEach(s -> stats.add(s.toExactStat(lvl)));
             });
 
-            ctx.add(new SimpleStatCtx(StatContext.StatCtxType.TALENT, stats));
+            ctx.add(new SimpleStatCtx(type.getCtxType(), stats));
         }
         return ctx;
     }

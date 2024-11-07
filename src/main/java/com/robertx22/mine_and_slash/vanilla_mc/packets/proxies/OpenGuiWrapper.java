@@ -36,7 +36,7 @@ public class OpenGuiWrapper {
         if (cards.size() == 3) {
             return new CardPickScreen(cards);
         }
-        
+
         return null;
     }
 
@@ -49,6 +49,10 @@ public class OpenGuiWrapper {
             return new CardPickScreen(cards);
         }
         return null;
+    }
+
+    public static void openMapUpgradeScreen() {
+        net.minecraft.client.Minecraft.getInstance().setScreen(OpenGuiWrapper.openMapUpgradePicker());
     }
 
     public static void openProphecyCards() {

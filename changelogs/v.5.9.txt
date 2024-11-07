@@ -39,3 +39,34 @@ v.5.9.2
 
 - fix phys to ele conversions not working
 - fix commands using perm lvl 3 instead of 2
+
+v.5.9.3
+
+- fix server crash
+
+v.5.9.4
+
+- fix currencies not going into master bag
+- fix spells being castable without being learned
+
+v.5.9.5
+
+- removed mob persistence in maps to attempt to fix lag issues. (delete old map world save to actually test it)
+- fix unique stat ranges showing wrong
+- mobs now despawn more strictly in maps, whenever you are too far away
+- added MOB_DESPAWN_DISTANCE_IN_MAPS config
+- removed mob persistence configs, replaced with despawn distance config
+- remember the mobs are still loaded back with the mob new mob save feature
+- mob hp now has dots
+- fixed unlearning spell schools
+- fixed mob hp being double 
+- fixed mobs having too much resists
+- give points cheatpoints now bypasses caps
+- attempt to fix some spells not hitting enough times
+- fixed infusions
+- fixed passive points showing as ascendancy points under list stat sources command
+
+v.5.9.6
+
+- removed break chest in maps feature
+- melee cooldown no longer applies to spells

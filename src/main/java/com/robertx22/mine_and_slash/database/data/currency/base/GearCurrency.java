@@ -5,7 +5,6 @@ import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.mine_and_slash.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.mine_and_slash.database.data.profession.ExplainedResult;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.WorksOnBlock;
-import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
@@ -72,14 +71,14 @@ public abstract class GearCurrency extends CodeCurrency {
             }
         }
 
-        var can = canBeModified(context.stack);
+        var can = canBeModified(context);
         if (!can.can) {
             return can;
         }
         return super.canItemBeModified(context);
     }
 
-    public abstract ExplainedResult canBeModified(ExileStack data);
+    public abstract ExplainedResult canBeModified(LocReqContext data);
 
 
 }

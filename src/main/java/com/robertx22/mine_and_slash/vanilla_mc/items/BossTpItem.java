@@ -55,12 +55,16 @@ public class BossTpItem extends AutoItem {
                 LeagueTeleportBlock.teleportToLeague(p, p.blockPosition(), LeagueMechanics.MAP_BOSS_ID);
 
                 return InteractionResultHolder.success(p.getItemInHand(pUsedHand));
+            } else {
+                p.sendSystemMessage(Chats.THIS_IS_ONLY_USABLE_INSIDE_A_MAP.locName());
+                return InteractionResultHolder.pass(p.getItemInHand(pUsedHand));
             }
         }
         return InteractionResultHolder.pass(p.getItemInHand(pUsedHand));
     }
 
     public static boolean canTeleportToArena(Player p) {
+     
         var map = Load.mapAt(p.level(), p.blockPosition());
 
         if (map == null) {
@@ -75,7 +79,8 @@ public class BossTpItem extends AutoItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+    public void appendHoverText(ItemStack pStack, @Nullable Level
+            pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         pTooltipComponents.addAll(splitLongText(Itemtips.BOSS_TELEPORT_ITEM.locName().withStyle(ChatFormatting.RED)));
     }
 
