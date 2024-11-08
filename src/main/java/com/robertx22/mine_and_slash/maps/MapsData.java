@@ -42,9 +42,12 @@ public class MapsData {
 
         data.lvl = Load.Unit(player).getLevel();
 
+        Load.player(player).map.clearMapAfterUpgrading();
+
         if (!data.isUber()) {
             Load.player(player).map.map = data;
         }
+
         return m;
     }
 

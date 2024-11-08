@@ -179,7 +179,7 @@ public abstract class CraftingStationScreen extends AbstractContainerScreen<Craf
         } else {
             recipes = new HashSet<>();
         }
-        recipes.addAll(ExileDB.Recipes().getFilterWrapped(x -> x.profession.equals(prof.GUID()) && x.canCraft(menu.getItems())).list);
+        recipes.addAll(ExileDB.Recipes().getFilterWrapped(x -> x.profession.equals(prof.GUID()) && x.canCraft(menu.getItems()).can).list);
         return recipes.stream().toList();
 
     }

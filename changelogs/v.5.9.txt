@@ -70,3 +70,19 @@ v.5.9.6
 
 - removed break chest in maps feature
 - melee cooldown no longer applies to spells
+
+
+v.5.9.7
+
+- casting spells now costs main hand durability, but only until the item is considered broken
+- can no longer cast spells with a broken weapon
+- should fix station crafting
+- stations should now show items that are missing  from recipe
+- added some animations to talents and exclamation mark
+
+v.5.9.8
+
+- should fix uber boss maps allowing you to upgrade the next boss map right away
+- map % needed for boss arenas is now by default 30% down from 50%, and is now a server config, will likely go back to 50 after mob saving bug is fixed
+- fixed ubers not dropping loot
+- maps are no longer empty and instead are filled with bedrock, this should hopefully prevent maps from allowing players to teleport outside, and mobs too

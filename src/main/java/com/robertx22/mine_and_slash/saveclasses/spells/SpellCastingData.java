@@ -22,6 +22,7 @@ import com.robertx22.mine_and_slash.uncommon.MathHelper;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.SpendResourceEvent;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.RepairUtils;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.NoManaPacket;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.spells.TellClientEntityCastingSpell;
 import net.minecraft.network.chat.Component;
@@ -409,6 +410,11 @@ public class SpellCastingData {
             if (data.getResources().hasEnough(mana) && data.getResources().hasEnough(energy)) {
 
                 var opt = Load.Unit(player).equipmentCache.getWeaponOpt();
+
+                if (RepairUtils.isItemBroken(player.getMainHandItem())) {
+                    return ExplainedResult.failure(Chats.CANT_CAST_WITH_BROKEN_WEAPON.locName());
+                }
+
                 GearItemData wep = opt.map(x -> x.gear).orElse(null);
 
                 if (wep == null) {
@@ -461,7 +467,6 @@ public class SpellCastingData {
     public void onSpellCastFinished(SpellCastContext ctx) {
 
         setCooldownOnCasted(ctx);
-
         this.casting = false;
 
         /*

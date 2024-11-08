@@ -161,7 +161,7 @@ public class PerkButton extends ImageButton {
 
         gui.pose().pushPose();
 
-        float scale = 2 - screen.zoom;
+        float scale = getScale(mouseX, mouseY);
 
         float posMulti = 1F / scale;
 
@@ -238,5 +238,13 @@ public class PerkButton extends ImageButton {
 
     }
 
+    private float getScale(int mouseX, int mouseY) {
+        float scale = 2 - screen.zoom;
+        if (isInside((int) (1F / screen.zoom * mouseX), (int) (1F / screen.zoom * mouseY))) {
+            scale = MathHelper.clamp(scale * 1.3f, 1.7f, 2.0f);
+        }
+
+        return MathHelper.clamp(scale, 1.5f, 2.0f);
+    }
 
 }

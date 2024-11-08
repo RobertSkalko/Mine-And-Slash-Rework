@@ -15,6 +15,7 @@ import com.robertx22.mine_and_slash.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.temp.SkillItemTier;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -58,7 +59,7 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
 
         return list;
     }
-  
+
 
     public SkillItemTier getTier() {
         return SkillItemTier.of(tier);
@@ -131,6 +132,13 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
             return false;
         }
 
+        public boolean hasAnyCount(ItemStack stack) {
+            if (type == Type.ITEM) {
+                return VanillaUTIL.REGISTRY.items().getKey(stack.getItem()).toString().equals(id);
+            }
+            return false;
+        }
+
         public ItemStack toStackForJei() {
             return new ItemStack(VanillaUTIL.REGISTRY.items().get(new ResourceLocation(id)), num);
         }
@@ -188,8 +196,54 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
         return this.mats.stream().anyMatch(x -> x.matches(v1)) && mats.stream().anyMatch(x -> x.matches(v2));
     }
 
-    public boolean canCraft(List<ItemStack> stacks) {
-        return mats.stream().allMatch(x -> stacks.stream().anyMatch(e -> x.matches(e)));
+    public enum FailReason {
+        NO_ITEM(Words.NO_ITEM_FOUND),
+        NOT_ENOUGH_OF_ITEM(Words.NOT_ENOUGH_ITEM_FOUND);
+
+        public Words word;
+
+        FailReason(Words word) {
+            this.word = word;
+        }
+    }
+
+    public ExplainedResult canCraft(List<ItemStack> stacks) {
+
+        MutableComponent msg = Words.CRAFT_FAILED.locName();
+
+        boolean fail = false;
+
+        for (CraftingMaterial mat : this.mats) {
+
+            boolean nope = true;
+            FailReason reason = FailReason.NO_ITEM;
+            //int needed = mat.num;
+            int have = 0;
+
+            for (ItemStack stack : stacks) {
+                if (mat.matches(stack)) {
+                    nope = false;
+                }
+            }
+            if (nope) {
+                for (ItemStack stack : stacks) {
+                    if (mat.hasAnyCount(stack)) {
+                        have = stack.getCount();
+                        reason = FailReason.NOT_ENOUGH_OF_ITEM;
+                    }
+                }
+            }
+            if (stacks.stream().noneMatch(x -> mat.matches(x))) {
+                fail = true;
+                msg.append(reason.word.locName(mat.toStackForJei().getDisplayName(), mat.num, have));
+            }
+        }
+
+        if (fail) {
+            return ExplainedResult.failure(msg);
+        }
+        return ExplainedResult.success();
+        //return mats.stream().allMatch(x -> stacks.stream().anyMatch(e -> x.matches(e)));
     }
 
     public List<ItemStack> craft(Player p, List<ItemStack> stacks) {

@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.vanilla_mc.items;
 
+import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.database.data.league.LeagueMechanics;
 import com.robertx22.mine_and_slash.database.data.rarities.MapRarityRewardData;
 import com.robertx22.mine_and_slash.mechanics.base.LeagueTeleportBlock;
@@ -64,7 +65,7 @@ public class BossTpItem extends AutoItem {
     }
 
     public static boolean canTeleportToArena(Player p) {
-     
+
         var map = Load.mapAt(p.level(), p.blockPosition());
 
         if (map == null) {
@@ -72,7 +73,7 @@ public class BossTpItem extends AutoItem {
         }
         int perc = MapRarityRewardData.getMapCompletePercent(map);
 
-        if (perc > 50) {
+        if (perc > ServerContainer.get().MAP_PERCENT_COMPLETE_NEEDED_FOR_BOSS_ARENA.get().intValue()) {
             return true;
         }
         return false;

@@ -49,6 +49,8 @@ public class UberBossAltarBlock extends Block {
 
                     Load.Unit(en).setRarity(IRarity.UBER); // todo does this work
 
+                    Load.Unit(en).isCorrectlySpawnedMapMob = true;
+
                     Load.Unit(en).recalcStats_DONT_CALL();
 
                     p.sendSystemMessage(uber.locDesc().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));

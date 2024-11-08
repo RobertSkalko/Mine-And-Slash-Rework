@@ -37,8 +37,6 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
             if (mobKilled.level().isClientSide) {
                 return;
             }
-
-
             if (WorldUtils.isMapWorldClass(mobKilled.level())) {
                 if (Load.Unit(mobKilled).getRarity().equals(IRarity.BOSS)) {
                     var sw = (ServerLevel) mobKilled.level();
@@ -49,7 +47,7 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
                     for (Player p : mobKilled.level().getEntitiesOfClass(Player.class, mobKilled.getBoundingBox().inflate(150))) {
                         Load.player(p).map.killed_boss = true;
                     }
-                
+
                 }
             }
 
@@ -92,6 +90,13 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
                     float loot_multi = (float) config.loot_multi;
                     float exp_multi = (float) config.exp_multi;
 
+                    if (WorldUtils.isDungeonWorld(mobKilled.level())) {
+                        var map = Load.mapAt(mobKilled.level(), mobKilled.blockPosition());
+                        if (map != null) {
+                            map.rooms.mobs.done++;
+                        }
+                    }
+
                     if (loot_multi > 0) {
 
                         if (WorldUtils.isDungeonWorld(mobKilled.level())) {
@@ -108,7 +113,7 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
                             var map = Load.mapAt(mobKilled.level(), mobKilled.blockPosition());
 
                             if (map != null) {
-                                map.rooms.mobs.done++;
+                                // map.rooms.mobs.done++;
 
                                 // map.trySpawnMechanic(mobKilled.level(), mobKilled.blockPosition());
 
@@ -142,7 +147,8 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
     }
 
 
-    private static void GiveExp(LivingEntity victim, Player killer, EntityData killerData, EntityData mobData, float multi) {
+    private static void GiveExp(LivingEntity victim, Player killer, EntityData killerData, EntityData mobData,
+                                float multi) {
 
         float exp = LevelUtils.getBaseExpMobReward(mobData.getLevel());
 

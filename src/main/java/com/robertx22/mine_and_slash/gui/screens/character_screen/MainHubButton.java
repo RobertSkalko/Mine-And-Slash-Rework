@@ -1,10 +1,13 @@
 package com.robertx22.mine_and_slash.gui.screens.character_screen;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.library_of_exile.utils.RenderUtils;
 import com.robertx22.mine_and_slash.gui.bases.IAlertScreen;
 import com.robertx22.mine_and_slash.gui.bases.IContainerNamedScreen;
 import com.robertx22.mine_and_slash.gui.bases.INamedScreen;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -13,6 +16,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
 import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
 import net.minecraft.resources.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 public class MainHubButton extends ImageButton {
 
@@ -22,7 +26,7 @@ public class MainHubButton extends ImageButton {
             SlashRef.MODID, "textures/gui/main_hub/exclamation_mark.png");
 
     boolean shouldAlert = false;
-
+    private int initTick;
 
     INamedScreen screen;
     boolean right;
@@ -45,6 +49,7 @@ public class MainHubButton extends ImageButton {
             IAlertScreen alert = (IAlertScreen) screen;
             this.shouldAlert = alert.shouldAlert();
         }
+        this.initTick = ClientOnly.getPlayer().tickCount;
 
     }
 
@@ -66,9 +71,13 @@ public class MainHubButton extends ImageButton {
         if (shouldAlert) {
             var mc = Minecraft.getInstance();
             // float color = MathHelper.clamp((mc.player.tickCount % 25 + mc.getPartialTick()) * 0.3F, 0, 3);
-            gui.setColor(1, 1, 1, 1);
+            RenderSystem.enableBlend();
+            RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+            //System.out.println(getDynamicAlpha(40));
+            RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, getDynamicAlpha(40));
             RenderUtils.render16Icon(gui, EXLAMATION_MARK_TEX, this.getX() + 5, this.getY() + 6);
-            gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+            RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+            RenderSystem.disableBlend();
 
         }
 
@@ -83,6 +92,22 @@ public class MainHubButton extends ImageButton {
 
             }
         }
+    }
+
+    private float getDynamicAlpha(int ticksOfChangingTwice){
+        int current = ClientOnly.getPlayer().tickCount;
+        int i = current - initTick;
+        int once = ticksOfChangingTwice / 2;
+        int i1 = (i % ticksOfChangingTwice);
+        float result;
+
+        if (i1 <= once){
+            result =  1 - i1 * 1.0f / once;
+        } else {
+            result =  ((i1 - once) * 1.0f / once);
+        }
+
+        return result;
     }
 
 }

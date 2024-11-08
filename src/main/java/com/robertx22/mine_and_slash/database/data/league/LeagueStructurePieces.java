@@ -30,7 +30,7 @@ public class LeagueStructurePieces implements IWeighted {
         }
         return null;
     }
-    
+
 
     boolean isWithinBounds(int x, int z) {
         int ax = Math.abs(x);

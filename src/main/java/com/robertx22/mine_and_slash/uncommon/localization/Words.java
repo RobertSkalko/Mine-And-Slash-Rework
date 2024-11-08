@@ -7,6 +7,9 @@ import java.util.Locale;
 
 // to use a "%" here, do %% or '%'
 public enum Words implements IAutoLocName {
+    CRAFT_FAILED("Craft Failed due to incorrect materials"),
+    NO_ITEM_FOUND("\n- %1$s is missing"),
+    NOT_ENOUGH_ITEM_FOUND("\n- %1$s needs %2$s items but you only inserted %3$s "),
     OPTION_LOCKED("Option Locked Until Map Boss is Killed."),
 
     UPGRADE_MAP("Upgrade Map Rarity"),

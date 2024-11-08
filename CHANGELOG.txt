@@ -1,6 +1,8 @@
 Changelog of recent updates: https://github.com/RobertSkalko/Mine-And-Slash-Rework/blob/1.20-Forge/changelogs/v.5.9.txt
 
-v.5.9.6
+v.5.9.8
 
-- removed break chest in maps feature
-- melee cooldown no longer applies to spells
+- should fix uber boss maps allowing you to upgrade the next boss map right away
+- map % needed for boss arenas is now by default 30% down from 50%, and is now a server config, will likely go back to 50 after mob saving bug is fixed
+- fixed ubers not dropping loot
+- maps are no longer empty and instead are filled with bedrock, this should hopefully prevent maps from allowing players to teleport outside, and mobs too

@@ -8,9 +8,12 @@ import com.robertx22.mine_and_slash.database.data.spells.spell_classes.bases.Spe
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.RepairUtils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 public class TellServerToCastSpellPacket extends MyPacket<TellServerToCastSpellPacket> {
 
@@ -51,6 +54,12 @@ public class TellServerToCastSpellPacket extends MyPacket<TellServerToCastSpellP
             var can = data.spellCastingData.canCast(spell, player);
 
             if (can.can) {
+
+                ItemStack wep = player.getMainHandItem();
+
+                if (!wep.isEmpty() && !RepairUtils.isItemBroken(wep)) {
+                    wep.hurt(1, player.getRandom(), (ServerPlayer) player);
+                }
 
                 SpellCastContext c = new SpellCastContext(player, 0, spell);
                 data.spellCastingData.setToCast(c);

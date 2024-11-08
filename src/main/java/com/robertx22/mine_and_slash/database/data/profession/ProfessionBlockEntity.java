@@ -79,7 +79,7 @@ public class ProfessionBlockEntity extends BlockEntity {
 
     public void tryTakeMaterialsFromNearbyChests() {
 
-        if (!ServerContainer.get().STATION_SUCK_NEARBY_CHESTS.get()) {
+        if (true || !ServerContainer.get().STATION_SUCK_NEARBY_CHESTS.get()) {
             return;
         }
 
@@ -210,14 +210,19 @@ public class ProfessionBlockEntity extends BlockEntity {
                             show.clearContent();
                     } else {
                         if (recipe_locked) {
-                            if (last_recipe.canCraft(getMats())) {
-                                var can = tryRecipe(p);
-                                if (!can.can && p.containerMenu instanceof CraftingStationMenu) {
-                                    p.sendSystemMessage(can.answer);
+                            var can = last_recipe.canCraft(getMats());
+                            if (can.can) {
+                                var can2 = tryRecipe(p);
+                                if (!can2.can && p.containerMenu instanceof CraftingStationMenu) {
+                                    p.sendSystemMessage(can2.answer);
                                     craftingState = Crafting_State.IDLE;
                                 }
-                            } else
+                            } else if (p.containerMenu instanceof CraftingStationMenu) {
+                                p.sendSystemMessage(can.answer);
                                 craftingState = Crafting_State.IDLE;
+                            }
+
+                            craftingState = Crafting_State.IDLE;
                         } else {
                             ProfessionRecipe recipe = getCurrentRecipe();
                             if (recipe == null) {
@@ -233,14 +238,17 @@ public class ProfessionBlockEntity extends BlockEntity {
                                 //ownerUUID = null;
                                 return;
                             }
+                            var can = recipe.canCraft(getMats());
 
-                            if (recipe.canCraft(getMats())) {
+                            if (can.can) {
                                 var rec = tryRecipe(p);
                                 if (!rec.can) {
                                     show.clearContent();
                                     craftingState = Crafting_State.IDLE;
                                     //ownerUUID = null;
                                 }
+                            } else {
+                                p.sendSystemMessage(can.answer);
                             }
                         }
                     }
@@ -399,7 +407,7 @@ public class ProfessionBlockEntity extends BlockEntity {
 
             // this could be a bit laggy
             var list = ExileDB.Recipes().getFilterWrapped(x -> {
-                return x.profession.equals(prof) && x.canCraft(mats);
+                return x.profession.equals(prof) && x.canCraft(mats).can;
             }).list;
 
             if (list.isEmpty()) {
