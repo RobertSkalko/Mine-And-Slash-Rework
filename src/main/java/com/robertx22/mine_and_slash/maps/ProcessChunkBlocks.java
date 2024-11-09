@@ -189,7 +189,7 @@ public class ProcessChunkBlocks {
                             }
                         }
 
-                        if (p.tickCount % 20 == 0) {
+                        if (p.tickCount % 40 == 0) {
                             MobUnloading.loadBackMobs(level, cpos);
                         }
                     }

@@ -44,6 +44,8 @@ public class MapData {
 
     public boolean gave_boss_tp = false;
 
+    public int despawnedMobs = 0;
+    
     public SpawnedMobList getMobSpawns() {
         return ExileDB.MapMobs().get(mobs);
     }

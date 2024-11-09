@@ -23,8 +23,8 @@ public class PetSpells implements ExileRegistryInit {
     public static String SPIDER = "spider_basic";
     public static String WOLF = "wolf_basic";
 
-    static Spell basic(String summon, String id) {
-        return SpellBuilder.of(id, PlayStyle.INT, SpellConfiguration.Builder.energy(3, 1).setUsesSupportGemsFrom(summon), "Fire Golem Attack",
+    static Spell basic(String summon, String id, String name) {
+        return SpellBuilder.of(id, PlayStyle.INT, SpellConfiguration.Builder.energy(3, 1).setUsesSupportGemsFrom(summon), name,
                         Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.PHYSICAL))
                 .defaultAndMaxLevel(1)
                 .manualDesc(
@@ -41,16 +41,16 @@ public class PetSpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        basic(SummonSpells.SUMMON_SPIRIT_WOLF, WOLF);
-        basic(SummonSpells.SUMMON_FIRE_GOLEM, FIRE_GOLEM);
-        basic(SummonSpells.SUMMON_COLD_GOLEM, FROST_GOLEM);
-        basic(SummonSpells.SUMMON_LIGHTNING_GOLEM, LIGHTNING_GOLEM);
-        basic(SummonSpells.SUMMON_ZOMBIE, ZOMBIE);
-        basic(SummonSpells.SUMMON_SKELETAL_ARMY, SKELETON);
+        basic(SummonSpells.SUMMON_SPIRIT_WOLF, WOLF, "Spirit Wolf Attack");
+        basic(SummonSpells.SUMMON_FIRE_GOLEM, FIRE_GOLEM, "Fire Golem Attack");
+        basic(SummonSpells.SUMMON_COLD_GOLEM, FROST_GOLEM, "Frost Golem Attack");
+        basic(SummonSpells.SUMMON_LIGHTNING_GOLEM, LIGHTNING_GOLEM, "Lightning Golem Attack");
+        basic(SummonSpells.SUMMON_ZOMBIE, ZOMBIE, "Zombie Attack");
+        basic(SummonSpells.SUMMON_SKELETAL_ARMY, SKELETON, "Skeleton Attack");
 
 
         SpellBuilder.of(SPIDER, PlayStyle.INT, SpellConfiguration.Builder.instant(2, 1)
-                                .setUsesSupportGemsFrom(SummonSpells.SUMMON_SPIDER), "Spider Pet Attack",
+                                .setUsesSupportGemsFrom(SummonSpells.SUMMON_SPIDER), "Spider Attack",
                         Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.CHAOS))
                 .defaultAndMaxLevel(1)
                 .manualDesc(

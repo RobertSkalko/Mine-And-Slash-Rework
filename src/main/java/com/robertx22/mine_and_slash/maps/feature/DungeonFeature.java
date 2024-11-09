@@ -32,7 +32,6 @@ public class DungeonFeature {
 
         settings.setBoundingBox(settings.getBoundingBox());
 
-
         if (template == null) {
             ExileLog.get().warn("FATAL ERROR: Structure does not exist (" + id + ")");
             return false;
@@ -56,9 +55,10 @@ public class DungeonFeature {
             settings.setRotation(Rotation.NONE);
         }
 
+        // Block.UPDATE_CLIENTS | Block.UPDATE_KNOWN_SHAPE is experimental thing that should reduce updatenighbor block lag in map generation
+        var done = template.placeInWorld((ServerLevelAccessor) world, position, position, settings, random, Block.UPDATE_CLIENTS | Block.UPDATE_KNOWN_SHAPE);
 
-        return template.placeInWorld((ServerLevelAccessor) world, position, position, settings, random, Block.UPDATE_CLIENTS);
-
+        return done;
     }
 
     private static boolean generateStructure(MapData mapData, LevelAccessor world, ChunkPos cpos, RandomSource random) {
@@ -103,7 +103,7 @@ public class DungeonFeature {
             if (chunk instanceof LevelChunk lc) {
                 Load.chunkData(lc).roomCreated = true;
             }
-    
+
         }
 
         return true;

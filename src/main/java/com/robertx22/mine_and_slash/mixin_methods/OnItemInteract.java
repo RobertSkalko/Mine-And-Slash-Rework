@@ -168,10 +168,11 @@ public class OnItemInteract {
             public Result tryApply(Player player, ItemStack craftedStack, ItemStack currency, Slot slot) {
                 if (craftedStack.isDamaged() && currency.getItem() instanceof RarityStoneItem) {
 
-                    if (!StackSaving.GEARS.has(craftedStack)) {
+                    if (!StackSaving.GEARS.has(craftedStack) && !StackSaving.OMEN.has(craftedStack)) {
                         player.sendSystemMessage(Chats.NOT_GEAR_OR_LACKS_SOUL.locName().withStyle(ChatFormatting.RED));
                         return new Result(false);
                     }
+
                     RarityStoneItem essence = (RarityStoneItem) currency.getItem();
 
                     SoundUtils.playSound(player, SoundEvents.ANVIL_USE, 1, 1);

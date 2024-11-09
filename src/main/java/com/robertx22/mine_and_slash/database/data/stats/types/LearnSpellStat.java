@@ -24,7 +24,7 @@ public class LearnSpellStat extends Stat {
 
     @Override
     public String locNameForLangFile() {
-        return "Learn " + spell.locNameForLangFile();
+        return "Level to " + spell.locNameForLangFile();
     }
 
     @Override

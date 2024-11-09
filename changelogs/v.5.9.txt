@@ -86,3 +86,16 @@ v.5.9.8
 - map % needed for boss arenas is now by default 30% down from 50%, and is now a server config, will likely go back to 50 after mob saving bug is fixed
 - fixed ubers not dropping loot
 - maps are no longer empty and instead are filled with bedrock, this should hopefully prevent maps from allowing players to teleport outside, and mobs too
+
+v.5.9.9
+
+- attempt to fix map gen lag
+- renamed learn x spell stat to level to spell
+- fixed prof lvls tooltip going off screen
+- removed vanilla_rar_enum  from gear rar datapacks, hardcoded temporarily cus of a lag bug
+
+v.5.9.10
+
+- omens are now repairable
+- spells now show that their support gems also benefit another spell (if they do)
+- fixed pet spells all being called Fire Golem Attack

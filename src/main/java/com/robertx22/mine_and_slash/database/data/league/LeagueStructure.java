@@ -133,7 +133,7 @@ public abstract class LeagueStructure {
                     }
                     settings.setRotation(Rotation.NONE);
 
-                    template.placeInWorld((ServerLevelAccessor) world, position, position, settings, world.getRandom(), Block.UPDATE_CLIENTS);
+                    template.placeInWorld((ServerLevelAccessor) world, position, position, settings, world.getRandom(), Block.UPDATE_CLIENTS | Block.UPDATE_KNOWN_SHAPE);
                 }
             }
         } catch (Exception e) {

@@ -4,10 +4,8 @@ import com.robertx22.library_of_exile.components.ICap;
 import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -62,20 +60,8 @@ public class ChunkCap implements ICap {
             try {
 
                 for (CompoundTag nbt : savedMobs) {
-                    var en = EntityType.loadEntityRecursive(nbt, world, x -> {
-                        if (MMORPG.RUN_DEV_TOOLS) {
-                            var nearestPlayer = x.level().getNearestPlayer(x, -1);
-                            if (nearestPlayer != null) {
-                                nearestPlayer.sendSystemMessage(Component.literal("Mob Loaded back: ").withStyle(ChatFormatting.GREEN).append(x.getDisplayName()));
-                            }
-                        }
-
-                        return x;
-                    });
-
+                    var en = EntityType.loadEntityRecursive(nbt, world, x -> x);
                     world.addFreshEntity(en);
-
-                    //  world.addFreshEntity(en); seems the above method actually spawns them too
                 }
             } catch (Exception e) {
                 e.printStackTrace();

@@ -22,6 +22,7 @@ import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
 import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
+import com.robertx22.mine_and_slash.mmorpg.UNICODE;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.mine_and_slash.saveclasses.skill_gem.ISkillGem;
@@ -74,7 +75,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     public SpellAnimationData cast_animation = new SpellAnimationData(SpellAnimations.STEADY_CAST);
     public SpellAnimationData cast_finish_animation = new SpellAnimationData(SpellAnimations.CAST_FINISH);
 
-   
+
     public Boolean hasCost(ResourceType type) {
         if (type == ResourceType.energy) {
             return config.ene_cost.min > 0;
@@ -417,6 +418,12 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
                 list.add(Chats.ALT_TO_SHOW_OTHER_SPELL.locName().withStyle(ChatFormatting.BLUE));
             }
         }
+        var others = this.getSpellsThatBenefitFromSupportGemsOfThis();
+
+        if (!others.isEmpty()) {
+            var merged = TooltipUtils.joinMutableComps(others.stream().map(x -> x.locName()).iterator(), Component.literal(", "));
+            list.add(Component.literal(UNICODE.STAR + " ").append(Words.SUPPORT_GEMS_ALSO_BENEFIT.locName(merged)).withStyle(ChatFormatting.GREEN));
+        }
 
         if (showEffectTip == null) {
             list.add(Itemtips.SHIFT_TIP.locName().withStyle(ChatFormatting.BLUE).append(" "));
@@ -452,6 +459,9 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         return lvl;
     }
 
+    public List<Spell> getSpellsThatBenefitFromSupportGemsOfThis() {
+        return ExileDB.Spells().getFilterWrapped(x -> x.config.use_support_gems_from.equals(GUID())).list;
+    }
 
     // todo need to make my own animations
     public AnimationHolder getAnimation(PlayerAnimations.CastEnum e) {

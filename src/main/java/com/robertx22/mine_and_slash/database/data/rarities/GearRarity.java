@@ -7,6 +7,7 @@ import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.VanillaRarities;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientTextureUtils;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -64,7 +65,6 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     public boolean is_unique_item = false;
     public MinMax map_tiers = new MinMax(0, 100);
 
-    public String vanilla_rar_enum = "";
 
     public int map_lives = 5;
 
@@ -75,7 +75,8 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     public int map_resist_req = 0;
 
     public Rarity getVanillaRarity() {
-        return Rarity.valueOf(vanilla_rar_enum);
+        return VanillaRarities.MAP.getOrDefault(GUID(), Rarity.COMMON);
+
     }
 
     transient ResourceLocation glintFull;
