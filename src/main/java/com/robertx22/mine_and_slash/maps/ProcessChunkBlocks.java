@@ -181,8 +181,8 @@ public class ProcessChunkBlocks {
 
                                     if (map.rooms.isDoneGenerating()) {
                                         player.sendSystemMessage(Chats.MAP_FINISHED_SPAWNING.locName().withStyle(ChatFormatting.DARK_PURPLE));
-                                        player.sendSystemMessage(Chats.TOTAL_MOBS.locName(map.rooms.mobs.total).withStyle(color));
-                                        player.sendSystemMessage(Chats.TOTAL_CHESTS.locName(map.rooms.chests.total).withStyle(color));
+                                        player.sendSystemMessage(Chats.TOTAL_MOBS.locName(map.rooms.mobs.done, map.rooms.mobs.total).withStyle(color));
+                                        player.sendSystemMessage(Chats.TOTAL_CHESTS.locName(map.rooms.chests.done, map.rooms.chests.total).withStyle(color));
                                     }
                                 }
 

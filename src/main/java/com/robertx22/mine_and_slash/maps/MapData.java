@@ -3,14 +3,18 @@ package com.robertx22.mine_and_slash.maps;
 import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.utils.TeleportUtils;
+import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.database.data.league.LeagueMechanics;
 import com.robertx22.mine_and_slash.database.data.league.LeagueStructure;
+import com.robertx22.mine_and_slash.database.data.profession.ExplainedResult;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.maps.spawned_map_mobs.SpawnedMobList;
 import com.robertx22.mine_and_slash.uncommon.MathHelper;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -45,7 +49,7 @@ public class MapData {
     public boolean gave_boss_tp = false;
 
     public int despawnedMobs = 0;
-    
+
     public SpawnedMobList getMobSpawns() {
         return ExileDB.MapMobs().get(mobs);
     }
@@ -171,6 +175,18 @@ public class MapData {
 
         return pos;
 
+    }
+
+    public ExplainedResult canTeleportToArena(Player p) {
+        int perc = rooms.getMapCompletePercent();
+
+        int needed = ServerContainer.get().MAP_PERCENT_COMPLETE_NEEDED_FOR_BOSS_ARENA.get().intValue();
+
+        if (perc > needed) {
+            return ExplainedResult.success(Chats.BOSS_ARENA_UNLOCKED.locName().withStyle(ChatFormatting.GREEN));
+        } else {
+            return ExplainedResult.failure(Chats.BOSS_LOCKED.locName(needed + "%").withStyle(ChatFormatting.RED));
+        }
     }
 
     public static BlockPos getDungeonStartTeleportPos(BlockPos pos) {

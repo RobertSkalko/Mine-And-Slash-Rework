@@ -6,8 +6,10 @@ import com.robertx22.mine_and_slash.database.data.profession.StationSyncData;
 import com.robertx22.mine_and_slash.database.data.profession.items.ProfTierMatItem;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
+import com.robertx22.mine_and_slash.mmorpg.UNICODE;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.vanilla_mc.items.misc.RarityStoneItem;
 import net.minecraft.ChatFormatting;
@@ -20,6 +22,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -114,7 +117,14 @@ public abstract class CraftingStationScreen extends AbstractContainerScreen<Craf
         int spacing = 18;
 
         for (ItemStack stack : recipe.getMaterials()) {
-            this.addRenderableWidget(new ItemButton(stack, leftPos + 64 + xoff, topPos + 75 + yoff));
+            var button = new ItemButton(stack, leftPos + 64 + xoff, topPos + 75 + yoff);
+
+            List<Component> tip = new ArrayList<>();
+            tip.add(Component.literal(UNICODE.CUBE + " ").append(Itemtips.RECIPE_MATERIAL.locName()).append(" " + UNICODE.CUBE).withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
+            tip.add(Component.empty());
+            button.extraText = tip;
+            
+            this.addRenderableWidget(button);
             xoff += spacing;
         }
 

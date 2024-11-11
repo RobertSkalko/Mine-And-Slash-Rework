@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.database.data.rarities;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.mine_and_slash.database.data.MinMax;
+import com.robertx22.mine_and_slash.database.data.omen.OmenDifficulty;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
@@ -43,6 +44,8 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
         }
         return 0;
     }
+
+    public OmenDifficulty omens = new OmenDifficulty(new MinMax(1, 1), new MinMax(1, 1), new MinMax(1, 1), new MinMax(1, 1), new MinMax(1, 1), 1);
 
     public int affix_rarity_weight = 1000;
     public GearRarityType type = GearRarityType.NORMAL;

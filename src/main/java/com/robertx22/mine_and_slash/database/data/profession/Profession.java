@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.database.data.profession;
 
+import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
@@ -19,6 +20,7 @@ import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.temp.SkillItemTier;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
@@ -272,7 +274,13 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
         if (data != null) {
             if (data.exp > 0) {
                 if (data.req.contains(ExpSources.REQ_GROWTH_STAGE)) {
-                    if (state.getValue(CropBlock.AGE) != CropBlock.MAX_AGE) {
+                    var opt = state.getOptionalValue(CropBlock.AGE);
+
+                    if (!opt.isPresent()) {
+                        ExileLog.get().log(BuiltInRegistries.BLOCK.getKey(state.getBlock()).toString() + " requires growth stage but doesn't have the age value!");
+                        return Arrays.asList();
+                    }
+                    if (opt.get() != CropBlock.MAX_AGE) {
                         return Arrays.asList();
                     }
                 }

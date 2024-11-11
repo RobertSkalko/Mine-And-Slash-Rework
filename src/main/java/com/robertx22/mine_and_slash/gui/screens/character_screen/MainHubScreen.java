@@ -42,6 +42,7 @@ import com.robertx22.mine_and_slash.gui.inv_gui.GuiInventoryGrids;
 import com.robertx22.mine_and_slash.gui.screens.OpenInvGuiScreen;
 import com.robertx22.mine_and_slash.gui.screens.OpenJewelsScreen;
 import com.robertx22.mine_and_slash.gui.screens.OpenSkillGems;
+import com.robertx22.mine_and_slash.gui.screens.map.MapScreen;
 import com.robertx22.mine_and_slash.gui.screens.skill_tree.AscendancyTree;
 import com.robertx22.mine_and_slash.gui.screens.skill_tree.TalentsScreen;
 import com.robertx22.mine_and_slash.gui.screens.spell.SpellSchoolScreen;
@@ -261,8 +262,9 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
                 rightButtons.add(new ProphecyScreen());
             } else {
                 rightButtons.add(OpenGuiWrapper.getProphecyCardsScreen());
-
             }
+            rightButtons.add(new MapScreen());
+
         }
 
         List<INamedScreen> leftButtons = new ArrayList<>();

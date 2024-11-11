@@ -41,6 +41,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -219,15 +220,22 @@ public class CommonEvents {
                             event.setCanceled(true);
                         }
                     }
-                } else {
-                    if (LivingHurtUtils.isEnviromentalDmg(event.getSource())) {
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
+        });
+
+        ForgeEvents.registerForgeEvent(LivingDamageEvent.class, event -> {
+            try {
+                if (event.getEntity() instanceof Player) {
+                    if (LivingHurtUtils.isEnviromentalDmg(event.getSource())) {
                         // spend magic shield on envi dmg
                         float dmg = event.getAmount();
                         float multi = dmg / event.getEntity().getMaxHealth();
                         float spend = Load.Unit(event.getEntity()).getUnit().magicShieldData().getValue() * multi;
                         Load.Unit(event.getEntity()).getResources().spend(event.getEntity(), ResourceType.magic_shield, spend);
-
                     }
                 }
             } catch (Exception e) {

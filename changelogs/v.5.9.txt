@@ -99,3 +99,35 @@ v.5.9.10
 - omens are now repairable
 - spells now show that their support gems also benefit another spell (if they do)
 - fixed pet spells all being called Fire Golem Attack
+
+v.5.9.11
+
+- fixed infusion reroll
+- added if_false field to spell conditions, to flip the condition
+- added is_optional field to spell conditions, optional conditions work as "any"
+3 optionals and 1 passes: works
+2 optionals and 1 non optional, if the non-optional fails, it wont work, even if the optionals pass
+- enchant compat caps are now per player (might be buggy)
+- added per_item_max and min to enchant compat to still be able to cap stuff per item
+- tried to fix map item config bans not working
+- fixed item_mod command to actually work
+- map upgrade screen should show fail reason now correctly 
+- massively increased the cost of mythic gear crafting, open to deleting it if people still say drops are useless
+- attempt to fix boss scroll teleport bug
+- gear now shows base stat % and value when shift is on
+- spells that share supp gems now also share innate spell stats
+- should fix null error on some block mining
+
+v.5.9.12
+
+- magic shield dmg from enviro dmg is now based on post mitigation dmg
+- uber maps now always spawn as mythic rarity (sorry guys no doing easy ubers :P)
+- you can no longer open dispensers in maps
+- should fix vanilla rarities (for loot beams and stuff)
+- omens/codexes stats affix count etc are now dictated in the gear rarity datapack
+- buffed higher rarity omens
+- fixed spells not working
+- new Map Screen! You can now:
+	- see your total map complete % 
+	- see the map item to check affixes etc again
+	- screen is still wip! 

@@ -1,7 +1,5 @@
 package com.robertx22.mine_and_slash.database.data.omen;
 
-import com.robertx22.library_of_exile.utils.RandomUtils;
-import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarityType;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.loot.LootInfo;
@@ -12,9 +10,6 @@ import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.AffixData;
 import com.robertx22.mine_and_slash.tags.all.SlotTags;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import net.minecraft.world.item.ItemStack;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 public class OmenBlueprint extends RarityItemBlueprint implements ITypeBlueprint {
 
@@ -31,7 +26,7 @@ public class OmenBlueprint extends RarityItemBlueprint implements ITypeBlueprint
 
         var rar = this.rarity.get();
 
-        var diff = RandomUtils.randomFromList(Arrays.stream(OmenDifficulty.values()).filter(x -> this.info.level >= GameBalanceConfig.get().MAX_LEVEL * x.lvl_req).collect(Collectors.toList()));
+        var diff = rar.omens;
 
         var omen = this.omen.get();
 
@@ -41,15 +36,13 @@ public class OmenBlueprint extends RarityItemBlueprint implements ITypeBlueprint
 
         data.rar = rar.GUID();
 
-        int slots = diff.specificSlots.random();
+        int slots = diff.specific_slots.random();
 
         int affixes = diff.affixes.random();
-
 
         data.rarities.put(GearRarityType.NORMAL, diff.normal.random());
         data.rarities.put(GearRarityType.UNIQUE, diff.unique.random());
         data.rarities.put(GearRarityType.RUNED, diff.runed.random());
-
 
         while (data.slot_req.size() < slots) {
             var slot = omen.getRandomSlotReq();

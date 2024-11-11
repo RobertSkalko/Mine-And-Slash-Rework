@@ -46,6 +46,7 @@ import com.robertx22.mine_and_slash.uncommon.coins.Coin;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.rework.action.StatEffect;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.rework.condition.StatCondition;
+import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.VanillaRarities;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -75,10 +76,10 @@ import java.util.function.Consumer;
 public class MMORPG {
 
     // DISABLE WHEN PUBLIC BUILD
-    public static boolean RUN_DEV_TOOLS = true;
+    public static boolean RUN_DEV_TOOLS = false;
 
     public static String formatNumber(float num) {
-        
+
         if (num < 10) {
             return DECIMAL_FORMAT.format(num);
         } else {
@@ -121,6 +122,8 @@ public class MMORPG {
                 event.run = MMORPG.RUN_DEV_TOOLS;
             }
         });
+
+        VanillaRarities.init();
 
         Coin.init();
 

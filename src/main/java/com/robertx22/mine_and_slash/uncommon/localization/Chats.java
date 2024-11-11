@@ -6,11 +6,17 @@ import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
 import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
+    BOSS_ARENA_UNLOCKED("Boss Arena: Open"),
+    BOSS_KILLED("Boss already Killed"),
+    BOSS_LOCKED("Boss Arena: Locked until Map is %1$s Explored"),
+    MAP_EXPLORATION_RARITY("%1$s Map Exploration %2$s"),
+    CURRENT_MAP_EXPLORATION_PERCENT("%1$s of current Map Explored"),
 
     EXPLORED_X_MAP_ROOMS("%1$s out of %2$s Map Rooms Scouted."),
     MAP_FINISHED_SPAWNING("Map Scouting Complete!"),
-    TOTAL_MOBS("Total Mobs in Map: %1$s"),
-    TOTAL_CHESTS("Total Chests in Map: %1$s"),
+    MAP_NOT_SCOUTED("This map was not scouted yet!"),
+    TOTAL_MOBS("Mobs in Map: %1$s/%2$s"),
+    TOTAL_CHESTS("Chests in Map: %1$s/%2$s"),
     NOT_INSIDE_MAP("You are not inside a valid Adventure Map"),
 
     NOT_GEAR_OR_NOT_COMPAT("Not a Gear Item or not recognized as such."),
@@ -171,7 +177,6 @@ public enum Chats implements IAutoLocName {
     HOW_TO_ENABLE_COMMAND_BLOCK("To enable go to your server.properties file and put enable-command-block as true."),
     WEAPON_REQ_NOT_MET("Weapon requirements not met"),
     ENEMY_TOO_CLOSE("Can't do that. There are enemies nearby."),
-    CANT_TP_TO_BOSS("You need to explore more of the map before you can enter the Boss Arena."),
     THIS_IS_ONLY_USABLE_INSIDE_A_MAP("Only usable inside the Map."),
     GEM_SOCKETED("Gem Socketed"),
     LEVEL_UP_MESSAGE_UP("Leveled Up!"),

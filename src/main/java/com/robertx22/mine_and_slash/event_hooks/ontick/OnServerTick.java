@@ -10,6 +10,7 @@ import com.robertx22.mine_and_slash.database.data.profession.screen.CraftingStat
 import com.robertx22.mine_and_slash.database.data.rarities.MapRarityRewardData;
 import com.robertx22.mine_and_slash.database.data.stat_compat.StatCompat;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.gui.screens.map.MapSyncData;
 import com.robertx22.mine_and_slash.maps.ProcessChunkBlocks;
 import com.robertx22.mine_and_slash.saveclasses.unit.ResourceType;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
@@ -20,6 +21,7 @@ import com.robertx22.mine_and_slash.uncommon.effectdatas.rework.RestoreType;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
+import com.robertx22.mine_and_slash.vanilla_mc.packets.MapCompletePacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -78,6 +80,10 @@ public class OnServerTick {
 
                     if (!pro.mapid.equals(map.map.uuid)) {
                         pro.clearIfNewMap(map.map);
+                    }
+
+                    if (player.tickCount % (20 * 15) == 0) {
+                        Packets.sendToClient(player, new MapCompletePacket(new MapSyncData(map)));
                     }
 
                     if (player.tickCount % (20 * 5) == 0) {

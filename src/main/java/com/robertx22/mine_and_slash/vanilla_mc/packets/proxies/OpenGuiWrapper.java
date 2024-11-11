@@ -7,6 +7,7 @@ import com.robertx22.mine_and_slash.gui.card_picker.ICard;
 import com.robertx22.mine_and_slash.gui.card_picker.MapUpgradeCard;
 import com.robertx22.mine_and_slash.gui.card_picker.ProphecyCurseCard;
 import com.robertx22.mine_and_slash.gui.screens.character_screen.MainHubScreen;
+import com.robertx22.mine_and_slash.gui.screens.map.MapScreen;
 import com.robertx22.mine_and_slash.gui.wiki.BestiaryGroup;
 import com.robertx22.mine_and_slash.gui.wiki.reworked.NewWikiScreen;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
@@ -20,9 +21,11 @@ import java.util.stream.Collectors;
 public class OpenGuiWrapper {
 
     public static void openMainHub() {
-
         net.minecraft.client.Minecraft.getInstance().setScreen(new MainHubScreen());
+    }
 
+    public static void openMapScreen() {
+        net.minecraft.client.Minecraft.getInstance().setScreen(new MapScreen());
     }
 
     public static CardPickScreen openMapUpgradePicker() {

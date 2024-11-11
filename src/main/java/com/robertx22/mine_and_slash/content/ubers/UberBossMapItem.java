@@ -6,6 +6,7 @@ import com.robertx22.mine_and_slash.loot.LootInfo;
 import com.robertx22.mine_and_slash.loot.blueprints.MapBlueprint;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.ICreativeIgnoreOption;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SlashItems;
+import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.PlayerUtils;
@@ -54,6 +55,7 @@ public class UberBossMapItem extends AutoItem implements IShapedRecipe, ICreativ
             MapBlueprint b = new MapBlueprint(LootInfo.ofLevel(tier.boss_lvl));
             b.setUberBoss(ExileDB.UberBoss().get(uber.id), tier);
             b.level.set(tier.boss_lvl);
+            b.rarity.set(ExileDB.GearRarities().get(IRarity.MYTHIC_ID));
 
             ItemStack stack = b.createStack();
 

@@ -1,9 +1,7 @@
 package com.robertx22.mine_and_slash.vanilla_mc.items;
 
-import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.database.data.league.LeagueMechanics;
 import com.robertx22.mine_and_slash.database.data.league.LeagueStructure;
-import com.robertx22.mine_and_slash.database.data.rarities.MapRarityRewardData;
 import com.robertx22.mine_and_slash.mechanics.base.LeagueTeleportBlock;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
@@ -46,8 +44,14 @@ public class BossTpItem extends AutoItem {
                     p.sendSystemMessage(Chats.ENEMY_TOO_CLOSE.locName());
                     return InteractionResultHolder.pass(p.getItemInHand(pUsedHand));
                 }
-                if (!canTeleportToArena(p)) {
-                    p.sendSystemMessage(Chats.CANT_TP_TO_BOSS.locName());
+                var map = Load.mapAt(p.level(), p.blockPosition());
+
+                if (map == null) {
+                    return InteractionResultHolder.pass(p.getItemInHand(pUsedHand));
+                }
+                var cantp = map.canTeleportToArena(p);
+                if (!cantp.can) {
+                    p.sendSystemMessage(cantp.answer);
                     return InteractionResultHolder.pass(p.getItemInHand(pUsedHand));
                 }
                 var can = LeagueStructure.canTeleportToLeagueStart(p, LeagueMechanics.MAP_BOSS);
@@ -68,20 +72,6 @@ public class BossTpItem extends AutoItem {
         return InteractionResultHolder.pass(p.getItemInHand(pUsedHand));
     }
 
-    public static boolean canTeleportToArena(Player p) {
-
-        var map = Load.mapAt(p.level(), p.blockPosition());
-
-        if (map == null) {
-            return false;
-        }
-        int perc = MapRarityRewardData.getMapCompletePercent(map);
-
-        if (perc > ServerContainer.get().MAP_PERCENT_COMPLETE_NEEDED_FOR_BOSS_ARENA.get().intValue()) {
-            return true;
-        }
-        return false;
-    }
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level

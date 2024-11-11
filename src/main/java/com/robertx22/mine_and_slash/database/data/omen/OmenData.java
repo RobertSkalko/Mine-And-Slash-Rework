@@ -61,7 +61,7 @@ public class OmenData {
         }
         num += slot_req.size() * 10;
 
-        num *= rar.stat_percents.max / 100F;
+        num *= rar.omens.stat_multi;
 
         return num;
     }

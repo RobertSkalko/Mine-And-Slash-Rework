@@ -12,4 +12,13 @@ public class MapRoomsData {
         }
         return rooms.done >= rooms.total;
     }
+
+    public int getMapCompletePercent() {
+        if (!isDoneGenerating()) {
+            return 0;
+        }
+        int mobs = this.mobs.getPercentDone();
+        int chests = this.chests.getPercentDone();
+        return (mobs + chests) / 2;
+    }
 }

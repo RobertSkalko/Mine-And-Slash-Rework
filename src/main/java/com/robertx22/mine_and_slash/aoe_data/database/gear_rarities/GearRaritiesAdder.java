@@ -2,6 +2,7 @@ package com.robertx22.mine_and_slash.aoe_data.database.gear_rarities;
 
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import com.robertx22.mine_and_slash.database.data.MinMax;
+import com.robertx22.mine_and_slash.database.data.omen.OmenDifficulty;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarityType;
 import com.robertx22.mine_and_slash.database.data.rarities.MapRarityRewardData;
@@ -13,9 +14,16 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
+/*
+        new OmenDifficulty(new MinMax(1, 1), new MinMax(1, 1), new MinMax(1, 1), new MinMax(0, 0), new MinMax(1, 1)),
+                new OmenDifficulty(new MinMax(1, 2), new MinMax(1, 2), new MinMax(1, 2), new MinMax(1, 1), new MinMax(1, 2)),
+                new OmenDifficulty(new MinMax(1, 3), new MinMax(1, 2), new MinMax(1, 2), new MinMax(2, 3), new MinMax(2, 3));
 
+ */
 
         GearRarity common = new GearRarity().edit(x -> {
+
+            x.omens = new OmenDifficulty(new MinMax(1, 1), new MinMax(1, 1), new MinMax(1, 1), new MinMax(0, 0), new MinMax(1, 1), 0.3f);
 
             x.map_resist_req = 0;
 
@@ -29,6 +37,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.weight = 5000;
             x.item_tier_power = 1;
             x.item_tier = 0;
+
             x.pot = new GearRarity.Potential(5);
             x.item_value_multi = 1;
             x.item_model_data_num = 1;
@@ -42,6 +51,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity uncommon = new GearRarity().edit(x -> {
+
+            x.omens = new OmenDifficulty(new MinMax(1, 1), new MinMax(1, 1), new MinMax(1, 1), new MinMax(0, 0), new MinMax(1, 1), 0.4F);
 
             x.map_reward = new MapRarityRewardData(50, ModLootTables.TIER_1_DUNGEON_CHEST, 2, 1.1F);
 
@@ -71,6 +82,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         GearRarity rar = new GearRarity().edit(x -> {
             x.map_reward = new MapRarityRewardData(60, ModLootTables.TIER_2_DUNGEON_CHEST, 3, 1.2F);
 
+            x.omens = new OmenDifficulty(new MinMax(1, 2), new MinMax(1, 2), new MinMax(1, 2), new MinMax(1, 1), new MinMax(1, 2), 0.6F);
+
             x.map_resist_req = 20;
 
             x.map_tiers = new MinMax(20, 40);
@@ -99,6 +112,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         GearRarity epic = new GearRarity().edit(x -> {
             x.map_reward = new MapRarityRewardData(70, ModLootTables.TIER_3_DUNGEON_CHEST, 5, 1.2F);
 
+            x.omens = new OmenDifficulty(new MinMax(1, 2), new MinMax(1, 2), new MinMax(1, 2), new MinMax(1, 1), new MinMax(1, 2), 1);
 
             x.map_resist_req = 30;
 
@@ -127,6 +141,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity legendary = new GearRarity().edit(x -> {
+            x.omens = new OmenDifficulty(new MinMax(1, 3), new MinMax(1, 2), new MinMax(1, 2), new MinMax(2, 3), new MinMax(2, 3), 1.25F);
+
             x.map_reward = new MapRarityRewardData(80, ModLootTables.TIER_4_DUNGEON_CHEST, 7, 1.5F);
 
             x.map_resist_req = 40;
@@ -158,6 +174,9 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity mythic = new GearRarity().edit(x -> {
+
+            x.omens = new OmenDifficulty(new MinMax(1, 3), new MinMax(1, 2), new MinMax(1, 2), new MinMax(2, 3), new MinMax(2, 3), 1.5F);
+
             x.map_reward = new MapRarityRewardData(90, ModLootTables.TIER_5_DUNGEON_CHEST, 10, 2);
 
 
@@ -191,6 +210,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
 
         GearRarity unique = new GearRarity().edit(x -> {
+            x.omens = new OmenDifficulty(new MinMax(1, 3), new MinMax(1, 2), new MinMax(1, 2), new MinMax(2, 3), new MinMax(2, 3), 1);
 
             x.map_resist_req = 50;
             x.type = GearRarityType.UNIQUE;
@@ -211,7 +231,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
         // todo need to make separate maprarity etc or else this will roll somehow
         GearRarity runeword = new GearRarity().edit(x -> {
-         
+            x.omens = new OmenDifficulty(new MinMax(1, 3), new MinMax(1, 2), new MinMax(1, 2), new MinMax(2, 3), new MinMax(2, 3), 1);
+
             x.max_runes = 10;
             x.max_gems = 0;
 

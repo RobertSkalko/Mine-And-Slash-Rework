@@ -39,7 +39,7 @@ public abstract class EffectCondition extends BaseFieldNeeder implements IGUID {
     public final boolean can(SpellCtx ctx, MapHolder data) {
 
         boolean can = canActivate(ctx, data);
-        boolean not = data.get(MapField.IS_FALSE);
+        boolean not = data.getOrDefault(MapField.IS_FALSE, false);
 
         if (not) {
             return !can;
@@ -58,7 +58,7 @@ public abstract class EffectCondition extends BaseFieldNeeder implements IGUID {
 
             boolean passed = condition.can(ctx, part);
 
-            boolean isOptional = part.get(MapField.OPTIONAL);
+            boolean isOptional = part.getOrDefault(MapField.OPTIONAL, false);
 
             if (passed) {
                 didOne = true;

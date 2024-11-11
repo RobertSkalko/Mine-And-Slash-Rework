@@ -6,8 +6,10 @@ import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.DispenserMenu;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.EntityMobGriefingEvent;
+import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -16,6 +18,19 @@ public class MapEvents {
 
     public static void init() {
 
+        ForgeEvents.registerForgeEvent(PlayerContainerEvent.Open.class, event -> {
+            try {
+                Player p = event.getEntity();
+                if (WorldUtils.isMapWorldClass(p.level())) {
+                    if (event.getContainer() instanceof DispenserMenu) {
+                        p.closeContainer();
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        
         ForgeEvents.registerForgeEvent(PlayerInteractEvent.RightClickItem.class, x -> {
             if (WorldUtils.isMapWorldClass(x.getEntity().level())) {
                 if (ServerContainer.get().isItemBanned(x.getItemStack().getItem())) {

@@ -2,12 +2,12 @@ package com.robertx22.mine_and_slash.database.data.rarities;
 
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.gui.screens.map.MapSyncData;
 import com.robertx22.mine_and_slash.maps.MapData;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.TeamUtils;
-import com.robertx22.mine_and_slash.vanilla_mc.items.BossTpItem;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.MapCompletePacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -29,21 +29,12 @@ public class MapRarityRewardData {
         this.loot_multi = loot_multi;
     }
 
-    public static int getMapCompletePercent(MapData map) {
-        if (!map.rooms.isDoneGenerating()) {
-            return 0;
-        }
-        int mobs = map.rooms.mobs.getPercentDone();
-        int chests = map.rooms.chests.getPercentDone();
-        return (mobs + chests) / 2;
-    }
-
 
     public static void updateMapCompletionRarity(ServerPlayer player, MapData map) {
 
-        int perc = getMapCompletePercent(map);
+        int perc = map.rooms.getMapCompletePercent();
 
-        if (!map.gave_boss_tp && BossTpItem.canTeleportToArena(player)) {
+        if (!map.gave_boss_tp && map.canTeleportToArena(player).can) {
             map.gave_boss_tp = true;
 
             for (Player p : TeamUtils.getOnlineMembers(player)) {
@@ -63,11 +54,11 @@ public class MapRarityRewardData {
 
                 for (Player x : player.level().players()) {
                     x.sendSystemMessage(Chats.MAP_COMPLETE_RARITY_UPGRADE.locName(ExileDB.GearRarities().get(map.completion_rarity).coloredName()).withStyle(ChatFormatting.LIGHT_PURPLE));
+                    Packets.sendToClient(player, new MapCompletePacket(new MapSyncData(map)));
                 }
             }
         }
 
-
-        Packets.sendToClient(player, new MapCompletePacket(map.rooms));
+        // Packets.sendToClient(player, new MapCompletePacket(new MapSyncData(map)));
     }
 }
