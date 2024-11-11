@@ -79,9 +79,10 @@ public class NormalStatTooltip implements IStatTooltipType {
         var v1 = mod.ToExactStat(max.minmax.min, lvl).getValue();
         var v2 = mod.ToExactStat(max.minmax.max, lvl).getValue();
 
+
         var mid = Component.literal((int) v1 + "" + " - " + (int) v2 + "");
 
-        var text = Component.literal(" [").append(mid).append("%]").withStyle(format);
+        var text = Component.literal(" [").append(mid).append("]").withStyle(format);
 
         if (rar != null) {
             text.append(Component.literal(" [" + TooltipUtils.rarityShort(rar).getString() + "]").withStyle(rar.textFormatting()));

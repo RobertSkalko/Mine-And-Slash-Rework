@@ -11,6 +11,7 @@ public enum Chats implements IAutoLocName {
     MAP_FINISHED_SPAWNING("Map Scouting Complete!"),
     TOTAL_MOBS("Total Mobs in Map: %1$s"),
     TOTAL_CHESTS("Total Chests in Map: %1$s"),
+    NOT_INSIDE_MAP("You are not inside a valid Adventure Map"),
 
     NOT_GEAR_OR_NOT_COMPAT("Not a Gear Item or not recognized as such."),
     NOT_MATCHING_GEAR_FAMILY("That Gear isn't of the correct Gear Family (Armors, Weapons, Jewelry, Offhands)"),
@@ -145,6 +146,7 @@ public enum Chats implements IAutoLocName {
     TOO_MANY_BUFFS("You can't have that many buffs."),
     NEW_DAY("A new day has arrived! Profession drop rates have been boosted for the following items:"),
     TOO_LOW_LEVEL("Your level is too low."),
+    TOO_LOW_LEVEL_TO_UPGRADE_SPELL("Your level is too low to Upgrade the Spell level."),
     CANT_SAME_BUFF("You already have a buff of that type."),
     NOT_OWNER("You are not the owner of this Station. Stations can NOT be shared, you have to craft your own."),
 
@@ -161,6 +163,7 @@ public enum Chats implements IAutoLocName {
     OPEN_LOOT_CHEST("Right-click to open Loot Chest!"),
     VINES_SHRINK("The Vines appear to shrink, for now..."),
     PROF_RECIPE_NOT_FOUND("Recipe not found. Most recipes need multiple of the same item, so double-check the item numbers."),
+    PROF_RECIPE_NOT_SELECTED("You did not select any recipe!"),
     PROF_OUTPUT_SLOT_NOT_EMPTY("Needs at least 1 empty Output slot."),
     PROF_RECIPE_LEVEL_NOT_ENOUGH("This Recipe requires %1$s level %2$s. But your profession level is only %3$s"),
     GEAR_DROP("You do not meet the requirements of that item."),

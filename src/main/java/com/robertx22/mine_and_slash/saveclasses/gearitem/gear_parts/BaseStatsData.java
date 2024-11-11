@@ -1,16 +1,14 @@
 package com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts;
 
-import com.robertx22.mine_and_slash.database.data.StatMod;
 import com.robertx22.mine_and_slash.database.data.stats.tooltips.StatTooltipType;
 import com.robertx22.mine_and_slash.database.data.stats.types.gear_base.IBaseStatModifier;
 import com.robertx22.mine_and_slash.itemstack.ExileStack;
 import com.robertx22.mine_and_slash.itemstack.StackKeys;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
-import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IGearPartTooltip;
-import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IRerollable;
-import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IStatsContainer;
-import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.StatRangeInfo;
+import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.*;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
+import com.robertx22.mine_and_slash.saveclasses.item_classes.tooltips.TooltipStatInfo;
+import com.robertx22.mine_and_slash.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
 import net.minecraft.network.chat.Component;
 
@@ -38,15 +36,22 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
 
     @Override
     public List<Component> GetTooltipString(StatRangeInfo info, ExileStack stack) {
+        List<Component> list = new ArrayList<>();
+
+        if (info.hasShiftDown) {
+            list.add(Component.literal(" "));
+            for (TooltipStatWithContext c : getAllStatsWithCtx(stack)) {
+                list.addAll(c.GetTooltipString());
+            }
+            return list;
+        }
 
         var gear = stack.get(StackKeys.GEAR).get();
 
         List<ExactStatData> all = GetAllStats(stack);
 
-
         info.statTooltipType = StatTooltipType.BASE_LOCAL_STATS;
 
-        List<Component> list = new ArrayList<>();
         list.add(Component.literal(" "));
 
         for (ExactStatData stat : all) {
@@ -65,6 +70,26 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
         return true;
     }
 
+
+    public List<TooltipStatWithContext> getAllStatsWithCtx(ExileStack ex) {
+        List<TooltipStatWithContext> list = new ArrayList<>();
+
+        var gear = ex.get(StackKeys.GEAR).get();
+
+        int p = (int) (this.p * gear.getQualityBaseStatsMulti(ex));
+
+        int lvl = gear.lvl;
+
+        gear.GetBaseGearType().baseStats()
+                .forEach(x -> {
+                    ExactStatData exact = x.ToExactStat(p, lvl);
+                    TooltipStatInfo confo = new TooltipStatInfo(exact, p, new StatRangeInfo(ModRange.of(getMinMax(gear))));
+                    //confo.affix_rarity = this.getRarity();
+                    list.add(new TooltipStatWithContext(confo, x, (int) lvl));
+                });
+        return list;
+    }
+
     @Override
     public List<ExactStatData> GetAllStats(ExileStack stack) {
 
@@ -72,13 +97,11 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
 
         List<ExactStatData> baseStats = new ArrayList<>();
 
+        for (TooltipStatWithContext c : getAllStatsWithCtx(stack)) {
+            baseStats.add(c.mod.ToExactStat(c.statinfo.percent, c.level));
+        }
+
         try {
-            int perc = (int) (p * gear.getQualityBaseStatsMulti(stack));
-
-            for (StatMod mod : gear.GetBaseGearType().baseStats()) {
-                baseStats.add(mod.ToExactStat(perc, gear.getLevel()));
-            }
-
             var list = gear.GetAllStatContainersExceptBase();
 
             var allstats = new ArrayList<ExactStatData>();

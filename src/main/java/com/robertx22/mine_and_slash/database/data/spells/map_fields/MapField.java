@@ -78,6 +78,8 @@ public class MapField<T> implements IGUID {
 
     // boolean
     public static MapField<Boolean> GRAVITY = make("gravity");
+    public static MapField<Boolean> IS_FALSE = make("is_false");
+    public static MapField<Boolean> OPTIONAL = make("is_optional");
     public static MapField<Boolean> EXPIRE_ON_ENTITY_HIT = make("expire_on_en_hit");
     public static MapField<Boolean> EXPIRE_ON_BLOCK_HIT = make("expire_on_block_hit");
     public static MapField<Boolean> IS_BLOCK_FALLING = make("is_falling_block");

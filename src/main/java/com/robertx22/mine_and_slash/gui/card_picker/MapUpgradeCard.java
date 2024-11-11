@@ -1,6 +1,7 @@
 package com.robertx22.mine_and_slash.gui.card_picker;
 
 import com.robertx22.library_of_exile.main.Packets;
+import com.robertx22.mine_and_slash.database.data.profession.ExplainedResult;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
@@ -21,12 +22,21 @@ public class MapUpgradeCard implements ICard {
     public enum MapOption {
         UPGRADE("upgrade", Words.UPGRADE_MAP, Words.UPGRADE_MAP_DESC) {
             @Override
-            public boolean canPick(Player p) {
+            public ExplainedResult canPick(Player p) {
                 var map = Load.player(p).map;
+
                 if (map.map == null) {
-                    return false;
+                    return ExplainedResult.failure(Words.NO_MAP_TO_UPGRADE.locName());
                 }
-                return map.map.getRarity().hasHigherRarity() && Load.player(p).map.killed_boss;
+                if (!map.map.getRarity().hasHigherRarity()) {
+                    return ExplainedResult.failure(Words.MAP_IS_ALREADY_MAX_RARITY.locName());
+                }
+                if (!Load.player(p).map.killed_boss) {
+                    return ExplainedResult.failure(Words.OPTION_LOCKED_UNTIL_BOSS_KILLED.locName());
+                }
+
+                return ExplainedResult.success();
+
             }
 
             @Override
@@ -43,12 +53,15 @@ public class MapUpgradeCard implements ICard {
 
         DOWNGRADE("downgrade", Words.DOWNGRADE_MAP, Words.DOWNGRADE_MAP_DESC) {
             @Override
-            public boolean canPick(Player p) {
+            public ExplainedResult canPick(Player p) {
                 var map = Load.player(p).map;
+
                 if (map.map == null) {
-                    return false;
+                    return ExplainedResult.failure(Words.NO_MAP_TO_UPGRADE.locName());
                 }
-                return true;
+
+                return ExplainedResult.success();
+
             }
 
             @Override
@@ -71,12 +84,15 @@ public class MapUpgradeCard implements ICard {
 
         KEEP_RARITY_AND_REROLL("reroll", Words.REROLL_MAP, Words.REROLL_MAP_DESC) {
             @Override
-            public boolean canPick(Player p) {
+            public ExplainedResult canPick(Player p) {
                 var map = Load.player(p).map;
                 if (map.map == null) {
-                    return false;
+                    return ExplainedResult.failure(Words.NO_MAP_TO_UPGRADE.locName());
                 }
-                return Load.player(p).map.killed_boss;
+                if (!Load.player(p).map.killed_boss) {
+                    return ExplainedResult.failure(Words.OPTION_LOCKED_UNTIL_BOSS_KILLED.locName());
+                }
+                return ExplainedResult.success();
             }
 
             @Override
@@ -104,7 +120,7 @@ public class MapUpgradeCard implements ICard {
         public abstract void onPick(Player p);
 
 
-        public abstract boolean canPick(Player p);
+        public abstract ExplainedResult canPick(Player p);
     }
 
     MapOption option;
@@ -134,9 +150,11 @@ public class MapUpgradeCard implements ICard {
         List<MutableComponent> list = new ArrayList<>();
         list.add(option.desc.locName());
 
-        if (!option.canPick(p)) {
+        var can = option.canPick(p);
+
+        if (!can.can) {
             list.add(Component.empty());
-            list.add(Words.OPTION_LOCKED.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
+            list.add(Component.literal("").append(can.answer).withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
         }
 
         return list;

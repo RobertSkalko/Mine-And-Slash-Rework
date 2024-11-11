@@ -1,6 +1,7 @@
 package com.robertx22.mine_and_slash.event_hooks.my_events;
 
 import com.robertx22.mine_and_slash.capability.DirtySync;
+import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
@@ -19,7 +20,14 @@ public class CachedPlayerStats {
 
     public List<StatContext> statContexts = new ArrayList<>();
 
+
+    public StatContext enchantCompat = null;
+
     private StatContext statCompat;
+
+    public DirtySync ENCHANT_COMPAT = new DirtySync("enchant_compat", x -> {
+        this.enchantCompat = GearItemData.getEnchantCompatStats(p, Load.Unit(p).equipmentCache.getGear());
+    });
 
     public DirtySync STAT_COMPAT = new DirtySync("stat_compat", x -> {
         recalcStatCompat();
@@ -52,12 +60,14 @@ public class CachedPlayerStats {
 
     public void setAllDirty() {
         ALLOCATED.setDirty();
+        ENCHANT_COMPAT.setDirty();
         STAT_COMPAT.setDirty();
     }
 
     public void tick() {
 
         ALLOCATED.onTickTrySync(p);
+        ENCHANT_COMPAT.onTickTrySync(p);
         STAT_COMPAT.onTickTrySync(p);
 
     }
@@ -71,8 +81,6 @@ public class CachedPlayerStats {
         if (false) {
             p.sendSystemMessage(Component.literal("Re calcing player stuff"));
         }
-
-
         statContexts = new ArrayList<>();
 
         var playerData = Load.player(p);

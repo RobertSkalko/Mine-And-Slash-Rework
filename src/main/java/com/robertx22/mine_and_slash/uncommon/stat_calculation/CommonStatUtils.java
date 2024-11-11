@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class CommonStatUtils {
+   
 
     // no idea about perf impact lets keep this player only for now
     public static StatContext addStatCompat(LivingEntity en) {

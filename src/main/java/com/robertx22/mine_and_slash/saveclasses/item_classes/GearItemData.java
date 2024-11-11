@@ -21,8 +21,10 @@ import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.IStatsContai
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.StatRequirement;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.*;
+import com.robertx22.mine_and_slash.saveclasses.unit.GearData;
 import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.StatContext;
+import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
@@ -296,7 +298,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
             var id = ForgeRegistries.ENCHANTMENTS.getKey(en.getKey()).toString();
             // todo this could be cached
             for (StatCompat compat : ExileDB.StatCompat().getFilterWrapped(x -> x.isEnchantCompat() && x.enchant_id.equals(id)).list) {
-                var result = compat.getEnchantCompatResult(stack, lvl);
+                var result = compat.getEnchantCompatResult(Arrays.asList(stack), lvl);
                 if (result != null) {
                     list.add(result);
                 }
@@ -305,6 +307,37 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         if (list.isEmpty()) {
             return null;
         }
+        StatContext ctx = new SimpleStatCtx(StatContext.StatCtxType.ENCHANT_COMPAT, list);
+        return ctx;
+
+    }
+
+    public static StatContext getEnchantCompatStats(Player p, List<GearData> gears) {
+        var list = new ArrayList<ExactStatData>();
+
+        Set<Enchantment> enchants = new HashSet<>();
+
+        for (GearData gear : gears) {
+            enchants.addAll(gear.stack.getAllEnchantments().keySet());
+        }
+
+        int lvl = Load.Unit(p).getLevel();
+        var stacks = gears.stream().map(x -> x.stack).collect(Collectors.toList());
+
+        for (Enchantment enchant : enchants) {
+            var id = ForgeRegistries.ENCHANTMENTS.getKey(enchant).toString();
+
+            for (StatCompat compat : ExileDB.StatCompat().getFilterWrapped(x -> x.isEnchantCompat() && x.enchant_id.equals(id)).list) {
+                var result = compat.getEnchantCompatResult(stacks, lvl);
+                if (result != null) {
+                    list.add(result);
+                }
+            }
+        }
+        if (list.isEmpty()) {
+            return null;
+        }
+
         StatContext ctx = new SimpleStatCtx(StatContext.StatCtxType.ENCHANT_COMPAT, list);
         return ctx;
 

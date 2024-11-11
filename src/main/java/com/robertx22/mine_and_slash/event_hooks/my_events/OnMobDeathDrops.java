@@ -37,21 +37,25 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
             if (mobKilled.level().isClientSide) {
                 return;
             }
-            if (WorldUtils.isMapWorldClass(mobKilled.level())) {
-                if (Load.Unit(mobKilled).getRarity().equals(IRarity.BOSS)) {
-                    var sw = (ServerLevel) mobKilled.level();
-                    var map = Load.mapAt(sw, mobKilled.blockPosition());
-                    LeagueMechanics.MAP_REWARD.generateManually(map, sw, mobKilled.blockPosition());
 
-
-                    for (Player p : mobKilled.level().getEntitiesOfClass(Player.class, mobKilled.getBoundingBox().inflate(150))) {
-                        Load.player(p).map.killed_boss = true;
-                    }
-
-                }
-            }
 
             if (!(mobKilled instanceof Player)) {
+
+                if (WorldUtils.isMapWorldClass(mobKilled.level())) {
+                    if (Load.Unit(mobKilled).getRarity().equals(IRarity.BOSS)) {
+                        var sw = (ServerLevel) mobKilled.level();
+                        var map = Load.mapAt(sw, mobKilled.blockPosition());
+                        LeagueMechanics.MAP_REWARD.generateManually(map, sw, mobKilled.blockPosition());
+
+                        // todo does this grab everyone in the map?
+                        for (Player p : mobKilled.level().getEntitiesOfClass(Player.class, mobKilled.getBoundingBox().inflate(200))) {
+                            Load.player(p).map.killed_boss = true;
+                        }
+                        if (onMobDeath.killer instanceof Player p) {
+                            Load.player(p).map.killed_boss = true;
+                        }
+                    }
+                }
 
                 EntityData mobKilledData = Load.Unit(mobKilled);
 

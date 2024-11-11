@@ -27,6 +27,7 @@ public class GearData {
 
     public List<StatContext> cachedStats = new ArrayList<>();
 
+    // public List<ExactStatData> cachedEnchantStats = new ArrayList<>();
 
     public GearData(ItemStack stack, EquipmentSlot slot, EntityData data) {
         this.stack = stack;
@@ -53,10 +54,13 @@ public class GearData {
                     stats.forEach(s -> s.multiplyBy(multi));
                 }
                 cachedStats.add(GearStatCtx.of(gear, stats));
+                /*
                 var ench = gear.getEnchantCompatStats(stack);
                 if (ench != null) {
                     cachedStats.add(ench);
                 }
+
+                 */
             } else {
                 percentStatUtilization = 0;
             }

@@ -1,13 +1,13 @@
 package com.robertx22.mine_and_slash.vanilla_mc.packets;
 
+import com.robertx22.library_of_exile.main.MyPacket;
+import com.robertx22.library_of_exile.packets.ExilePacketContext;
 import com.robertx22.mine_and_slash.database.data.profession.Crafting_State;
 import com.robertx22.mine_and_slash.database.data.profession.ProfessionBlockEntity;
 import com.robertx22.mine_and_slash.database.data.profession.ProfessionRecipe;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
-import com.robertx22.library_of_exile.main.MyPacket;
-import com.robertx22.library_of_exile.packets.ExilePacketContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -63,7 +63,7 @@ public class LockTogglePacket extends MyPacket<LockTogglePacket> {
             } else if (pbe.craftingState == Crafting_State.STOPPED && !pbe.recipe_locked) {
                 ProfessionRecipe recipe = pbe.getCurrentRecipe();
                 if (recipe == null) {
-                    exilePacketContext.getPlayer().sendSystemMessage(Chats.PROF_RECIPE_NOT_FOUND.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
+                    exilePacketContext.getPlayer().sendSystemMessage(Chats.PROF_RECIPE_NOT_SELECTED.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
                     return;
                 }
 

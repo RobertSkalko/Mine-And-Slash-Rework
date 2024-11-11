@@ -99,11 +99,9 @@ public class ComponentPart {
         if (ctx.world.isClientSide) {
             return;
         }
-        for (MapHolder part : ifs) {
-            EffectCondition condition = EffectCondition.MAP.get(part.type);
-            if (!condition.canActivate(ctx, part)) {
-                return;
-            }
+
+        if (!EffectCondition.conditionsPass(ifs, ctx)) {
+            return;
         }
 
         Set<LivingEntity> list = new HashSet<>();
@@ -119,7 +117,7 @@ public class ComponentPart {
                 if (pred != null) {
                     selected = selected.stream().filter(targetEntity -> {
                         SpellCtx chainedCtx = SpellCtx.onEntityHit(ctx, targetEntity);
-                        return pred.canActivate(chainedCtx, entityPredicate);
+                        return pred.can(chainedCtx, entityPredicate);
                     }).collect(Collectors.toList());
                 }
             }
@@ -144,12 +142,10 @@ public class ComponentPart {
 
                     List<LivingEntity> single = Arrays.asList(en);
 
-                    for (MapHolder part : onEn.ifs) {
-                        EffectCondition condition = EffectCondition.MAP.get(part.type);
-                        if (!condition.canActivate(chainedCtx, part)) {
-                            return;
-                        }
+                    if (!EffectCondition.conditionsPass(onEn.ifs, chainedCtx)) {
+                        return;
                     }
+                    
                     for (MapHolder part : onEn.acts) {
                         SpellAction action = SpellAction.MAP.get(part.type);
                         action.tryActivate(single, chainedCtx, part);

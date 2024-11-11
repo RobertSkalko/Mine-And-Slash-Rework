@@ -226,7 +226,7 @@ public class ProfessionBlockEntity extends BlockEntity {
                         } else {
                             ProfessionRecipe recipe = getCurrentRecipe();
                             if (recipe == null) {
-                                p.sendSystemMessage(Chats.PROF_RECIPE_NOT_FOUND.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
+                                p.sendSystemMessage(Chats.PROF_RECIPE_NOT_SELECTED.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
                                 craftingState = Crafting_State.IDLE;
                                 //ownerUUID = null;
                                 return;
@@ -282,7 +282,7 @@ public class ProfessionBlockEntity extends BlockEntity {
         }
 
         if (recipe == null) {
-            return ExplainedResult.failure(Chats.PROF_RECIPE_NOT_FOUND.locName());
+            return ExplainedResult.failure(Chats.PROF_RECIPE_NOT_SELECTED.locName());
         }
         int ownerLvl = Load.player(p).professions.getLevel(getProfession().GUID());
         if (recipe.getLevelRequirement() > ownerLvl) {

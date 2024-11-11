@@ -1,10 +1,10 @@
 package com.robertx22.mine_and_slash.database.data.spells.components.conditions;
 
+import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.mine_and_slash.database.data.spells.components.BaseFieldNeeder;
 import com.robertx22.mine_and_slash.database.data.spells.components.MapHolder;
 import com.robertx22.mine_and_slash.database.data.spells.map_fields.MapField;
 import com.robertx22.mine_and_slash.database.data.spells.spell_classes.SpellCtx;
-import com.robertx22.library_of_exile.registry.IGUID;
 
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +35,46 @@ public abstract class EffectCondition extends BaseFieldNeeder implements IGUID {
 
 
     public abstract boolean canActivate(SpellCtx ctx, MapHolder data);
+
+    public final boolean can(SpellCtx ctx, MapHolder data) {
+
+        boolean can = canActivate(ctx, data);
+        boolean not = data.get(MapField.IS_FALSE);
+
+        if (not) {
+            return !can;
+        }
+        return can;
+    }
+
+    public final static boolean conditionsPass(List<MapHolder> ifs, SpellCtx ctx) {
+
+        boolean did = true;
+        boolean didOne = false;
+
+        for (MapHolder part : ifs) {
+
+            EffectCondition condition = EffectCondition.MAP.get(part.type);
+
+            boolean passed = condition.can(ctx, part);
+
+            boolean isOptional = part.get(MapField.OPTIONAL);
+
+            if (passed) {
+                didOne = true;
+            } else {
+                if (!isOptional) {
+                    return false;
+                }
+            }
+        }
+        if (didOne) {
+            did = true;
+        }
+
+        return did;
+    }
+
 
     public static HashMap<String, EffectCondition> MAP = new HashMap<>();
 

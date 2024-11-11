@@ -59,6 +59,8 @@ public class CachedEntityStats {
         recalcGears();
 
         if (x instanceof Player p) {
+            Load.player(p).cachedStats.ENCHANT_COMPAT.setDirty();
+
             Load.player(p).cachedStats.omenStats = null;
             Load.player(p).recalcOmensFilled();
             var omen = Load.player(p).getOmen();
@@ -75,6 +77,9 @@ public class CachedEntityStats {
 
     public DirtySync WEAPON = new DirtySync("weapon", x -> {
         recalcWeapon();
+        if (x instanceof Player p) {
+            Load.player(p).cachedStats.ENCHANT_COMPAT.setDirty();
+        }
         STAT_CALC.setDirty();
     });
 

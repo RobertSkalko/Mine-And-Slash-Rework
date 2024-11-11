@@ -2,6 +2,7 @@ package com.robertx22.mine_and_slash.vanilla_mc.items;
 
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.database.data.league.LeagueMechanics;
+import com.robertx22.mine_and_slash.database.data.league.LeagueStructure;
 import com.robertx22.mine_and_slash.database.data.rarities.MapRarityRewardData;
 import com.robertx22.mine_and_slash.mechanics.base.LeagueTeleportBlock;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
@@ -47,12 +48,15 @@ public class BossTpItem extends AutoItem {
                 }
                 if (!canTeleportToArena(p)) {
                     p.sendSystemMessage(Chats.CANT_TP_TO_BOSS.locName());
-
+                    return InteractionResultHolder.pass(p.getItemInHand(pUsedHand));
+                }
+                var can = LeagueStructure.canTeleportToLeagueStart(p, LeagueMechanics.MAP_BOSS);
+                if (!can.can) {
+                    p.sendSystemMessage(can.answer);
                     return InteractionResultHolder.pass(p.getItemInHand(pUsedHand));
                 }
 
                 itemstack.shrink(1);
-
                 LeagueTeleportBlock.teleportToLeague(p, p.blockPosition(), LeagueMechanics.MAP_BOSS_ID);
 
                 return InteractionResultHolder.success(p.getItemInHand(pUsedHand));

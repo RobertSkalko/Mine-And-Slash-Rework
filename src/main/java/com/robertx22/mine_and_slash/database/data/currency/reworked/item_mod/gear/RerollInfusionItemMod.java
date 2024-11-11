@@ -30,6 +30,8 @@ public class RerollInfusionItemMod extends GearModification {
             }).random();
 
             en.en = affix.GUID();
+
+            gear.ench = en;
         });
     }
 

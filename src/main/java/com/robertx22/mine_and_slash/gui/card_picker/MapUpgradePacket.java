@@ -35,7 +35,9 @@ public class MapUpgradePacket extends MyPacket<MapUpgradePacket> {
     @Override
     public void onReceived(ExilePacketContext ctx) {
         var p = ctx.getPlayer();
-        if (option.canPick(p)) {
+
+        var can = option.canPick(p);
+        if (can.can) {
             option.onPick(p);
         }
         Load.player(ctx.getPlayer()).playerDataSync.setDirty();

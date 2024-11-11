@@ -2,10 +2,12 @@ package com.robertx22.mine_and_slash.database.data.league;
 
 import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.library_of_exile.utils.TeleportUtils;
+import com.robertx22.mine_and_slash.database.data.profession.ExplainedResult;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.maps.MapItemData;
 import com.robertx22.mine_and_slash.mmorpg.ModErrors;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
+import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -144,6 +146,22 @@ public abstract class LeagueStructure {
         return true;
     }
 
+    public static final ExplainedResult canTeleportToLeagueStart(Player p, LeagueMechanic league) {
+        var map = Load.mapAt(p.level(), p.blockPosition());
+
+        if (map != null) {
+            var lo = map.leagues.get(league).spawn_pos;
+            if (lo != 0L) {
+                return ExplainedResult.success();
+            } else {
+                return ExplainedResult.failure(Chats.NOT_INSIDE_MAP.locName());
+
+            }
+        } else {
+            return ExplainedResult.failure(Chats.NOT_INSIDE_MAP.locName());
+        }
+
+    }
 
     public final void teleportToStartOfLeague(Player p) {
         var map = Load.mapAt(p.level(), p.blockPosition());

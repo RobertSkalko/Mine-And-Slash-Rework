@@ -1,10 +1,14 @@
 package com.robertx22.mine_and_slash.maps;
 
+import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.mmorpg.ForgeEvents;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.EntityMobGriefingEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.Event;
 
@@ -12,6 +16,15 @@ public class MapEvents {
 
     public static void init() {
 
+        ForgeEvents.registerForgeEvent(PlayerInteractEvent.RightClickItem.class, x -> {
+            if (WorldUtils.isMapWorldClass(x.getEntity().level())) {
+                if (ServerContainer.get().isItemBanned(x.getItemStack().getItem())) {
+                    x.getEntity().sendSystemMessage(Component.literal("This item is banned in Adventure Maps: ")
+                            .append(x.getItemStack().getDisplayName()).withStyle(ChatFormatting.BOLD));
+                    x.setCanceled(true);
+                }
+            }
+        });
         ForgeEvents.registerForgeEvent(EntityMobGriefingEvent.class, x -> {
             if (WorldUtils.isMapWorldClass(x.getEntity().level())) {
                 x.setResult(Event.Result.DENY);

@@ -49,11 +49,13 @@ public class PlayerCommands {
                 var p = PLAYER.get(e);
                 var mod = MOD.getFromRegistry(e);
                 ItemStack stack = p.getMainHandItem();
-                mod.applyMod(ExileStack.of(stack), res);
+
+                var ex = ExileStack.of(stack);
+                mod.applyMod(ex, res);
 
                 res.onFinish(p);
 
-                p.setItemSlot(EquipmentSlot.MAINHAND, stack);
+                p.setItemSlot(EquipmentSlot.MAINHAND, ex.getStack());
 
                 p.sendSystemMessage(Component.literal("Applied Item Modification from Command").withStyle(ChatFormatting.GREEN));
             });

@@ -122,23 +122,25 @@ public class ProfessionRecipes {
                 float rarnumMulti = 1;
                 int rarnum = 1;
                 for (String rar : IRarity.NORMAL_GEAR_RARITIES) {
-                    float finalRarnumMulti = rarnumMulti;
+                    if (!rar.equals(IRarity.MYTHIC_ID)) {
+                        float finalRarnumMulti = rarnumMulti;
 
-                    float famMulti = 1;
-                    if (fam == SlotFamily.Weapon || fam == SlotFamily.Jewelry) {
-                        famMulti = 2;
+                        float famMulti = 1;
+                        if (fam == SlotFamily.Weapon || fam == SlotFamily.Jewelry) {
+                            famMulti = 2;
+                        }
+
+                        var b = ProfessionRecipe.TierBuilder.of(x -> ProfessionProductItems.CRAFTED_SOULS.get(fam).get(rar).get(), Professions.GEAR_CRAFTING, 1)
+                                .onlyOnTier(x -> new ItemStack(ProfessionMatItems.TIERED_MAIN_MATS.get(Professions.MINING).get(x).get(), (int) ((x.tier + 1) * finalRarnumMulti)))
+                                .onTierOrAbove(SkillItemTier.TIER0, RarityItems.RARITY_STONE.get(rar).get(), (int) (3 + (rarnum * 1.5F) * famMulti))
+                                .onTierOrAbove(SkillItemTier.TIER0, fam.craftItem.get(), 1);
+
+                        b.exp(250);
+                        b.buildEachTier();
+
+                        rarnumMulti += 0.4F;
+                        rarnum++;
                     }
-
-                    var b = ProfessionRecipe.TierBuilder.of(x -> ProfessionProductItems.CRAFTED_SOULS.get(fam).get(rar).get(), Professions.GEAR_CRAFTING, 1)
-                            .onlyOnTier(x -> new ItemStack(ProfessionMatItems.TIERED_MAIN_MATS.get(Professions.MINING).get(x).get(), (int) ((x.tier + 1) * finalRarnumMulti)))
-                            .onTierOrAbove(SkillItemTier.TIER0, RarityItems.RARITY_STONE.get(rar).get(), (int) (3 + (rarnum * 1.5F) * famMulti))
-                            .onTierOrAbove(SkillItemTier.TIER0, fam.craftItem.get(), 1);
-
-                    b.exp(250);
-                    b.buildEachTier();
-
-                    rarnumMulti += 0.4F;
-                    rarnum++;
                 }
             }
 

@@ -1,18 +1,12 @@
 package com.robertx22.mine_and_slash.mixins;
 
-import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.mixin_methods.TooltipMethod;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
-import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -44,6 +38,7 @@ public abstract class ItemStackMixin {
         }
     }
 
+    /*
     @Inject(method = "use", at = @At(value = "HEAD"), cancellable = true)
     public void hookLoot(Level world, Player p, InteractionHand pUsedHand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
 
@@ -61,6 +56,8 @@ public abstract class ItemStackMixin {
             e.printStackTrace();
         }
     }
+
+     */
 
     // copied from TooltipCallback fabric event
     @Inject(method = {"getTooltipLines"}, at = {@At("RETURN")})

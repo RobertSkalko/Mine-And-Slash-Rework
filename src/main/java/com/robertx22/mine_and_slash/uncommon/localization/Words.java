@@ -13,7 +13,9 @@ public enum Words implements IAutoLocName {
     CRAFT_FAILED("Craft Failed due to incorrect materials"),
     NO_ITEM_FOUND("\n- %1$s is missing"),
     NOT_ENOUGH_ITEM_FOUND("\n- %1$s needs %2$s items but you only inserted %3$s "),
-    OPTION_LOCKED("Option Locked Until Map Boss is Killed."),
+    OPTION_LOCKED_UNTIL_BOSS_KILLED("Option Locked Until Map Boss is Killed."),
+    MAP_IS_ALREADY_MAX_RARITY("Map is already at Maximum Rarity."),
+    NO_MAP_TO_UPGRADE("You don't have any map currently."),
 
     UPGRADE_MAP("Upgrade Map Rarity"),
     DOWNGRADE_MAP("Downgrade Map Rarity"),
