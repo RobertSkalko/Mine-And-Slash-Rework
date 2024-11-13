@@ -7,14 +7,17 @@ cloth_helmet
 cloth_pants
 crossbow
 epic
+epic_gem
 epic_jewel
 leather_boots
 leather_chest
 leather_helmet
 leather_pants
 legendary
+legendary_gem
 legendary_jewel
 mythic
+mythic_gem
 mythic_jewel
 necklace
 plate_boots
@@ -22,6 +25,7 @@ plate_chest
 plate_helmet
 plate_pants
 rare
+rare_gem
 rare_jewel
 ring
 shield

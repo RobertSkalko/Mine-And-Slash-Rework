@@ -4,13 +4,12 @@ import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.screens.map.MapSyncData;
 import com.robertx22.mine_and_slash.maps.MapData;
-import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
-import com.robertx22.mine_and_slash.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.TeamUtils;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.MapCompletePacket;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ClickEvent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -38,10 +37,9 @@ public class MapRarityRewardData {
             map.gave_boss_tp = true;
 
             for (Player p : TeamUtils.getOnlineMembers(player)) {
-                var stack = SlashItems.ARENA_TP.get().getDefaultInstance();
-                var name = Component.empty().append(stack.getDisplayName()).withStyle(ChatFormatting.DARK_PURPLE);
-                PlayerUtils.giveItem(stack, p);
-                p.sendSystemMessage(Chats.GIVEN_BOSS_ARENA_ITEM.locName(name).withStyle(ChatFormatting.RED));
+                p.sendSystemMessage(Chats.GIVEN_BOSS_ARENA_ITEM.locName()
+                        .setStyle(Style.EMPTY.withClickEvent(
+                                new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/mine_and_slash open map_gui"))).withStyle(ChatFormatting.RED));
             }
         }
 

@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.aoe_data.database.spells.impl;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import com.robertx22.mine_and_slash.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.PartBuilder;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.SpellBuilder;
@@ -11,7 +12,6 @@ import com.robertx22.mine_and_slash.mmorpg.registers.common.SlashEntities;
 import com.robertx22.mine_and_slash.tags.all.SpellTags;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.PlayStyle;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Items;
@@ -43,7 +43,7 @@ public class SongSpells implements ExileRegistryInit {
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.NOTE, 20D, 1D))
                 .build();
 
-        SpellBuilder.of(RITARDANDO, PlayStyle.INT, SpellConfiguration.Builder.instant(7, 15)
+        SpellBuilder.of(RITARDANDO, PlayStyle.INT, SpellConfiguration.Builder.instant(7, 100)
                                 .setSwingArm()
                                 .applyCastSpeedToCooldown(), "Ritardando",
                         Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.song, SpellTags.PHYSICAL))
@@ -60,7 +60,7 @@ public class SongSpells implements ExileRegistryInit {
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.NOTE, 20D, 3D))
                 .build();
 
-        SpellBuilder.of(RESONANCE, PlayStyle.INT, SpellConfiguration.Builder.multiCast(7, 20, 10, 3)
+        SpellBuilder.of(RESONANCE, PlayStyle.INT, SpellConfiguration.Builder.multiCast(7, 20, 30, 3)
                                 .setSwingArm().setChargesAndRegen("resonance", 3, 20 * 30)
                                 .applyCastSpeedToCooldown(), "Resonance",
                         Arrays.asList(SpellTags.projectile, SpellTags.area, SpellTags.damage, SpellTags.song, SpellTags.PHYSICAL))

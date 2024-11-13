@@ -173,7 +173,8 @@ public class SpellOnHotbarRender {
             if (disableKeyRender) {
                 txt = "";
             } else {
-                txt = "UNBOUND KEY";
+                //txt = "UNBOUND KEY";
+                txt = "";
             }
         }
         // todo renderScaledText doesnt do push and pop but does antiscale.. FIX THIS

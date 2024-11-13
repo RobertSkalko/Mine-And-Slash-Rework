@@ -265,6 +265,8 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
             }
             rightButtons.add(new MapScreen());
 
+        } else {
+            rightButtons.add(OpenGuiWrapper.openMapUpgradePicker());
         }
 
         List<INamedScreen> leftButtons = new ArrayList<>();

@@ -215,6 +215,19 @@ public class PlayerCommands {
 
         }, "Resets bonus points of player");
 
+        // for map chat click event
+        CommandBuilder.of(dis, x -> {
+
+            x.addLiteral("open", PermWrapper.ANY_PLAYER);
+            x.addLiteral("map_gui", PermWrapper.ANY_PLAYER);
+
+            x.action(e -> {
+                var p = e.getSource().getPlayer();
+                var type = OpenGuiPacket.GuiType.MAP_GUI;
+                Packets.sendToClient(p, new OpenGuiPacket(type));
+            });
+
+        }, "");
 
         CommandBuilder.of(dis, x -> {
             PlayerWrapper PLAYER = new PlayerWrapper();

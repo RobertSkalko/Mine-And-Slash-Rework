@@ -34,7 +34,7 @@ public class BonusExp extends Stat {
 
     @Override
     public String locNameForLangFile() {
-        return "Bonus Experience";
+        return "Experience Gain";
     }
 
     private static class SingletonHolder {

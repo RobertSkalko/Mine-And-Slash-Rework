@@ -44,6 +44,7 @@ public class MapsData {
 
         Load.player(player).map.clearMapAfterUpgrading();
 
+      
         if (!data.isUber()) {
             Load.player(player).map.map = data;
         }

@@ -17,7 +17,7 @@ public class RuneProphecy extends ProphecyStart {
 
     @Override
     public boolean acceptsModifier(ProphecyModifierType type) {
-        return true;
+        return false;
     }
 
     @Override

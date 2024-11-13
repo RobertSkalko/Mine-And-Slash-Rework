@@ -39,6 +39,8 @@ public class MapUpgradePacket extends MyPacket<MapUpgradePacket> {
         var can = option.canPick(p);
         if (can.can) {
             option.onPick(p);
+        } else {
+            p.sendSystemMessage(can.answer);
         }
         Load.player(ctx.getPlayer()).playerDataSync.setDirty();
     }

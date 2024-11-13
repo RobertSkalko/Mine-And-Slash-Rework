@@ -8,11 +8,7 @@ import com.robertx22.mine_and_slash.loot.blueprints.SkillGemBlueprint;
 import com.robertx22.mine_and_slash.saveclasses.skill_gem.SkillGemData;
 
 public class AuraGemProphecy extends ProphecyStart {
-    @Override
-    public boolean acceptsModifier(ProphecyModifierType type) {
-        return true;
-    }
-
+  
     @Override
     public ItemBlueprint create(int lvl, int tier) {
         var info = LootInfo.ofLevel(lvl);
@@ -20,6 +16,10 @@ public class AuraGemProphecy extends ProphecyStart {
         return new SkillGemBlueprint(info, SkillGemData.SkillGemType.AURA);
     }
 
+    @Override
+    public boolean acceptsModifier(ProphecyModifierType type) {
+        return type == ProphecyModifierType.SKILL_GEM_RARITY;
+    }
 
     @Override
     public String GUID() {

@@ -24,7 +24,8 @@ public class GearProphecy extends ProphecyStart {
 
     @Override
     public boolean acceptsModifier(ProphecyModifierType type) {
-        return true;
+        return type == ProphecyModifierType.GEAR_TYPE
+                || type == ProphecyModifierType.GEAR_RARITY;
     }
 
     @Override

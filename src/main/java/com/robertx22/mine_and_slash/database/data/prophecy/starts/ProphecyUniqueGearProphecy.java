@@ -29,7 +29,7 @@ public class ProphecyUniqueGearProphecy extends ProphecyStart {
 
     @Override
     public boolean acceptsModifier(ProphecyModifierType type) {
-        return false;
+        return type == ProphecyModifierType.GEAR_TYPE;
     }
 
     @Override

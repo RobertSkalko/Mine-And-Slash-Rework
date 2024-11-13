@@ -45,7 +45,7 @@ public class ServerContainer {
         LOG_ERRORS = b.define("log_errors", true);
         STOP_ERROR_SPAM = b.define("stop_error_spam", true);
         STATION_SUCK_NEARBY_CHESTS = b.define("STATION_SUCK_NEARBY_CHESTS", false);
-        MIN_LEVEL_MAP_DROPS = b.defineInRange("min_level_map_drops", 10, 0, Integer.MAX_VALUE);
+        MIN_LEVEL_MAP_DROPS = b.defineInRange("min_level_map_drops", 25, 0, Integer.MAX_VALUE);
         MIN_SLIME_SIZE_FOR_LOOT = b.defineInRange("MIN_SLIME_SIZE_FOR_LOOT", 3, 0, Integer.MAX_VALUE);
         DEATH_PENALTY_START_LEVEL = b.defineInRange("DEATH_PENALTY_START_LEVEL", 25, 0, Integer.MAX_VALUE);
         LEVEL_DISTANCE_PENALTY_LEEWAY = b.defineInRange("LEVEL_DISTANCE_PENALTY_LEEWAY", 2, 0, Integer.MAX_VALUE);
@@ -58,11 +58,11 @@ public class ServerContainer {
         MAX_EXP_DEBT_MULTI = b.defineInRange("max_death_exp_debt_multi", 1F, 0, 100);
         EXP_GAIN_MULTI = b.defineInRange("exp_gain_multi", 1D, 0, 1000);
         PARTY_RADIUS = b.defineInRange("party_radius", 200D, 0, 1000);
-        LEVEL_DISTANCE_PENALTY_PER_LVL = b.comment("When you are higher or lower level than mobs by X levels, decreases the loot and exp droprate.").defineInRange("lvl_distance_loot_penalty_per_level", 0.1D, 0, 1D);
+        LEVEL_DISTANCE_PENALTY_PER_LVL = b.comment("When you are higher or lower level than mobs by X levels, decreases the loot and exp droprate.").defineInRange("lvl_distance_loot_penalty_per_level", 0.2D, 0, 1D);
         LEVEL_DISTANCE_PENALTY_MIN_MULTI = b.defineInRange("min_loot_chance", 0.2D, 0, 1);
         EXTRA_MOB_STATS_PER_LEVEL = b.defineInRange("extra_mob_stats_per_lvl", 0.02D, 0, 1000);
         VANILLA_MOB_DMG_AS_EXILE_DMG = b.defineInRange("vanilla_mob_dmg_as_exile_dmg", 1D, 0, 1000);
-        PVP_DMG_MULTI = b.defineInRange("pvp_dmg_multi", 1D, 0, 1000);
+        PVP_DMG_MULTI = b.defineInRange("pvp_dmg_multi", 1D, 0, 10);
         MAX_TEAM_DISTANCE = b.defineInRange("max_team_distance", 75D, 0, 100000);
         MOB_DESPAWN_DISTANCE_IN_MAPS = b.comment("Distance needed from player to despawn mobs in maps, lower means more despawning")
                 .defineInRange("MOB_DESPAWN_DISTANCE_IN_MAPS", 30D, 5, 200);
@@ -78,8 +78,6 @@ public class ServerContainer {
 
         GEAR_DROPRATE = b.defineInRange("gear_drop_rate", 7D, 0, 1000);
         SOUl_DROPRATE = b.defineInRange("soul_drop_rate", 0.3D, 0, 1000);
-        MAP_DROPRATE = b.defineInRange("map_drop_rate", 1D, 0, 1000);
-        MAP_DROPRATE_INSIDE_MAPS = b.defineInRange("MAP_DROPRATE_INSIDE_MAPS", 0.5D, 0, 1000);
         GEM_DROPRATE = b.defineInRange("gem_drop_rate", 1D, 0, 1000);
         UBER_FRAG_DROPRATE = b.defineInRange("UBER_FRAG_DROP_RATE", 10D, 0, 1000);
         SKILL_GEM_DROPRATE = b.defineInRange("skill_gem_drop_rate", 3D, 0, 1000);
@@ -236,8 +234,6 @@ public class ServerContainer {
 
     public ForgeConfigSpec.DoubleValue GEAR_DROPRATE;
     public ForgeConfigSpec.DoubleValue SOUl_DROPRATE;
-    public ForgeConfigSpec.DoubleValue MAP_DROPRATE;
-    public ForgeConfigSpec.DoubleValue MAP_DROPRATE_INSIDE_MAPS;
     public ForgeConfigSpec.DoubleValue GEM_DROPRATE;
     public ForgeConfigSpec.DoubleValue UBER_FRAG_DROPRATE;
     public ForgeConfigSpec.DoubleValue SKILL_GEM_DROPRATE;

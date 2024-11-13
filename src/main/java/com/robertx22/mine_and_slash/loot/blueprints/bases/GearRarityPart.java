@@ -49,20 +49,11 @@ public class GearRarityPart extends BlueprintPart<GearRarity, ItemBlueprint> {
         }
 
         if (this.blueprint instanceof MapBlueprint) {
-
             var list = new ArrayList<GearRarity>();
             var rar = ExileDB.GearRarities().get(IRarity.COMMON_ID);
             list.add(rar);
-
-            if (blueprint.info.isMapWorld) {
-                while (rar.hasHigherRarity() && rar.getHigherRarity().item_tier <= this.blueprint.info.map.map.getRarity().item_tier) {
-                    rar = rar.getHigherRarity();
-                    list.add(rar);
-                }
-            }
             return list;
         }
-
 
         var filt = ExileDB.GearRarities().getFilterWrapped(x -> this.blueprint.info.level >= x.min_lvl);
 

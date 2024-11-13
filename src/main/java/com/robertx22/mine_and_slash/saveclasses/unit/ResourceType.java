@@ -1,7 +1,7 @@
 package com.robertx22.mine_and_slash.saveclasses.unit;
 
-import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.library_of_exile.registry.IGUID;
+import com.robertx22.mine_and_slash.capability.entity.EntityData;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +19,6 @@ public enum ResourceType implements IGUID {
         this.id = id;
         this.locname = locname;
     }
-
 
     public boolean isFull(EntityData data) {
         return data.getResources().get(data.getEntity(), this) >= data.getResources().getMax(data.getEntity(), this);

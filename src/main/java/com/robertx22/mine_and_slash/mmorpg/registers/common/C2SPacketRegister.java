@@ -8,6 +8,7 @@ import com.robertx22.mine_and_slash.characters.ToonActionPacket;
 import com.robertx22.mine_and_slash.characters.reworked_gui.ToonActionButton;
 import com.robertx22.mine_and_slash.gui.card_picker.MapUpgradeCard;
 import com.robertx22.mine_and_slash.gui.card_picker.MapUpgradePacket;
+import com.robertx22.mine_and_slash.gui.screens.map.MapTeleportPacket;
 import com.robertx22.mine_and_slash.gui.screens.stat_gui.RequestStatCalcInfoPacket;
 import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.prophecy.AcceptProphecyAffixPacket;
@@ -42,6 +43,7 @@ public class C2SPacketRegister {
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new RequestStatCalcInfoPacket(), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new LockRecipePacket(""), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new MapUpgradePacket(MapUpgradeCard.MapOption.DOWNGRADE), i++);
+        Packets.registerClientToServerPacket(MMORPG.NETWORK, new MapTeleportPacket(MapTeleportPacket.Type.TO_BOSS), i++);
 
 
         // Packets.registerClientToServerPacket(MMORPG.NETWORK, new SetupHotbarPacket(), i++);

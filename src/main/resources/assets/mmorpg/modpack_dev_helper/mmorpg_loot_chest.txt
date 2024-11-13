@@ -4,6 +4,5 @@ aura
 currency
 gear
 gem
-map
 rune
 support_gem

@@ -55,17 +55,23 @@ public class MapScreen extends BaseScreen implements INamedScreen, IAlertScreen 
 
         try {
 
+
+            var p = mc.player;
+
             ItemStack stack = SlashItems.MAP.get().getDefaultInstance();
             getData().data.map.saveToStack(stack);
 
+            var rar = getData().data.map.getRarity();
+
+            var canBoss = getData().data.canTeleportToArena(p).can;
+
+            addRenderableWidget(new MapRarityButton(getData(), guiLeft + sizeX / 2 - MapRarityButton.SIZE / 2, guiTop + 5));
             addRenderableWidget(new ItemButton(stack, guiLeft + 56, guiTop + 58));
             addRenderableWidget(new MapBarButton(MapCompletePacket.SYNCED_DATA, guiLeft + 11, guiTop + 207));
 
-            //    addRenderableWidget(new LeftRightButton(this, guiLeft + 100 - LeftRightButton.xSize - 5, guiTop + 25 - LeftRightButton.ySize / 2, true));
-            //    addRenderableWidget(new LeftRightButton(this, guiLeft + 150 + 5, guiTop + 25 - LeftRightButton.ySize / 2, false));
-
-            // addRenderableWidget(new PointsDisplayButton(PlayerPointsType.SPELLS, guiLeft + 8, guiTop + 206));
-            // addRenderableWidget(new PointsDisplayButton(PlayerPointsType.PASSIVES, guiLeft + 148, guiTop + 206));
+            if (canBoss) {
+                addRenderableWidget(new TeleportBossButton(guiLeft + (sizeX / 2) - TeleportBossButton.WIDTH / 2, guiTop + sizeY + 3));
+            }
 
 
         } catch (Exception e) {
@@ -87,9 +93,6 @@ public class MapScreen extends BaseScreen implements INamedScreen, IAlertScreen 
                 max = size;
             }
         }
-
-
-        // test todo
         gui.drawWordWrap(mc.font, tip, x - max / 2, y, maxWidth, ChatFormatting.RED.getColor());
     }
 
@@ -116,7 +119,6 @@ public class MapScreen extends BaseScreen implements INamedScreen, IAlertScreen 
             mnsRenderBG(gui);
 
             gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-            // gui.blit(currentSchool().getIconLoc(), guiLeft + 107, guiTop + 8, 36, 36, 36, 36, 36, 36);
 
             // background
             gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);

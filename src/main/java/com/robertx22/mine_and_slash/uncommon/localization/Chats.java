@@ -7,6 +7,7 @@ import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
     BOSS_ARENA_UNLOCKED("Boss Arena: Open"),
+    ALREADY_IN_ARENA("You are already inside the Boss Arena"),
     BOSS_KILLED("Boss already Killed"),
     BOSS_LOCKED("Boss Arena: Locked until Map is %1$s Explored"),
     MAP_EXPLORATION_RARITY("%1$s Map Exploration %2$s"),
@@ -92,7 +93,7 @@ public enum Chats implements IAutoLocName {
     INFUSES_STATS("Infuses stats into blank gear."),
     RIGHT_CLICK_TO_GEN_ITEM("You can also right-click to generate an item."),
     MAP_COMPLETE_RARITY_UPGRADE("Your Map Exploration is now %1$s"),
-    GIVEN_BOSS_ARENA_ITEM("Your exploration of the map has yielded results. %1$s can now be used to teleport to the Boss Arena."),
+    GIVEN_BOSS_ARENA_ITEM("Your exploration of the map has yielded results. Click to open the Map gui from where you can teleport to the Boss Arena."),
 
     REQ_LVL("Required Level: %1$s"),
     ONLY_ONE_OF_TYPE("Can only have one Perk of this type:"),

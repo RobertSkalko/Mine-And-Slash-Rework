@@ -71,6 +71,7 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
     }
 
 
+    // this can run on client
     public List<TooltipStatWithContext> getAllStatsWithCtx(ExileStack ex) {
         List<TooltipStatWithContext> list = new ArrayList<>();
 
@@ -97,9 +98,16 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
 
         List<ExactStatData> baseStats = new ArrayList<>();
 
-        for (TooltipStatWithContext c : getAllStatsWithCtx(stack)) {
-            baseStats.add(c.mod.ToExactStat(c.statinfo.percent, c.level));
-        }
+        int p = (int) (this.p * gear.getQualityBaseStatsMulti(stack));
+
+        int lvl = gear.lvl;
+
+        gear.GetBaseGearType().baseStats()
+                .forEach(x -> {
+                    ExactStatData exact = x.ToExactStat(p, lvl);
+                    baseStats.add(exact);
+                });
+
 
         try {
             var list = gear.GetAllStatContainersExceptBase();

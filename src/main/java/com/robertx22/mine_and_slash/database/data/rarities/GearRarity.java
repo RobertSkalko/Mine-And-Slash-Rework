@@ -166,6 +166,13 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
 
     }
 
+    public ResourceLocation getMapIconTexture() {
+
+        return SlashRef.guiId("map/rarity/" + GUID());
+
+    }
+
+
     public boolean isHigherThan(GearRarity other) {
         return this.item_tier > other.item_tier;
     }

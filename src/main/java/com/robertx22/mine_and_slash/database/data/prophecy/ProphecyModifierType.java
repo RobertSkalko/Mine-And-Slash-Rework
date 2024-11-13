@@ -5,7 +5,7 @@ import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.loot.blueprints.GearBlueprint;
 import com.robertx22.mine_and_slash.loot.blueprints.ItemBlueprint;
 import com.robertx22.mine_and_slash.loot.blueprints.JewelBlueprint;
-import com.robertx22.mine_and_slash.loot.blueprints.RarityItemBlueprint;
+import com.robertx22.mine_and_slash.loot.blueprints.SkillGemBlueprint;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.MutableComponent;
 
@@ -58,6 +58,31 @@ public enum ProphecyModifierType {
             return b instanceof JewelBlueprint;
         }
     },
+    SKILL_GEM_RARITY() {
+        @Override
+        public MutableComponent getTooltip(String data) {
+            var rar = ExileDB.GearRarities().get(data);
+            return rar.locName().withStyle(rar.textFormatting());
+        }
+
+        @Override
+        public float chanceToSpawn() {
+            return 75;
+        }
+
+        @Override
+        public void set(ItemBlueprint b, String data) {
+            if (b instanceof SkillGemBlueprint gb) {
+                gb.rarity.set(ExileDB.GearRarities().get(data));
+            }
+        }
+
+        @Override
+        public boolean canApplyTo(ProphecyStart start, ItemBlueprint b) {
+            return b instanceof SkillGemBlueprint;
+        }
+    },
+
 
     GEAR_RARITY() {
         @Override
@@ -73,14 +98,14 @@ public enum ProphecyModifierType {
 
         @Override
         public void set(ItemBlueprint b, String data) {
-            if (b instanceof RarityItemBlueprint gb) {
+            if (b instanceof GearBlueprint gb) {
                 gb.rarity.set(ExileDB.GearRarities().get(data));
             }
         }
 
         @Override
         public boolean canApplyTo(ProphecyStart start, ItemBlueprint b) {
-            return b instanceof RarityItemBlueprint;
+            return b instanceof GearBlueprint;
         }
     };
 

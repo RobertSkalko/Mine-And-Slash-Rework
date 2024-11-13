@@ -37,20 +37,6 @@ public class TpBackItem extends AutoItem implements IShapedRecipe {
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player p, InteractionHand pUsedHand) {
         ItemStack itemstack = p.getItemInHand(pUsedHand);
 
-        if (WorldUtils.isMapWorldClass(pLevel)) {
-
-            // todo
-            /*
-            if (MMORPG.RUN_DEV_TOOLS_REMOVE_WHEN_DONE) {
-                if (pLevel.isClientSide) {
-                    OpenGuiWrapper.openMapScreen();
-                }
-                return InteractionResultHolder.success(p.getItemInHand(pUsedHand));
-            }
-
-             */
-        }
-
         if (!pLevel.isClientSide) {
 
             if (WorldUtils.isMapWorldClass(pLevel)) {

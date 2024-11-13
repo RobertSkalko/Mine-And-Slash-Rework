@@ -207,43 +207,46 @@ public class OnServerTick {
 
                 playerData.spellCastingData.charges.onTicks(player, 20);
 
-
-                if (!ResourceType.mana.isFull(unitdata)) {
-                    RestoreResourceEvent mana = EventBuilder.ofRestore(player, player, ResourceType.mana, RestoreType.regen, 0)
-                            .build();
-                    mana.Activate();
-                }
-
-                if (!player.isBlocking()) {
-                    if (!ResourceType.energy.isFull(unitdata)) {
-                        RestoreResourceEvent energy = EventBuilder.ofRestore(player, player, ResourceType.energy, RestoreType.regen, 0)
-                                .build();
-                        energy.Activate();
-                    }
+                if (player.getY() < (double) (player.level().getMinBuildHeight() - 64)) {
+                    // if player is in the void bellow the world, stop regen
                 } else {
-                    if (unitdata.getResources().getEnergy() < 1) {
-                        player.getCooldowns().addCooldown(player.getOffhandItem().getItem(), 20 * 3);
-                        player.getCooldowns().addCooldown(player.getMainHandItem().getItem(), 20 * 3);
-                        player.stopUsingItem();
-                    }
-                }
 
-                if (!ResourceType.magic_shield.isFull(unitdata)) {
-                    RestoreResourceEvent msevent = EventBuilder.ofRestore(player, player, ResourceType.magic_shield, RestoreType.regen, 0)
-                            .build();
-                    msevent.Activate();
-                }
-
-                boolean canHeal = player.getFoodData().getFoodLevel() >= 1;
-
-                if (canHeal) {
-                    if (true) { //if (player.getHealth() < player.getMaxHealth()) {
-                        RestoreResourceEvent hpevent = EventBuilder.ofRestore(player, player, ResourceType.health, RestoreType.regen, 0)
+                    if (!ResourceType.mana.isFull(unitdata)) {
+                        RestoreResourceEvent mana = EventBuilder.ofRestore(player, player, ResourceType.mana, RestoreType.regen, 0)
                                 .build();
-                        hpevent.Activate();
+                        mana.Activate();
+                    }
+
+                    if (!player.isBlocking()) {
+                        if (!ResourceType.energy.isFull(unitdata)) {
+                            RestoreResourceEvent energy = EventBuilder.ofRestore(player, player, ResourceType.energy, RestoreType.regen, 0)
+                                    .build();
+                            energy.Activate();
+                        }
+                    } else {
+                        if (unitdata.getResources().getEnergy() < 1) {
+                            player.getCooldowns().addCooldown(player.getOffhandItem().getItem(), 20 * 3);
+                            player.getCooldowns().addCooldown(player.getMainHandItem().getItem(), 20 * 3);
+                            player.stopUsingItem();
+                        }
+                    }
+
+                    if (!ResourceType.magic_shield.isFull(unitdata)) {
+                        RestoreResourceEvent msevent = EventBuilder.ofRestore(player, player, ResourceType.magic_shield, RestoreType.regen, 0)
+                                .build();
+                        msevent.Activate();
+                    }
+
+                    boolean canHeal = player.getFoodData().getFoodLevel() >= 1;
+
+                    if (canHeal) {
+                        if (true) { //if (player.getHealth() < player.getMaxHealth()) {
+                            RestoreResourceEvent hpevent = EventBuilder.ofRestore(player, player, ResourceType.health, RestoreType.regen, 0)
+                                    .build();
+                            hpevent.Activate();
+                        }
                     }
                 }
-
 
             }
 

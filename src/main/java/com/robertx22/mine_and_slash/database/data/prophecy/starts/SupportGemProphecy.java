@@ -17,7 +17,7 @@ public class SupportGemProphecy extends ProphecyStart {
 
     @Override
     public boolean acceptsModifier(ProphecyModifierType type) {
-        return true;
+        return type == ProphecyModifierType.SKILL_GEM_RARITY;
     }
 
     @Override

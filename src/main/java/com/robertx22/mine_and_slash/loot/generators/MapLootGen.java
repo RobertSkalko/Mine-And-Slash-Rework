@@ -15,12 +15,16 @@ public class MapLootGen extends BaseLootGen<MapBlueprint> {
 
     @Override
     public float baseDropChance() {
+        return 0;
+        /*
         if (this.info.isMapWorld) {
             return ServerContainer.get().MAP_DROPRATE_INSIDE_MAPS.get().floatValue();
 
         } else {
             return ServerContainer.get().MAP_DROPRATE.get().floatValue();
         }
+
+         */
 
     }
 

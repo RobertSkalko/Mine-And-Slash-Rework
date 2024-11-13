@@ -89,10 +89,9 @@ public class PlayerProfessionsData {
 
         public void levelUp() {
             int needExp = getExpNeeded();
-            while (exp >= needExp) {
+            if (exp >= needExp) {
                 exp -= needExp;
                 lvl++;
-                needExp = getExpNeeded();
             }
         }
     }

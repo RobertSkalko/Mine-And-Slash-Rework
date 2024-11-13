@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.aoe_data.database.spells.impl;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.PartBuilder;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.SpellCalcs;
@@ -12,7 +13,6 @@ import com.robertx22.mine_and_slash.mmorpg.registers.common.SlashEntities;
 import com.robertx22.mine_and_slash.tags.all.SpellTags;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.PlayStyle;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Items;
@@ -45,5 +45,6 @@ public class TestSpells implements ExileRegistryInit {
                 .onHit(PartBuilder.aoeParticles(ParticleTypes.SMOKE, 5D, 0.5D))
 
                 .build();
+
     }
 }

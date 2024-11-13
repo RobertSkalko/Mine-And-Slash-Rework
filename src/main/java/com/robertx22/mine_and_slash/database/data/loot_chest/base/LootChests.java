@@ -6,15 +6,12 @@ public class LootChests {
 
     public static void init() {
 
-
         new CurrencyLootChest().registerToExileRegistry();
         new GearLootChest().registerToExileRegistry();
-        new MapLootChest().registerToExileRegistry();
         new AuraLootChest().registerToExileRegistry();
         new SupportLootChest().registerToExileRegistry();
         new GemLootChest().registerToExileRegistry();
         new RuneLootChest().registerToExileRegistry();
 
-      
     }
 }

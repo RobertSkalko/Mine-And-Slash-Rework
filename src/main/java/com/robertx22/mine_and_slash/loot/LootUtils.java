@@ -24,6 +24,8 @@ public class LootUtils {
 
         if (num <= leeway) {
             return 1;
+        } else {
+            num -= leeway;
         }
 
         float multi = (float) (1F - num * ServerContainer.get().LEVEL_DISTANCE_PENALTY_PER_LVL.get());

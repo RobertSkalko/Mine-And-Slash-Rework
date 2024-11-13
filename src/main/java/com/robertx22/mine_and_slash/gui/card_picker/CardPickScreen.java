@@ -13,10 +13,14 @@ public class CardPickScreen extends BaseScreen implements INamedScreen {
     List<ICard> cards;
 
     static int spacing = 5;
+    Words word;
+    String icon;
 
-    public CardPickScreen(List<ICard> cards) {
+    public CardPickScreen(List<ICard> cards, Words word, String icon) {
         super((CardPickButton.SIZE_X + spacing) * 3, CardPickButton.SIZE_Y);
         this.cards = cards;
+        this.word = word;
+        this.icon = icon;
     }
 
     @Override
@@ -36,12 +40,12 @@ public class CardPickScreen extends BaseScreen implements INamedScreen {
 
     @Override
     public ResourceLocation iconLocation() {
-        return new ResourceLocation(SlashRef.MODID, "textures/gui/main_hub/icons/prophecy.png");
+        return new ResourceLocation(SlashRef.MODID, "textures/gui/main_hub/icons/" + icon + ".png");
     }
 
     @Override
     public Words screenName() {
-        return Words.PROPHECIES;
+        return word;
     }
 
 }

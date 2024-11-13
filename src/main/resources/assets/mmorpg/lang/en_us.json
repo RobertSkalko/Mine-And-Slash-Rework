@@ -189,7 +189,6 @@
 	"mmorpg.item_tips.alt_tip": "[Alt]: Desc",
 	"mmorpg.item_tips.augment_explanation": "Enhances Player stats when equipped.",
 	"mmorpg.item_tips.aura_reservation": "Aura Reservation: ",
-	"mmorpg.item_tips.boss_teleport_item": "Right click to enter Boss Arena\nKilling the Boss unlocks the reward room\nRewards are based on your map exploration percent.\n\nTo get More rewards, complete more of the map before entering the boss room.",
 	"mmorpg.item_tips.buff_consumable_duration_minutes": "Duration: %1$s minutes",
 	"mmorpg.item_tips.buff_consumable_info": "You can have One Consumable active per each type:\nElixirs, Meals and Seafoods.",
 	"mmorpg.item_tips.buff_consumable_type": "%1$s Consumable",
@@ -220,6 +219,7 @@
 	"mmorpg.item_tips.level_tip": "Level %1$s",
 	"mmorpg.item_tips.loot": "Bonus Loot: %1$s%%",
 	"mmorpg.item_tips.loot_chest_key_desc": "Used to unlock Loot chests obtained from the Fishing Profession.",
+	"mmorpg.item_tips.map_creator_item": "Creates a Fresh Common Adventure Map",
 	"mmorpg.item_tips.map_league_spawn": "Can Spawn: ",
 	"mmorpg.item_tips.map_tier_tip": "Map tier indicate the difficulty and loot quality of this map",
 	"mmorpg.item_tips.need_key": "Needs %1$s ",
@@ -285,7 +285,6 @@
 	"mmorpg.profession.husbandry": "Animal Breeding",
 	"mmorpg.profession.mining": "Mining",
 	"mmorpg.profession.salvaging": "Salvaging",
-	"item.mmorpg.arena_teleport": "Boss Arena Teleport Scroll",
 	"item.mmorpg.chest.common_gear": "Loot Chest",
 	"item.mmorpg.chest.currency": "Loot Chest",
 	"item.mmorpg.chest.epic_gear": "Loot Chest",
@@ -331,6 +330,7 @@
 	"item.mmorpg.keys.4": "Legendary Key",
 	"item.mmorpg.keys.5": "Mythic Key",
 	"item.mmorpg.leather_set": "Leather-Armor Soul Modifier",
+	"item.mmorpg.map_creator": "Adventure Map Creator",
 	"item.mmorpg.master_bag": "\u00A75Master Backpack",
 	"item.mmorpg.material.farming.0": "Spiritual Produce",
 	"item.mmorpg.material.farming.1": "Celestial Produce",
@@ -1119,7 +1119,7 @@
 	"mmorpg.stat.blood_on_kill": "Leech Blood on Kill",
 	"mmorpg.stat.blood_per_10_strength": "\u00A7a[VAL1] \u00A74\u2764 Blood\u00A77 per 10 \u00A7b\u2605 Strength\u00A77",
 	"mmorpg.stat.blood_user": "\u00A77You now use \u00A74\u2764 Blood\u00A77 instead of \u00A79\u262F Mana\u00A77",
-	"mmorpg.stat.bonus_exp": "Bonus Experience",
+	"mmorpg.stat.bonus_exp": "Experience Gain",
 	"mmorpg.stat.bow_damage": "Bow Damage",
 	"mmorpg.stat.buff_cast_time": "Buff Cast Time",
 	"mmorpg.stat.buff_cdr": "Buff Spell Cooldown Reduction",
@@ -1942,6 +1942,7 @@
 
 	"mmorpg.chat.already_casting": "Already Casting a Spell",
 	"mmorpg.chat.already_has_soul": "Item Already has a Soul.",
+	"mmorpg.chat.already_in_arena": "You are already inside the Boss Arena",
 	"mmorpg.chat.already_max_links": "Item already has maximum possible links.",
 	"mmorpg.chat.already_max_sockets": "Item already has maximum possible sockets.",
 	"mmorpg.chat.alt_to_show_other_spell": "Press [Alt] to show the other Spell",
@@ -1989,7 +1990,7 @@
 	"mmorpg.chat.gear_drop": "You do not meet the requirements of that item.",
 	"mmorpg.chat.gear_no_potential": "Gear Has no remaining potential and Can't be crafted any further. Note, you can still use currencies that cost 0 potential to craft, like gems, runes etc.",
 	"mmorpg.chat.gem_socketed": "Gem Socketed",
-	"mmorpg.chat.given_boss_arena_item": "Your exploration of the map has yielded results. %1$s can now be used to teleport to the Boss Arena.",
+	"mmorpg.chat.given_boss_arena_item": "Your exploration of the map has yielded results. Click to open the Map gui from where you can teleport to the Boss Arena.",
 	"mmorpg.chat.how_to_enable_command_block": "To enable go to your server.properties file and put enable-command-block as true.",
 	"mmorpg.chat.infuses_stats": "Infuses stats into blank gear.",
 	"mmorpg.chat.item_aquired_through_league": "This item is obtainable through the Specified League content.",
@@ -2746,6 +2747,7 @@
 	"mmorpg.word.map": "Map",
 	"mmorpg.word.map_is_already_max_rarity": "Map is already at Maximum Rarity.",
 	"mmorpg.word.map_res_req_lack_dmg_multi": "Player Lacking Map Resist Requirement DMG-Multi",
+	"mmorpg.word.map_upgrade": "Map Upgrading",
 	"mmorpg.word.mapdesc": "Items used to travel to a Dungeon Dimension using the Map Device.",
 	"mmorpg.word.maps": "Maps",
 	"mmorpg.word.max_charges": "Max Charges: %1$s",
@@ -2837,6 +2839,7 @@
 	"mmorpg.word.tags": "Tags: ",
 	"mmorpg.word.talents": "Talents",
 	"mmorpg.word.target": "Target",
+	"mmorpg.word.teleport_to_boss": "Enter Boss Arena!",
 	"mmorpg.word.this_is_not_a": "This is not a %1$s",
 	"mmorpg.word.tier": "Tier",
 	"mmorpg.word.title_feature_aggro_summons": "Aggressive Summons",
@@ -2875,18 +2878,6 @@
 "_comment": " [CATEGORY]: WORDS - NAMES",
 
 
-"_comment": " [CATEGORY]: CHAOS STAT - NAMES",
-
-	"mmorpg.chaos_stat.normal_high": "Ascended",
-	"mmorpg.chaos_stat.normal_low": "Upgraded",
-	"mmorpg.chaos_stat.normal_med": "Elevated",
-	"mmorpg.chaos_stat.unique_high": "Ascended",
-	"mmorpg.chaos_stat.unique_low": "Upgraded",
-	"mmorpg.chaos_stat.unique_med": "Elevated",
-
-"_comment": " [CATEGORY]: CHAOS STAT - NAMES",
-
-
 "_comment": " [CATEGORY]: OMENS - NAMES",
 
 	"mmorpg.omen.blood": "Omen of Blood",
@@ -2899,6 +2890,18 @@
 	"mmorpg.omen.waves": "Omen of Waves",
 
 "_comment": " [CATEGORY]: OMENS - NAMES",
+
+
+"_comment": " [CATEGORY]: CHAOS STAT - NAMES",
+
+	"mmorpg.chaos_stat.normal_high": "Ascended",
+	"mmorpg.chaos_stat.normal_low": "Upgraded",
+	"mmorpg.chaos_stat.normal_med": "Elevated",
+	"mmorpg.chaos_stat.unique_high": "Ascended",
+	"mmorpg.chaos_stat.unique_low": "Upgraded",
+	"mmorpg.chaos_stat.unique_med": "Elevated",
+
+"_comment": " [CATEGORY]: CHAOS STAT - NAMES",
 
 
 "_comment": " [CATEGORY]: LOOTMODIFIER - NAMES",
