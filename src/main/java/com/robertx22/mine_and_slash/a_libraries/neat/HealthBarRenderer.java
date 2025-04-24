@@ -210,7 +210,6 @@ public class HealthBarRenderer {
                     .sorted((x, y) -> -Integer.compare(x.getValue(), y.getValue()))
                     .map(Pair::getLeft)
                     .filter(x -> x.location() == null)
-                    .peek(x -> System.out.println("found one!"))
                     .collect(Collectors.toCollection(ArrayList::new));
         }
         return Collections.EMPTY_LIST;
@@ -338,7 +337,7 @@ public class HealthBarRenderer {
         poseStack.popPose(); // Remove globalScale
 
         // Icons
-        {
+        if (!icons.isEmpty()){
             final int size = 8;
             final float iconInterval = size * 0.2f;
             poseStack.pushPose();
