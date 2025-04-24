@@ -8,7 +8,7 @@ import java.util.Locale;
 public enum Formatter implements IAutoLocName {
 
     //BASIC_STAT_FORMAT("%1$s %2$s %3$s"), todo the stat code is too messy to edit currently
-
+    MOB_NAME_TEMPLATE("Lvl %1$s %2$s %3$s %4$s %5$s"),
     UNIQUE_NAME_FORMAT("%1$s %2$s"),
     GEM_ITEM_NAME("%1$s %2$s", "Use to control the order and space of gem item name, like \"(cracked) (ruby)\""),
     BUFF_CONSUMPTIONS_NAME("%1$s %2$s %3$s", "control the order and space of buff consumption."),

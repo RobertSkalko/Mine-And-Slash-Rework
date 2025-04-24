@@ -2,22 +2,23 @@ package com.robertx22.mine_and_slash.a_libraries.neat;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 import com.robertx22.library_of_exile.util.UNICODE;
-import com.robertx22.library_of_exile.utils.CLOC;
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.database.data.mob_affixes.MobAffix;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
+import com.robertx22.mine_and_slash.uncommon.localization.Formatter;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.HealthUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.language.I18n;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
@@ -27,20 +28,22 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.scores.Team;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.tuple.Pair;
+import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 
 import java.text.DecimalFormat;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -48,6 +51,10 @@ import java.util.stream.Collectors;
 public class HealthBarRenderer {
 
     private static final DecimalFormat HEALTH_FORMAT = new DecimalFormat("#.##");
+    private static final TagKey<EntityType<?>> FORGE_BOSS_TAG =
+            TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("forge", "bosses"));
+    private static final TagKey<EntityType<?>> FABRIC_BOSS_TAG =
+            TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("c", "bosses"));
 
     private static Entity getEntityLookedAt(Entity e) {
         Entity foundEntity = null;
@@ -138,12 +145,6 @@ public class HealthBarRenderer {
         }
     }
 
-    private static final TagKey<EntityType<?>> FORGE_BOSS_TAG =
-            TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("forge", "bosses"));
-
-    private static final TagKey<EntityType<?>> FABRIC_BOSS_TAG =
-            TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("c", "bosses"));
-
     private static boolean isBoss(Entity entity) {
         return entity.getType().is(FORGE_BOSS_TAG) || entity.getType().is(FABRIC_BOSS_TAG);
     }
@@ -201,13 +202,18 @@ public class HealthBarRenderer {
         return visible;
     }
 
-    static List<ItemStack> getIcons(Entity e) {
+    static List<EffectIcon> getIcons(Entity e) {
 
         if (e instanceof LivingEntity en) {
             return Load.Unit(en).getStatusEffectsData().exileMap.entrySet().stream()
-                    .map(x -> new ItemStack(ExileDB.ExileEffects().get(x.getKey()).getEffectDisplayItem(), x.getValue().stacks)).collect(Collectors.toList());
+                    .map(x -> Pair.of(EffectIcon.of(ExileDB.ExileEffects().get(x.getKey()).getTexture(), x.getValue().stacks), x.getValue().ticks_left))
+                    .sorted((x, y) -> -Integer.compare(x.getValue(), y.getValue()))
+                    .map(Pair::getLeft)
+                    .filter(x -> x.location() == null)
+                    .peek(x -> System.out.println("found one!"))
+                    .collect(Collectors.toCollection(ArrayList::new));
         }
-        return Arrays.asList();
+        return Collections.EMPTY_LIST;
 
     }
 
@@ -231,68 +237,33 @@ public class HealthBarRenderer {
         final int barHeight = NeatConfig.instance.barHeight();
         final boolean boss = isBoss(living);
 
-        List<ItemStack> icons = getIcons(entity);
+        List<EffectIcon> icons = getIcons(entity);
 
-        int lvl = Load.Unit(living).getLevel();
-        int playerlvl = Load.Unit(mc.player).getLevel();
-        int diffabove = lvl - playerlvl;
+        MutableComponent name = getNameString(entity, living, mc);
 
-        String lvltext = "Lvl " + lvl;
-
-        if (entity instanceof Player == false && diffabove > ServerContainer.get().LEVEL_DISTANCE_SKULL_SHOW.get()) {
-            if (ServerContainer.get().SKULL_HIDES_LEVEL.get()) {
-                lvltext = "Lvl " + ChatFormatting.RED + UNICODE.SKULL;
-            } else {
-                lvltext = "Lvl " + lvl + " " + ChatFormatting.RED + UNICODE.SKULL;
-            }
-        }
-
-        String prefix = "";
-        String suffix = "";
-
-        for (MobAffix affix : Load.Unit(entity).getAffixData().getAffixes()) {
-
-            if (affix.type.isPrefix()) {
-
-                prefix += CLOC.translate(affix.locName());
-            } else {
-
-                suffix += CLOC.translate(affix.locName());
-
-            }
-        }
-
-        String rar = I18n.get(Load.Unit(living).getMobRarity().locName().getString());
-
-        ChatFormatting color = Load.Unit(living).getMobRarity().textFormatting();
-
-        if (living instanceof Player) {
-            rar = "";
-            color = ChatFormatting.RED;
-        }
-
-        String name = ChatFormatting.YELLOW + lvltext + " " + color + rar + " " + prefix + " " + living.getDisplayName().getString() + " " + suffix;
-
-        final float nameLen = (mc.font.width(name) + (icons.size() * 5)) * textScale;
+        final float nameLen = (mc.font.width(name.getString()) + (icons.size() * 5)) * textScale;
         final float halfSize = Math.max(NeatConfig.instance.plateSize(), nameLen / 2.0F + 10.0F);
 
         poseStack.pushPose();
+        //System.out.println(living.getBbHeight());
+        //System.out.println(NeatConfig.instance.heightAbove());
         poseStack.translate(0, living.getBbHeight() + NeatConfig.instance.heightAbove(), 0);
         poseStack.mulPose(cameraOrientation);
 
         // Plate background, bars, and text operate with globalScale, but icons don't
         poseStack.pushPose();
         poseStack.scale(-globalScale, -globalScale, globalScale);
-
+        RenderType renderType = NeatRenderType.getHealthBarType();
+        float padding = NeatConfig.instance.backgroundPadding();
+        int bgHeight = NeatConfig.instance.backgroundHeight();
         // Background
         if (NeatConfig.instance.drawBackground()) {
-            float padding = NeatConfig.instance.backgroundPadding();
-            int bgHeight = NeatConfig.instance.backgroundHeight();
-            VertexConsumer builder = buffers.getBuffer(NeatRenderType.BAR_TEXTURE_TYPE);
-            builder.vertex(poseStack.last().pose(), -halfSize - padding, -bgHeight, 0.01F).color(0, 0, 0, 64).uv(0.0F, 0.0F).uv2(light).endVertex();
-            builder.vertex(poseStack.last().pose(), -halfSize - padding, barHeight + padding, 0.01F).color(0, 0, 0, 64).uv(0.0F, 0.5F).uv2(light).endVertex();
-            builder.vertex(poseStack.last().pose(), halfSize + padding, barHeight + padding, 0.01F).color(0, 0, 0, 64).uv(1.0F, 0.5F).uv2(light).endVertex();
-            builder.vertex(poseStack.last().pose(), halfSize + padding, -bgHeight, 0.01F).color(0, 0, 0, 64).uv(1.0F, 0.0F).uv2(light).endVertex();
+
+            VertexConsumer builder = buffers.getBuffer(renderType);
+            builder.vertex(poseStack.last().pose(), -halfSize - padding, -bgHeight, 0.01F).color(0, 0, 0, 64).uv(0.0F, 0.0F).endVertex();
+            builder.vertex(poseStack.last().pose(), -halfSize - padding, barHeight + padding, 0.01F).color(0, 0, 0, 64).uv(0.0F, 0.5F).endVertex();
+            builder.vertex(poseStack.last().pose(), halfSize + padding, barHeight + padding, 0.01F).color(0, 0, 0, 64).uv(1.0F, 0.5F).endVertex();
+            builder.vertex(poseStack.last().pose(), halfSize + padding, -bgHeight, 0.01F).color(0, 0, 0, 64).uv(1.0F, 0.0F).endVertex();
         }
 
         // Health Bar
@@ -306,18 +277,18 @@ public class HealthBarRenderer {
             float maxHealth = Math.max(living.getHealth(), living.getMaxHealth());
             float healthHalfSize = halfSize * (living.getHealth() / maxHealth);
 
-            VertexConsumer builder = buffers.getBuffer(NeatRenderType.BAR_TEXTURE_TYPE);
-            builder.vertex(poseStack.last().pose(), -halfSize, 0, 0.001F).color(r, g, b, 127).uv(0.0F, 0.75F).uv2(light).endVertex();
-            builder.vertex(poseStack.last().pose(), -halfSize, barHeight, 0.001F).color(r, g, b, 127).uv(0.0F, 1.0F).uv2(light).endVertex();
-            builder.vertex(poseStack.last().pose(), -halfSize + 2 * healthHalfSize, barHeight, 0.001F).color(r, g, b, 127).uv(1.0F, 1.0F).uv2(light).endVertex();
-            builder.vertex(poseStack.last().pose(), -halfSize + 2 * healthHalfSize, 0, 0.001F).color(r, g, b, 127).uv(1.0F, 0.75F).uv2(light).endVertex();
+            VertexConsumer builder = buffers.getBuffer(renderType);
+            builder.vertex(poseStack.last().pose(), -halfSize, 0, 0.001F).color(r, g, b, 127).uv(0.0F, 0.75F).endVertex();
+            builder.vertex(poseStack.last().pose(), -halfSize, barHeight, 0.001F).color(r, g, b, 127).uv(0.0F, 1.0F).endVertex();
+            builder.vertex(poseStack.last().pose(), -halfSize + 2 * healthHalfSize, barHeight, 0.001F).color(r, g, b, 127).uv(1.0F, 1.0F).endVertex();
+            builder.vertex(poseStack.last().pose(), -halfSize + 2 * healthHalfSize, 0, 0.001F).color(r, g, b, 127).uv(1.0F, 0.75F).endVertex();
 
             // Blank part of the bar
             if (healthHalfSize < halfSize) {
-                builder.vertex(poseStack.last().pose(), -halfSize + 2 * healthHalfSize, 0, 0.001F).color(0, 0, 0, 127).uv(0.0F, 0.5F).uv2(light).endVertex();
-                builder.vertex(poseStack.last().pose(), -halfSize + 2 * healthHalfSize, barHeight, 0.001F).color(0, 0, 0, 127).uv(0.0F, 0.75F).uv2(light).endVertex();
-                builder.vertex(poseStack.last().pose(), halfSize, barHeight, 0.001F).color(0, 0, 0, 127).uv(1.0F, 0.75F).uv2(light).endVertex();
-                builder.vertex(poseStack.last().pose(), halfSize, 0, 0.001F).color(0, 0, 0, 127).uv(1.0F, 0.5F).uv2(light).endVertex();
+                builder.vertex(poseStack.last().pose(), -halfSize + 2 * healthHalfSize, 0, 0.001F).color(0, 0, 0, 127).uv(0.0F, 0.5F).endVertex();
+                builder.vertex(poseStack.last().pose(), -halfSize + 2 * healthHalfSize, barHeight, 0.001F).color(0, 0, 0, 127).uv(0.0F, 0.75F).endVertex();
+                builder.vertex(poseStack.last().pose(), halfSize, barHeight, 0.001F).color(0, 0, 0, 127).uv(1.0F, 0.75F).endVertex();
+                builder.vertex(poseStack.last().pose(), halfSize, 0, 0.001F).color(0, 0, 0, 127).uv(1.0F, 0.5F).endVertex();
             }
         }
 
@@ -368,17 +339,19 @@ public class HealthBarRenderer {
 
         // Icons
         {
-            final float zBump = -0.1F;
+            final int size = 8;
+            final float iconInterval = size * 0.2f;
             poseStack.pushPose();
+            poseStack.scale(-globalScale, -globalScale, 1);
+            poseStack.translate(halfSize + padding, bgHeight, 0);
+            float horizontalOffset = icons.size() * size + (icons.size() - 1) * iconInterval;
+            //todo: haven't handle the case like entity has insane amount of effects.
+            // it will make the icon exceed the left of health bar.
+            poseStack.translate(-horizontalOffset, 0, 0);
+            for (int i = 0; i < icons.size(); i++) {
+                if (i != 0) poseStack.translate(size + iconInterval, 0, 0);
+                icons.get(i).renderOnHealthBar(poseStack, buffers, size);
 
-            float iconOffset = 2.85F;
-            float zShift = 0F;
-
-            // todo
-            for (ItemStack icon : icons) {
-                renderIcon(living.level(), icon, poseStack, buffers, globalScale, halfSize, iconOffset, zShift);
-                iconOffset += 5F;
-                zShift += zBump;
             }
 
 
@@ -388,26 +361,53 @@ public class HealthBarRenderer {
         poseStack.popPose();
     }
 
-    private static void renderIcon(Level level, ItemStack icon, PoseStack poseStack,
-                                   MultiBufferSource buffers, float globalScale, float halfSize, float leftShift, float zShift) {
-        if (!icon.isEmpty()) {
-            final float iconScale = 0.12F;
-            poseStack.pushPose();
-            // halfSize and co. are units operating under the assumption of globalScale,
-            // but in the icon rendering section we don't use globalScale, so we need
-            // to manually multiply it in to ensure the units line up.
-            float dx = (halfSize - leftShift) * globalScale;
-            float dy = 3F * globalScale;
-            float dz = zShift * globalScale;
-            // Need to negate X due to our rotation below
-            poseStack.translate(-dx, dy, dz);
-            poseStack.scale(iconScale, iconScale, iconScale);
-            poseStack.mulPose(Axis.YP.rotationDegrees(180F));
+    private static @NotNull MutableComponent getNameString(Entity entity, LivingEntity living, Minecraft mc) {
+        int lvl = Load.Unit(living).getLevel();
+        int playerlvl = Load.Unit(mc.player).getLevel();
+        int diffabove = lvl - playerlvl;
+        MutableComponent level = Component.literal(lvl + "");
 
-
-            Minecraft.getInstance().getItemRenderer()
-                    .renderStatic(icon, ItemDisplayContext.NONE, 0xF000F0, OverlayTexture.NO_OVERLAY, poseStack, buffers, level, 0);
-            poseStack.popPose();
+        if (entity instanceof Player == false && diffabove > ServerContainer.get().LEVEL_DISTANCE_SKULL_SHOW.get()) {
+            if (ServerContainer.get().SKULL_HIDES_LEVEL.get()) {
+                level = Component.literal(UNICODE.SKULL).withStyle(ChatFormatting.RED);
+            } else {
+                level = Component.literal(lvl + " " + UNICODE.SKULL).withStyle(ChatFormatting.RED);
+            }
         }
+        level = level.withStyle(ChatFormatting.YELLOW);
+
+        Component prefix = CommonComponents.EMPTY;
+        Component name = living.getDisplayName();
+        Component suffix = CommonComponents.EMPTY;
+
+
+        for (MobAffix affix : Load.Unit(entity).getAffixData().getAffixes()) {
+
+            if (affix.type.isPrefix()) {
+                prefix = affix.locName();
+            } else {
+                suffix = affix.locName();
+
+            }
+        }
+        ChatFormatting rarityColor;
+        Component rarity;
+        rarity = Load.Unit(living).getMobRarity().locName();
+
+        rarityColor = Load.Unit(living).getMobRarity().textFormatting();
+
+        if (living instanceof Player) {
+            rarity = CommonComponents.EMPTY;
+            rarityColor = ChatFormatting.RED;
+        }
+        List<Component> rarity1 = List.of(rarity, prefix, name, suffix);
+        for (Component component : rarity1) {
+            if (component instanceof MutableComponent){
+                ((MutableComponent) component).withStyle(rarityColor);
+            }
+        }
+        Component[] array = rarity1.toArray(Component[]::new);
+        return Formatter.MOB_NAME_TEMPLATE.locName((Object[]) ArrayUtils.addFirst(array, level)).withStyle(ChatFormatting.YELLOW);
     }
+
 }

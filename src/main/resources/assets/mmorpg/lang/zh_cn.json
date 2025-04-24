@@ -1700,6 +1700,7 @@
 	"mmorpg.formatter.special_unique_process": "%1$s%2$s",
 	"mmorpg.formatter.special_unique_process.locale_context_for_translator": "currently no use",
 	"mmorpg.formatter.unique_name_format": "%1$s%2$s",
+	"mmorpg.formatter.mob_name_template": "%1$s级%2$s%3$s%4$s%5$s",
 
 "_comment": " [CATEGORY]: FORMATTER - NAMES",
 
