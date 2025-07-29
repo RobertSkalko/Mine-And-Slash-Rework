@@ -74,17 +74,27 @@ public class SpellBuilder {
         return this;
     }
 
-    public SpellBuilder summons(EntityType type, int duration, int amount, SummonType st, boolean countsTowardsMax) {
-        onCast(PartBuilder.justAction(SummonPetAction.SUMMON_PET.create(type, duration, amount, st, countsTowardsMax)))
+    public SpellBuilder summons(EntityType type, int duration, int amount, SummonType st, boolean countsTowardsMax, int aggroRadius) {
+        onCast(PartBuilder.justAction(SummonPetAction.SUMMON_PET.create(type, duration, amount, st, countsTowardsMax, aggroRadius)))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.WITCH, 200D, 3.5D))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.SOUL, 200D, 3.5D))
                 .onCast(PartBuilder.playSound(SoundEvents.EVOKER_PREPARE_SUMMON, 0.5D, 1D));
         return this;
     }
 
+    public SpellBuilder summons(EntityType type, int duration, int amount, SummonType st, boolean countsTowardsMax) {
+
+        return summons(type, duration, amount, st, countsTowardsMax, 15);
+    }
+
+    public SpellBuilder summons(EntityType type, int duration, int amount, SummonType st, int aggroRadius) {
+
+        return summons(type, duration, amount, st, true, aggroRadius);
+    }
+
     public SpellBuilder summons(EntityType type, int duration, int amount, SummonType st) {
 
-        return summons(type, duration, amount, st, true);
+        return summons(type, duration, amount, st, true, 15);
     }
 
     public SpellBuilder teleportForward() {

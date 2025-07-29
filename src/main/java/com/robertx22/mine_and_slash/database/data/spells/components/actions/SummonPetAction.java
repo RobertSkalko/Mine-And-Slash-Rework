@@ -53,7 +53,7 @@ public class SummonPetAction extends SpellAction {
             int duration = data.get(MapField.LIFESPAN_TICKS).intValue();
             duration *= ctx.calculatedSpellData.data.getNumber(EventData.DURATION_MULTI, 1).number;
 
-            int aggroRadius = data.get(MapField.LIFESPAN_TICKS).intValue();
+            int aggroRadius = data.get(MapField.AGGRO_RADIUS).intValue();
             aggroRadius *= ctx.calculatedSpellData.data.getNumber(EventData.AGGRO_RADIUS, 1).number;
 
 
@@ -105,12 +105,13 @@ public class SummonPetAction extends SpellAction {
         }
     }
 
-    public MapHolder create(EntityType type, int lifespan, int amount, SummonType st, boolean counts) {
+    public MapHolder create(EntityType type, int lifespan, int amount, SummonType st, boolean counts, int aggroRadius) {
         MapHolder c = new MapHolder();
         c.put(MapField.SUMMON_TYPE, st.name());
         c.put(MapField.SUMMONED_PET_ID, EntityType.getKey(type).toString());
         c.put(MapField.ENTITY_NAME, Spell.DEFAULT_EN_NAME);
         c.put(MapField.LIFESPAN_TICKS, (double) lifespan);
+        c.put(MapField.AGGRO_RADIUS, (double) aggroRadius);
         c.put(MapField.COUNT, (double) amount);
         c.put(MapField.COUNTS_TOWARDS_MAX_SUMMONS, counts);
         c.type = GUID();

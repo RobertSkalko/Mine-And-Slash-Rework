@@ -22,6 +22,7 @@ public class MapField<T> implements IGUID {
     public static MapField<Double> PARTICLE_COUNT = make("particle_count");
     public static MapField<Double> Y_RANDOM = make("y_rand");
     public static MapField<Double> LIFESPAN_TICKS = make("life_ticks");
+    public static MapField<Double> AGGRO_RADIUS = make("aggro_radius");
     public static MapField<Double> PROJECTILE_SPREAD_RANDOMNESS = make("projectile_spread_randomness");
     public static MapField<Double> DISTANCE = make("distance");
     public static MapField<Double> WIDTH = make("width");
