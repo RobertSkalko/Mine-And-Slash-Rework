@@ -157,28 +157,29 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     }
 
     public final void onCastingTick(SpellCastContext ctx) {
-        int timesToCast = (int) ctx.spell.getConfig().times_to_cast;
-        if (timesToCast > 1) {
-            int castTimeTicks = (int) getCastTimeTicks(ctx);
+
+        int timesToCast = ctx.spell.getConfig().times_to_cast;
+        if (timesToCast > 1){
+            SpellCastInfo castInfo = getCastInfo(ctx);
+
             // if i didnt do this then cast time reduction would reduce amount of spell hits.
-            int castEveryXTicks = castTimeTicks / timesToCast;
-            if (timesToCast > 1) {
-                if (castEveryXTicks < 1) {
-                    castEveryXTicks = 1;
-                }
-            }
-            if (ctx.ticksInUse > 0 && ctx.ticksInUse % castEveryXTicks == 0) {
+
+
+            if (ctx.ticksInUse > 0 && castInfo.castInThisTick(ctx.ticksInUse)) {
                 this.cast(ctx);
             }
+
         } else if (timesToCast < 1) {
             ExileLog.get().warn("Times to cast spell is: " + timesToCast + " . this seems like a bug.");
         }
+
+        ctx.castedThisTick = true;
     }
 
     public void cast(SpellCastContext ctx) {
         LivingEntity caster = ctx.caster;
-        ctx.castedThisTick = true;
-        /*
+
+     /*
         if (MMORPG.RUN_DEV_TOOLS_REMOVE_WHEN_DONE && this.config.swing_arm) {
             //    caster.swingTime = -1; // this makes sure hand swings
             //   caster.swing(InteractionHand.MAIN_HAND);
@@ -195,9 +196,32 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         return (int) ctx.event.data.getNumber(EventData.CHARGE_COOLDOWN_TICKS).number;
     }
 
-    public final int getCastTimeTicks(SpellCastContext ctx) {
+    public SpellCastInfo getCastInfo(SpellCastContext ctx) {
         // if it casts 5 times a cast, it should take at least 5 ticks to cast it
-        return MathHelper.clamp((int) ctx.event.data.getNumber(EventData.CAST_TICKS).number, config.times_to_cast, 10000);
+        // since Robert don't want spell can be cast multiple times in a single tick, then we have to handle the decimal cast tick carefully
+        float clamp = MathHelper.clamp(ctx.event.data.getNumber(EventData.CAST_TICKS).number, config.times_to_cast * 1f, 10000f);
+        int timesToCast = ctx.spell.getConfig().times_to_cast;
+        float singleTimeCost = clamp / timesToCast;
+        int[] points = new int[timesToCast];
+        //means a single cast cost decimal tick
+        if (singleTimeCost % 1 != 0) {
+            for (int i = 0; i < timesToCast; i++) {
+                float v = singleTimeCost * (i + 1);
+                //means the result time is integer at some situation, like 2.5 * 4 ticks.
+                if (v % 1 == 0){
+                    points[i] = ((int) v);
+                } else {
+                    points[i] = ((int) Math.ceil(singleTimeCost * (i + 1)));
+                }
+
+            }
+        } else {
+            for (int i = 0; i < timesToCast; i++) {
+                points[i] = ((int) singleTimeCost) * (i + 1);
+            }
+
+        }
+        return new SpellCastInfo(points[points.length - 1], points);
     }
 
     @Override
@@ -272,12 +296,12 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
             list.add(Words.COOLDOWN.locName(getCooldownTicks(ctx) / 20).withStyle(ChatFormatting.YELLOW));
         }
 
-        int casttime = getCastTimeTicks(ctx);
+        int casttime = getCastInfo(ctx).castTime();
 
         if (casttime == 0) {
             list.add(Words.INSTANT_CAST.locName().withStyle(ChatFormatting.GREEN));
         } else {
-            list.add(Words.CAST_TIME.locName(casttime / 20).withStyle(ChatFormatting.GREEN));
+            list.add(Words.CAST_TIME.locName(Math.round(casttime / 20.0f * 100f) / 100f).withStyle(ChatFormatting.GREEN));
         }
 
         Set<String> radiuses = new LinkedHashSet<>();
