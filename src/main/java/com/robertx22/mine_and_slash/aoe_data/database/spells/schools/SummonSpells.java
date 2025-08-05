@@ -13,6 +13,7 @@ import com.robertx22.mine_and_slash.aoe_data.database.stats.OffenseStats;
 import com.robertx22.mine_and_slash.database.data.spells.components.SpellConfiguration;
 import com.robertx22.mine_and_slash.database.data.spells.components.actions.ExileEffectAction;
 import com.robertx22.mine_and_slash.database.data.spells.components.actions.SpellAction;
+import com.robertx22.mine_and_slash.database.data.spells.components.actions.SummonPetAction;
 import com.robertx22.mine_and_slash.database.data.spells.components.selectors.TargetSelector;
 import com.robertx22.mine_and_slash.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.mine_and_slash.database.data.stats.types.summon.SummonHealth;
@@ -50,7 +51,7 @@ public class SummonSpells implements ExileRegistryInit {
                 .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.CAST_FINISH)
 
                 .manualDesc("Summon a Golem that can cast Fire Nova to aid you in combat.")
-                .summons(SlashEntities.FIRE_GOLEM.get(), 20 * 60 * 3, 1, SummonType.GOLEM)
+                .summons(SlashEntities.FIRE_GOLEM.get(), SummonPetAction.INFINITE_DURATION, 1, SummonType.GOLEM)
                 .levelReq(20)
                 .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(10, 50))
                 .addStat(new SummonHealth().mod(10, 100))
@@ -64,7 +65,7 @@ public class SummonSpells implements ExileRegistryInit {
                 .manualDesc("Summon a Golem that can cast Frost Nova to aid you in combat.")
                 .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.CAST_FINISH)
 
-                .summons(SlashEntities.COLD_GOLEM.get(), 20 * 60 * 3, 1, SummonType.GOLEM)
+                .summons(SlashEntities.COLD_GOLEM.get(), SummonPetAction.INFINITE_DURATION, 1, SummonType.GOLEM)
                 .levelReq(20)
                 .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(10, 50))
                 .addStat(new SummonHealth().mod(10, 100))
@@ -77,7 +78,7 @@ public class SummonSpells implements ExileRegistryInit {
                 .manualDesc("Summon a Golem that can cast Lightning Nova to aid you in combat .")
                 .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.CAST_FINISH)
 
-                .summons(SlashEntities.LIGHTNING_GOLEM.get(), 20 * 60 * 3, 1, SummonType.GOLEM)
+                .summons(SlashEntities.LIGHTNING_GOLEM.get(), SummonPetAction.INFINITE_DURATION, 1, SummonType.GOLEM)
                 .levelReq(20)
                 .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(10, 50))
                 .addStat(new SummonHealth().mod(10, 100))
@@ -91,7 +92,7 @@ public class SummonSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.beast, SpellTags.has_pet_ability, SpellTags.PHYSICAL))
                 .manualDesc("Summon a Spirit Wolf to aid you in combat.")
 
-                .summons(SlashEntities.SPIRIT_WOLF.get(), 20 * 30, 1, SummonType.BEAST)
+                .summons(SlashEntities.SPIRIT_WOLF.get(), SummonPetAction.INFINITE_DURATION, 1, SummonType.BEAST)
                 .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(5, 25))
                 .addStat(new SummonHealth().mod(30, 300))
                 .levelReq(1)
@@ -104,7 +105,7 @@ public class SummonSpells implements ExileRegistryInit {
                 .manualDesc("Summon a Zombie to aid you in combat.")
                 .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.CAST_FINISH)
 
-                .summons(SlashEntities.ZOMBIE.get(), 20 * 60 * 2, 1, SummonType.UNDEAD)
+                .summons(SlashEntities.ZOMBIE.get(), SummonPetAction.INFINITE_DURATION, 1, SummonType.UNDEAD)
                 .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(10, 50))
                 .addStat(new SummonHealth().mod(20, 200))
                 .levelReq(1)
@@ -117,7 +118,7 @@ public class SummonSpells implements ExileRegistryInit {
                 .manualDesc("Summon a fast moving spider to aid you in combat.")
                 .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.CAST_FINISH)
 
-                .summons(SlashEntities.SPIDER.get(), 20 * 60 * 2, 1, SummonType.SPIDER)
+                .summons(SlashEntities.SPIDER.get(), SummonPetAction.INFINITE_DURATION, 1, SummonType.SPIDER)
                 .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(5, 25))
                 .addStat(new AilmentChance(Ailments.POISON).mod(10, 50))
                 .levelReq(1)
@@ -130,7 +131,7 @@ public class SummonSpells implements ExileRegistryInit {
                 .manualDesc("Summon Skeleton to fight for you using ranged attacks.")
                 .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.CAST_FINISH)
 
-                .summons(SlashEntities.SKELETON.get(), 20 * 60 * 3, 1, SummonType.UNDEAD)
+                .summons(SlashEntities.SKELETON.get(), SummonPetAction.INFINITE_DURATION, 1, SummonType.UNDEAD)
                 .levelReq(30)
                 .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(10, 150))
                 .addStat(new SummonHealth().mod(10, 100))

@@ -26,7 +26,7 @@ public class SummonPetAction extends SpellAction {
         super(Arrays.asList());
     }
 
-    public static Double INFINITE_DURATION = -1D;
+    public static int INFINITE_DURATION = -1;
 
     @Override
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
