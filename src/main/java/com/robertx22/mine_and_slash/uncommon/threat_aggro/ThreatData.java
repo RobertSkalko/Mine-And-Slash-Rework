@@ -7,6 +7,7 @@ import net.minecraft.world.entity.Mob;
 
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class ThreatData {
@@ -16,29 +17,22 @@ public class ThreatData {
         String key = threatCreatorEntity.getUUID().toString();
         int cur = map.getOrDefault(key, 0);
         map.put(key, cur + threat);
-
-        String highest = getHighest();
-        if (key.equals(highest)) {
-            makeMobTarget(mob, threatCreatorEntity);
-        } else {
-            cleanIfHighestThreatSummonIsDead(threatCreatorEntity, highest);
-        }
+        updateMobTargetWithHighestThreat(mob, threatCreatorEntity, key);
     }
 
-    private static void makeMobTarget(Mob mob, LivingEntity threatCreatorEntity) {
-        if (mob.getTarget() != threatCreatorEntity) {
-            mob.setTarget(threatCreatorEntity);
-        }
-    }
-
-    private void cleanIfHighestThreatSummonIsDead(LivingEntity threatCreatorEntity, String highest) {
-        if (!(threatCreatorEntity.level() instanceof ServerLevel serverLevel)) {
+    private void updateMobTargetWithHighestThreat(Mob mob, LivingEntity threatCreatorEntity, String key) {
+        String highestKey = getHighest();
+        if (highestKey.equals(key)) {
+            if (mob.getTarget() != threatCreatorEntity) {
+                mob.setTarget(threatCreatorEntity);
+            }
             return;
         }
 
-        Entity highestEntity = serverLevel.getEntity(UUID.fromString(highest));
-        if (highestEntity == null || !highestEntity.isAlive()) {
-            map.remove(highest);
+        Entity threat = ((ServerLevel)mob.level()).getEntity(UUID.fromString(highestKey));
+        if (threat == null || !threat.isAlive()) {
+            map.remove(highestKey);
+            updateMobTargetWithHighestThreat(mob, threatCreatorEntity, key);
         }
     }
 
@@ -47,6 +41,6 @@ public class ThreatData {
             return "";
         }
 
-        return map.entrySet().stream().max(Comparator.comparingInt(x -> x.getValue())).get().getKey();
+        return map.entrySet().stream().max(Comparator.comparingInt(Map.Entry::getValue)).get().getKey();
     }
 }
