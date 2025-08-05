@@ -11,17 +11,21 @@ import java.util.Map;
 import java.util.UUID;
 
 public class ThreatData {
-    public HashMap<String, Integer> map = new HashMap<>();
+    public HashMap<UUID, Integer> map = new HashMap<>();
 
     public void addThreat(LivingEntity threatCreatorEntity, Mob mob, int threat) {
-        String key = threatCreatorEntity.getUUID().toString();
-        int cur = map.getOrDefault(key, 0);
-        map.put(key, cur + threat);
-        updateMobTargetWithHighestThreat(mob, threatCreatorEntity, key);
+        UUID uuid = threatCreatorEntity.getUUID();
+        var cur = map.getOrDefault(uuid, 0);
+        map.put(uuid, cur + threat);
+        updateMobTargetWithHighestThreat(mob, threatCreatorEntity, uuid);
     }
 
-    private void updateMobTargetWithHighestThreat(Mob mob, LivingEntity threatCreatorEntity, String key) {
-        String highestKey = getHighest();
+    private void updateMobTargetWithHighestThreat(Mob mob, LivingEntity threatCreatorEntity, UUID key) {
+        var highestKey = getHighest();
+        if (highestKey == null) {
+            return;
+        }
+
         if (highestKey.equals(key)) {
             if (mob.getTarget() != threatCreatorEntity) {
                 mob.setTarget(threatCreatorEntity);
@@ -29,16 +33,16 @@ public class ThreatData {
             return;
         }
 
-        Entity threat = ((ServerLevel)mob.level()).getEntity(UUID.fromString(highestKey));
+        Entity threat = ((ServerLevel)mob.level()).getEntity(highestKey);
         if (threat == null || !threat.isAlive()) {
             map.remove(highestKey);
             updateMobTargetWithHighestThreat(mob, threatCreatorEntity, key);
         }
     }
 
-    public String getHighest() {
+    public UUID getHighest() {
         if (map.isEmpty()) {
-            return "";
+            return null;
         }
 
         return map.entrySet().stream().max(Comparator.comparingInt(Map.Entry::getValue)).get().getKey();
