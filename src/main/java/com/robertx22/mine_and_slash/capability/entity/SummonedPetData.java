@@ -2,6 +2,7 @@ package com.robertx22.mine_and_slash.capability.entity;
 
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.mine_and_slash.database.data.spells.components.Spell;
+import com.robertx22.mine_and_slash.database.data.spells.components.actions.SummonPetAction;
 import com.robertx22.mine_and_slash.database.data.spells.summons.entity.SummonEntity;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
@@ -34,6 +35,10 @@ public class SummonedPetData {
 
     public void tick(LivingEntity en) {
         if (!en.level().isClientSide) {
+            if (ticks == SummonPetAction.INFINITE_DURATION) {
+                return;
+            }
+
             if (ticks-- < 1) {
                 SoundUtils.playSound(en, SoundEvents.GENERIC_DEATH);
                 discard(en);

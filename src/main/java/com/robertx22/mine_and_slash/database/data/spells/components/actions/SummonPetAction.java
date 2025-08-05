@@ -26,6 +26,8 @@ public class SummonPetAction extends SpellAction {
         super(Arrays.asList());
     }
 
+    public static Double INFINITE_DURATION = -1D;
+
     @Override
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
 
@@ -51,8 +53,7 @@ public class SummonPetAction extends SpellAction {
 
             en.setPos(pos.getX(), pos.getY(), pos.getZ());
 
-            int duration = data.get(MapField.LIFESPAN_TICKS).intValue();
-            duration *= ctx.calculatedSpellData.data.getNumber(EventData.DURATION_MULTI, 1).number;
+            int duration = getDuration(ctx, data);
 
             float aggroRadius = ctx.calculatedSpellData.data.getNumber(EventData.AGGRO_RADIUS, 15).number;
             aggroRadius *= ctx.calculatedSpellData.data.getNumber(EventData.AGGRO_RADIUS_MULTI, 1).number;
@@ -74,6 +75,15 @@ public class SummonPetAction extends SpellAction {
 
         int totalSummons = (int) ctx.calculatedSpellData.data.getNumber(EventData.BONUS_TOTAL_SUMMONS, 0).number;
         updatePlayerSummons(ctx.caster, totalSummons, ctx.calculatedSpellData.spell_id);
+    }
+
+    private static int getDuration(SpellCtx ctx, MapHolder data) {
+        int duration = data.get(MapField.LIFESPAN_TICKS).intValue();
+        if (duration == INFINITE_DURATION) {
+            return duration;
+        }
+
+        return (int) (duration * ctx.calculatedSpellData.data.getNumber(EventData.DURATION_MULTI, 1).number);
     }
 
     public static void updatePlayerSummons(LivingEntity caster, int totalSummons, String currentSummonSpell) {
