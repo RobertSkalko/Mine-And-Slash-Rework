@@ -43,8 +43,12 @@ public class ScalingCalc {
         return (int) (multi.getValue(en, provider) * 100);
     }
 
-    public Component GetTooltipString(LivingEntity en, MaxLevelProvider provider) {
+    public Component GetStatTooltipString(LivingEntity en, MaxLevelProvider provider) {
         return Gui.SPELL_DAMAGE_PROPORTION.locName(getMultiAsPercent(en, provider), getStat().getMutableIconNameFormat());
+    }
+
+    public Component GetTargetStatTooltipString(LivingEntity en, MaxLevelProvider provider) {
+        return Gui.TARGET_SPELL_DAMAGE_PROPORTION.locName(getMultiAsPercent(en, provider), getStat().getMutableIconNameFormat());
     }
 
     public List<Component> getTooltipFor(float multi, float value, MutableComponent statname, Elements el) {

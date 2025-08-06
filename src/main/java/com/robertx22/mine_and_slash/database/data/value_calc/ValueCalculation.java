@@ -33,7 +33,12 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
         return new ArrayList<>(stat_scalings);
     }
 
+    public List<ScalingCalc> getAllTargetScalingValues() {
+        return new ArrayList<>(target_stat_scalings);
+    }
+
     public List<ScalingCalc> stat_scalings = new ArrayList<>();
+    public List<ScalingCalc> target_stat_scalings = new ArrayList<>();
 
     public String id = "";
     public StatScaling base_scaling_type = StatScaling.NORMAL;
@@ -68,21 +73,27 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
         return "[calc:" + id + "]";
     }
 
-    private int getCalculatedScalingValue(LivingEntity en, MaxLevelProvider provider) {
+    private int getCalculatedScalingValue(LivingEntity caster, LivingEntity target, MaxLevelProvider provider) {
 
         var opt = getAllScalingValues().stream().filter(x -> x.getStat() == WeaponDamage.getInstance()).findFirst();
 
         float dmg = 0;
         if (opt.isPresent()) {
-            dmg = opt.get().getCalculatedValue(en, provider);
+            dmg = opt.get().getCalculatedValue(caster, provider);
         }
 
 
         float other = 0;
 
         other += getAllScalingValues().stream().filter(x -> x.getStat() != WeaponDamage.getInstance())
-                .mapToInt(x -> x.getCalculatedValue(en, provider))
+                .mapToInt(x -> x.getCalculatedValue(caster, provider))
                 .sum();
+
+        if (target != null) {
+            other += getAllTargetScalingValues().stream().filter(x -> x.getStat() != WeaponDamage.getInstance())
+                    .mapToInt(x -> x.getCalculatedValue(target, provider))
+                    .sum();
+        }
 
         if (this.capsToWeaponDamage()) {
             float maxotherscaling = dmg * this.cap_to_wep_dmg;
@@ -96,9 +107,13 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
         return (int) amount;
     }
 
-    public int getCalculatedValue(LivingEntity en, MaxLevelProvider provider) {
-        int val = getCalculatedScalingValue(en, provider);
-        val += getCalculatedBaseValue(en, provider);
+    public int getCalculatedValue(LivingEntity caster, MaxLevelProvider provider) {
+        return getCalculatedValue(caster, null, provider);
+    }
+
+    public int getCalculatedValue(LivingEntity caster, LivingEntity target, MaxLevelProvider provider) {
+        int val = getCalculatedScalingValue(caster, target, provider);
+        val += getCalculatedBaseValue(caster, provider);
         return val;
 
     }
@@ -116,7 +131,11 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
         }
 
         stat_scalings.forEach(x -> {
-            text.append(" ").append(x.GetTooltipString(en, provider));
+            text.append(" ").append(x.GetStatTooltipString(en, provider));
+        });
+
+        target_stat_scalings.forEach(x -> {
+            text.append(" ").append(x.GetTargetStatTooltipString(en, provider));
         });
 
         if (capsToWeaponDamage()) {

@@ -55,6 +55,11 @@ public class ValueCalcBuilder {
         return this;
     }
 
+    public ValueCalcBuilder targetStatScaling(Stat stat, float min, float max) {
+        calc.target_stat_scalings.add(new ScalingCalc(stat, new LeveledValue(min, max)));
+        return this;
+    }
+
     public ValueCalculation build() {
         calc.addToSerializables(MMORPG.SERIAZABLE_REGISTRATION_INFO);
         return calc;

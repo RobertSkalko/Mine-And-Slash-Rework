@@ -39,7 +39,7 @@ public class DamageAction extends SpellAction {
 
             float dmgEffectiveness = calc.getDamageEffectiveness(ctx.caster, ctx.calculatedSpellData.getSpell());
 
-            int value = calc.getCalculatedValue(ctx.caster, ctx.calculatedSpellData.getSpell());
+            int value = calc.getCalculatedValue(ctx.caster, ctx.target, ctx.calculatedSpellData.getSpell());
 
             if (ctx.calculatedSpellData.chains_did > 0) {
                 float dmgMulti = MathHelper.clamp(1F - (GameBalanceConfig.get().DMG_REDUCT_PER_CHAIN * ctx.calculatedSpellData.chains_did), GameBalanceConfig.get().MIN_CHAIN_DMG, 1F);

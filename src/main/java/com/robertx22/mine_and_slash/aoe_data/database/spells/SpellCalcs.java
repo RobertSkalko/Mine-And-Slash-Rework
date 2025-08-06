@@ -37,8 +37,7 @@ public class SpellCalcs {
 
     public static ValueCalculation EXPLODE_MINION = ValueCalcBuilder.of("explode_minion")
             .spellScaling(0.25F, 1f)
-            .capScaling(5)
-            .statScaling(Health.getInstance(), 0.1F, 0.3F)
+            .targetStatScaling(Health.getInstance(), 0.1F, 0.3F)
             .build();
 
     public static ValueCalculation CHAOS_TOTEM = ValueCalcBuilder.of("chaos_totem")
