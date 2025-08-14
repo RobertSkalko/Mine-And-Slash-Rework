@@ -19,9 +19,16 @@ public class ExpireAction extends SpellAction {
         if (ctx.getPositionEntity() != null) {
             if (!ctx.getPositionEntity().isRemoved()) {
 
-                // todo this is confusing
+                // SAFETY: Avoid recursively discarding inside an ON_EXPIRE activation, which can
+                // trigger entities' remove() -> onExpire -> ExpireAction -> discard() loops.
+                // This can hang the tick thread if multiple components cascade removals.
+                if (ctx.activation == com.robertx22.mine_and_slash.database.data.spells.components.EntityActivation.ON_EXPIRE) {
+                    return;
+                }
+
+                // Only discard non-player sources as intended by original logic.
                 if (ctx.getPositionEntity() instanceof Player == false) {
-                    ctx.getPositionEntity().discard(); // this can cause infi loops and even calling expire spell multiple times
+                    ctx.getPositionEntity().discard();
                 }
             }
         }

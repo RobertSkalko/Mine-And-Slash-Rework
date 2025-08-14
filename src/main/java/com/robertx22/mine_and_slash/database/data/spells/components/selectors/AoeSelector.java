@@ -56,34 +56,45 @@ public class AoeSelector extends BaseTargetSelector {
 
     public static boolean canHit(Vec3 pos, Entity en) {
 
+        // PERFORMANCE FIX:
+        // The previous implementation used Explosion.getSeenPercent(pos, en) which samples many rays
+        // across the entity AABB. When executed per entity per tick (e.g. homing projectiles), this
+        // became very expensive and could contribute to watchdog timeouts on busy servers.
+        // We replace it with a small number of cheap ray casts to approximate visibility.
+        try {
+            if (en == null || en.isRemoved()) {
+                return false;
+            }
 
-        float perc = Explosion.getSeenPercent(pos, en);
+            // Quick accept if extremely close to avoid ray checks in melee range
+            if (en.position().distanceToSqr(pos) <= 0.25D) {
+                return true;
+            }
 
-        if (perc >= 0.4) {
-            return true;
-        }
-        // todo this doesnt work all the time..
+            Vec3 eye = (en instanceof LivingEntity le)
+                    ? le.getEyePosition()
+                    : en.position().add(0, en.getBbHeight() * 0.6D, 0);
 
-        int height = 2;
+            // Primary straight ray to the eye position
+            if (en.level().clip(new ClipContext(pos, eye, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, null)).getType() == HitResult.Type.MISS) {
+                return true;
+            }
 
-        // we check if there's a ceiling
-        if (en.level().clip(new ClipContext(pos, pos.add(0, height, 0), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, null)).getType() == HitResult.Type.MISS) {
-            for (int i = 1; i <= height; i++) {
-                if (Explosion.getSeenPercent(pos.add(0, i, 0), en) >= 0.4) {
+            // Try a couple of slight vertical offsets to account for small ledges/uneven terrain
+            // Keep attempts minimal to ensure bounded cost.
+            for (int i = 1; i <= 2; i++) {
+                Vec3 alt = eye.add(0, i * 0.5D, 0);
+                if (en.level().clip(new ClipContext(pos, alt, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, null)).getType() == HitResult.Type.MISS) {
                     return true;
                 }
             }
-        }
-        // check if there's floor
-        if (en.level().clip(new ClipContext(pos, pos.add(0, -height, 0), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, null)).getType() == HitResult.Type.MISS) {
-            for (int i = -1; i >= -height; i--) {
-                if (Explosion.getSeenPercent(pos.add(0, i, 0), en) >= 0.4) {
-                    return true;
-                }
-            }
-        }
 
-        return false;
+            // If all fast checks fail, consider it not visible. We intentionally avoid
+            // Explosion.getSeenPercent here to keep the cost deterministic and low.
+            return false;
+        } catch (Exception ex) {
+            return false;
+        }
     }
 
     // i copy pasted this from Explosion.class in case it loses it in future updates, very important to make sure spells cant be cheesed through walls with aoe etc
